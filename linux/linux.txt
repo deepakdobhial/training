@@ -1,0 +1,565 @@
+Start termial (ctrl+alt+t)
+
+OS version (check version)– Syntax: lsb_release -a
+		Output: 	No LSB modules are available.
+				Distributor ID:	Ubuntu
+				Description:	Ubuntu 20.04.2 LTS
+				Release:	20.04
+				Codename:	focal
+
+1) pwd- To know which directory you are in, you can use the “pwd” command. 	
+	syntax: pwd
+	output : home/beryl(username) (absolute path beryl ) or current dir.	
+
+2) ls- To know what files are in the directory you are in.
+	syntax: ls
+	output : all files and folders 
+	
+	i) ls -a (output : hidden files and folders)
+	ii) ls -R (display the sub-directories and files)
+	    syntax: $ ls -R
+	   Outut:
+			.:
+			dee
+
+			./dee:
+			folder
+
+			./dee/folder:
+			test.txt
+	iii) ls -r (output : dislay in reverse order)
+	iv) ls -l  (To display the file details) or ls -l test.txt
+		Output: -rw-rw-r-- 1 beryl beryl 6 Dec 20 17:37 t.txt
+		
+-
+The first character represents the file type: "-" for a regular file, "d" for a directory, "l" for a symbolic link.
+rwx
+The next three characters represent the permissions for the file's owner: in this case, the owner may read from, write to, ore xecute the file.
+rw-
+The next three characters represent the permissions for members of the file group. In this case, any member of the file's owning group may read from or write to the file. The final dash is a placeholder; group members do not have permission to execute this file.
+r--
+The permissions for "others" (everyone else). Others may only read this file.
+1
+The number of hard links to this file.
+hope
+The file's owner.
+hopestaff
+The group to whom the file belongs.
+123
+The size of the file in blocks.
+Feb 03 15:36
+The file's mtime (date and time when the file was last modified).
+file.txt
+The name of the file.
+
+
+
+	
+	v) ls -hl (human readable )
+	vi) ls -s list files or directories with their sizes:
+
+	vii) ls -t (to list files or directories and sort by last modified date and time in descending)
+	viii)ls -S (list files or directories and sort by date or time in descending order)
+	viii)ls -m (list files or directories by comma)
+	ix) ls> output.txt (create file with dir)
+		beryl@beryl-HP-ProBook-6460b:~$ cat output.txt
+		deepak dobhial
+		Desktop
+		Documents
+		Downloads
+		fol1
+		fol2
+		Music
+		new folder
+		output.txt
+		Pictures
+		Public
+		snap
+		Templates
+		Videos
+	x) ls -cl (sort dir using change time with details)
+
+
+
+
+
+
+
+3) mkdir - To create a folder or a directory.
+	syntax: mkdir deepak\ dobhial
+	output : deepak dobhial
+	
+	i) mkdir -p (create parent directory first, if it doesn't exist. But if it already exists, then it will 		not print an error message and will move further to create sub-directories)
+		Syntax: mkdir -p new\ folder/dee
+		
+
+	ii) mkdir -v (print a message with every new file created.)
+		Syntax: mkdir -v folder1 folder2 folder3
+		Output: mkdir: created directory 'folder1'
+			mkdir: created directory 'folder2'
+			mkdir: created directory 'folder3'
+
+	iii) mkdir -pv/ mkdir -vp (create parent directory and sub-dir with message)
+	
+	iv) mkdir -m rwx folder4 (will give access to user, group and other to read, write and 						execute this directory. Error if already exist)
+
+
+-m=mode,
+--mode=mode
+You can use the -m option to set a file mode (permissions, etc.) for the created directories. The syntax of mode is the same as with the chmod command.
+-p,
+--parents
+Create parent directories as necessary. When this option is specified, no error is reported if a directory already exists.
+-v,
+--verbose
+Verbose output. Print a message for each created directory.
+-Z=context,
+--context=context
+If you are using SELinux, this option sets the security context of each created directory to context. For detailed information about security contexts, consult your SELinux documentation.
+--help
+Display a help message, and exit.
+--version
+Display version information, and exit.
+
+	
+
+4) cd-  To go to a directory (case sensitive)		
+	syntax: cd deepak\ dobhial or cd /home/beryl/deepak\ dobhial		
+	output : ~/deepak dobhial$
+	
+cd or cd ~
+Navigate to HOME directory
+cd ..
+Move one level up
+cd dir1
+To change to a particular directory
+Cd /
+cd -
+Move to the root directory
+Move to previous parent dir and again use move to back child dir 
+
+
+
+5) rmdir - To delete a emty directory.
+	syntax: rmdir deepak\ dobhial
+
+	i) rmdir -p mydir1/mydir2/mydir3/ (Removes the directory mydir3 and its parents(mydir2 & 						mydir1) too recursively if they are empty. )
+	ii) rmdir -v mydir (displays verbose information)
+		Output: rmdir: removing directory, 'mydir'
+	iii) rmdir --ignore-fail-on-non-empty mydir/(The above command 				will not remove the directory, but will stop 				displaying error message.)
+	
+	iv) rmdir –version (Dislay version of rmdir command)
+
+-p
+Each directory argument is treated as a pathname of which all components will be removed, if they are empty, starting with the last component. (See rm for fully non-discriminant recursive removal.)
+-v, --verbose
+Display verbose information for every directory processed.
+--ignore-fail-on-non-empty
+Do not report a failure which occurs solely because a directory is non-empty. Normally, when rmdir is instructed to remove a non-empty directory, it reports an error. This option suppresses those error messages.
+--help
+Display a help message, and exit.
+--version
+Output version information, and exit.
+
+
+6) rm – To remove a file 
+	syntax: rm new.txt
+
+Option
+Description
+rm *extension
+Used to delete files having same extension.
+rm -r or R
+To delete a directory recursively.
+rm -i
+Remove a file interactively.
+rm -rf
+Remove a directory forcefully.
+
+	rm *extension (remove all the files ending with same extensions)
+	syntax: rm *txt
+	
+	rm -r  remove directory (emty or non empty)
+	syntax: rm -r dir1
+	
+	rm -i file.txt or rm -ri dir1 (Before deleting a file it will ask you want to delete it or not.)
+	output: rm: remove regular file 'magic.mgc'? Y or n
+	
+	rm -rf dir1 or rm -f f.txt (command deletes directory forcefully. It means a file or directory will be 					deleted anyhow even if it has read-only permission.)
+ 	
+	
+
+7) cp- To copy files 
+	syntax: cp first.txt dee (folder name “dee” where file copied)
+	
+Option
+Function
+cp -r 
+To copy a directory along with its sub dirctories.
+cp file1 file 2 directory name 
+To copy multiple file or directories in a directory.
+cp -backup 
+To backup the existing file before over writing it.
+cp -i 
+Asks for confirmtion.
+cp -l 
+To create hard link file.
+cp -p 
+Preserves attribute of a file.
+cp -u -v 
+To make sure source file is newer then destination file.
+
+i) cp -r deep(soure folder) home/beryl/Desktop
+
+ii) cp -*txt or file.txt magic.mgc /home/beryl/Desktop
+iii) cp --backup t.txt /home/beryl/Desktop (Make a backup copy of t.txt at destination dir)
+iv) cp -i t.txt /home/beryl/Desktop/
+	cp: overwrite '/home/beryl/Desktop/t.txt'? Y
+v) cp -p t.txt /home/beryl/Desktop (Same attributes)
+vi) cp -uv t.txt /home/beryl/Desktop/
+	output:  't.txt' -> '/home/beryl/Desktop/t.txt' (overwirte file at destination)
+
+
+
+8) mv- To move (or rename)  files 
+	syntax: mv first.txt folder1 (folder1 where file moved)
+		mv first.txt test.txt (Change name to test)
+
+	
+Option
+Function
+mv -i
+Asks for permission to over write.
+mv *
+Move multiple files to a specific directory.
+mv --suffix
+Used to take backup before over writing.
+mv -u
+Only move those files that doesn't exist.
+
+
+i) mv-i
+
+8) rename using mv command – mv t.txt test.txt (change name t.txt into test.txt)
+	
+
+9) touch-   To create a new file (stat filename.txt – show file details)
+	syntax: touch new.txt	 or touch file1.txt file2.tx or touch file{1,2}.txt
+	Out: new.txt or file1.txt file2.txt or file1.txt file2.txt
+	
+	i) touch -m file.txt (change the modification time of a file.)
+	ii) touch -a file.txt (change the access time of a file.)
+	iii)touch -c file.txt (don’t create new file only change access and modification time to 				current time)
+	
+ 	iv) touch -t 201903081047.30 file_name.txt
+
+		The datetime format must be in CCYYMMDDhhmm.ss where:
+    • MM – The month of the year [01-12] 
+    • DD – The day of the month [01-31] 
+    • hh – The hour of the day [00-23] 
+    • mm – The minute of the hour [00-59] 
+    • CC – The first two digits of the year 
+    • YY – The second two digits of the year 
+    • SS – The second of the minute [00-59] 
+		v) touch -r file1.txt file2.txt (change timestamp of file2 from file1)
+10) cat-  To create a text file and will enter in the editor mode. Enter text and Ctrl+d for save
+	Syntax: cat>test.txt
+	
+	i) cat text.txt - To display the content of the file
+	ii) cat -n output.txt – Display content with numbers
+   	  1	deepak dobhial
+   	  2	Desktop
+    	 3	Documents
+    	 4	Downloads
+    	 5	fol1
+     	6	fol2
+     	7	Music
+     	8	new folder
+    	 9	output.txt
+   	 10	Pictures
+   	 11	Public
+    	12	snap
+    	13	Templates
+    	14	Videos
+	iii) cat file1.txt>file2.txt (Copy contents of file1 to file2)
+	
+	iv) cat>>t4.txt (Append data in file)
+	v) cat -T t.txt (Show tab ^I in output)
+	vi) cat -E t.txt (To display $ at end of each line)
+	vii) cat -A t.txt (Show all non printing )
+	viii) cat * (Show all files content) or cat *.txt (Only text files)
+	ix) cat >new.txt <<EOF
+		output: > hello
+			> EOF(displays an end marker at the end of a file. It is called here directive and 				file content will be saved at the given end marker.)
+	x) cat week.txt |tac|cat|tac (means cat output for tac then output for cat then again for tac)
+	
+	Table 1 – All cat command options
+CLI option
+Meaning
+-A
+Equivalent to -vET.
+-b
+Number nonempty output lines. (remove empty line)
+-e
+Equivalent to -vE.
+-E
+Display $ at end of each line.
+-n
+Number all output lines.
+-s
+Suppress repeated empty output lines.
+-t
+Equivalent to -vT.
+-T
+Display TAB characters as ^I.
+-v
+Show nonprinting i.e. use ^ and M- notation, except for LFD and TAB.
+--help
+Display this help and exit.
+--version
+Output version information and exit.
+
+	
+	
+11) tac- display content in reverse order (By words)
+	syntax: tac file.txt
+	
+	syntax: tac week.txt –separator “Monday” 
+	output: Tuesday
+		Wednesday
+		Thursday
+		Friday
+		Saturday
+		Sunday
+		Sunday
+		Monday
+	
+
+12) echo- To create file with contents
+	syntax: echo “file contents”>test.txt
+
+13) time - execute a command and prints a summary of real-time, user CPU time and system CPU 		time spent by executing a command when it terminates.
+		Syntax: time ls -l 
+		Output : execute ls command and show time 
+			real	0m0.005s (wall clock time taken by a command to get executed)
+			user	0m0.000s (number of CPU seconds that command uses in user )
+			sys	0m0.005s(number of CPU seconds that command uses kernel mode)
+
+
+14) date command is used or set to display the system date and time.
+	
+		Syntax: $date (Show date)
+			Output: 
+			Tue Oct 10 22:55:01 PDT 2017
+		Syntax: $date -u (time in GMT(Greenwich Mean Time)/UTC(Coordinated 						Universal Time )time zone)
+			Output :
+			Wed Oct 11 06:11:31 UTC 2017
+
+15) scp - 
+16) file - used to determine the file type.
+	Syntax: file dir1    or file t.txt or file or file t.txt
+	output: dir1: Directory or t.txt:empty (if file empty) or t.txt:ASCII text
+	
+file -s
+Used for special files.
+file *
+Used to list types of all the files.
+file /directory name/*
+Used to list types of all the files from mentioned directory.
+file [range]*
+It will list out all the files starting from the alphabet present within the given range.
+
+	i) file -s f.txt
+	ii) file *
+		output: fol 1:     directory
+			  fol 2:     directory
+            	  magic.mgc: magic binary file for file(1) cmd (version 14) 												(little endian)
+            	  t.txt:     ASCII text
+
+	iii) file ./deep/* 
+		Output: ./deep/fol 1:     directory
+			  ./deep/fol 2:     directory
+			 ./deep/magic.mgc: magic binary file for file(1) cmd (version 14) 				(little endian)
+			  ./deep/t.txt:     ASCII text
+
+	iv) file [a-g]* 
+
+		 outpput: fol 1: directory
+			    fol 2: directory
+
+17) rename - 
+
+18) head  - The 'head' command displays the starting content of a file. By default, it displays starting 10 		lines of any file.
+	Syntax: head file.txt  
+	Syntax head – n 15 file.txt (show 15 lines)
+	Syntax head -c 20 file.txt (count 20 bytes and then show lines according size)
+19) tail  - The 'tail' command displays the ending content of a file. By default, it displays end10 		lines of any file.
+	Syntax: tail file.txt  (10 lines )
+	Syntax tail – n 15 file.txt (show 15 lines)
+	Syntax tail-c 20 file.txt (count 20 bytes and then show lines according size)
+
+20) more - As 'cat' command displays the file content. Same way 'more' command also displays the 			content of a file.
+		Enter key: To scroll down page line by line. 
+    • Space bar: To go to next page. 
+    • b key: To go to the backward page. 
+    • / key: Lets you search the string. 
+	Syntax: more file.txt
+21) cal – Display calender
+	syntax: cal (current month)
+		cal July 2021 (july month of year 2021)
+22) find -The find command helps us to find a particular file within a directory. It is used to find the list of 		files for the various conditions like permission, user ownership, modification, date/time, 		size, and more.
+	Syntax: i) find . -name "*.txt" (list all the text files from the current working directory.)
+		./a.txt
+		./test1.txt
+		./week.txt
+		./t.txt
+		./new.txt
+		./folder/t.txt
+	
+	ii)	Finding files by type
+		The '-type' parameter is used to specify the file type.
+		Some of the file types are as follows:
+    • f: regular file 
+    • d: directory 
+    • l: symbolic links 
+    • c: character devices 
+    • b: block devices 
+	syntax : find . -type d(directory) or find . -type d -name “*.bak”
+		output: show all directories or show all directories with extension bak (bakfile.bak/ is 				directory)
+	iii) Find newer files
+		The '-newer' parameter helps in searching the files which are newer than the 			mentioned file. 
+		Syntax : find . -newer filename.txt
+	iv) Find and delete a file
+		The '-delete' option is used to delete a specific file. We need to be very careful while 			using this command because there is no undo option if it is once executed.
+
+		Syntax: find . -name filename.txt -delete 
+	v) Find files by modification time
+		syntax: find . -mtime +1 (-1) { -1 for the last day and +1 for more than one day ago)
+	vi) Find files by permission
+		The '-perm' option is used to find files by permission.
+		Syntax: find . -perm 777 (777 for all users)
+	vii) Find and replace files (with sed command)
+23) tree – create tree
+
+24) gzip - Gzip (GNU zip) is a compressing tool, which is used to truncate the file size. By default 		    original file will be replaced by the compressed file ending with extension (.gz).
+          	Syntax: gzip file.txt (Output : file.txt.gz)
+		gunzip file.txt.gz (Output: file.txt)
+		gzip -l file.txt.gz (tell compression ratio)
+		cat file1.txt file2.txt | gzip final.gz (create final.gz file from file1 and file2)
+
+	show zip file contents
+	Syntax: zcat filename.t.gz
+
+	
+
+25) which - To display the path of any executable files such as programs and commands,
+
+
+
+
+26) Filters
+	1) cp – syntax: cp week.txt |tac|cp (oe output is input for other)
+	
+	example: cat marks.txt 
+			deepak 50
+			rahul 100
+			pankaj 65
+			monika 80
+
+	2) cut - Linux cut command is useful for selecting a specific column of a file. It is used to cut a 			specific sections by byte position, character, and field and writes them to standard output. 
+		
+		i) syntax: cut -b 2, 6 marks.txt 
+			output : cut data by 2 bytes ( only show one character at 2 place and 6 place)
+				ek
+				a
+				aj
+				oa
+		ii) syntax: cut -c 2,6 marks.txt (same as bytes but using charcters)
+		
+		iii)  syntax: cut –complement -c 2 marks.txt
+				output: depak 50
+					rhul 100
+					pnkaj 65
+					mnika 80
+		iv) cut -d ' ' -f1 or f2 marks.txt (d for delimiter and f1 is first column and f2 is iind)
+				(f1)			(f2)
+				deepak                         50
+				rahul			100
+				pankaj			65		
+				monika		80
+27) grep - global regular expression print". grep command filters the content of a file which makes our 			search easy.
+			grep with pipe
+			The 'grep' command is generally used with pipe (|).
+		syntax: grep 5 marks.txt  or cat marks.txt| grep 5 (list which contenets 5 )
+			deepak 50
+			pankaj 65
+		Syntax: grep -v 9 marks.txt (displays lines not matching to the specified word.)
+			deepak 50			(show lines which don’t have 9 opposite to grep)
+			rahul 100
+			pankaj 65
+			monika 80
+			
+		
+
+
+
+grep -i: The 'grep -i' command filters output in a case-insensitive way.
+		
+			syntax: grep -i d marks.txt 
+			output:	deepak 50
+				Deepak 100
+grep -A/ grep -B/ grep -C 
+grep -A command is used to display the line after the result. (A1 give one line A2 give two and so on)
+grep -B command is used to display the line before the result.
+grep -C command is used to display the line after and line before the result.
+You can use (A1, A2, A3.....)(B1, B2, B3....)(C1, C2, C3....) to display any number of lines.
+Syntax: grep -A1 aj marks.txt     or  grep -A2 aj marks.txt 
+output:  	pankaj 65		show two more lines after pankaj 65
+		monika 80
+
+Syntax: grep -B1 aj marks.txt     or  grep -A2 aj marks.txt 
+output:  	rahul 100	   show two more lines after pankaj 65
+		 pankaj 65
+
+
+
+28) tee command (Linux tee command is quite similar to the 'cat' command, with only one difference. It puts stdin on stdout and also put them into a file.) (take input and also show output)
+
+
+	syntax: tee week.txt (Overwrite file with empty if exist)
+	Output: Show contents in files 
+
+
+	syntax: cat weeks.txt | tee newfile.txt
+			output is input for tee
+
+1) append – tee -a newfile.txt
+
+
+
+29) tr- change lower to upper translate
+
+	syntax: cat week.txt| tr “S” “s”   (change S to s)
+
+
+
+
+
+--------------------------User------------------------------
+
+1) whoami – tell user name
+	syntax: whoami
+		Beryl
+
+
+2) who
+ The who command gives the information about the users logged on to the system.
+
+3) who am i
+	This command displays the information about the current user only.
+
+4) w
+	This command tells about the users who are logged in and what are they doing.
+5) id
+This command tells about your user id, primary group id, and a list of groups that belongs to you.
+
