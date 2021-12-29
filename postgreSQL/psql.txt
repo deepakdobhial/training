@@ -1,0 +1,849 @@
+---------------------PostgresSQL (version 14.1)-------------------------------- (https://www.postgresqltutorial.com)
+
+1) Connect to the PostgreSQL database server via psql
+	
+	When you installed PostgreSQL, the installation process created a user account called postgres associated with the default postgres 		role.
+	
+	i) switch over to the postgres account on your server
+	
+		syntax: $ sudo -i -u postgres
+		output: [sudo] password for beryl: type password
+		
+	ii) Access the PostgreSQL 
+	
+		syntax: psql or psql -U postgres -h localhost
+		output: postgres=# 
+		
+2) Quit the PostgreSQL
+	
+	i) syntax: postgres=# \q (This above command will bring you back to the postgres Linux command prompt.)
+	   output: postgres@beryl-HP-ProBook-6460b: pwd
+		/var/lib/postgresql
+
+	ii) syntax: postgres@beryl-HP-ProBook-6460b:exit  (To return to your regular system user)
+	    output: logout 
+	    
+	 
+	 
+3) Load the sample database
+
+	i) First, switch over the postgres account using the following command:
+
+		syntax: $ sudo -i -u postgres
+		
+	ii) download the sample database using the curl tool:
+		syntax: $ curl -O https://sp.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.zip
+		
+	iii) Third, unzip the dvdrental.zip file to get the dvdrental.tar file:
+
+		syntax: $ unzip dvdrental.zip
+		
+	iv)Access the PostgreSQL using the psql tool:
+
+		syntax: $ psql
+			
+	v) Create the dvdrental database using the CREATE DATABASE statement:
+
+		syntax: postgres=# create database dvdrental;
+			
+	vi) Quit the psql by using the \q command:
+
+		syntax: postgres=# \q
+	vii) Use the pg_restore tool to restore the dvdrental database:
+
+		syntax: $ pg_restore --dbname=dvdrental --verbose dvdrental.tar
+		
+	viii) Access PostgreSQL database server again using psql:
+
+		syntax: $ psql
+			
+	ix) Switch to the dvdental database:
+
+		syntax: postgres=# \c dvdrental
+			
+			Now, you’re connected to the dvdrental database:
+
+			dvdrental=#
+			dvdrental=# select count(*) from film;
+			
+			Here is the output:
+
+			count
+			-------
+			1000
+			(1 row)
+			
+			
+4) check version 
+
+	syntax: postgres=# select version();
+	output: show version
+	
+5) Data Types
+
+	5.1)  Boolean type- (Three values: true, false and NULL, storing byte- one byte, abbreviated - BOOL)
+	
+		5.1.1) valid literal values for TRUE and FALSE   
+		
+					True	False		NULL
+					true	false		Space
+					‘t’	‘f ‘		
+					‘true’	‘false’	
+					‘y’	‘n’
+					‘yes’	‘no’
+					‘1’	‘0’
+					
+	5.2) Character types - i)  CHARACTER(n) or CHAR(n), 
+				ii) CHARACTER VARYINGING(n) or VARCHAR(n), 
+				ii) TEXT                                   ( n is a positive integer.)
+	
+
+				Character Types			       Description
+				---------------------------------------------------------------------
+				CHARACTER VARYING(n), VARCHAR(n)	variable-length with length limit
+				CHARACTER(n), CHAR(n)			fixed-length, blank padded	
+				TEXT, VARCHAR				variable unlimited length
+							
+					
+		
+		
+		
+		
+	5.3) Numeric type - i) integer
+			    ii) floating-point numbers
+		
+		
+			i) integer- 
+					 Name		Storage Size	   Min		   		Max
+					 ----------------------------------------------------------------------
+					 SMALLINT	2 bytes	-32,768			+32,767
+					 INTEGER(INT)	4 bytes	-2,147,483,648			+2,147,483,647
+					 BIGINT	8 bytes	-9,223,372,036,854,775,808	+9,223,372,036,854,775,807
+		
+		
+		
+6) clear screen from psql
+			syntax: \! clear     (use linux commands)		
+			
+		
+		
+7) Create and Drop database
+
+	7.1) create database
+
+		i) Syntax: postgres@beryl-HP-ProBook-6460b: createdb databasename (using command line)
+			
+				or
+				
+		ii) postgres=# create database databasename;
+		
+		
+		
+	7.2) drop database
+		
+		i) Syntax: postgres@beryl-HP-ProBook-6460b: dropdb databasename
+			    				     dropdb -h localhost -p 5432 -U postgress testdb  (using command line)
+			
+				or
+				
+		ii) postgres=# drop database [if exists] databasename;
+		
+		
+		
+8)  List all database 
+	
+		syntax: \l or \l databasename;
+		
+		
+9) select database (switch database)
+	
+		syntax: \c databasename;
+		
+		syntax: psql -h localhost -p 5432 -U postgres databasename   (using command line)
+			
+			databasename#
+			
+			
+10)  Alter database (rename database)
+
+		syntax: alter database databasename rename to newname;
+		
+11) Create Table
+
+		syntax: create table [if not exists] tablename(
+			column1 datatype column_constraint,
+			column2 datatype column_constraint,
+			column3 datatype column_constraint,
+			table_constraints
+			);
+			
+			
+12) show table lists in database
+
+		syntax: \d or \dt  (list all tables)
+		
+13)table structure (Describe) 
+
+		syntx: \d tablename;
+		
+14) Drop a table
+
+		syntax: drop table tablename1,tablename2;
+		
+15)  Alter table (rename table)
+
+		syntax: Alter table tablename rename to newname;
+		
+16) Insert into table
+
+		syntax: insert into tablename
+			(column1, column2, column3,...columnN)
+		 VALUES (value1, value2, value3,...valueN);		
+		
+17) Select from table
+
+		syntax: select * or column1,column2 from tablename; 
+		
+		
+		
+		
+18) update contents in table
+
+		syntax: UPDATE table_name
+			SET column1 = value1, column2 = value2...., columnN = valueN
+			WHERE [condition];
+					
+19) Delete/Truncate contents from table
+
+		syntax: DELETE FROM table_name
+			WHERE [condition];
+			
+			
+	------------------------------------------------------------------------------		
+		syntax:     TRUNCATE TABLE table_name; 
+   			   [ RESTART IDENTITY | CONTINUE IDENTITY ] [ CASCADE | RESTRICT ]  
+	-----------------------------------------------------------------------------------
+	
+			
+20) Alter table 
+
+		20.1) Add column - syntax:        ALTER TABLE table_name  
+   					    	   ADD COLUMN new_column_name data_type,
+   					           ADD COLUMN new_column_name data_type;  
+   					     	
+   		20.2) i) DROP COLUMN - syntax:       ALTER TABLE table_name   
+    						      DROP COLUMN column_name;  
+		    
+		      ii) Removing those columns and all its connected objects
+
+    				syntax: ALTER TABLE table_name  
+    				      	DROP COLUMN column_name CASCADE;  	
+   			        	
+		      iii)     ALTER TABLE table_name   
+		       	DROP COLUMN IF EXISTS column_name;  
+			
+		      iv)     ALTER TABLE table_name  
+		      	      DROP COLUMN column_name_1,  
+			      DROP COLUMN column_name_2;
+			      
+	     	20.3) CHANGE DATA TYPE OF A COLUMN
+	     			
+	     			Syntax:     ALTER TABLE table_name  
+					    ALTER COLUMN column_name_1 SET DATA TYPE OR TYPE new_data_type,  
+					    ALTER COLUMN column_name_2 SET DATA TYPE OR TYPE new_data_type;   
+	     	  
+		20.4) RENAME COLUMN 
+			
+				Syntax:     ALTER TABLE table_name   
+    					    RENAME COLUMN column_name TO new_column_name;  (one at a time)
+    					    
+         	20.5) Set a default value for the column.
+         	
+         			Syntax:     	ALTER TABLE table_name 
+					    	ALTER COLUMN column_name 
+					    	[SET DEFAULT give value | DROP DEFAULT];
+		
+		
+		
+		
+		20.6) Add a constraint to a column
+		
+				syntax: 	ALTER TABLE table_name 
+						ADD CONSTRAINT constraint_name constraint_definition;
+						
+						
+21) Clause: ( From > Where > group by > having > select > Distinct > Order by > Limit)
+	      -----------------------------------------------------------------------
+	      		
+		21.1) Where : - The WHERE condition is used to describe a condition while we get data from a table or a Join various 					tables. It is commonly used with SELECT, UPDATE, and DELETE commands to filter the output. It returns the 					exact result only when the condition is fulfilled.
+		
+		
+		
+				syntax: SELECT column1, column2, ..... columnN    
+					FROM table_name    
+					WHERE [search_condition]    
+					
+				
+				e.g. 	select name, id from teachers where id=1;
+		
+				output:     name    | id 
+					------------+----
+					 Manju dass |  2
+					 Manoj      |  2
+					(2 rows)
+					
+						
+				e.g.	select name, id,salary from teachers where salary>10000;
+				
+				Output: name  | id | salary 
+					-------+----+--------
+					 Manoj |  1 |  50000
+					 Manoj |  2 |  50000
+					(2 rows)
+					
+		21.2) GROUP BY - GROUP BY clause is used in collaboration with the SELECT statement to group together those rows in a 						table that have identical data. This is done to eliminate redundancy in the output and/or compute 						aggregates that apply to these groups.
+					
+		
+		
+				syntax: SELECT column-list    
+					FROM table_name    
+					WHERE [conditions ]    
+					GROUP BY column1, column2....columnN    
+					ORDER BY column1, column2....columnN    
+					
+					
+				e.g.	select id, name from teachers group by name, id;
+					
+					select name, count(salary) from teachers group by name;
+					
+				output:     name    | count 
+					------------+-------
+					 Manju dass |     1
+					 ritu       |     1
+					 Manoj      |     2
+					(3 rows)
+					
+				e.g. 	# select name, sum(salary) from teachers group by name;
+				
+					    name    |  sum   
+			       output:	------------+--------
+					 Manju dass |  10000
+					 ritu       |  10000
+					 Manoj      | 100000
+					(3 rows)
+
+						
+					
+		21.3) HAVING : - HAVING clause places conditions on groups created by the GROUP BY clause.
+				  it is regularly used with the GROUP BY clause to filter groups or aggregates based on a detailed 					  condition.	
+				
+				syntax: SELECT column1, column2
+					FROM table1, table2
+					WHERE [ conditions ]
+					GROUP BY column1, column2
+					HAVING [ conditions ]
+					ORDER BY column1, column2
+					
+					
+				e.g.   select name,id,salary from teachers group by name,id,salary having max(salary)<=10000;
+				output:     name    | id | salary 
+					------------+----+--------
+					 ritu       |  3 |  10000
+					 Manju dass |  2 |  10000
+					 
+					 
+		21.4) DISTINNCT:- Used in conjunction with SELECT statement to eliminate all the duplicate records and fetching only 					   unique records.
+		
+		
+				syntax: SELECT DISTINCT name FROM COMPANY;
+		
+
+			    	  --  the combination of values in both column1,column2...columnN will be used for evaluating the 				      duplicate.
+				
+				syntax: SELECT DISTINCT column1, column2,.....columnN
+					FROM table_name
+					WHERE [condition]
+					
+					combination values - select  gender,name from teachers ;
+								 gender |    name    
+								--------+------------
+								 M      | Manoj
+								 M      | Manoj
+								 M      | Ram
+								 F      | ritu
+								 F      | Manju dass
+								(5 rows)
+
+					
+					
+					
+				e.g.  select distinct gender,name from teachers; (distinct based combination values)
+					 gender |    name    
+					--------+------------
+					 M      | Manoj
+					 M      | Ram
+					 F      | ritu
+					 F      | Manju dass
+					(4 rows)
+					
+					
+			DISTINCT ON : - sorts the result set by the  bcolor and  fcolor, and then for each group of duplicates, it keeps 						the first row in the returned result set.
+			 
+			Without distinct On -	 mydatabase=# select gender,name,id from teachers order by gender,name;
+						 gender |    name    | id 
+						--------+------------+----
+						 F      | Manju dass |  5
+						 F      | ritu       |  3
+						 M      | Manoj      |  1
+						 M      | Manoj      |  2
+						 M      | Ram        |  4
+						(5 rows)
+
+			With distinct On:       mydatabase=# select distinct on(gender) gender,name,id from teachers order by gender,name;
+						 gender |    name    | id 
+						--------+------------+----
+						 F      | Manju dass |  5
+						 M      | Manoj      |  1
+						(2 rows)
+
+
+		
+		21.5) ORDER BY - sort the data in ascending or descending order, based on one or more columns. (with select)
+		
+				syntax: SELECT column-list
+					FROM table_name
+					[WHERE condition]
+					[ORDER BY column1, column2, .. columnN] [ASC | DESC];
+					or
+					ORDER BY sort_expresssion [ASC | DESC] [NULLS FIRST | NULLS LAST]  
+					
+				e.g.    select id, name from teachers order by department desc;
+				
+				
+				
+		21.6) LIMIT - used to limit the data amount returned by the SELECT statement.
+		
+				SYNTAX: SELECT column1, column2, columnN
+					FROM table_name
+					LIMIT [no of rows]
+									
+				
+			i) without limit: 	 mydatabase=# select * from teachers ;
+						 id |    name    | department | working_year | salary | bonus | gender 
+						----+------------+------------+--------------+--------+-------+--------
+						  1 | Manoj      | Science    |           20 |  50000 | 25000 | M
+						  2 | Manoj      | Math       |           20 |  50000 | 25000 | M
+						  4 | Ram        | Medical    |           25 |  35000 | 20000 | M
+						  3 | ritu       | Math       |           10 |  10000 |  1000 | F
+						  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+						(5 rows)
+
+			ii) Limit 		mydatabase=# select * from teachers limit 3;
+						 id | name  | department | working_year | salary | bonus | gender 
+						----+-------+------------+--------------+--------+-------+--------
+						  1 | Manoj | Science    |           20 |  50000 | 25000 | M
+						  2 | Manoj | Math       |           20 |  50000 | 25000 | M
+						  4 | Ram   | Medical    |           25 |  35000 | 20000 | M
+						(3 rows)
+
+		     iii) Limit with order by	 mydatabase=# select * from teachers order by id limit 4;
+						 id | name  | department | working_year | salary | bonus | gender 
+						----+-------+------------+--------------+--------+-------+--------
+						  1 | Manoj | Science    |           20 |  50000 | 25000 | M
+						  2 | Manoj | Math       |           20 |  50000 | 25000 | M
+						  3 | ritu  | Math       |           10 |  10000 |  1000 | F
+						  4 | Ram   | Medical    |           25 |  35000 | 20000 | M
+						(4 rows)
+
+
+		     iv) Limit with offset 	 mydatabase=# select * from teachers order by id limit 2 offset 2;
+			 (skip rows) 		 id | name | department | working_year | salary | bonus | gender 
+						----+------+------------+--------------+--------+-------+--------
+						  3 | ritu | Math       |           10 |  10000 |  1000 | F
+						  4 | Ram  | Medical    |           25 |  35000 | 20000 | M
+						(2 rows)
+						
+						
+						
+						
+		21.7) FETCH - To retrieve a number of rows returned by a query same as limit but follow sql standard.
+				(OFFSET clause must come before the FETCH clause in SQL:2008. However, OFFSET and FETCH clauses can appear 					in any order in PostgreSQL.)
+		
+				syntax:     OFFSET start { ROW | ROWS }  
+    					    FETCH { FIRST | NEXT } [ row_count ] { ROW | ROWS } ONLY  
+				
+				
+				
+		 i) Without fetch		mydatabase=# select * from teachers ;
+						 id |    name    | department | working_year | salary | bonus | gender 
+						----+------------+------------+--------------+--------+-------+--------
+						  1 | Manoj      | Science    |           20 |  50000 | 25000 | M
+						  2 | Manoj      | Math       |           20 |  50000 | 25000 | M
+						  4 | Ram        | Medical    |           25 |  35000 | 20000 | M
+						  3 | ritu       | Math       |           10 |  10000 |  1000 | F
+						  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+						(5 rows)
+
+		ii) Fetch first first row-		mydatabase=# select * from teachers FETCH FIRST ROW ONLY;
+						 id | name  | department | working_year | salary | bonus | gender 
+						----+-------+------------+--------------+--------+-------+--------
+						  1 | Manoj | Science    |           20 |  50000 | 25000 | M
+						(1 row)
+
+		iii) Fetch first 1 rows orrow mydatabase=# select * from teachers FETCH FIRST 1 ROWS ONLY;
+						 id | name  | department | working_year | salary | bonus | gender 
+						----+-------+------------+--------------+--------+-------+--------
+						  1 | Manoj | Science    |           20 |  50000 | 25000 | M
+						(1 row)
+
+		iv) Fetch first 4 row or rows   mydatabase=# select * from teachers FETCH FIRST 4 ROWS ONLY;
+						 id | name  | department | working_year | salary | bonus | gender 
+						----+-------+------------+--------------+--------+-------+--------
+						  1 | Manoj | Science    |           20 |  50000 | 25000 | M
+						  2 | Manoj | Math       |           20 |  50000 | 25000 | M
+						  4 | Ram   | Medical    |           25 |  35000 | 20000 | M
+						  3 | ritu  | Math       |           10 |  10000 |  1000 | F
+						(4 rows)
+
+		v) Fetch with offset		mydatabase=# select * from teachers OFFSET 2 ROWS FETCH FIRST 2 ROWS ONLY;
+						 id | name | department | working_year | salary | bonus | gender 
+						----+------+------------+--------------+--------+-------+--------
+						  4 | Ram  | Medical    |           25 |  35000 | 20000 | M
+						  3 | ritu | Math       |           10 |  10000 |  1000 | F
+						(2 rows)
+
+            vi) Fetch with order by 		 mydatabase=# select * from teachers ORDER BY ID OFFSET 2 ROWS FETCH FIRST 2 ROWS ONLY;
+		and offset			 id | name | department | working_year | salary | bonus | gender 
+						----+------+------------+--------------+--------+-------+--------
+						  3 | ritu | Math       |           10 |  10000 |  1000 | F
+						  4 | Ram  | Medical    |           25 |  35000 | 20000 | M
+						(2 rows)
+
+								
+		
+			
+			
+			
+---------------------------------------OPERATORS------------------------------------------------------
+
+1)  Logical Operators : AND, OR, NOT
+
+	1.1)  AND- allows the existence of multiple conditions in a PostgresSQL statement's WHERE clause. (Both condition need true)
+	
+			SYNTAX: mydatabase=# select * from teachers where id=5 and name='Manju dass';
+				 id |    name    | department | working_year | salary | bonus | gender 
+				----+------------+------------+--------------+--------+-------+--------
+				  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+				(1 row)
+	
+	1.2) OR- The OR operator is used to combine multiple conditions in a PostgresSQL statement's WHERE clause. (any one true)
+
+			SYNTAX: mydatabase=# SELECT * FROM teachers where id=5 or name='Manoj';
+				 id |    name    | department | working_year | salary | bonus | gender 
+				----+------------+------------+--------------+--------+-------+--------
+				  1 | Manoj      | Science    |           20 |  50000 | 25000 | M
+				  2 | Manoj      | Math       |           20 |  50000 | 25000 | M
+				  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+				(3 rows)
+				
+				
+	1.3) NOT- The NOT operator reverses the meaning of the logical operator with which it is used. Eg. NOT EXISTS, NOT BETWEEN, NOT 				IN etc. This is negate operator.
+
+			Table:  mydatabase=# select * from teachers ;
+				 id |    name    | department | working_year | salary | bonus | gender 
+				----+------------+------------+--------------+--------+-------+--------
+				  1 | Manoj      | Science    |           20 |  50000 | 25000 | M
+				  2 | Manoj      | Math       |           20 |  50000 | 25000 | M
+				  4 | Ram        | Medical    |           25 |  35000 | 20000 | M
+				  3 | ritu       | Math       |           10 |  10000 |  1000 | F
+				  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+				  6 | rahul      | non-med    |            1 |  50000 |  5000 | M
+				(6 rows)
+
+		  	NOT IN: mydatabase=# select * from teachers where name not in ('Manoj','rahul');
+				 id |    name    | department | working_year | salary | bonus | gender 
+				----+------------+------------+--------------+--------+-------+--------
+				  4 | Ram        | Medical    |           25 |  35000 | 20000 | M
+				  3 | ritu       | Math       |           10 |  10000 |  1000 | F
+				  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+				(3 rows)
+				
+				
+2) Comparison Operators : 
+
+			Operators 	       		 Description
+			-------------------------------------------------------------------------------------------------------
+			< ( less than) 			Returns true when the left operand is less than the right operand.
+			> ( greater than) 			Returns true when the left operand is greater than the right operand.
+			<= ( less than or equal ) 		Returns true when the left operand is less than or equal to the right 																operand.
+			>= (greater than or equal) 		Returns true when the left operand is greater than or equal to the right 																	operand.
+			= ( equal ) 				Returns true when the operands are equal but the type of the operands must 																	be same.
+			<> or != ( not equal) 			Returns true when the operands are not equa
+		
+		
+3) Arithmetic Operators: 
+
+			   Operators 			Description 				Example 		Output
+			   ------------------------------------------------------------------------------------------------
+				+ 			Addition 				5 + 8 			13
+				- 			Subtraction 				6 - 9 			-3
+				* 			Multiplication 			5 * 8 			40
+				/ 			Division 				15 / 3 		5
+				% 			Modulo ( Remainder ) 			15 % 2 		1
+				^ 			Exponentiation 			4.0 ^ 2.0 		16
+				| / 			Square Root 				|/ 16 		4
+				| | / 			Cube Root 				||/ 27 		3
+				! 			Factorial 				!6 			720
+				! ! 			Factorial ( with prefix operator) 	!!6 			720
+				@ 			Absolute Value 			@-15.07 		15.07
+				& 			Bitwise AND 				53 & 38 		36
+				| 			Bitwise OR 				53 | 38 		55
+				# 			Bitwise XOR 				53 # 38 		19
+				~ 			Bitwise NOT 				~ 38 			-39
+				<< 			Bitwise shift left 			25 << 2 		100
+				>> 			Bitwise shift right 			120 >> 3 		15
+				
+4) LIKE - returns true if the string matches the supplied pattern. and the NOT LIKE expression returns false if LIKE returns true.
+
+		I) % -  matches any sequence of zero or more characters.
+		
+			SYNTAX: mydatabase=# select * from teachers where name like 'M%';
+				 id |    name    | department | working_year | salary | bonus | gender 
+				----+------------+------------+--------------+--------+-------+--------
+				  1 | Manoj      | Science    |           20 |  50000 | 25000 | M
+				  2 | Manoj      | Math       |           20 |  50000 | 25000 | M
+				  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+				(3 rows)
+
+		
+		II) _ -  pattern stands for (matches) any single character
+		
+			SYNTAX: mydatabase=# select * from teachers where name LIKE '_a%';
+				 id |    name    | department | working_year | salary | bonus | gender 
+				----+------------+------------+--------------+--------+-------+--------
+				  1 | Manoj      | Science    |           20 |  50000 | 25000 | M
+				  2 | Manoj      | Math       |           20 |  50000 | 25000 | M
+				  4 | Ram        | Medical    |           25 |  35000 | 20000 | M
+				  5 | Manju dass | Math       |           10 |  10000 |  1000 | F
+				  6 | rahul      | non-med    |            1 |  50000 |  5000 | M
+				(5 rows)
+
+		III) NOT LIKE-  mydatabase=# select * from teachers where name NOT LIKE '_a%';
+				 id | name | department | working_year | salary | bonus | gender 
+				----+------+------------+--------------+--------+-------+--------
+				  3 | ritu | Math       |           10 |  10000 |  1000 | F
+				(1 row)
+
+		
+5) Bit Operators: 
+
+			     Operator 		         Description
+			    -----------------------------------------
+				|| 			concatenation
+				& 			bitwise AND
+				| 			bitwise OR
+				# 			bitwise XOR
+				~ 			bitwise NOT
+				<< 			bitwise shift left
+				>> 			bitwise shift right	
+				
+		e.g. -  mydatabase=# select 'deep'||'dobhal' as concatenate;
+					 concatenate 
+					-------------
+					 deepdobhal
+					(1 row)
+
+
+
+
+
+
+---------------------------------------------------JOINS------------------------------------------------------
+
+It is used to merge columns from one or more tables according to the data of the standard columns between connected tables. Usually, the standard columns of the first table are primary key columns and the second table columns are foreign key columns.
+
+                                     TYPES 
+				---------------------		
+				    Inner join (Default join so Inner optional)
+				    Left join	or Left Outer Join
+				    Left join only left table
+				    Right join or Right Outer Join
+				    Right Join only right table 
+				    Full join or Full outer join
+				    Full outer join ONLY UNIQUE ROWS FROM BOTH TABLES
+				    Cross join 
+				    Natural join
+				    Self-join.
+				    
+			Table-set_a-  	 data  			Table- set_b-	 data 	
+					------                         		------
+					    1						   1
+					    2						   2
+					    3						   3	
+					    5						   8
+					(4 rows)   					(4 rows)
+
+	    			    
+				 
+		I) INNER JOIN - (SET INTERSECTION) - COMMON ELEMENTS FROM SET A AND SER B
+			
+		syntax: mydatabase=# select A.data as A_data, B.data as B_data from set_a as A inner join set_b as B on A.data=B.data;
+		
+					a_data | b_data 
+					--------+--------
+					      1 |      1
+					      2 |      2
+					      3 |      3
+					(3 rows)							 
+
+
+
+		
+		
+		II) Left join	or Left Outer Join  -  Returns all records from the left table (table1), and the 								matching records (if any) from the right table (table2).
+		
+		syntax: mydatabase=# select A.data as a, B.data as b from set_a as A left join set_b as B on A.data=B.data;
+		
+						 a | b 
+						---+---
+						 1 | 1
+						 2 | 2
+						 3 | 3
+						 5 | -
+						(4 rows)
+						
+		III) Left join Only row from left table using where IS NULL : -
+			
+		syntax: mydatabase=# select * from set_a left join set_b on set_a.data=set_b.data where set_b.data is null;
+						 data | data 
+						------+------
+						    5 |  -   
+						(1 row)
+
+
+		IV) Right join or Right Outer join :   Returns all records from the right table (table1), and the 								  matching records (if any) from the left table (table2).
+
+
+		syntax: mydatabase=# select * from set_a as A right outer join set_b as B on A.data=B.data;
+						 data | data 
+						------+------
+						    1 |    1
+						    2 |    2
+						    3 |    3
+						   -  |    8
+						(4 rows)
+						
+						
+		V) Right join Only row from right table using where IS NULL :
+
+		syntax: mydatabase=# select * from set_a as A right outer join set_b as B on A.data=B.data where set_a.data IS NULL;
+						 data | data 
+						------+------
+						    - |    8
+						    
+						(4 rows) 
+						
+		VI) Full outer join - returns a result set that contains all rows from both left and right tables, with the matching rows 						from both sides if available. In case there is no match, the columns of the table will be filled 						with NULL.
+
+		
+		syntax: mydatabase=# select * from set_a as A full outer join set_b as B on A.data=B.data;
+						 data | data 
+						------+------
+						    1 |    1
+						    2 |    2
+						    3 |    3
+						    5 |    - 
+						   -  |    8
+						(5 rows)
+						
+		VII) Full outer join ONLY UNIQUE(unmatch) ROWS FROM BOTH TABLES :- 
+		
+			SYNTAX: mydatabase=# select * from a full join b on a.data=b.data where a.data is null or b.data is null;
+						 data | data 
+						------+------
+						    5 |    -  
+						    - |    8
+						(2 rows)
+						
+						
+		VIII) CROSS JOIN -(CARTESIAN JOIN) that allows us to produce the Cartesian product of all 						related tables.
+		
+		SYNTAX: mydatabase=# select * from a cross join b;  OR select * from a inner join b on True;
+					 data | data 
+					------+------
+					    1 |    1
+					    1 |    2
+					    1 |    3
+					    1 |    8
+					    2 |    1
+					    2 |    2
+					    2 |    3
+					    2 |    8
+					    3 |    1
+					    3 |    2
+					    3 |    3
+					    3 |    8
+					    5 |    1
+					    5 |    2
+					    5 |    3
+					    5 |    8
+					(16 rows)
+					
+					
+		IX) SELF JOIN - i) The PostgreSQL Self Join is Special Join, where we can also get the hierarchical data within the same 																	    table.   
+			    ii) We used the PostgreSQL Self join clause to combine a table itself with the help of Inner Join and Left 																    Join clauses.
+			syntax: mydatabase=# select * from a as x inner join or left join a as y on x.data=y.data;
+						 data | data 
+						------+------
+						    1 |    1
+						    2 |    2
+						    3 |    3
+						    5 |    5
+						(4 rows)
+
+		X) Natural Join :- The natural join is where multiple tables are combined, and as an output, we will get the new rows, 					    which is intended to join the columns for each of the tables		
+
+			syntax: mydatabase=# select * from a natural Join or Natural Inner join b; (
+				 data 
+				------
+				    1
+				    2
+				    3
+				(3 rows)
+				
+							
+						
+		
+			syntax: mydatabase=# select * from a natural left join b;
+				 data 
+				------
+				    1
+				    2
+				    3
+				    5
+				(4 rows)
+
+			syntax: mydatabase=# select * from a natural right join b;
+				 data 
+				------
+				    1
+				    2
+				    3
+				    8
+				(4 rows)
+				
+
+----------------------------------------------Constraints----------------------------------------
+
+Constraints are the rules enforced on data columns on table. These are used to prevent invalid data from being entered into the 	database				
+					    Types
+				-----------------------------------
+				
+				
+				
+
+
+		
+
+
+		
