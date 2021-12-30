@@ -79,7 +79,7 @@
 	syntax: postgres=# select version();
 	output: show version
 	
-5) Data Types
+5) -------------------------------------------Data Types--------------------------------------------------------
 
 	5.1)  Boolean type- (Three values: true, false and NULL, storing byte- one byte, abbreviated - BOOL)
 	
@@ -119,7 +119,109 @@
 					 SMALLINT	2 bytes	-32,768			+32,767
 					 INTEGER(INT)	4 bytes	-2,147,483,648			+2,147,483,647
 					 BIGINT	8 bytes	-9,223,372,036,854,775,808	+9,223,372,036,854,775,807
+					 
+					 
+					 
+			ii)Decimal(p,e)-  decimal 	variable 	user-specified       up to 131072 digits before the decimal point;  
+									precision,exact      up to 16383 digits after the decimal point 
+			
+			
+		        iii)numeric -	numeric 	variable 	user-specified       up to 131072 digits before the decimal point; 
+		        						precision,exact      up to 16383 digits after the decimal point
+		        
+		        iv) float(in exact)
+			iv) real	real 	         4 bytes 	variable-precision,inexact 	6 decimal digits precision
+			
+			v) double       double          8 bytes        variable-precision,inexact     15 decimal digits precision
+			  Precision     precision	 		 	
+
+
+	Auto_increment - vi) serial- 	smallserial 	2 bytes 	small autoincrementing integer 	1 to 32767
+			                serial 	4 bytes 	autoincrementing integer 	        1 to 2147483647
+					bigserial 	8 bytes 	large autoincrementing integer 	1 to 9223372036854775807
+
+
+	5.4) Monetary Types- The money type stores a currency amount with a fixed fractional precision. Values of the numeric, int, and 					bigint data types can be cast to money. Using Floating point numbers is not recommended to handle money 					due to the potential for rounding errors.
+
+					Name 	Storage Size 	Description 	                     Range
+					money 	8 bytes 	currency amount 	-92233720368547758.08 to +92233720368547758.07
+
+	5.5) Date/Time Types- 
+	
+	
+	Name 	           Description 	  Storage Size 	  Low Value 	   High Value 	        Resolution
+	-------------------------------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	1) Date-  used to store the date values. (YYYY-MM-DD)  (4 bytes and range- 1000-01-01 to 9999-12-31)
+	
+			
+	Syntax: mydatabase=# alter table emp
+		mydatabase-# add column joining_date Date not null default current_date;
+		ALTER TABLE
+
+	
+	
+	2) Time: which stores the Time of days values.  (8 bytes of storage,  6 digits of precision and range- 00:00:00 to 24:00:00)
+	
+	i) without precision Time format -         HH:MM     
+						    HH:MM:SS  
+						    HHMMSS 
+						    
+	ii) With precision Time format - 	    MM:SS.pppppp   (12:10:12.123654)   
+						    HH:MM:SS.pppppp  
+						    HHMMSS.pppppp   
+	
+	
+				syntax: alter table emp add column logout time;
+				
+				
+	
+	
+	3) TIME with time zone type (timetz) - (12 bytes, which allow us to store a time value with the time zone from 00:00:00+1459 to 														24:00:00-1459 range.)
+	
 		
+	
+	
+	4) Timestamp - store both TIME and DATE values. 
+	
+			I) TIMESTAMP - The timestamp data type is used without time zone one
+			
+			II) Timestamptz: The timestamptz data type is used with a time zone.
+			
+	
+	
+	5) Interval - used to store and deploy Time in years, months, days, hours, minutes, seconds, etc. And the months and days values 				are integers values, whereas the second's field can be the fractions values.
+			(16 bytes, -178000000 years to 178000000 years.)
+		
+	syntax: 	
+	
+	
+	
+	
+
 		
 		
 6) clear screen from psql
@@ -271,6 +373,11 @@
 				syntax: 	ALTER TABLE table_name 
 						ADD CONSTRAINT constraint_name constraint_definition;
 						
+		20.7) Drop Unique Constraint
+
+				Syntax:	ALTER TABLE table_name
+						DROP CONSTRAINT constraint_name;
+						
 						
 21) Clause: ( From > Where > group by > having > select > Distinct > Order by > Limit)
 	      -----------------------------------------------------------------------
@@ -352,7 +459,7 @@
 					 Manju dass |  2 |  10000
 					 
 					 
-		21.4) DISTINNCT:- Used in conjunction with SELECT statement to eliminate all the duplicate records and fetching only 					   unique records.
+		21.4) DISTINCT:- Used in conjunction with SELECT statement to eliminate all the duplicate records and fetching only 					   unique records.
 		
 		
 				syntax: SELECT DISTINCT name FROM COMPANY;
@@ -467,7 +574,7 @@
 						
 						
 		21.7) FETCH - To retrieve a number of rows returned by a query same as limit but follow sql standard.
-				(OFFSET clause must come before the FETCH clause in SQL:2008. However, OFFSET and FETCH clauses can appear 					in any order in PostgreSQL.)
+			      (OFFSET clause must come before the FETCH clause in SQL:2008. However, OFFSET and FETCH clauses can appear 					in any order in PostgreSQL.)
 		
 				syntax:     OFFSET start { ROW | ROWS }  
     					    FETCH { FIRST | NEXT } [ row_count ] { ROW | ROWS } ONLY  
@@ -519,7 +626,7 @@
 						  4 | Ram  | Medical    |           25 |  35000 | 20000 | M
 						(2 rows)
 
-								
+									
 		
 			
 			
@@ -652,6 +759,115 @@
 					-------------
 					 deepdobhal
 					(1 row)
+
+6) BETWEEN-  how to retrieve values from an expression within a specific range
+
+		Syntax: mydatabase=# select first_name from emp where emp_id not between or between 1 and 3;
+				 first_name 
+				------------
+				 Manoj     
+				 Rahul     
+				 Manju     
+				 Deepak    
+				 Ram       
+				(5 rows)
+
+7) EXISTS- 
+
+
+8) UNION - which is used to combine the output of various commands into a single output.
+
+			i)  The number and the order of the columns in the select list of both queries must be the same.
+			ii) The data types must be compatible.
+
+			iii) duplicate rows from the combined data set show one time only.
+			
+			mydatabase=# select * from table_x;
+			 f | s 
+			---+---
+			 1 | 2
+			 2 | 4
+			 3 | 9
+			 3 | 3
+			(4 rows)
+
+			mydatabase=# select * from table_y;
+			 f1 | s1 
+			----+----
+			  1 |  1
+			  2 |  2
+			  3 |  3
+			  1 |  2
+			(4 rows)
+
+			mydatabase=# select * from table_x
+			union
+			select * from table_y
+			order by columnname;
+			 f | s 
+			---+---
+			 3 | 3
+			 3 | 9
+			 1 | 2
+			 2 | 2
+			 1 | 1
+			 2 | 4
+			(6 rows)
+			
+	UNION ALL -duplicate rows from the combined data set show two time only.
+
+			mydatabase=# select * from table_x
+			union all
+			select * from table_y;
+			 f | s 
+			---+---
+			 1 | 2
+			 2 | 4
+			 3 | 9
+			 3 | 3
+			 1 | 1
+			 2 | 2
+			 3 | 3
+			 1 | 2
+			(8 rows)
+
+
+
+
+9) INTERSECT - used to merge the output of multiple commands common rows.
+
+			mydatabase=# select * from table_x
+			mydatabase-# intersect
+			mydatabase-# select * from table_y;
+			 f | s 
+			---+---
+			 3 | 3
+			 1 | 2
+			(2 rows)
+
+
+
+10)EXCEPT - show rows from first table which aren't common in IINd table
+
+
+	
+			mydatabase=# select * from table_x
+			except
+			select * from table_y order by f;
+			 f | s 
+			---+---
+			 2 | 4
+			 3 | 9
+			(2 rows)
+
+
+
+
+
+
+
+
+
 
 
 
@@ -838,10 +1054,216 @@ It is used to merge columns from one or more tables according to the data of the
 Constraints are the rules enforced on data columns on table. These are used to prevent invalid data from being entered into the 	database				
 					    Types
 				-----------------------------------
+				NOT NULL Constraint − Ensures that a column cannot have NULL value.
+				
+				CHECK Constraint − The CHECK constraint ensures that all values in a column satisfy certain conditions.
+
+				UNIQUE Constraint − Ensures that all values in a column are different.
+
+				PRIMARY Key − Uniquely identifies each row/record in a database table.
+
+				FOREIGN Key − Constrains data based on columns in other tables.
+
+				EXCLUSION Constraint - This constraint is used to make sure that any two rows are linked on the precise 								columns or statements with the help of defined operators, and one of these operator 							assessments should return either Null or False.
 				
 				
+				
+1) NOT NULL -     Syntax:	    CREATE TABLE Customer(  
+				    Cust_Id INT PRIMARY KEY NOT NULL,  (Cust_id column can't have null values)
+				    Cust_Name TEXT NOT NULL,   
+				    Cust_Address CHAR(50),  
+				    Cust_Age INT NOT NULL,  
+				    Cust_Salary REAL  
+				    ); 
+				    
+		 Note: A NOT NULL constraint is always written as a column constraint. 
+				    
+				    				
+2) CHECK Constraint − The CHECK Constraint enables a condition to check the value being entered into a record. If the condition evaluates 			to false, the record violates the constraint and is not entered into the table.
+
+		    Syntax: 	    mydatabase=# 	create table emp
+							(emp_id int not null,
+							first_name char(10),
+							last_name char(10),
+							gender char not null,
+							salary real check(salary>5000));
+	    
+				     mydatabase=# 	insert into emp 
+							values(1,'Deepak',Default, 'M',1000);
+							ERROR:  new row for relation "emp" violates check constraint "emp_salary_check"
+							DETAIL:  Failing row contains (1, Deepak    , null, M, 1000).	
 				
 
+3) UNIQUE Constraint − Ensures that all values in a column are different.
+
+		3.1)  As Column Constraint 
+			
+				Syntax: mydatabase=# alter table emp 
+					mydatabase-# add column email varchar(50) UNIQUE;
+					
+					
+		3.2) As Table Constraint (unique constraint on multiple columns)
+		
+		
+		
+4) PRIMARY Key - Not Null, Unique, (A primary key is a column or a group of columns used to identify a row uniquely in a table.)
+
+
+		i) As Column Constraint-	CREATE TABLE TABLE (
+						column_1 data_type PRIMARY KEY,
+						column_2 data_type,
+							…
+							);
+							
+		ii) AS Table Constraint - 	CREATE TABLE TABLE (
+						column_1 data_type,
+						column_2 data_type,
+						… 
+						PRIMARY KEY (column_1, column_2)
+						);
+					
+5) Foreign Key - A foreign key is a column or a group of columns in a table that reference the primary key of another 					table.	
+ 
+					CREATE TABLE contacts(
+					   contact_id INT GENERATED ALWAYS AS IDENTITY,
+					   customer_id INT,
+					   contact_name VARCHAR(255) NOT NULL,
+					   phone VARCHAR(15),
+					   email VARCHAR(100),
+					   PRIMARY KEY(contact_id),
+					   CONSTRAINT fk_customer   			(name of foreign key)
+					   FOREIGN KEY(customer_id) 			(column or columns used for foreign key)
+					   REFERENCES customers(customer_id)		(Reference with primary key)
+					);			
+
+
+
+---------------------------------------INDEX---------------------------------
+An index is a separated data structure e.g., B-Tree that speeds up the data retrieval on a table at the cost of additional writes and storage to maintain it. Indexes help the database server find specific rows much faster than it could do without indexes.
+
+1) Index list -  (\di - show index in database)
+ 
+			    SELECT tablename, indexname, indexdef  
+			    FROM pg_indexes  
+			    WHERE schemaname = 'public'  
+			    ORDER BY tablename, indexname;  
+
+2) create index:	    create index index_name 
+	
+
+
+
+
+
+
+-------------------------------------------------Temporary Table----------------------------------------
+
+A temporary table is a brief table; its name means; it presents at the time of a database session. 
+
+	syntax: CREATE TEMPORARY TABLE temp_table_name(...);  or CREATE TEMP TABLE temp_table_name(...);  
+	
+	
+	
+-------------------------------------------------Sub-Quries----------------------------------------------
+
+The query inside the brackets is called a subquery or an inner query. The query that contains the subquery is known as an outer query.
+
+    First, executes the subquery.
+    Second, gets the result and passes it to the outer query.
+    Third, executes the outer query.
+    
+    
+	
+
+--------------------------------------------------Functions-----------------------------------
+
+1)			     current_date -  return current date
+		             
+		             e.g. select CURRENT_DATE;
+		             
+		             now() -         return current date and time
+		             now()::date -   return current date only	
+		             
+		             
+		             TO_CHAR()-      get the output in a specific format
+		             	
+		            e.g. SELECT TO_CHAR(NOW() :: DATE, 'YYYY/MM/DD');   
+		            
+		            AGE()
+		            
+		            EXTRACT(),
+		            
+		           CURRENT_TIME        mydatabase=# select current_time OR CURRENT_TIME(2)
+						mydatabase-# ;
+						     current_time      
+						-----------------------
+						 14:26:13.238285+05:30   OR 14:26:13.23
+							(1 row)
+
+
+
+			    LOCALTIME -     mydatabase=# select LOCALTIME;
+							    localtime    
+							-----------------
+							 14:29:19.097756
+							(1 row)
+
+							mydatabase=# select LOCALTIME(2);
+							  localtime  
+							-------------
+							 14:29:25.37
+							(1 row)
+
+
+CURRENT_TIMESTAMP, TIMEOFDAY(), and timezone(zone, timestamp)
+
+
+
+SHOW TIMEZONE;   NOW(), CURRENT_TIMESTAMP, CURRENT_TIME, TIMEOFDAY(), converting time value
+
+
+justify_days(), justify_hours(), justify_interval().
+
+
+--------------------------------------------Important Questions---------------------------------
+
+1) how alter column type into serial?
+
+	mydatabase=# alter table emp
+	mydatabase-# alter column emp_id type serial;
+	ERROR:  type "serial" does not exist
+
+Solution :     CREATE SEQUENCE my_serial START 5 OWNED BY tablename.columnname;
+
+		ALTER TABLE address ALTER COLUMN columnname SET DEFAULT nextval('my_serial');
+
+
+
+2) How to know storge
+
+		  SELECT typname, typlen  
+  		  FROM pg_type  
+    		  WHERE typname ~ '^timestamp';   
+
+
+
+
+3) second highest salary query: 
+	
+		
+mydatabase=#  select first_name,salary from emp where salary=(select max(salary) from emp where salary <>( select max(salary) from emp));
+				 first_name |  salary  
+				------------+----------
+				 Manju      | 25000.00
+				 Ram        | 25000.00
+				 Raj        | 25000.00
+				(3 rows)
+
+
+
+
+
+			
 
 		
 
