@@ -89,15 +89,29 @@
 7) Customer_order table -
 
 			inventory_mgt=# create table customer_order
-				inventory_mgt-# (order_id char(10) not null primary key,
-				inventory_mgt(# customer_id char(10) not null,
-				inventory_mgt(# invoice_no char(10) not null unique,
-				inventory_mgt(# product_id char(10) not null,
-				inventory_mgt(# constraint fk_key_customer foreign key(customer_id) references customer(customer_id) on    				delete no action on update no action,
-				inventory_mgt(# constraint fk_key_product foreign key(product_id) references product(product_id) on delete 				no action on update no action);
-				CREATE TABLE
+			inventory_mgt-# (order_id char(10) not null primary key,
+			inventory_mgt(# customer_id char(10) not null,
+			inventory_mgt(# invoice_no char(10) not null unique,
+			inventory_mgt(# product_id char(10) not null,
+			inventory_mgt(# constraint fk_key_customer foreign key(customer_id) references customer(customer_id) on    			delete no action on update no action,
+			inventory_mgt(# constraint fk_key_product foreign key(product_id) references product(product_id) on delete 			no action on update no action);
+			CREATE TABLE
+
+8) Supply_order table -
+			inventory_mgt=# create table supply_order
+			inventory_mgt-# (sup_order_id char(10) not null primary key,
+			inventory_mgt(# supplier_id char(10) not null,
+			inventory_mgt(# product_id char(10) not null,
+			inventory_mgt(# order_date date not null default current_date,
+			inventory_mgt(# order_time time not null default current_time,
+			inventory_mgt(# quantity int not null),
+			constraint fk_key_supplier foreign key(supplier_id) references supplier(supplier_id) on delete restrict on update 				restrict, add constraint fk_key_product foreign key(product_id) references product(product_id) on delete restrict 				on update restrict;
+			CREATE TABLE
+			
+
 
 			
+							
 
 
 			
