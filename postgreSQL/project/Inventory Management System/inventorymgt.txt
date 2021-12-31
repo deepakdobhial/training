@@ -1,0 +1,13 @@
+-----------------------------ITEM INVENTORY MANAGEMENT SYSTEM--------------------------
+
+1) CREATE DATABASE -
+
+			postgres=# create database inventory_mgt;
+			CREATE DATABASE
+2) SELECT DATABASE: 
+			
+			postgres=# \c inventory_mgt 
+			You are now connected to database "inventory_mgt" as user "postgres".
+			inventory_mgt=# 
+
+
