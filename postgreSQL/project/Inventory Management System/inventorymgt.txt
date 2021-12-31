@@ -65,6 +65,28 @@
 			inventory_mgt=# alter table supplier 
 			inventory_mgt-# add primary key(supplier_id,product_id);
 			ALTER TABLE
+			
+			
+			inventory_mgt=# alter table supplier 
+			inventory_mgt-# drop column product_id,
+			inventory_mgt-# drop column quantity;
+			inventory_mgt-# add primary key(supplier_id);
+			
+6) Customer table -
+
+			inventory_mgt=# create table customer
+			(customer_id char(10) not null primary key,
+			first_name varchar(15) not null,
+			last_name varchar(20),
+			city varchar(20) not null,
+			state varchar(20) not null,
+			contact bigint not null,
+			email varchar(50));
+			CREATE TABLE
+			inventory_mgt=# 
+			
+			
+
 
 			
 			
