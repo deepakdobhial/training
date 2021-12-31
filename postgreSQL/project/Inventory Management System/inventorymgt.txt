@@ -37,3 +37,25 @@
 			constraint fk_product_category foreign key(category_id)
 			references category(category_id) on delete no action on update no action 
 			);
+			
+4) supplier table -
+
+			inventory_mgt=# create table supplier(
+			inventory_mgt(# supplier_id char(10) not null primary key,
+			inventory_mgt(# first_name varchar(20) not null,
+			inventory_mgt(# last_name varchar(25),
+			inventory_mgt(# company_name varchar(50) not null,
+			inventory_mgt(# city varchar(20) not null,
+			inventory_mgt(# state varchar(20) not null,
+			inventory_mgt(# contact bigint not null,
+			inventory_mgt(# email varchar(50),
+			inventory_mgt(# product_id char(10) not null,
+			inventory_mgt(# quantity int not null,
+			inventory_mgt(# constraint fk_key_supplier foreign key(product_id) references product(product_id) on delete 
+			no action on update no action);
+			CREATE TABLE
+
+			
+			
+			
+			
