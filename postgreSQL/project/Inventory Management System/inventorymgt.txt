@@ -11,3 +11,10 @@
 			inventory_mgt=# 
 
 
+------------------------------------TABLES---------------------------
+
+1) brand table - 
+			inventory_mgt=# create table brand
+			inventory_mgt-# (brand_id char(10) not null primary key,
+			inventory_mgt(# brand_name varchar(20) not null unique);
+			CREATE TABLE
