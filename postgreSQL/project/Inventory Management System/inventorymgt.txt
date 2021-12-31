@@ -18,3 +18,10 @@
 			inventory_mgt-# (brand_id char(10) not null primary key,
 			inventory_mgt(# brand_name varchar(20) not null unique);
 			CREATE TABLE
+			
+2) category table - 
+			inventory_mgt=# create table category
+			inventory_mgt-# (category_id char(10) not null primary key,
+			inventory_mgt(# category_title varchar(15) not null unique);
+			CREATE TABLE
+			inventory_mgt=# 
