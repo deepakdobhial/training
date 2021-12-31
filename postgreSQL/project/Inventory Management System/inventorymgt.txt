@@ -54,6 +54,17 @@
 			inventory_mgt(# constraint fk_key_supplier foreign key(product_id) references product(product_id) on delete 
 			no action on update no action);
 			CREATE TABLE
+			
+			
+5) Alter supplier table - 
+
+			inventory_mgt=# alter table supplier 
+			inventory_mgt-# drop constraint supplier_pkey;
+			ALTER TABLE
+
+			inventory_mgt=# alter table supplier 
+			inventory_mgt-# add primary key(supplier_id,product_id);
+			ALTER TABLE
 
 			
 			
