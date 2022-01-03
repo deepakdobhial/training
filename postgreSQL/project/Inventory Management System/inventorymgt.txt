@@ -235,6 +235,16 @@
 			('OD011','CUS009','IN011','PR003','11/12/2021',1,'EMP010'),
 			('OD012','CUS010','IN012','PR007','12/12/2021',2,'EMP010'),
 			('OD013','CUS010','IN013','PR008','01/01/2022',1,'EMP004');
+			
+7) supplier table
+
+			insert into supplier
+			values
+			('SUP001','Ashish','Dhawan','M/S Ashish Enterprises','Faridabad','Haryana',9245125741,'ashishenterprises@gmail.com'),
+			('SUP002','Narender','Bhati','M/S SAV Enterprises','Faridabad','Haryana',9811471452,'saventerprises@gmail.com'),
+			('SUP003','Sanjay','Kumar','M/S Sanjoy Enterprises ','New Delhi','Delhi',9874563214,'sanjoyenterprises@gmail.com'),
+			('SUP004','Ram','Milan','M/S UMA Enterprises  ','Gurgaon','Haryana',9011564245,'umaenterprises@gmail.com'),
+			('SUP005','Prem','Khattar','M/S ONS Enterprises ','Noida','Uttar Pradesh',9716564125,'onsenterprises@gmail.com');
 				      
 
 			
