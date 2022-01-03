@@ -110,10 +110,19 @@
 			
 9) Alter customer table add column DOB
 
-inventory_mgt=# alter table customer
-inventory_mgt-# add column DOB date,
-add column gender char;
-ALTER TABLE		
+			inventory_mgt=# alter table customer
+			inventory_mgt-# add column DOB date,
+			add column gender char;
+			ALTER TABLE	
+
+10) Alter customer_order table - 
+
+			inventory_mgt=# alter table customer_order 
+			add column order_date timestamp,
+			add column quantity int not null,
+			add column emp_id char(10) not null;
+			add constraint fk_key_emp foreign key(emp_id) references employee(emp_id) on delete restrict on update restrict;
+			ALTER TABLE	
 
 
 			
