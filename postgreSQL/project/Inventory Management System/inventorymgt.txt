@@ -151,6 +151,14 @@
 			constraint fk_key_job foreign key(job_id) references job(job_id) on update restrict on delete restrict;
 
 			CREATE TABLE
+			
+			
+13) Alter table product - 
+
+			inventory_mgt=# alter table product 
+			inventory_mgt-# add column price numeric(10,2);
+			ALTER TABLE
+
 
 			
 							
