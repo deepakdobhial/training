@@ -128,12 +128,29 @@
 			
 11) Create job table -
 	
-			4) inventory_mgt=# create table job
+			inventory_mgt=# create table job
 			inventory_mgt-# (job_id char(10) not null primary key,
 			inventory_mgt(# job_title varchar(20) not null);
 			CREATE TABLE
 			
+			
+12) Create table employee-
 
+			inventory_mgt=# create table employee
+			inventory_mgt-# (emp_id char(10) not null primary key,
+			inventory_mgt(# first_name varchar(15) not null,
+			inventory_mgt(# last_name varchar(20),
+			inventory_mgt(# date_of_birth date,
+			inventory_mgt(# city varchar(20),
+			inventory_mgt(# state varchar(20),
+			inventory_mgt(# gender char not null,
+			inventory_mgt(# job_id char(10) not null,
+			inventory_mgt(# date_of_joining date not null,
+			inventory_mgt(# date_of_exit date,
+			inventory_mgt(# salary numeric(10,2) not null);
+			constraint fk_key_job foreign key(job_id) references job(job_id) on update restrict on delete restrict;
+
+			CREATE TABLE
 
 			
 							
