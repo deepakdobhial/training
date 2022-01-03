@@ -491,6 +491,24 @@
 					 VIVEK KAMBOJ | 25-12-1984    |  37
 					(2 rows)
 
+12) show product details :
+	
+	inventory_mgt=# select product_id,brand_name,category_name from product natural join brand natural join category;
+	
+					 product_id | brand_name | category_name 
+					------------+------------+---------------
+					 PR001      | Lenovo     | Mobile
+					 PR002      | Lenovo     | Laptop
+					 PR003      | Lenovo     | Desktop
+					 PR004      | Apple      | Mobile
+					 PR005      | HP         | Laptop
+					 PR006      | HP         | Desktop
+					 PR007      | Dell       | Laptop
+					 PR008      | Dell       | Desktop
+					 PR009      | Redmi      | Mobile
+					(9 rows)
+
+
 
 
 			
