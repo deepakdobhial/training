@@ -246,7 +246,19 @@
 			('SUP004','Ram','Milan','M/S UMA Enterprises  ','Gurgaon','Haryana',9011564245,'umaenterprises@gmail.com'),
 			('SUP005','Prem','Khattar','M/S ONS Enterprises ','Noida','Uttar Pradesh',9716564125,'onsenterprises@gmail.com');
 				      
-
+8) 6)supply_order table - 
+ 
+			insert into supply_order
+			values
+			('SOD001','SUP001','PR001','25/08/2021','15:07:35',10),
+			('SOD002','SUP002','PR002','30/08/2021','11:10:45',10),
+			('SOD003','SUP003','PR003','20/09/2021','12:12:55',10),
+			('SOD004','SUP002','PR004','01/10/2021','15:15:35',10),
+			('SOD005','SUP003','PR005','01/12/2021','16:37:20',10),
+			('SOD006','SUP004','PR006','01/12/2021','12:34:10',10),
+			('SOD007','SUP005','PR007','01/12/2021','13:33:12',10),
+			('SOD008','SUP001','PR008','12/12/2021','15:35:08',10),
+			('SOD009','SUP005','PR009','02/12/2021','11:40:10',10);
 			
 			
 			
