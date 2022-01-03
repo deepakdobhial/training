@@ -196,6 +196,14 @@
 			('EMP008','SUMIT','PHUKELA','10/08/1999','GURGAON','HARYANA','M','J001','05/09/2018',DEFAULT,45000.00),
 			('EMP009','VIVEK','KAMBOJ','25/12/1984','FARIDABAD','HARYANA','M','J004','05/08/2016',DEFAULT,40000.00),
 			('EMP010','RAHUL','CHAWLA','01/07/2000','NOIDA','UTTAR PRADESH','M','J003','05/01/2019',DEFAULT,15000.00);
+			
+4) job table-
+				insert into job 
+				values('J001','SALES MANAGER'),
+				      ('J002','STOCK MANAGER'),
+				      ('J003','SALESMAN'),
+				      ('J004','STOCK CLERK');
+				      
 
 			
 			
