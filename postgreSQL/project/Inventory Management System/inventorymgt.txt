@@ -456,7 +456,20 @@
 					 J003       | SALESMAN      | 117000.00
 					 J004       | STOCK CLERK   |  40000.00
 					(4 rows)
-		
+9) employees full name whose salary>20000 
+
+	inventory_mgt=# select e.job_id,e.first_name||' '||e.last_name as full_name,j.job_title,e.salary from employee as e inner join job 			 as j on e.job_id=j.job_id where e.salary>20000 order by e.job_id;
+
+
+					   job_id   |     full_name     |   job_title   |  salary  
+					------------+-------------------+---------------+----------
+					 J001       | RAHUL SHARMA      | SALES MANAGER | 45000.00
+					 J001       | SUMIT PHUKELA     | SALES MANAGER | 45000.00
+					 J002       | HARSH VERMA       | STOCK MANAGER | 55000.00
+					 J003       | HARSHIT CHAWDHARY | SALESMAN      | 22000.00
+					 J003       | GAUTAM AHUJA      | SALESMAN      | 30000.00
+					 J004       | VIVEK KAMBOJ      | STOCK CLERK   | 40000.00
+					(6 rows)
 			
 			
 			
