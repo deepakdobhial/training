@@ -84,7 +84,7 @@
 			email varchar(50));
 			CREATE TABLE
 			inventory_mgt=# 
-			
+		
 			
 7) Customer_order table -
 
@@ -107,6 +107,17 @@
 			inventory_mgt(# quantity int not null),
 			constraint fk_key_supplier foreign key(supplier_id) references supplier(supplier_id) on delete restrict on update 				restrict, add constraint fk_key_product foreign key(product_id) references product(product_id) on delete restrict 				on update restrict;
 			CREATE TABLE
+			
+9) Alter customer table add column DOB
+
+inventory_mgt=# alter table customer
+inventory_mgt-# add column DOB date,
+add column gender char;
+ALTER TABLE		
+
+
+			
+
 			
 
 
