@@ -158,7 +158,20 @@
 			inventory_mgt=# alter table product 
 			inventory_mgt-# add column price numeric(10,2);
 			ALTER TABLE
+			
 
+
+------------------------------------INSERT DATA---------------------------------------------
+1) BRAND TABLE -
+
+			inventory_mgt=# insert into brand 
+			inventory_mgt-# (brand_id,brand_name)
+			inventory_mgt-# values('B001','Lenovo'),
+			inventory_mgt-# ('B002','Apple'),
+			inventory_mgt-# ('B003','HP'),
+			inventory_mgt-# ('B004','Dell'),
+			inventory_mgt-# ('B005','Redmi');
+			INSERT 0 5
 
 			
 							
