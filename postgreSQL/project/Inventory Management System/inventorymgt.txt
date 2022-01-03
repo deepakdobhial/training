@@ -341,7 +341,25 @@
 			(9 rows)
 			
 			
-3.) 
+3.) find product details with total ordered quantity
+
+		inventory_mgt=# select product_id,brand_name,category_name,sum(quantity) as qty from product 
+	        natural join  brand natural inner join category natural inner join customer_order group by    
+	        product_id,brand_name,category_name order by product_id;
+
+			 product_id | brand_name | category_name | qty 
+			------------+------------+---------------+-----
+			 PR001      | Lenovo     | Mobile        |   4
+			 PR002      | Lenovo     | Laptop        |   2
+			 PR003      | Lenovo     | Desktop       |   3
+			 PR004      | Apple      | Mobile        |   2
+			 PR005      | HP         | Laptop        |   2
+			 PR006      | HP         | Desktop       |   2
+			 PR007      | Dell       | Laptop        |   2
+			 PR008      | Dell       | Desktop       |   1
+			 PR009      | Redmi      | Mobile        |   1
+			(9 rows)
+
 
 		
 			
