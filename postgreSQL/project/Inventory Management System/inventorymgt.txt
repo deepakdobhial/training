@@ -204,6 +204,20 @@
 				      ('J003','SALESMAN'),
 				      ('J004','STOCK CLERK');
 				      
+5) customer table-
+
+			insert into customer
+			values
+			('CUS001','DEEPAK','DOBHAL','FARIDABAD','HARYANA',7011564145,'deepak@gmail.com', ‘1989-05-12 ’,’M’),
+			('CUS002','MANJU','DASS','DELHI','DELHI',9014562145,'manju@gmail.com',’07/07/1984’,’F’),
+			('CUS003','RITU','SHARMA','DEHRADUN','UTTRAKHAND',6325412547,'ritu@gmail.com','07/05/1984','F'),
+			('CUS004','PANKAJ','PANDEY','FARIDABAD','HARYANA',6547896541,'pankaj@gmail.com','07/12/2000','M'),
+			('CUS005','DEVANSH','UNIYAL','NEWDELHI','DELHI',9632541254,'devansh@gmail.com','07/07/2006','M')
+			('CUS006','DEV','ANAND','SURAT','GUJARAT',9210503012,'dev@gmail.com','05/09/2008','M'),
+			('CUS007','POOJA','SHARMA','GURGAON','HARYANA',8855443315,'pooja@gmail.com','15/09/2001','F’),('CUS008','DEVANSH','KHATRI','NEWDELHI','DELHI',8874563698,'dev07@gmail.com','12/08/2000','M'),
+			('CUS009','NEETU','MISHRA','PATNA','BIHAR',7012365478,'neetu@gmail.com','05/12/1981','F'),
+			('CUS010','BABITA','NARULA','NOIDA','UTTAR PRADESH',8832564512,'babita@gmail.com','07/07/2006','F');
+				      
 
 			
 			
