@@ -445,7 +445,17 @@
 					(4 rows)
 		
 
+8)Total salary by designation
 
+	inventory_mgt=# select e.job_id,j.job_title,sum(e.salary) as total_salary from employee as e inner join job as j on 			 e.job_id=j.job_id group by e.job_id,j.job_title order by e.job_id;
+						
+					   job_id   |   job_title   |total_salary  
+					------------+---------------+-----------
+					 J001       | SALES MANAGER |  90000.00
+					 J002       | STOCK MANAGER |  55000.00
+					 J003       | SALESMAN      | 117000.00
+					 J004       | STOCK CLERK   |  40000.00
+					(4 rows)
 		
 			
 			
