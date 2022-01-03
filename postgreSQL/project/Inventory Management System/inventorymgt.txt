@@ -473,7 +473,26 @@
 			
 			
 			
-			
+10) Max salary of a employee
+
+	inventory_mgt=# select first_name,last_name,salary from employee where salary=(select max(salary) from employee) group by 				first_name,last_name,salary;
+	
+					 first_name | last_name |   salary    
+					------------+-----------+----------
+					 HARSH      | VERMA     | 55000.00
+					(1 row)			
+11) age of employees > 30
+
+	inventory_mgt=# select first_name||' '||last_name as full_name,to_char(date_of_birth,'dd-mm-yyyy') as Date_of_birth,extract(year 				from age(date_of_birth)) as age from employee group by first_name,last_name,date_of_birth having extract(year from 			age(date_of_birth))>30 order by age;
+	
+					  full_name   | date_of_birth | age 
+					--------------+---------------+-----
+					 GAUTAM AHUJA | 08-07-1990    |  31
+					 VIVEK KAMBOJ | 25-12-1984    |  37
+					(2 rows)
+
+
+
 			
 			
 			
