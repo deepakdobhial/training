@@ -152,29 +152,6 @@
 	Name 	           Description 	  Storage Size 	  Low Value 	   High Value 	        Resolution
 	-------------------------------------------------------------------------------------------------------------------
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	1) Date-  used to store the date values. (YYYY-MM-DD)  (4 bytes and range- 1000-01-01 to 9999-12-31)
 	
 			
@@ -1215,6 +1192,35 @@ SHOW TIMEZONE;   NOW(), CURRENT_TIMESTAMP, CURRENT_TIME, TIMEOFDAY(), converting
 
 
 justify_days(), justify_hours(), justify_interval().
+
+
+------------------------------------------IMPORTANT FUNCTION--------------------------
+
+1) PostgreSQL COALESCE as ISNULL - PostgreSQL does not have the ISNULL function. However, you can use the COALESCE function which 					provides similar functionality. Note that the COALESCE function returns the first non-null 						argument, so the following syntax has a similar effect as the ISNULL function above: 
+
+			syntax: COALESCE(EXPRESSION,REPLACEMENT)
+			
+			e.g. inventory_mgt=# select customer_id,coalesce(sum(quantity),0) from customer natural left join customer_order 					group by customer_id order by customer_id;
+			
+				 customer_id | coalesce 
+				-------------+----------
+				 CUS001      |        1
+				 CUS002      |        1
+				 CUS003      |        2
+				 CUS004      |        1
+				 CUS005      |        2
+				 CUS006      |        2
+				 CUS007      |        2
+				 CUS008      |        4
+				 CUS009      |        1
+				 CUS010      |        3
+				 CUS011      |        0
+				 CUS012      |        0
+				(12 rows)
+
+
+
+
 
 
 --------------------------------------------Important Questions---------------------------------
