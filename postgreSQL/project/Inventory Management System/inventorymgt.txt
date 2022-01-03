@@ -279,6 +279,25 @@
 			('SOD009','SUP005','PR009','02/12/2021','11:40:10',10);
 			
 
+
+----------------------------------------------Sub-Queries------------------------------------
+
+1) find total quantity of order product 
+
+		inventory_mgt=# select product_id,sum(quantity) from customer_order group by product_id order by product_id;
+	 product_id | sum 
+	------------+-----
+	 PR001      |   4
+	 PR002      |   2
+	 PR003      |   3
+	 PR004      |   2
+	 PR005      |   2
+	 PR006      |   2
+	 PR007      |   2
+	 PR008      |   1
+	 PR009      |   1
+	(9 rows)
+
 			
 			
 			
