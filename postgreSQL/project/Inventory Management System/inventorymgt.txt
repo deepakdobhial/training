@@ -181,7 +181,25 @@
 			inventory_mgt-# ('cat_002','Laptop'),
 			inventory_mgt-# ('cat_003','Desktop');
 			INSERT 0 3
-							
+				
+			
+3) product table 
+			insert into product
+			values
+			('PR001','B001','cat_001',25000.50),
+			('PR002','B001','cat_002',50000.00),
+			('PR003','B001','cat_003',35000.00),
+			('PR004','B002','cat_001',100000.00),
+			('PR005','B003','cat_002',60000.00),
+			('PR006','B003','cat_003',40000.00),
+			('PR007','B004','cat_002',80000.00),
+			('PR008','B004','cat_003',60000.00),
+			('PR009','B005','cat_001',20000.00);
+			
+
+
+
+
 3) employee table -
 	
 			insert into employee
@@ -246,7 +264,7 @@
 			('SUP004','Ram','Milan','M/S UMA Enterprises  ','Gurgaon','Haryana',9011564245,'umaenterprises@gmail.com'),
 			('SUP005','Prem','Khattar','M/S ONS Enterprises ','Noida','Uttar Pradesh',9716564125,'onsenterprises@gmail.com');
 				      
-8) 6)supply_order table - 
+8)supply_order table - 
  
 			insert into supply_order
 			values
@@ -259,6 +277,8 @@
 			('SOD007','SUP005','PR007','01/12/2021','13:33:12',10),
 			('SOD008','SUP001','PR008','12/12/2021','15:35:08',10),
 			('SOD009','SUP005','PR009','02/12/2021','11:40:10',10);
+			
+
 			
 			
 			
