@@ -278,6 +278,12 @@
 			('SOD008','SUP001','PR008','12/12/2021','15:35:08',10),
 			('SOD009','SUP005','PR009','02/12/2021','11:40:10',10);
 			
+9) alter category table
+			inventory_mgt=# alter table category
+			rename column category_title to category_name;
+			ALTER TABLE
+
+			
 
 
 ----------------------------------------------Sub-Queries------------------------------------
@@ -315,7 +321,7 @@
 			 PR008      |        1 |           9
 			 PR009      |        1 |           9
 			(9 rows)
-
+3.) 
 		
 			
 			
