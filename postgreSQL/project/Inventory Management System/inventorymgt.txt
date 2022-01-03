@@ -286,7 +286,7 @@
 			
 
 
-----------------------------------------------Sub-Queries------------------------------------
+----------------------------------------------Queries------------------------------------
 
 1) find total quantity of each ordered product 
 
@@ -380,7 +380,7 @@
 
 5) find order placed by each customer
 
-		5.1)add two new customer
+		5.1)add two new customers
 		
 			inventory_mgt=# insert into customer                                   
 			values
@@ -405,9 +405,48 @@
 		 CUS011      | POOJA RAWAT    |            0
 		 CUS012      | POOJA SHARMA   |            0
 		(12 rows)
+		
+		
+6) Customer details with age-
+
+		inventory_mgt=# select customer_id,first_name||' '||last_name as full_name,order_date,extract(years from age(dob)) as age 			from customer natural left join customer_order group by customer_id, first_name,last_name,order_date order by customer_id;
+ 
+ 
+		 customer_id |   full_name    |     order_date      | age 
+		-------------+----------------+---------------------+-----
+		 CUS001      | DEEPAK DOBHAL  | 2021-09-06 00:00:00 |  32
+		 CUS002      | MANJU DASS     | 2021-12-06 00:00:00 |  37
+		 CUS003      | RITU SHARMA    | 2021-12-09 00:00:00 |  37
+		 CUS004      | PANKAJ PANDEY  | 2021-12-07 00:00:00 |  21
+		 CUS005      | DEVANSH UNIYAL | 2021-10-09 00:00:00 |  15
+		 CUS005      | DEVANSH UNIYAL | 2021-11-25 00:00:00 |  15
+		 CUS006      | DEV ANAND      | 2021-12-07 00:00:00 |  13
+		 CUS007      | POOJA SHARMA   | 2021-10-11 00:00:00 |  20
+		 CUS008      | DEVANSH KHATRI | 2021-09-01 00:00:00 |  21
+		 CUS008      | DEVANSH KHATRI | 2021-11-30 00:00:00 |  21
+		 CUS009      | NEETU MISHRA   | 2021-12-11 00:00:00 |  40
+		 CUS010      | BABITA NARULA  | 2021-12-12 00:00:00 |  15
+		 CUS010      | BABITA NARULA  | 2022-01-01 00:00:00 |  15
+		 CUS011      | POOJA RAWAT    |                     |  41
+		 CUS012      | POOJA SHARMA   |                     |  32
+		(15 rows)
 
 
-				
+7) number of employees working for each designation
+
+	inventory_mgt=# select e.job_id,j.job_title, count(e.job_id) as nos_of_employees from employee as e inner join job as j on 			e.job_id=j.job_id group by e.job_id,j.job_title order by e.job_id;
+ 
+					   job_id   |   job_title   | nos_of_employees 
+					------------+---------------+------------------
+					 J001       | SALES MANAGER |                2
+					 J002       | STOCK MANAGER |                1
+					 J003       | SALESMAN      |                6
+					 J004       | STOCK CLERK   |                1
+					(4 rows)
+		
+
+
+		
 			
 			
 			
