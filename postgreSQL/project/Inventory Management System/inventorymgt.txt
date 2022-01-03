@@ -361,7 +361,24 @@
 			(9 rows)
 
 
+4) find product all details with balance quantity
+
+		inventory_mgt=# select co.product_id,co.brand_name,co.category_name,so.quantity as supply_qty,co.quantity as 			order_quantity,so.quantity-co.quantity as balance_qty from(select product_id,brand_name,category_name,sum(quantity) as 			quantity from product natural join brand natural join category natural join customer_order group by 		 			product_id,brand_name,category_name ) as co join supply_order as so on co.product_id=so.product_id;
 		
+		 product_id | brand_name | category_name | supply_qty | order_quantity | balance_qty 
+		------------+------------+---------------+------------+----------------+-------------
+		 PR001      | Lenovo     | Mobile        |         10 |              4 |           6
+		 PR002      | Lenovo     | Laptop        |         10 |              2 |           8
+		 PR003      | Lenovo     | Desktop       |         10 |              3 |           7
+		 PR004      | Apple      | Mobile        |         10 |              2 |           8
+		 PR005      | HP         | Laptop        |         10 |              2 |           8
+		 PR006      | HP         | Desktop       |         10 |              2 |           8
+		 PR007      | Dell       | Laptop        |         10 |              2 |           8
+		 PR008      | Dell       | Desktop       |         10 |              1 |           9
+		 PR009      | Redmi      | Mobile        |         10 |              1 |           9
+		(9 rows)
+
+				
 			
 			
 			
