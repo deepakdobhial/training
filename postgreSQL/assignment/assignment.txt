@@ -316,6 +316,97 @@
 			  19 | Nichol Mat       | 100000
 			  20 | Weekti           |  60000
 			(20 rows)
+			
+5) INSERT DATA INTO CERTIFIED -
+
+
+			airline_flights=# insert into certified
+			airline_flights-# values
+			airline_flights-# (1,102),
+			airline_flights-# (1,115),
+			airline_flights-# (1,111),
+			airline_flights-# (1,120),
+			airline_flights-# (2,101),
+			airline_flights-# (2,102),
+			airline_flights-# (2,107),
+			airline_flights-# (2,109),
+			airline_flights-# (2,118),
+			airline_flights-# (3,103),
+			airline_flights-# (3,112),
+			airline_flights-# (5,104),
+			airline_flights-# (5,112),
+			airline_flights-# (5,110),
+			airline_flights-# (6,106),
+			airline_flights-# (6,113),
+			airline_flights-# (7,105),
+			airline_flights-# (7,108),
+			airline_flights-# (7,113),
+			airline_flights-# (7,114),
+			airline_flights-# (12,116),
+			airline_flights-# (12,117),
+			airline_flights-# (12,119),
+			airline_flights-# (13,118),
+			airline_flights-# (15,101),
+			airline_flights-# (15,105),
+			airline_flights-# (15,102),
+			airline_flights-# (15,117),
+			airline_flights-# (15,116),
+			airline_flights-# (16,101),
+			airline_flights-# (16,107),
+			airline_flights-# (16,115),
+			airline_flights-# (16,118),
+			airline_flights-# (17,107),
+			airline_flights-# (17,119),
+			airline_flights-# (18,111),
+			airline_flights-# (19,113),
+			airline_flights-# (19,120);
+			INSERT 0 38
+			
+------->		select * from certified;
+				
+			 eid | aid 
+			-----+-----
+			   1 | 102
+			   1 | 115
+			   1 | 111
+			   1 | 120
+			   2 | 101
+			   2 | 102
+			   2 | 107
+			   2 | 109
+			   2 | 118
+			   3 | 103
+			   3 | 112
+			   5 | 104
+			   5 | 112
+			   5 | 110
+			   6 | 106
+			   6 | 113
+			   7 | 105
+			   7 | 108
+			   7 | 113
+			   7 | 114
+			  12 | 116
+			  12 | 117
+			  12 | 119
+			  13 | 118
+			  15 | 101
+			  15 | 105
+			  15 | 102
+			  15 | 117
+			  15 | 116
+			  16 | 101
+			  16 | 107
+			  16 | 115
+			  16 | 118
+			  17 | 107
+			  17 | 119
+			  18 | 111
+			  19 | 113
+			  19 | 120
+			(38 rows)
+
+
 
 		    
 
