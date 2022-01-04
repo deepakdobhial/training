@@ -172,6 +172,57 @@
 			 1032 | Chicago       | New York      |      800 | 15:00:00+05:30 | 17:20:00+05:30 |   150
 			 1033 | Chicago       | New York      |      800 | 18:30:00+05:30 | 19:20:00+05:30 |   300
 			(33 rows)
+			
+
+2) INSERT DATA INTO AIRCRAFT -
+
+			airline_flights=# insert into aircraft
+			airline_flights-# values
+			airline_flights-# (101,'Airbus','1000'),
+			airline_flights-# (102,'Boeing','4000'),
+			airline_flights-# (103,'BAE Systems','4000'),
+			airline_flights-# (104,'GE Aviation','6000'),
+			airline_flights-# (105,'United Technologies','1000'),
+			airline_flights-# (106,'General Electric','3000'),
+			airline_flights-# (107,'Rolls-Royce','3000'),
+			airline_flights-# (108,'L-3 Technologies','4000'),
+			airline_flights-# (109,'United Aircraft','5000'),
+			airline_flights-# (110,'AVIC','6000'),
+			airline_flights-# (111,'GKN Aerospace','5000'),
+			airline_flights-# (112,'Triumph Group','8000'),
+			airline_flights-# (113,'ST Engineering','6000'),
+			airline_flights-# (114,'Solvay Group','9000'),
+			airline_flights-# (115,'SKF','1000'),
+			airline_flights-# (116,'Air United','3000'),
+			airline_flights-# (117,'Sky Jet','3500'),
+			airline_flights-# (118,'Air New York','1000');
+			INSERT 0 18
+			
+			
+----------->  		 airline_flights=# select * from aircraft;
+
+			 aid |        aname        | cruisingrange 
+			-----+---------------------+---------------
+			 101 | Airbus              |          1000
+			 102 | Boeing              |          4000
+			 103 | BAE Systems         |          4000
+			 104 | GE Aviation         |          6000
+			 105 | United Technologies |          1000
+			 106 | General Electric    |          3000
+			 107 | Rolls-Royce         |          3000
+			 108 | L-3 Technologies    |          4000
+			 109 | United Aircraft     |          5000
+			 110 | AVIC                |          6000
+			 111 | GKN Aerospace       |          5000
+			 112 | Triumph Group       |          8000
+			 113 | ST Engineering      |          6000
+			 114 | Solvay Group        |          9000
+			 115 | SKF                 |          1000
+			 116 | Air United          |          3000
+			 117 | Sky Jet             |          3500
+			 118 | Air New York        |          1000
+			(18 rows)
+
 					    
 
 
