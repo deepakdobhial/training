@@ -1,0 +1,11 @@
+---------------------------------------------------ASSIGNMENT------------------------------------------
+1) CREATE DATABASE -  AIRLINE FLIGHTS
+
+	--> 	create database airline_flights;
+		CREATE DATABASE
+		
+2) SELECT DATABASE- AIRLINE FLIGHTS
+
+	--> 	\c airline_flights ;
+		You are now connected to database "airline_flights" as user "postgres".
+		
