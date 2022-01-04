@@ -67,7 +67,29 @@
 				 salary | integer               |           |          | 
 				Indexes:
 				    "employees_pkey" PRIMARY KEY, btree (eid)
-				    
+			
+4) CREATE CERTIFIED TABLE - 
+
+		  airline_flights=# create table certified
+				  (eid int not null,aid int not null,
+				  primary key(eid,aid),
+				  constraint certified_fkey_eid foreign key(eid) references employees(eid) on delete cascade on update 					  cascade,
+				  constraint certified_fkey_aid foreign key(aid) references aircraft(aid) on delete cascade on update 					  cascade);
+			CREATE TABLE
+			
+
+		3.1) TABLE DESCRIPTION -    airline_flights=# \d certified;
+		
+					     Table "public.certified"
+				 Column |  Type   | Collation | Nullable | Default 
+				--------+---------+-----------+----------+---------
+				 eid    | integer |           | not null | 
+				 aid    | integer |           | not null | 
+				Indexes:
+				    "certified_pkey" PRIMARY KEY, btree (eid, aid)
+				Foreign-key constraints:
+		               "certified_fkey_aid" FOREIGN KEY (aid) REFERENCES aircraft(aid) ON UPDATE CASCADE ON DELETE CASCADE
+			      "certified_fkey_eid" FOREIGN KEY (eid) REFERENCES employees(eid) ON UPDATE CASCADE ON DELETE CASCADE	    
 				    
 				    
 				    
