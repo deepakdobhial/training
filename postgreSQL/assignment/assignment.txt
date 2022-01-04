@@ -263,6 +263,60 @@
 			 120 | Boeing 7            |          5000
 			 121 | Boeing 400          |          4000
 			(21 rows)
+			
+4) INSERT DATA INTO EMPLOYEES - 
+
+			airline_flights=# insert into employees
+			airline_flights-# values
+			airline_flights-# (1,'Kevin Zacher',200000),
+			airline_flights-# (2,'Victoria Mutenue',150000),
+			airline_flights-# (3,'Pankaj Pandey',50000),
+			airline_flights-# (4,'Mohit Dagar',90000),
+			airline_flights-# (5,'Alexander',180000),
+			airline_flights-# (6,'Krishna',80000),
+			airline_flights-# (7,'Deepak',160000),
+			airline_flights-# (8,'Jade',70000),
+			airline_flights-# (9,'Ram Kishan',40000),
+			airline_flights-# (10,'Rozar',15000),
+			airline_flights-# (11,'Elena',60000),
+			airline_flights-# (12,'Kane Williamson',260000),
+			airline_flights-# (13,'Tim Boult',60000),
+			airline_flights-# (14,'Tom Latham',40000),
+			airline_flights-# (15,'Colin Murno',140000),
+			airline_flights-# (16,'Rajiv Patel',300000),
+			airline_flights-# (17,'Samual Zacher',100000),
+			airline_flights-# (18,'Henry Nicholas',80000),
+			airline_flights-# (19,'Nichol Mat',100000),
+			airline_flights-# (20,'Weekti',60000);
+			INSERT 0 20
+			
+			
+-------> 		airline_flights=# select * from employees;
+
+			 eid |      ename       | salary 
+			-----+------------------+--------
+			   1 | Kevin Zacher     | 200000
+			   2 | Victoria Mutenue | 150000
+			   3 | Pankaj Pandey    |  50000
+			   4 | Mohit Dagar      |  90000
+			   5 | Alexander        | 180000
+			   6 | Krishna          |  80000
+			   7 | Deepak           | 160000
+			   8 | Jade             |  70000
+			   9 | Ram Kishan       |  40000
+			  10 | Rozar            |  15000
+			  11 | Elena            |  60000
+			  12 | Kane Williamson  | 260000
+			  13 | Tim Boult        |  60000
+			  14 | Tom Latham       |  40000
+			  15 | Colin Murno      | 140000
+			  16 | Rajiv Patel      | 300000
+			  17 | Samual Zacher    | 100000
+			  18 | Henry Nicholas   |  80000
+			  19 | Nichol Mat       | 100000
+			  20 | Weekti           |  60000
+			(20 rows)
+
 		    
 
 
