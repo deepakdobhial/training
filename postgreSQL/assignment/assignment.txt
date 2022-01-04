@@ -33,4 +33,26 @@
 			 price    | integer               |           | not null | 
 			Indexes:
 			    "flights_pkey" PRIMARY KEY, btree (flno)
+			    
+2) CREATE AIRCRAFT TABLE -
+
+		airline_flights=# create table aircraft 
+		airline_flights-# (aid int not null primary key,aname varchar(100) not null, cruisingrange int not null);
+		CREATE TABLE
+
+		2.1) TABLE DESCRIPTION -	airline_flights=# \d aircraft;
+				
+							 Table "public.aircraft"
+				    Column     |          Type          | Collation | Nullable | Default 
+				---------------+------------------------+-----------+----------+---------
+				 aid           | integer                |           | not null | 
+				 aname         | character varying(100) |           | not null | 
+				 cruisingrange | integer                |           | not null | 
+				Indexes:
+				    "aircraft_pkey" PRIMARY KEY, btree (aid)
+				    
+				    
+				    
+				    
+
 
