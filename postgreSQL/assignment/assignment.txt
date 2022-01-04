@@ -9,3 +9,28 @@
 	--> 	\c airline_flights ;
 		You are now connected to database "airline_flights" as user "postgres".
 		
+	
+----------------------------------------------TABLES----------------------------------
+
+1) CREATE FLIGHT TABLE -
+
+		 airline_flights=# create table flights
+		(flno int not null primary key,"from" varchar(70) not null,"to" varchar(70) not null,distance int not null,departs timetz 			not null,arrives timetz not null,price int not null);
+		CREATE TABLE
+
+			
+		1.1) TABLE DESCRIPTION -   airline_flights=# \d flights;
+		
+					      Table "public.flights"
+			  Column  |         Type          | Collation | Nullable | Default 
+			----------+-----------------------+-----------+----------+---------
+			 flno     | integer               |           | not null | 
+			 from     | character varying(70) |           | not null | 
+			 to       | character varying(70) |           | not null | 
+			 distance | integer               |           | not null | 
+			 departs  | time with time zone   |           | not null | 
+			 arrives  | time with time zone   |           | not null | 
+			 price    | integer               |           | not null | 
+			Indexes:
+			    "flights_pkey" PRIMARY KEY, btree (flno)
+
