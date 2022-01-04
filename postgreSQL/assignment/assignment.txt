@@ -50,6 +50,23 @@
 				 cruisingrange | integer                |           | not null | 
 				Indexes:
 				    "aircraft_pkey" PRIMARY KEY, btree (aid)
+				
+3) CREATE EMPLOYEES TABLE - 
+
+		   airline_flights=# create table employees
+		   airline_flights-# (eid int not null primary key,ename varchar(30) not null,salary int);
+		   CREATE TABLE
+
+		   3.1) TABLE DESCRIPTION -	airline_flights=# \d employees;
+						
+						    Table "public.employees"
+				 Column |         Type          | Collation | Nullable | Default 
+				--------+-----------------------+-----------+----------+---------
+				 eid    | integer               |           | not null | 
+				 ename  | character varying(30) |           | not null | 
+				 salary | integer               |           |          | 
+				Indexes:
+				    "employees_pkey" PRIMARY KEY, btree (eid)
 				    
 				    
 				    
