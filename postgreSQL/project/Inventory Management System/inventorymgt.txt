@@ -510,6 +510,15 @@
 
 
 
+13) Find age of the eldest employee
+
+	inventory_mgt=# select first_name||' '||last_name as full_name,extract(year from age(date_of_birth)) as age from employee where 				 date_of_birth=(select min(date_of_birth) from employee);
+	
+					  full_name   | age 
+					--------------+-----
+					 VIVEK KAMBOJ |  37
+					(1 row)
+
 
 			
 			
