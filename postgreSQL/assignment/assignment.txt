@@ -223,6 +223,46 @@
 			 118 | Air New York        |          1000
 			(18 rows)
 
-					    
+3) UPDATE AND INSERT MORE DATA INTO AIRCRAFT-
+
+	Update-	airline_flights=# update aircraft
+			airline_flights-# set aname='Boeing 777' where aid=102;
+			UPDATE 1
+			
+	Insert-	airline_flights=# insert into aircraft
+			airline_flights-# values
+			airline_flights-# (119,'Boeing 101',3000),
+			airline_flights-# (120,'Boeing 7',5000),
+			airline_flights-# (121,'Boeing 400',4000);
+			INSERT 0 3
+
+			
+--------->		airline_flights=# select * from aircraft;
+
+			 aid |        aname        | cruisingrange 
+			-----+---------------------+---------------
+			 101 | Airbus              |          1000
+			 103 | BAE Systems         |          4000
+			 104 | GE Aviation         |          6000
+			 105 | United Technologies |          1000
+			 106 | General Electric    |          3000
+			 107 | Rolls-Royce         |          3000
+			 108 | L-3 Technologies    |          4000
+			 109 | United Aircraft     |          5000
+			 110 | AVIC                |          6000
+			 111 | GKN Aerospace       |          5000
+			 112 | Triumph Group       |          8000
+			 113 | ST Engineering      |          6000
+			 114 | Solvay Group        |          9000
+			 115 | SKF                 |          1000
+			 116 | Air United          |          3000
+			 117 | Sky Jet             |          3500
+			 118 | Air New York        |          1000
+			 102 | Boeing 777          |          4000
+			 119 | Boeing 101          |          3000
+			 120 | Boeing 7            |          5000
+			 121 | Boeing 400          |          4000
+			(21 rows)
+		    
 
 
