@@ -587,6 +587,19 @@ f) Find the aids of all aircraft that can be used on routes from Los Angeles to 
 			 121
 			(17 rows)
 			
+h)Print the enames of pilots who can operate planes with cruisingrange greaterthan 3000 miles but are not certified on any Boeing   aircraft. 
+
+		select distinct ename from employees natural join certified natural join aircraft group by ename having ename not 			in(select e.ename from aircraft as a inner join certified as c on c.aid=a.aid inner join employees as e on e.eid=c.eid 			where aname like 'Boeing%') and min(cruisingrange)>3000 order by ename;
+		
+			     ename      
+			----------------
+			 Alexander
+			 Henry Nicholas
+			 Pankaj Pandey
+			(3 rows)
+						
+			
+			
 l) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
 
 		airline_flights=# select distinct e.ename from employees as e inner join certified as c on c.eid=e.eid inner join aircraft as a on a.aid=c.aid group by e.ename having min(a.cruisingrange)>1000 order by e.ename;
@@ -602,6 +615,9 @@ l) Print the names of employees who are certified only on aircrafts with cruisin
 			 Pankaj Pandey
 			 Samual Zacher
 			(7 rows)
+			
+			
+
 
 
 
