@@ -586,6 +586,22 @@ f) Find the aids of all aircraft that can be used on routes from Los Angeles to 
 			 120
 			 121
 			(17 rows)
+			
+l) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
+
+		airline_flights=# select distinct e.ename from employees as e inner join certified as c on c.eid=e.eid inner join aircraft as a on a.aid=c.aid group by e.ename having min(a.cruisingrange)>1000 order by e.ename;
+		
+					
+			      ename      
+			-----------------
+			 Alexander
+			 Henry Nicholas
+			 Kane Williamson
+			 Krishna
+			 Nichol Mat
+			 Pankaj Pandey
+			 Samual Zacher
+			(7 rows)
 
 
 
