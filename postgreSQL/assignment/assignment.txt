@@ -446,6 +446,25 @@
 			  23 | Saroj            |    150
 			(23 rows)
 
+7) Update table flights-
+
+			airline_flights=# update flights                                 
+			set distance=5000 where flno=1006;
+			UPDATE 1
+			
+			airline_flights=# update flights                                 
+			set distance=3000 where flno=1007;
+			UPDATE 1
+			
+			airline_flights=# select flno,"from","to",distance from flights where "from"='Los Angeles' and "to"='Chicago';
+			 flno |    from     |   to    | distance 
+			------+-------------+---------+----------
+			 1005 | Los Angeles | Chicago |     2818
+			 1008 | Los Angeles | Chicago |     2818
+			 1006 | Los Angeles | Chicago |     5000
+			 1007 | Los Angeles | Chicago |     3000
+			(4 rows)
+
 
 
 
