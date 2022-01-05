@@ -602,7 +602,21 @@ h)Print the enames of pilots who can operate planes with cruisingrange greaterth
 			 Pankaj Pandey
 			(3 rows)
 						
-			
+k) Print the name and salary of every nonpilot whose salary is more than the average salary for pilots. 	
+
+	airline_flights=# select ename as employee_name,salary from employees where eid not in(select eid from employees natural join       certified) and salary>(select avg(salary) from employees natural join certified);
+	
+	
+			 employee_name | salary 
+			---------------+--------
+			 Mohit Dagar   | 170000
+			(1 row)
+
+
+
+
+
+		
 			
 l) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
 
