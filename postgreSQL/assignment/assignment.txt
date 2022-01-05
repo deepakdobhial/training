@@ -465,7 +465,11 @@
 			 1007 | Los Angeles | Chicago |     3000
 			(4 rows)
 
+8) Update table employees
 
+			airline_flights=# update employees
+			airline_flights-# set salary=170000 where eid=4;
+			UPDATE 1
 
 
 
