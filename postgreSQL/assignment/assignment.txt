@@ -562,7 +562,30 @@ e) Find the names of pilots certified for some Boeing aircraft.
 		 Victoria Mutenue
 		(6 rows)
 
+f) Find the aids of all aircraft that can be used on routes from Los Angeles to Chicago
 
+		airline_flights=# select aid as aircraft_id from aircraft where cruisingrange>=(select min(distance) from flights  where  			"from"='Los Angeles' and "to"='Chicago') order by aid; 
+					
+			 aircraft_id 
+			------------
+			 102
+			 103
+			 104
+			 106
+			 107
+			 108
+			 109
+			 110
+			 111
+			 112
+			 113
+			 114
+			 116
+			 117
+			 119
+			 120
+			 121
+			(17 rows)
 
 
 
