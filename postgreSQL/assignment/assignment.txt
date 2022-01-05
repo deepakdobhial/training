@@ -407,6 +407,48 @@
 			(38 rows)
 
 
+6) Insert more data into employees
+
+	airline_flights=# insert into employees
+					airline_flights-# values
+					airline_flights-# (21,'Saroj',150),
+					airline_flights-# (22,'Angel',195),
+					airline_flights-# (23,'Saroj',150);
+					INSERT 0 3
+					
+					
+-------->		airline_flights=# select * from employees;
+			
+			 eid |      ename       | salary 
+			-----+------------------+--------
+			   1 | Kevin Zacher     | 200000
+			   2 | Victoria Mutenue | 150000
+			   3 | Pankaj Pandey    |  50000
+			   4 | Mohit Dagar      |  90000
+			   5 | Alexander        | 180000
+			   6 | Krishna          |  80000
+			   7 | Deepak           | 160000
+			   8 | Jade             |  70000
+			   9 | Ram Kishan       |  40000
+			  10 | Rozar            |  15000
+			  11 | Elena            |  60000
+			  12 | Kane Williamson  | 260000
+			  13 | Tim Boult        |  60000
+			  14 | Tom Latham       |  40000
+			  15 | Colin Murno      | 140000
+			  16 | Rajiv Patel      | 300000
+			  17 | Samual Zacher    | 100000
+			  18 | Henry Nicholas   |  80000
+			  19 | Nichol Mat       | 100000
+			  20 | Weekti           |  60000
+			  21 | Saroj            |    150
+			  22 | Angel            |    195
+			  23 | Saroj            |    150
+			(23 rows)
+
+
+
+
 
 
 
@@ -448,7 +490,6 @@ airline_flights=# select c.eid,max(a.cruisingrange) as maximum_cruisingrange fro
   15 |                  4000
   16 |                  3000
 (5 rows)
-
 
 
 
