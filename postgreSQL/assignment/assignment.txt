@@ -408,6 +408,45 @@
 
 
 
+
+
+---------------------------------------------------------QUERIES---------------------------------------------------
+
+1) a. Find the names of aircraft such that all pilots certified to operate them earn more than $80,000.
+
+airline_flights=# select aname as aircraft_name from aircraft where aid not in(select a.aid from employees as e inner join certified as c on c.eid=e.eid inner join aircraft as a on a.aid=c.aid where salary<=80000 group by a.aid order by a.aid) order by aname;
+       
+        aircraft_name        
+---------------------
+ Airbus
+ Air United
+ AVIC
+ Boeing 101
+ Boeing 400
+ Boeing 7
+ Boeing 777
+ GE Aviation
+ L-3 Technologies
+ Rolls-Royce
+ SKF
+ Sky Jet
+ Solvay Group
+ United Aircraft
+ United Technologies
+(15 rows)
+
+
+
+
+
+
+
+
+
+
+
+
+
 		    
 
 
