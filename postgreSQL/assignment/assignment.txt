@@ -601,6 +601,18 @@ h)Print the enames of pilots who can operate planes with cruisingrange greaterth
 			 Henry Nicholas
 			 Pankaj Pandey
 			(3 rows)
+
+j) Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
+
+		airline_flights=# select pilot_avg_salary,round(avg(salary),2) as employees_avg_salary from(select round(avg(salary),2) as pilot_avg_salary from employees natural inner join certified) as pilot_salary cross join employees group by pilot_avg_salary; 
+	 
+			 pilot_avg_salary | employees_avg_salary 
+			------------------+----------------------
+				163421.05 |            100673.70
+			(1 row)
+	
+
+
 						
 k) Print the name and salary of every nonpilot whose salary is more than the average salary for pilots. 	
 
