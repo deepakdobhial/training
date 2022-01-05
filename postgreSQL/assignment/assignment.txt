@@ -647,6 +647,18 @@ l) Print the names of employees who are certified only on aircrafts with cruisin
 			(7 rows)
 			
 			
+n)Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft
+
+
+		airline_flights=# select distinct ename from employees natural join certified natural join aircraft group by ename having 			ename in(select e.ename from aircraft as a inner join certified as c on c.aid=a.aid inner join employees as e on 			e.eid=c.eid where aname like 'Boeing%') and min(cruisingrange)>1000 order by ename;
+     
+				     
+				      ename      
+				-----------------
+				 Kane Williamson
+				 Nichol Mat
+				 Samual Zacher
+				(3 rows)
 
 
 
