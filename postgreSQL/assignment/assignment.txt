@@ -454,7 +454,7 @@
 
 ---------------------------------------------------------QUERIES---------------------------------------------------
 
-1) a. Find the names of aircraft such that all pilots certified to operate them earn more than $80,000.
+a) Find the names of aircraft such that all pilots certified to operate them earn more than $80,000.
 
 airline_flights=# select aname as aircraft_name from aircraft where aid not in(select a.aid from employees as e inner join certified as c on c.eid=e.eid inner join aircraft as a on a.aid=c.aid where salary<=80000 group by a.aid order by a.aid) order by aname;
        
@@ -478,7 +478,7 @@ airline_flights=# select aname as aircraft_name from aircraft where aid not in(s
 (15 rows)
 
 
-2) For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified.
+b) For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified.
 
 airline_flights=# select c.eid,max(a.cruisingrange) as maximum_cruisingrange from aircraft as a inner join certified as c on a.aid=c.aid group by c.eid having count(c.aid)>3 order by c.eid;
 
@@ -492,7 +492,7 @@ airline_flights=# select c.eid,max(a.cruisingrange) as maximum_cruisingrange fro
 (5 rows)
 
 
-3) Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
+c) Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
 
 		airline_flights=# select ename from employees natural join certified where salary<(select max(price) from flights where 			"from"='Los Angeles' and "to"='Honolulu')group by ename;
 		
@@ -502,6 +502,32 @@ airline_flights=# select c.eid,max(a.cruisingrange) as maximum_cruisingrange fro
 			 Pankaj Pandey
 			(2 rows)
 
+
+d) For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for 		this aircraft. 
+
+
+			airline_flights=# select a.aname,round(avg(e.salary),2) as average_salary from aircraft as a inner join certified 				as c on a.aid=c.aid inner join employees as e on e.eid=c.eid group by a.aname,a.cruisingrange having 			a.cruisingrange>1000 order by a.aname;
+			
+			
+		      aname       | average_salary 
+		------------------+----------------
+		 Air United       |      200000.00
+		 AVIC             |      180000.00
+		 BAE Systems      |       50000.00
+		 Boeing 101       |      180000.00
+		 Boeing 7         |      150000.00
+		 Boeing 777       |      163333.33
+		 GE Aviation      |      180000.00
+		 General Electric |       80000.00
+		 GKN Aerospace    |      140000.00
+		 L-3 Technologies |      160000.00
+		 Rolls-Royce      |      183333.33
+		 Sky Jet          |      200000.00
+		 Solvay Group     |      160000.00
+		 ST Engineering   |      113333.33
+		 Triumph Group    |      115000.00
+		 United Aircraft  |      150000.00
+		(16 rows)
 
 
 
