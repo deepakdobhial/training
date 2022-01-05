@@ -492,7 +492,15 @@ airline_flights=# select c.eid,max(a.cruisingrange) as maximum_cruisingrange fro
 (5 rows)
 
 
+3) Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
 
+		airline_flights=# select ename from employees natural join certified where salary<(select max(price) from flights where 			"from"='Los Angeles' and "to"='Honolulu')group by ename;
+		
+			     ename     
+			---------------
+			 Tim Boult
+			 Pankaj Pandey
+			(2 rows)
 
 
 
