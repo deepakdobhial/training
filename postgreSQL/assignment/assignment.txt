@@ -529,6 +529,19 @@ d) For all aircraft with cruisingrange over 1000 miles, find the name of the air
 		 United Aircraft  |      150000.00
 		(16 rows)
 
+e) Find the names of pilots certified for some Boeing aircraft.
+
+		airline_flights=# select distinct e.ename from employees as e inner join certified as c on e.eid=c.eid inner join 			aircraft as a on a.aid=c.aid where a.aname like 'Boeing%' order by e.ename;
+		
+		      ename       
+		------------------
+		 Colin Murno
+		 Kane Williamson
+		 Kevin Zacher
+		 Nichol Mat
+		 Samual Zacher
+		 Victoria Mutenue
+		(6 rows)
 
 
 
