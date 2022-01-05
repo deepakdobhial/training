@@ -645,7 +645,34 @@ l) Print the names of employees who are certified only on aircrafts with cruisin
 			 Pankaj Pandey
 			 Samual Zacher
 			(7 rows)
-			
+m) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles, but on at least two such aircrafts	
+
+			airline_flights=# select employee_name from(select ename as employee_name from employees natural join certified natural join aircraft where cruisingrange>1000) as employees_details group by employee_name having count(*)>1 order by employee_name;
+				  
+				  employee_name   
+				------------------
+				 Alexander
+				 Colin Murno
+				 Deepak
+				 Kane Williamson
+				 Kevin Zacher
+				 Krishna
+				 Nichol Mat
+				 Pankaj Pandey
+				 Samual Zacher
+				 Victoria Mutenue
+				(10 rows)
+
+
+
+
+
+
+
+
+
+
+		
 			
 n)Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft
 
