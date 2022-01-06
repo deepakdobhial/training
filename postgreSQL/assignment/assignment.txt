@@ -591,6 +591,23 @@ f) Find the aids of all aircraft that can be used on routes from Los Angeles to 
 			 121
 			(17 rows)
 			
+g) Identify the routes that can be piloted by every pilot who makes more than $100,000.
+
+			airline_flights=# select distinct "from","to" from flights where distance <=(select max(cruisingrange) from 			employees natural join certified natural join aircraft where salary>100000);
+
+			     from      |    to    
+			---------------+----------
+			 San Francisco | Honolulu
+			 Los Angeles   | Honolulu
+			 Madison       | Dallas
+			 Madison       | Chicago
+			 Madison       | New York
+			 Dallas        | Chicago
+			 Los Angeles   | Chicago
+			 Chicago       | New York
+			(8 rows)
+
+			
 h)Print the enames of pilots who can operate planes with cruisingrange greaterthan 3000 miles but are not certified on any Boeing   aircraft. 
 
 		select distinct ename from employees natural join certified natural join aircraft group by ename having ename not 			in(select e.ename from aircraft as a inner join certified as c on c.aid=a.aid inner join employees as e on e.eid=c.eid 			where aname like 'Boeing%') and min(cruisingrange)>3000 order by ename;
