@@ -479,15 +479,13 @@
 
 a) Find the names of aircraft such that all pilots certified to operate them earn more than $80,000.
 
-airline_flights=# select aname as aircraft_name from aircraft where aid not in(select a.aid from employees as e inner join certified as c on c.eid=e.eid inner join aircraft as a on a.aid=c.aid where salary<=80000 group by a.aid order by a.aid) order by aname;
-       
-        aircraft_name        
+airline_flights=# select distinct aname from aircraft natural join certified natural join employees where aid not in(select distinct aid from aircraft natural join certified natural join employees where salary<=80000 order by aid) order by aname;
+        aname        
 ---------------------
  Airbus
  Air United
  AVIC
  Boeing 101
- Boeing 400
  Boeing 7
  Boeing 777
  GE Aviation
@@ -498,7 +496,8 @@ airline_flights=# select aname as aircraft_name from aircraft where aid not in(s
  Solvay Group
  United Aircraft
  United Technologies
-(15 rows)
+(14 rows)
+
 
 
 b) For each pilot who is certified for more than three aircraft, find the eid and the maximum cruisingrange of the aircraft for which she or he is certified.
@@ -641,10 +640,6 @@ k) Print the name and salary of every nonpilot whose salary is more than the ave
 			 Mohit Dagar   | 170000
 			(1 row)
 
-
-
-
-
 		
 			
 l) Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
@@ -681,15 +676,7 @@ m) Print the names of employees who are certified only on aircrafts with cruisin
 				(10 rows)
 
 
-
-
-
-
-
-
-
-
-		
+	
 			
 n)Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles and who are certified on some Boeing aircraft
 
