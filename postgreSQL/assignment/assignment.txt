@@ -471,7 +471,20 @@
 			airline_flights-# set salary=170000 where eid=4;
 			UPDATE 1
 
+9) Update table flights
 
+			airline_flights=# update flights
+			set distance=10000 where flno=1009;
+			UPDATE 1
+			airline_flights=# update flights
+			set distance=10000 where flno=1010;
+			UPDATE 1
+			airline_flights=# update flights
+			set distance=10000 where flno=1011;
+			UPDATE 1
+			airline_flights=# update flights
+			set distance=10000 where flno=1012;
+			UPDATE 1
 
 
 
