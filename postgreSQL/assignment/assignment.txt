@@ -485,6 +485,21 @@
 			airline_flights=# update flights
 			set distance=10000 where flno=1012;
 			UPDATE 1
+			airline_flights=# update flights
+			airline_flights-# set price=75000 where flno=1;
+			UPDATE 0
+			
+			airline_flights=# update flights
+			set price=75000 where flno=1001;
+			UPDATE 1
+			
+			airline_flights=# update flights
+			set price=70000 where flno=1002;
+			UPDATE 1
+			
+			airline_flights=# update flights
+			set price=170000 where flno=1003;
+			UPDATE 1
 
 
 
@@ -529,7 +544,7 @@ airline_flights=# select c.eid,max(a.cruisingrange) as maximum_cruisingrange fro
 
 c) Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
 
-		airline_flights=# select ename from employees natural join certified where salary<(select max(price) from flights where 			"from"='Los Angeles' and "to"='Honolulu')group by ename;
+		airline_flights=# select ename from employees natural join certified where salary<(select min(price) from flights where 			"from"='Los Angeles' and "to"='Honolulu')group by ename;
 		
 			     ename     
 			---------------
@@ -617,26 +632,28 @@ g) Identify the routes that can be piloted by every pilot who makes more than $1
 
 
 			
-h)Print the enames of pilots who can operate planes with cruisingrange greaterthan 3000 miles but are not certified on any Boeing   aircraft. 
+h)Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing   aircraft. 
 
-		select distinct ename from employees natural join certified natural join aircraft group by ename having ename not 			in(select e.ename from aircraft as a inner join certified as c on c.aid=a.aid inner join employees as e on e.eid=c.eid 			where aname like 'Boeing%') and min(cruisingrange)>3000 order by ename;
-		
-			     ename      
-			----------------
-			 Alexander
-			 Henry Nicholas
-			 Pankaj Pandey
-			(3 rows)
+	airline_flights=# select distinct ename from employees natural join certified natural join aircraft group by ename,cruisingrange having ename not in(select e.ename from aircraft as a inner join certified as c on c.aid=a.aid inner join employees as e on e.eid=c.eid where aname like 'Boeing%') and cruisingrange>3000 order by ename;
+	
+				     ename      
+				----------------
+				 Alexander
+				 Deepak
+				 Henry Nicholas
+				 Krishna
+				 Pankaj Pandey
+				(5 rows)
 
 j) Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
 
-		airline_flights=# select pilot_avg_salary,round(avg(salary),2) as employees_avg_salary from(select round(avg(salary),2) as pilot_avg_salary from employees natural inner join certified) as pilot_salary cross join employees group by pilot_avg_salary; 
-	 
-			 pilot_avg_salary | employees_avg_salary 
-			------------------+----------------------
-				163421.05 |            100673.70
+			airline_flights=# select pilot_avg_salary-round(avg(salary),2) as difference_avg_salary from(select 			round(avg(salary),2) as pilot_avg_salary from employees natural inner join certified) as pilot_salary cross join 				employees group by pilot_avg_salary;
+			
+			 difference_avg_salary 
+			------------------------
+				       62747.35
 			(1 row)
-	
+
 
 
 						
