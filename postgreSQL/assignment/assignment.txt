@@ -644,6 +644,26 @@ h)Print the enames of pilots who can operate planes with cruisingrange greater t
 				 Krishna
 				 Pankaj Pandey
 				(5 rows)
+				
+i) A customer wants to travel from Madison to New York with no more than two changes of flight. List the choice of departure times from Madison if the customer wants to arrive in New York by 6 p.m.
+
+airline_flights=# select distinct f1.departs as departure_time from flights f1 left join flights f2 on f1."to"=f2."from" and f1.arrives<f2.departs and f2.departs<='18:00' left join flights f3 on f2."to"=f3."from" and f2.arrives<f3.departs and f3.departs<='18:00' where f1."from"='Madison' and ((f1."to"='New York'and f1.arrives<='18:00') or f2."to"='New York'or f3."to"='New York');
+
+
+				 departure_time 
+				----------------
+				 07:00:00
+				 08:00:00
+				 09:00:00
+				 10:00:00
+				 11:15:00
+				 11:30:00
+				 12:00:00
+				 13:00:00
+				 15:00:00
+				(9 rows)
+
+
 
 j) Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
 
