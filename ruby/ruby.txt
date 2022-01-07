@@ -101,7 +101,20 @@ RVM- Ruby Version Manager is a tool meant to use the command line for installing
 			  3) a.class     -   return class of that particular object
 			  
 			  
-			  
+4) Class and Object -
+					# class 
+					class Sample
+			    		  def method1
+					    puts "Hello"
+			   		  end
+					end
+
+		
+			#object created 
+			object=Sample .new
+			#access class members using object
+			object.method1			  
+						  
 			  
 			  
 
