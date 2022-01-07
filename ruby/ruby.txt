@@ -36,7 +36,10 @@ RVM- Ruby Version Manager is a tool meant to use the command line for installing
 		    Description					Commands
 		    -----------------------------------------------------------
 		    
-	i) 	List All Ruby Versions - 				rvm list
+	i) 	List All Ruby Versions - 				rvm list 	(=> - current
+											 =* - current && default
+											 * - default)
+
 	ii)	Install Specific Ruby Version-			rvm install 2.7.2
 	iii)	Uninstall Specific Ruby Version-			rvm uninstall 2.7.2
 	iv) 	set(switch) Ruby version as current version		rvm use 1.9.2
@@ -46,6 +49,63 @@ RVM- Ruby Version Manager is a tool meant to use the command line for installing
 	viii)	full list of all commands:				rvm help
 	ix) 	Current ruby version:					rvm current
 	x) 	switch to default ruby:				rvm use default
+	
+	
+
+--------------------------------------------RUBY(2.7.2 and 3.0.0 versions)-----------------------------------------
+
+1) Interactive Ruby----
+
+			$ ruby  or irb
+			 puts "Hello"  (Press Ctrl+D for run and exit)
+		output-- Hello
+			
+
+	
+2) Reversed words ----
+
+			BEGIN 		do 		next 		then
+			END 		else 		nil 		true
+			alias 		elsif 		not 		undef
+			and 		end 		or 		unless
+			begin 		ensure 	redo 		until
+			break 		false 		rescue 	when
+			case 		for 		retry 		while
+			class 		if 		return 	while
+			def 		in 		self 		__FILE__
+			defined? 	module 	super 		__LINE__
+				
+				
+3)  Data Types ---- 
+
+			    Numbers- 
+			    		e.g. -  5/2 = 2 
+			    			5.0/2 = 2.5
+			    		
+			    
+			    Boolean- true.false   (true belong TrueClass and false belong to FalseClass
+			    
+			    Strings- a='ab'  
+			    
+			    Hashes-  a={'A'=>1,'B'=>2}
+
+			    Arrays-  a=[5,'A']
+
+			    Symbols - a=:ab  
+			    
+			    
+			  Some points to remember----
+			  
+			  1) a.object_id -  return object id
+			  2) a.size 	  -  return size
+			  3) a.class     -   return class of that particular object
+			  
+			  
+			  
+			  
+			  
+
+	
 	
 		
 	
