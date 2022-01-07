@@ -30,4 +30,22 @@ RVM- Ruby Version Manager is a tool meant to use the command line for installing
 		1) rvm install ruby   (Install Latest Version)
 		2) rvm install 2.7.2  (Particular old version)
 		
+		
+3) some RVM Important commands -->
+		
+		    Description					Commands
+		    -----------------------------------------------------------
+		    
+	i) 	List All Ruby Versions - 				rvm list
+	ii)	Install Specific Ruby Version-			rvm install 2.7.2
+	iii)	Uninstall Specific Ruby Version-			rvm uninstall 2.7.2
+	iv) 	set(switch) Ruby version as current version		rvm use 1.9.2
+	v)	set Ruby version as default version			rvm use 1.9.2 --default
+	vi) 	RVM update to stable version:				rvm get stable
+	vii)	Upgrade the Ruby version:				rvm upgrade 3.0.0
+	viii)	full list of all commands:				rvm help
+	ix) 	Current ruby version:					rvm current
+	x) 	switch to default ruby:				rvm use default
+	
+		
 	
