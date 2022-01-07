@@ -1,0 +1,33 @@
+-----------------------------------------------RUBY and RVM(Ruby Version Manager-1.29.12) ----------------------------------------
+
+RVM- Ruby Version Manager is a tool meant to use the command line for installing and managing the various ruby versions easily
+
+1) Install RVM - 
+
+	i)      Add RVM GPG key-- packages to install Ruby Version Manager
+	
+		curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+		curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+	
+	ii)	Install RVM --------
+	
+		curl -sSL https://get.rvm.io | bash -s stable 
+	
+	iii) Check the RVM version-----------
+		
+		rvm --version
+		------>  rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+		
+
+2) Install Ruby
+
+	i) List Ruby version available to install 
+	
+		rvm list known
+		
+	ii) Install the latest ruby or particular version
+	
+		1) rvm install ruby   (Install Latest Version)
+		2) rvm install 2.7.2  (Particular old version)
+		
+	
