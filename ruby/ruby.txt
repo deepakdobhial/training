@@ -115,10 +115,79 @@ RVM- Ruby Version Manager is a tool meant to use the command line for installing
 			#access class members using object
 			object.method1			  
 						  
-			  
-			  
 
-	
-	
+5) Variables and Its Scope- 
+
+						
+			    i)    Local variables - 	local_variable
+   			    ii)   Class variables -	@@class_variable
+			    iii)  Instance variables - @instance_variable
+			    iv)   Global variables - 	$global_variable
 		
-	
+
+	Variable	Naming 					Scope 				Initialization
+--------------------------------------------------------------------------------------------------------------------
+Local Variable        begin with a lowercase 			within its block of 		No need to initialize. An 
+		       letter or underscore(_).		initialization.		uninitialized local variable is 													interpreted as methods with no arguments.
+		       
+		       
+Global Variable	$global_var				can be accessed from 		There’s no need to initilize.
+								anywhere in a program.		Uninitialized global variables have the 													value nil.
+								
+Instance Variable 	@instance_var				Their scope is limited 	There’s no need to initilize. Uninitialized 
+								to one instance of a class.	instance variables have the value nil.
+								
+Class Variable 	@@class_var				Their scope is limited 	They need to be initialized beforehand, 
+								to the class in which 		otherwise they’ll result in error.
+								they are created.
+								
+								
+								
+	example ---- Variable scope within class							
+								
+						$global_var=0   # global variable
+						class Student
+						    @@nos_of_object=0  #class variable
+						    local_var=0  # local variable
+						    def initialize(name,age)
+							@name=name #instance Variables
+							@age=age
+							@@nos_of_object+=1
+							$global_var+=1
+							# local_var+=1  (no scope here )
+						    end
+
+						    def display()
+						 iii) & vi) puts "Student name #@name and age #@age"
+						 iv) & vii) puts  "Nos of object #@@nos_of_object"
+						 v) & viii) puts  "Global Variable #$global_var"
+							# puts "Local Variable #{local_var}" #(no scope here)
+						    end
+
+						    i)puts "Local Variable #{local_var+=1}"  # scope within class only not methods 
+
+						end
+
+					ii)	puts "Global variable access outside class before object create #$global_var"
+						ob1=Student.new('Ram',25)
+						ob1.display
+						ob2=Student.new('Rahul',30)
+						ob2.display
+					ix)	puts "Global variable access outside class after object create #$global_var"		
+								
+								
+				Output ---->    i)Local Variable 1
+						ii)Global variable access outside class before object create 0
+						iii)Student name Ram and age 25
+						iv) Nos of object 1
+						v)  Global Variable 1
+						vi) Student name Rahul and age 30
+						vii)Nos of object 2
+						viii)Global Variable 2
+						ix)Global variable access outside class after object create2				
+														
+								
+								
+								
+								
+								
