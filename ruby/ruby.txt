@@ -305,9 +305,71 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 			------>  ["bar", "bas", "bat"] 
 			
 		 
-		
+		    9) defined operator-
+		    
+		    	foo = 42
+		    	
+				defined? foo    # => "local-variable"
+				defined? $_     # => "global-variable"
+				defined? bar    # => nil (undefined)
+				
+				
+				e.g.  	3.0.0 :100 > $v (define but not initialization)
+						 => nil 
+						3.0.0 :101 > defined?$v
+						 => nil                (reurn nil bcz not initialize)
+						3.0.0 :102 > $v
+						 => nil 
+						3.0.0 :103 > $v=20   (initialize)
+						 => 20 
+						3.0.0 :104 > defined?$v
+						 => "global-variable" 
+						3.0.0 :105 >
+				
 					
+			10) Dot "." and Double Colon "::" Operators- 
+			
+			
+					i) Dot (.) operator is used to access the methods of a class.
+					e.g.  class Dot_operator
 
+							def display
+								puts "Good morning everyone"
+
+							end
+						end
+
+
+						ob1=Dot_operator.new
+						ob1.display()
+											
+					
+					
+					
+					ii) Double(::) - operator is used to access the constants, class methods, and instance methods defined within a class or 									 module to anywhere outside the class or module.
+					
+					
+									# defined constant on main Object class
+											CONS = 5  
+											 
+											# define module
+											module Dot_colon
+												 
+											   CONS = 5
+												
+											   # set global CONS to 7
+											   ::CONS = 7  
+												
+												# set local CONS to 10
+											   CONS = 10   
+											end
+											 
+											# displaying global CONS value
+											puts CONS    
+											 
+											# displaying local "Geeks" CONS value
+											# using :: operator
+											puts Dot_colon::CONS
 
 			
 								
