@@ -526,12 +526,35 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 						 end while $i<$num
 			
 	
-					
-		
+2) for loop - Entry Controlled Loop- Preferred when the number of times loop statements are to be executed is known beforehand.
 	
+				for variable [, variable ...] in expression [do]
+				   code
+				end					
+
+
+				e.g. 			 for i in 1..5
+									puts i
+								 end
+								 
+				output:			1
+								2
+								3
+								4
+								5	
+			Iterate over array
+						
+								x=['a','b',1,2]
+
+								for i in x do
+									puts i
+								end
 	
-	
-	
+				Output-			a
+								b
+								1
+								2
+									
 	
 	
 	
