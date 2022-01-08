@@ -658,4 +658,49 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 								9
 								10
 	 								
+7) redo Statement- redo statement is used to repeat the current iteration of the loop. Restarts yield or call if called within a block
+					The redo statement is executed without evaluating the loop's condition.
+					
+			e.g. 	 i = 0   
+					while(i < 5)   # Prints "012345" instead of "01234"   
+					  puts i   
+					  i += 1   
+					  if i == 5
+						redo
+					  end 
+					end  
+					
+			output: 0
+					1
+					2
+					3
+					4
+					5		#--------(Ignore loop condition and print 5) 
+
+			
+
+
+8)retry Statement - retry statement is used to repeat the whole loop iteration from the start.
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
