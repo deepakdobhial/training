@@ -460,7 +460,31 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 				   puts "x is greater than 2"
 				end    
     
-    
+ 10) case statment - The case statement is a multiway branch statement just like a switch statement in other languages.
+ 
+ 						marks=Integer(gets)
+ 						
+						case marks
+						
+						when 0..32           # when condition1,condition2,condition3
+							puts "Fail"
+						
+						when 33..50
+							puts "Pass"
+						
+						when 51..60
+							puts 'grade B'
+						
+						else
+							puts 'gradde A'
+
+						end
+						
+						
+				notes: -i) Can also use case statement without any value.
+						ii) Can use case statement in method call. Like method call, a case statement will always return a single object.
+ 
+ 			   
     
 			
 								
