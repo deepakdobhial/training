@@ -200,7 +200,7 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 		  ** 				Exponent −  				a**b  = 100000000000000000000 (10 to power 20)	
 		  
 		  
-		  2) Airthmetic Operators - 
+		  2) Comparison Operators - 
 		
 		Operator 			Description 												Example
 		---------------------------------------------------------------------------------------------
@@ -262,12 +262,53 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 		not-NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT 																				operator will make false. 	not(a && b) is false.
 		  
 		  
-		  
-		  
+		  5) Parallel Assignment- 
+		  			
+		  			e.g.   a, b, c = 10, 20, 30
+		  			swap-  a, b = b, c
 		  
 		  
 		  					
-										
+		  6) Bitwise Operators - 
+		  
+		  			 	 a    =  0011 1100
+						 b    =  0000 1101
+						 ------------------
+						 a&b  =  0000 1100
+						 a|b  =  0011 1101
+						 a^b  =  0011 0001
+						 ~a   =  1100 0011	
+						 a << 2 will give 240, which is 1111 0000
+						 a >> 2 will give 15, which is 0000 1111			
+						 
+			7) Ternary Operator- 
+			
+						 It first evaluates an expression for a true or false value and then executes one of the two given statements 								depending upon the result of the evaluation. 	
+						 
+						 a,b=10,20
 								
+						c=a>10 ? a:c
+						----> c=20
+						
+			8) Range Operators- 
+			
+					used to create a range of successive values - consisting of a start value, an end value, and a range of values in 						between.
+					
+					range1 = (1..10).to_a
+				--> 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+				
+				  range2=(1...10).to_a
+				 			
+			----->  [1,2,3,4,5,6,7,8,9]  (...) not include 10
+			
+				range2 = ('bar'..'bat').to_a
+			------>  ["bar", "bas", "bat"] 
+			
+		 
+		
+					
+
+
+			
 								
 								
