@@ -429,5 +429,38 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 								=end		
 								
 								
-				
+9) If-else Statement - 
+
+		i)   	 if statement
+    	ii) 	if-else statement
+   	   iii)		if-else-if (elsif) statement
+       
+           
+    e.g.  	no1=Integer(gets)  #input
+			no2=Integer(gets)
+			no3=Integer(gets)
+			if no1>no2 && no1>no3
+				print "No1 is biggest\n"
+			elsif no2>no1 && no2>no3
+				print "No2 is biggest\n"
+			else
+				print "No3 is biggest\n"
+			end
+			
+		iv) if modifier - 
+			
+				$debug = 1
+				print "debug\n" if $debug
+    	
+    	v) unless Statement
+				x = 1 
+				unless x>=2
+				   puts "x is less than 2"
+				 else
+				   puts "x is greater than 2"
+				end    
+    
+    
+    
+			
 								
