@@ -586,12 +586,25 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 							  10
 							  
 							  
+4) until loop -Basically it’s just opposite to the while loop which executes until the given condition evaluates to false 							  
 							  
-							  
-							  
-							  
-							  	
-							
+			until conditional [do]
+
+			 # code to be executed
+
+			end		
+			
+					e.g. 	x=5
+							until x==0 do
+								puts x
+								x-=1
+							end	
+				   
+				   output:  5  
+							4  
+							3  
+							2  	
+							1
 							
 							
 							
