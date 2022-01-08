@@ -606,9 +606,56 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 							2  	
 							1
 							
+				#until modifier  -- 
+				
+						code until conditional
+
+						OR
+
+						begin
+						   code
+						end until conditional		
+						
+						
+				e.g.	x=5
+						begin
+							puts x
+							x-=1
+						end until x==0	
+						
+						
+5)break Statement-- used to terminate a loop
+
+					e.g.    x=10
+							while x>0
+								puts x
+								x-=1
+								if x==5
+									break
+								# end
+							end
 							
 							
+					output:  10
+							  9
+							  8
+							  7
+							  6
+							  
+6) next statement - skip loop's next iteration. Once the next statement is executed, no further iteration will be performed. 
+
+					e.g.     for i in 5...11   
+							   if i == 7 then   
+								  next   
+							   end   
+							   puts i   
+							end  
+													
 							
-									
-	
+					output:   	5
+								6
+								8
+								9
+								10
 	 								
+
