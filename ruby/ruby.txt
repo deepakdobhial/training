@@ -730,11 +730,72 @@ e.g 1 ) Method without parameters -
 											puts sum
 											
 								output:-    20     (this fun return last statement) return d
+								
+								
+		2) Passing parameters to methods- 
+		
+											def sum(a,b)
+												c=a+b
+											end
+											puts sum 5,10
+											
+											
+								Output:     15
+								
+		3) #method with default arguments
+											#method with default arguments
+											
+											def sum(a=20,b=50)
+												c=a+b
+											end
 
+											print "calling without parameters ",sum,"\n"
+											print "calling with parameters ",(sum 15,20),"\n"
+			
+							output:         calling without parameters 70
+											calling with parameters 35
+											
+											
+		4)Variable Number of Parameters- method that can take the variable number of arguments
+		
+							def fun1(*args)            
+								puts var.class
+							end
+							
+							fun1 5,4,3
+		
+				output:    array
+				
+				
+				required arguments-> optional -> variable -> keyword
+		
+											
 
+							
+		5) return statement - used to return one or more values from a Ruby Method.
+		
+							return
 
+							OR
 
+							return 12
 
+							OR
+
+							return 1,2,3
+							
+							
+							def test
+								i = 100
+								j = 200
+								k = 300
+							 return i, j, k
+							 end
+							 var = test
+							 puts var.class	
+							 
+							 
+				output: - 	 array
 
 
 
