@@ -684,10 +684,52 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 
 			
 
+---------------------------------------------------------METHODS----------------------------------------------------
+
+1. Define a method  
+
+		Syntax:
+					def method_name [( [arg [= default]]...[, * arg [, &expr ]])] 
+					   expr..
+					end
+					
+					or 
+					
+					
+				def method_name or def method_name (var1, var2)
+					# Statement 1
+					# Statement 2
+						.
+						.
+				end
+
+2. calling a method -  method_name  or method_name para1,para2...
 
 
+e.g 1 ) Method without parameters - 
 
+									e.g.1	def sum
+												a=5
+												b=10
+												c=a+b
+												
+											end
+											puts sum
+											
+								output:-    15     (this fun return last statement) return c
+								
+								
 
+								e.g.2 			def sum
+												a=5
+												b=10
+												c=a+b
+												d=20
+												
+											end
+											puts sum
+											
+								output:-    20     (this fun return last statement) return d
 
 
 
