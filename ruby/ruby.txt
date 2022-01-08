@@ -484,7 +484,59 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 				notes: -i) Can also use case statement without any value.
 						ii) Can use case statement in method call. Like method call, a case statement will always return a single object.
  
- 			   
-    
+-----------------------------------LOOPS---------------------------------------------------------------------------'
+  1)  while loop
+  2)  for loop
+  3)  do..while loop
+  4)  until loop 		
+  
+  
+  	1) while loop - Entry Controlled Loop - basically, while loop is used when the number of iterations is not fixed in a program. 	
+  	
+  					Note: A while loop’s conditional is separated from code by the reserved word do, a newline, backslash(\), or a 																														 semicolon(;).
+  					
+  					while conditional [do]    [do] optional
+					   code
+					end
+					  	
+  			   e.g. x=10
+					while x>0 do
+						puts x
+						x-=1
+					end    
+					
+			 output: 	10
+						9
+						8
+						7
+						6
+						5
+						4
+						3
+						2
+						1
+						
+    		1.1) while modifier -  
+    		
+    					$i = 0
+						$num = 5
+						begin
+							puts("Inside the loop i = #$i" )
+							$i +=1
+						 end while $i<$num
 			
-								
+	
+					
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 								
