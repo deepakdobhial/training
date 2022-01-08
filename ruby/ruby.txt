@@ -186,8 +186,88 @@ Class Variable 	@@class_var				Their scope is limited 	They need to be initializ
 						viii)Global Variable 2
 						ix)Global variable access outside class after object create2				
 														
-								
-								
+6) Operators-  a=10 b=20
+
+		1) Arithmetic Operators - 
+		
+		Operator 			Description 				Example
+		---------------------------------------------------------
+		  + 				Addition − 					a + b = 30
+		  − 				Subtraction − 				a - b =-10
+		  * 				Multiplication − 			a * b = 200
+		  / 				Division − 					b / a = 2
+		  % 				Modulus − remainder			b % a = 0
+		  ** 				Exponent −  				a**b  = 100000000000000000000 (10 to power 20)	
+		  
+		  
+		  2) Airthmetic Operators - 
+		
+		Operator 			Description 												Example
+		---------------------------------------------------------------------------------------------
+		  == 			Equal operator													a==b --> 	false
+		  != 			Not equal operator												a!=b --> 	true
+		  > 			left operand is greater than right operand						a>b ---> 	false
+		  <				Right operand is greater than left operand						a<b ---> 	true
+		  >= 			Left operand is greater than or equal to right operand			a>=b --> 	false
+		  <= 			Right operand is greater than or equal to left operand			a<=b --> 	true
+		  <=> 			Combined comparison operator									a<=>b --> 	-1     (spaceship operator)
+		 .eql? 			Checks for equality and type of the operands					a.eql?b -->  false
+		 equal? 		Checks for the object ID										a.equal?b --> 		(object_id)
+		  
+		  Note -    Combined comparison operator. Returns 0 if first operand equals second, 1 if first operand is greater than the second 						and-1 if first operand is less than the second.
+		  		
+		  		20<=>20 = 0
+		  		20<=>10 = 1
+		  		10<=>20 = -1
+		  		
+		  		.eql?    1 == 1.0 returns true, but 1.eql?(1.0) is false.
+		  		
+		  		
+		 3) Assignment Operators- 
+		 
+		 	Operator 			Description 												Example
+		---------------------------------------------------------------------------------------------
+		 
+		 = 				Simple assignment operator					c = a + b will assign the value of a + b into c
+		 
+		 += 			Add AND assignment operator              	c += a is equivalent to c = c + a
+		 
+		 -= 			Subtract AND assignment operator			c -= a is equivalent to c = c - a
+		 
+		 *= 			Multiply AND assignment operator			c *= a is equivalent to c = c * a
+		 
+		 /= 			Divide AND assignment operator 				c /= a is equivalent to c = c / a
+		 
+		 %= 			Modulus AND assignment operator				c %= a is equivalent to c = c % a
+		 
+		**= 			Exponent AND assignment operator			c **= a is equivalent to c = c ** a
+		  		
+		  			
+		  		
+		4) Logical Operators -
+		
+		 	Operator 			Description 												Example
+		---------------------------------------------------------------------------------------------
+		
+		and  -AND operator.(If both the operands are true,then the condition becomes true. 	(a and b) is true.
+		
+		or 	 -OR Operator. If any of the two operands are non zero, then the condition becomes true. 	(a or b) is true.
+		
+		&& 	-AND operator. If both the operands are non zero, then the condition becomes true. 	(a && b) is true.
+		
+		|| 	-OR Operator. If any of the two operands are non zero, then the condition becomes true. 	(a || b) is true.
+		
+		! 	-NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT 																				operator will make false. 	!(a && b) is false.
+		
+		not-NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT 																				operator will make false. 	not(a && b) is false.
+		  
+		  
+		  
+		  
+		  
+		  
+		  					
+										
 								
 								
 								
