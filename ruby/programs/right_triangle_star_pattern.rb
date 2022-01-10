@@ -12,3 +12,26 @@ puts
 for i in 1..n
     puts "* "*i
 end
+
+
+#--------------------Output-------------
+
+=begin
+Using While loop
+
+* 
+* * 
+* * * 
+* * * * 
+* * * * * 
+* * * * * * 
+
+Using for loop
+
+* 
+* * 
+* * * 
+* * * * 
+* * * * * 
+* * * * * * 
+=end
