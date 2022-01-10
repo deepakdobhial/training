@@ -1,0 +1,1005 @@
+-----------------------------------------------RUBY and RVM(Ruby Version Manager-1.29.12) ----------------------------------------
+
+RVM- Ruby Version Manager is a tool meant to use the command line for installing and managing the various ruby versions easily
+
+1) Install RVM - 
+
+	i)      Add RVM GPG key-- packages to install Ruby Version Manager
+	
+		curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+		curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+	
+	ii)	Install RVM --------
+	
+		curl -sSL https://get.rvm.io | bash -s stable 
+	
+	iii) Check the RVM version-----------
+		
+		rvm --version
+		------>  rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+		
+
+		
+
+2) Install Ruby
+
+	i) List Ruby version available to install 
+	
+		rvm list known
+		
+	ii) Install the latest ruby or particular version
+	
+		1) rvm install ruby   (Install Latest Version)
+		2) rvm install 2.7.2  (Particular old version)
+		
+		
+3) some RVM Important commands -->
+		
+		    Description					Commands
+		    -----------------------------------------------------------
+		    
+	i) 	List All Ruby Versions - 				rvm list 	(=> - current
+											 =* - current && default
+											 * - default)
+
+	ii)	Install Specific Ruby Version-			rvm install 2.7.2
+	iii)	Uninstall Specific Ruby Version-			rvm uninstall 2.7.2
+	iv) 	set(switch) Ruby version as current version		rvm use 1.9.2
+	v)	set Ruby version as default version			rvm use 1.9.2 --default
+	vi) 	RVM update to stable version:				rvm get stable
+	vii)	Upgrade the Ruby version:				rvm upgrade 3.0.0
+	viii)	full list of all commands:				rvm help
+	ix) 	Current ruby version:					rvm current
+	x) 	switch to default ruby:				rvm use default
+	
+	*** bash --login (if command not run)
+	
+	
+
+--------------------------------------------RUBY(2.7.2 and 3.0.0 versions)-----------------------------------------
+
+1) Interactive Ruby----
+
+			$ ruby  or irb
+			 puts "Hello"  (Press Ctrl+D for run and exit)
+		output-- Hello
+			
+
+	
+2) Reversed words ----
+
+			BEGIN 		do 		next 		then
+			END 		else 		nil 		true
+			alias 		elsif 		not 		undef
+			and 		end 		or 		unless
+			begin 		ensure 	redo 		until
+			break 		false 		rescue 	when
+			case 		for 		retry 		while
+			class 		if 		return 	while
+			def 		in 		self 		__FILE__
+			defined? 	module 	super 		__LINE__
+				
+				
+3)  Data Types ---- 
+
+			    Numbers- 
+			    		e.g. -  5/2 = 2 
+			    			5.0/2 = 2.5
+			    		
+			    
+			    Boolean- true.false   (true belong TrueClass and false belong to FalseClass
+			    
+			    Strings- a='ab'  
+			    
+			    Hashes-  a={'A'=>1,'B'=>2}
+
+			    Arrays-  a=[5,'A']
+
+			    Symbols - a=:ab  
+			    
+			    
+			  Some points to remember----
+			  
+			  1) a.object_id -  return object id
+			  2) a.size 	  -  return size
+			  3) a.class     -   return class of that particular object
+			  
+			  
+4) Class and Object -
+					# class 
+					class Sample
+			    		  def method1
+					    puts "Hello"
+			   		  end
+					end
+
+		
+			#object created 
+			object=Sample .new
+			#access class members using object
+			object.method1			  
+						  
+
+5) Variables and Its Scope- 
+
+						
+			    i)    Local variables - 	local_variable
+   			    ii)   Class variables -	@@class_variable
+			    iii)  Instance variables - @instance_variable
+			    iv)   Global variables - 	$global_variable
+		
+
+	Variable	Naming 					Scope 				Initialization
+--------------------------------------------------------------------------------------------------------------------
+Local Variable        begin with a lowercase 			within its block of 		No need to initialize. An 
+		       letter or underscore(_).		initialization.		uninitialized local variable is 													interpreted as methods with no arguments.
+		       
+		       
+Global Variable	$global_var				can be accessed from 		There’s no need to initilize.
+								anywhere in a program.		Uninitialized global variables have the 													value nil.
+								
+Instance Variable 	@instance_var				Their scope is limited 	There’s no need to initilize. Uninitialized 
+								to one instance of a class.	instance variables have the value nil.
+								
+Class Variable 	@@class_var				Their scope is limited 	They need to be initialized beforehand, 
+								to the class in which 		otherwise they’ll result in error.
+								they are created.
+								
+								
+								
+	example ---- Variable scope within class							
+								
+						$global_var=0   # global variable
+						class Student
+						    @@nos_of_object=0  #class variable
+						    local_var=0  # local variable
+						    def initialize(name,age)
+							@name=name #instance Variables
+							@age=age
+							@@nos_of_object+=1
+							$global_var+=1
+							# local_var+=1  (no scope here )
+						    end
+
+						    def display()
+						 iii) & vi) puts "Student name #@name and age #@age"
+						 iv) & vii) puts  "Nos of object #@@nos_of_object"
+						 v) & viii) puts  "Global Variable #$global_var"
+							# puts "Local Variable #{local_var}" #(no scope here)
+						    end
+
+						    i)puts "Local Variable #{local_var+=1}"  # scope within class only not methods 
+
+						end
+
+					ii)	puts "Global variable access outside class before object create #$global_var"
+						ob1=Student.new('Ram',25)
+						ob1.display
+						ob2=Student.new('Rahul',30)
+						ob2.display
+					ix)	puts "Global variable access outside class after object create #$global_var"		
+								
+								
+				Output ---->    i)Local Variable 1
+						ii)Global variable access outside class before object create 0
+						iii)Student name Ram and age 25
+						iv) Nos of object 1
+						v)  Global Variable 1
+						vi) Student name Rahul and age 30
+						vii)Nos of object 2
+						viii)Global Variable 2
+						ix)Global variable access outside class after object create2				
+														
+6) Operators-  a=10 b=20
+
+		1) Arithmetic Operators - 
+		
+		Operator 			Description 				Example
+		---------------------------------------------------------
+		  + 				Addition − 					a + b = 30
+		  − 				Subtraction − 				a - b =-10
+		  * 				Multiplication − 			a * b = 200
+		  / 				Division − 					b / a = 2
+		  % 				Modulus − remainder			b % a = 0
+		  ** 				Exponent −  				a**b  = 100000000000000000000 (10 to power 20)	
+		  
+		  
+		  2) Comparison Operators - 
+		
+		Operator 			Description 												Example
+		---------------------------------------------------------------------------------------------
+		  == 			Equal operator													a==b --> 	false
+		  != 			Not equal operator												a!=b --> 	true
+		  > 			left operand is greater than right operand						a>b ---> 	false
+		  <				Right operand is greater than left operand						a<b ---> 	true
+		  >= 			Left operand is greater than or equal to right operand			a>=b --> 	false
+		  <= 			Right operand is greater than or equal to left operand			a<=b --> 	true
+		  <=> 			Combined comparison operator									a<=>b --> 	-1     (spaceship operator)
+		 .eql? 			Checks for equality and type of the operands					a.eql?b -->  false
+		 equal? 		Checks for the object ID										a.equal?b --> 		(object_id)
+		  
+		  Note -    Combined comparison operator. Returns 0 if first operand equals second, 1 if first operand is greater than the second 						and-1 if first operand is less than the second.
+		  		
+		  		20<=>20 = 0
+		  		20<=>10 = 1
+		  		10<=>20 = -1
+		  		
+		  		.eql?    1 == 1.0 returns true, but 1.eql?(1.0) is false.
+		  		
+		  		
+		 3) Assignment Operators- 
+		 
+		 	Operator 			Description 												Example
+		---------------------------------------------------------------------------------------------
+		 
+		 = 				Simple assignment operator					c = a + b will assign the value of a + b into c
+		 
+		 += 			Add AND assignment operator              	c += a is equivalent to c = c + a
+		 
+		 -= 			Subtract AND assignment operator			c -= a is equivalent to c = c - a
+		 
+		 *= 			Multiply AND assignment operator			c *= a is equivalent to c = c * a
+		 
+		 /= 			Divide AND assignment operator 				c /= a is equivalent to c = c / a
+		 
+		 %= 			Modulus AND assignment operator				c %= a is equivalent to c = c % a
+		 
+		**= 			Exponent AND assignment operator			c **= a is equivalent to c = c ** a
+		  		
+		  			
+		  		
+		4) Logical Operators -
+		
+		 	Operator 			Description 												Example
+		---------------------------------------------------------------------------------------------
+		
+		and  -AND operator.(If both the operands are true,then the condition becomes true. 	(a and b) is true.
+		
+		or 	 -OR Operator. If any of the two operands are non zero, then the condition becomes true. 	(a or b) is true.
+		
+		&& 	-AND operator. If both the operands are non zero, then the condition becomes true. 	(a && b) is true.
+		
+		|| 	-OR Operator. If any of the two operands are non zero, then the condition becomes true. 	(a || b) is true.
+		
+		! 	-NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT 																				operator will make false. 	!(a && b) is false.
+		
+		not-NOT Operator. Use to reverses the logical state of its operand. If a condition is true, then Logical NOT 																				operator will make false. 	not(a && b) is false.
+		  
+		  
+		  5) Parallel Assignment- 
+		  			
+		  			e.g.   a, b, c = 10, 20, 30
+		  			swap-  a, b = b, c
+		  
+		  
+		  					
+		  6) Bitwise Operators - 
+		  
+		  			 	 a    =  0011 1100
+						 b    =  0000 1101
+						 ------------------
+						 a&b  =  0000 1100
+						 a|b  =  0011 1101
+						 a^b  =  0011 0001
+						 ~a   =  1100 0011	
+						 a << 2 will give 240, which is 1111 0000
+						 a >> 2 will give 15, which is 0000 1111			
+						 
+			7) Ternary Operator- 
+			
+						 It first evaluates an expression for a true or false value and then executes one of the two given statements 								depending upon the result of the evaluation. 	
+						 
+						 a,b=10,20
+								
+						c=a>10 ? a:c
+						----> c=20
+						
+			8) Range Operators- 
+			
+					used to create a range of successive values - consisting of a start value, an end value, and a range of values in 						between.
+					
+					range1 = (1..10).to_a
+				--> 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+				
+				  range2=(1...10).to_a
+				 			
+			----->  [1,2,3,4,5,6,7,8,9]  (...) not include 10
+			
+				range2 = ('bar'..'bat').to_a
+			------>  ["bar", "bas", "bat"] 
+			
+		 
+		    9) defined operator-
+		    
+		    	foo = 42
+		    	
+				defined? foo    # => "local-variable"
+				defined? $_     # => "global-variable"
+				defined? bar    # => nil (undefined)
+				
+				
+				e.g.  	3.0.0 :100 > $v (define but not initialization)
+						 => nil 
+						3.0.0 :101 > defined?$v
+						 => nil                (reurn nil bcz not initialize)
+						3.0.0 :102 > $v
+						 => nil 
+						3.0.0 :103 > $v=20   (initialize)
+						 => 20 
+						3.0.0 :104 > defined?$v
+						 => "global-variable" 
+						3.0.0 :105 >
+				
+					
+			10) Dot "." and Double Colon "::" Operators- 
+			
+			
+					i) Dot (.) operator is used to access the methods of a class.
+					e.g.  class Dot_operator
+
+							def display
+								puts "Good morning everyone"
+
+							end
+						end
+
+
+						ob1=Dot_operator.new
+						ob1.display()
+											
+					
+					
+					
+					ii) Double(::) - operator is used to access the constants, class methods, and instance methods defined within a class or 									 module to anywhere outside the class or module.
+					
+					
+									# defined constant on main Object class
+											CONS = 5  
+											 
+											# define module
+											module Dot_colon
+												 
+											   CONS = 5
+												
+											   # set global CONS to 7
+											   ::CONS = 7  
+												
+												# set local CONS to 10
+											   CONS = 10   
+											end
+											 
+											# displaying global CONS value
+											puts CONS    
+											 
+											# displaying local "Geeks" CONS value
+											# using :: operator
+											puts Dot_colon::CONS
+
+	---------------Operators Precedence---------
+			
+			Method 	Operator 				Description
+			Yes 	:: 		C			onstant resolution operator
+			Yes 			[ ] [ ]= 						Element reference, element set
+			Yes 	** 	Exponentiation (raise to the power)
+			Yes 	! ~ + - 	Not, complement, unary plus and minus (method names for the last two are +@ and -@)
+			Yes 	* / % 	Multiply, divide, and modulo
+			Yes 	+ - 	Addition and subtraction
+			Yes 	>> << 	Right and left bitwise shift
+			Yes 	& 	Bitwise 'AND'
+			Yes 	^ | 	Bitwise exclusive `OR' and regular `OR'
+			Yes 	<= < > >= 	Comparison operators
+			Yes 	<=> == === != =~ !~ 	Equality and pattern match operators (!= and !~ may not be defined as methods)
+  						&& 	Logical 'AND'
+  					|| 	Logical 'OR'
+  					.. ... 	Range (inclusive and exclusive)
+  					? : 	Ternary if-then-else
+  					= %= { /= -= += |= &= >>= <<= *= &&= ||= **= 	Assignment
+  					defined? 	Check if specified symbol defined
+  					not 	Logical negation
+  					or and 	Logical composition
+							
+		
+		
+7) Constants - 
+
+			Constants begin with an uppercase letter. Constants defined within a class or module can be accessed from within that class 			or module, and those defined outside a class or module can be accessed globally.	
+			
+				Constants may not be defined within methods. Referencing an uninitialized constant produces an error. 
+				
+				
+				
+						class Example
+						   VAR1 = 100
+						   VAR2 = 200
+						   def show
+							  puts "Value of first Constant is #{VAR1}"
+							  puts "Value of second Constant is #{VAR2}"
+						   end
+						end
+
+						# Create Objects
+						object = Example.new()
+						object.show	
+						
+						------------------	Value of first Constant is 100
+											Value of second Constant is 200			
+							
+8) comments -  
+
+				single line - #single line commenet
+				multiline -   	=begin
+								This is a multiline comment and con spwan as many lines as you
+								like. But =begin and =end should come in the first line only. 
+								=end		
+								
+								
+9) If-else Statement - 
+
+		i)   	 if statement
+    	ii) 	if-else statement
+   	   iii)		if-else-if (elsif) statement
+       
+           
+    e.g.  	no1=Integer(gets)  #input
+			no2=Integer(gets)
+			no3=Integer(gets)
+			if no1>no2 && no1>no3
+				print "No1 is biggest\n"
+			elsif no2>no1 && no2>no3
+				print "No2 is biggest\n"
+			else
+				print "No3 is biggest\n"
+			end
+			
+		iv) if modifier - 
+			
+				$debug = 1
+				print "debug\n" if $debug
+    	
+    	v) unless Statement
+				x = 1 
+				unless x>=2
+				   puts "x is less than 2"
+				 else
+				   puts "x is greater than 2"
+				end    
+    
+ 10) case statment - The case statement is a multiway branch statement just like a switch statement in other languages.
+ 
+ 						marks=Integer(gets)
+ 						
+						case marks
+						
+						when 0..32           # when condition1,condition2,condition3
+							puts "Fail"
+						
+						when 33..50
+							puts "Pass"
+						
+						when 51..60
+							puts 'grade B'
+						
+						else
+							puts 'gradde A'
+
+						end
+						
+						
+				notes: -i) Can also use case statement without any value.
+						ii) Can use case statement in method call. Like method call, a case statement will always return a single object.
+ 
+-----------------------------------LOOPS---------------------------------------------------------------------------'
+  1)  while loop
+  2)  for loop
+  3)  do..while loop
+  4)  until loop 		
+  
+  
+  	1) while loop - Entry Controlled Loop - basically, while loop is used when the number of iterations is not fixed in a program. 	
+  	
+  					Note: A while loop’s conditional is separated from code by the reserved word do, a newline, backslash(\), or a 																														 semicolon(;).
+  					
+  					while conditional [do]    [do] optional
+					   code
+					end
+					  	
+  			   e.g. x=10
+					while x>0 do
+						puts x
+						x-=1
+					end    
+					
+			 output: 	10
+						9
+						8
+						7
+						6
+						5
+						4
+						3
+						2
+						1
+						
+    		1.1) while modifier -  
+    		
+    					$i = 0
+						$num = 5
+						begin
+							puts("Inside the loop i = #$i" )
+							$i +=1
+						 end while $i<$num
+			
+	
+2) for loop - Entry Controlled Loop- Preferred when the number of times loop statements are to be executed is known beforehand.
+	
+				for variable [, variable ...] in expression [do]
+				   code
+				end					
+
+
+				e.g. 			 for i in 1..5
+									puts i
+								 end
+								 
+				output:			1
+								2
+								3
+								4
+								5	
+			Iterate over array
+						
+								x=['a','b',1,2]
+
+								for i in x do
+									puts i
+								end
+	
+				Output-			a
+								b
+								1
+								2
+									
+	
+3) do..while loop - Exit-Controlled loop - checks the condition after executing the statements
+
+			loop do
+
+			 # code to be executed
+
+			break if Boolean_Expression
+
+			end
+
+				
+					e.g.  	 i=0
+							loop do
+							  i+=1
+							  print "#{i}\n"
+							  break if i==10
+							end 
+	
+			output: -         1
+							  2
+							  3
+							  4
+							  5
+							  6
+							  7
+							  8
+							  9
+							  10
+							  
+							  
+4) until loop -Basically it’s just opposite to the while loop which executes until the given condition evaluates to false 							  
+							  
+			until conditional [do]
+
+			 # code to be executed
+
+			end		
+			
+					e.g. 	x=5
+							until x==0 do
+								puts x
+								x-=1
+							end	
+				   
+				   output:  5  
+							4  
+							3  
+							2  	
+							1
+							
+				#until modifier  -- 
+				
+						code until conditional
+
+						OR
+
+						begin
+						   code
+						end until conditional		
+						
+						
+				e.g.	x=5
+						begin
+							puts x
+							x-=1
+						end until x==0	
+						
+						
+5)break Statement-- used to terminate a loop
+
+					e.g.    x=10
+							while x>0
+								puts x
+								x-=1
+								if x==5
+									break
+								# end
+							end
+							
+							
+					output:  10
+							  9
+							  8
+							  7
+							  6
+							  
+6) next statement - skip loop's next iteration. Once the next statement is executed, no further iteration will be performed. 
+
+					e.g.     for i in 5...11   
+							   if i == 7 then   
+								  next   
+							   end   
+							   puts i   
+							end  
+													
+							
+					output:   	5
+								6
+								8
+								9
+								10
+	 								
+7) redo Statement- redo statement is used to repeat the current iteration of the loop. Restarts yield or call if called within a block
+					The redo statement is executed without evaluating the loop's condition.
+					
+			e.g. 	 i = 0   
+					while(i < 5)   # Prints "012345" instead of "01234"   
+					  puts i   
+					  i += 1   
+					  if i == 5
+						redo
+					  end 
+					end  
+					
+			output: 0
+					1
+					2
+					3
+					4
+					5		#--------(Ignore loop condition and print 5) 
+
+			
+
+
+8)retry Statement - retry statement is used to repeat the whole loop iteration from the start.
+
+			
+
+---------------------------------------------------------METHODS----------------------------------------------------
+
+1. Define a method  
+
+		Syntax:
+					def method_name [( [arg [= default]]...[, * arg [, &expr ]])] 
+					   expr..
+					end
+					
+					or 
+					
+					
+				def method_name or def method_name (var1, var2)
+					# Statement 1
+					# Statement 2
+						.
+						.
+				end
+
+2. calling a method -  method_name  or method_name para1,para2...
+
+
+e.g 1 ) Method without parameters - 
+
+									e.g.1	def sum
+												a=5
+												b=10
+												c=a+b
+												
+											end
+											puts sum
+											
+								output:-    15     (this fun return last statement) return c
+								
+								
+
+								e.g.2 			def sum
+												a=5
+												b=10
+												c=a+b
+												d=20
+												
+											end
+											puts sum
+											
+								output:-    20     (this fun return last statement) return d
+								
+								
+		2) Passing parameters to methods- 
+		
+											def sum(a,b)
+												c=a+b
+											end
+											puts sum 5,10
+											
+											
+								Output:     15
+								
+		3) #method with default arguments
+											#method with default arguments
+											
+											def sum(a=20,b=50)
+												c=a+b
+											end
+
+											print "calling without parameters ",sum,"\n"
+											print "calling with parameters ",(sum 15,20),"\n"
+			
+							output:         calling without parameters 70
+											calling with parameters 35
+											
+											
+		4)Variable Number of Parameters- method that can take the variable number of arguments
+		
+							def fun1(*args)            
+								puts var.class
+							end
+							
+							fun1 5,4,3
+		
+				output:    array
+				
+				
+				required arguments-> optional -> variable -> keyword
+		
+											
+
+							
+		5) return statement - used to return one or more values from a Ruby Method.
+		
+							return
+
+							OR
+
+							return 12
+
+							OR
+
+							return 1,2,3
+							
+							
+							def test
+								i = 100
+								j = 200
+								k = 300
+							 return i, j, k
+							 end
+							 var = test
+							 puts var.class	
+							 
+							 
+				output: - 	 array
+
+
+-----------------------------------------------BLOCKS-----------------------------------------------------------------
+
+A block is the same thing as a method, but it does not belong to an object. Blocks are called closures in other programming languages. There are some important points about Blocks in Ruby:
+
+    Block can accept arguments and returns a value.
+    Block does not have their own name.
+    Block consist of chunks of code.
+    A block is always invoked with a function or can say passed to a method call.
+    To call a block within a method with a value, yield statement is used.
+    Blocks can be called just like methods from inside the method that it is passed to.
+    
+    
+    A block code can be used in two ways as follows-
+    
+    1) Inside the do..end statement
+	
+				e.g.		#Method
+
+							def sum
+								a=5
+								b=5
+								c=a+b    #c=10
+								yield c  # block call with argument c value 10
+								c+=a+b  #c=10+5+5 = 20
+								yield c     # block call with argument c    yield a,b,c
+							end
+
+							#block 
+
+							sum do
+								|c|     #first call c=10 and IInd call c=20                       # block parameter  |a,b,c|
+								c=c**2  #10**2=100
+								puts c
+							end #control goes back to method 
+		
+		output:      		100 
+							200
+							
+		Explanation: -	2) But as soon as yield statements execute the control goes to block and block will execute its statements. As 								soon as the block will execute it gives control back to the method and the method will continue to execute 								from where yield statement called.
+
+		
+		
+		
+	2) Inline between the curly braces {} : - 
+	
+				e.g.      def sum
+								a=5
+								b=5
+								c=a+b
+								yield c    # block call with argument c    yield a,b,c
+							end
+				
+							sum {|c| puts c}  
+
+			output:         10
+			
+			
+			e.g.  		puts [1, 2, 3, 4, 5].select { |num| num.even? }		
+			
+							output:  2
+									 4
+									 
+						puts [1, 2, 3, 4, 5].select { |num| num.odd? }
+						
+						output: 1
+								3				 
+								5
+								
+								
+				note-  1) The yield Statement:- 
+
+						The yield statement is used to call a block inside the method using the yield keyword with or without a value.
+						
+						
+3) BEGIN and END Blocks -  
+
+
+				Ruby source file has a feature to declare the block of code which can run as the file is being loaded i.e the BEGIN 				block. After the complete execution of the program END block will execute
+				
+				 A program can contain more than 1 BEGIN and END block. BEGIN blocks will always execute in a order but END blocks will 				 execute in reverse order.
+				
+				
+				e.g.  	   BEGIN { 
+							   # BEGIN block code 
+							   puts "BEGIN code block"
+							} 
+
+							END { 
+							   # END block code 
+							   puts "END code block"
+							}
+							   # MAIN block code 
+							puts "This is last statement of program but will execute before end block"
+							
+							
+				Output:  Begin code block
+						 This is last statement of program but will execute before end block
+						 End code block
+						 
+						 
+						 
+-------------------------------------------------------MODULES----------------------------------------------------
+
+Modules are a way of grouping together methods, classes, and constants
+
+ Modules are defined as a class, but with the module keyword not with class keyword.
+ 
+ 
+		 Important Points about Modules: 
+		 
+		    ->  You cannot inherit modules or you can’t create a subclass of a module.
+				Objects cannot be created from a module.
+				Modules are used as namespaces and as mixins.
+				All the classes are modules, but all the modules are not classes.
+				The class can use namespaces, but they cannot use mixins like modules.
+				The name of a module must start with a capital letter.
+ 						 
+ 						 
+ 		Syntax:
+
+					module Module_name
+
+					   # statements to be executed
+
+					end
+
+		e.g. 1 ---->     module Maths
+
+						def Maths.square(a)
+							c=a**2
+							puts c
+						end
+
+						def Maths.addition(a,b)
+							c=a+b
+							puts c
+						end
+						def subtraction(a,b)
+							c=a-b
+							puts c
+						end
+					end
+						
+					Maths.square(5)
+					Maths.addition(5,10)
+
+
+					#access instance method
+
+					class Sub_class
+					include Maths
+						# def Initialize(a,b)
+						#     @a=a
+						#     @b=b
+						# end
+
+					end
+
+					ob1=Sub_class.new
+					ob1.subtraction(30,5)
+					
+					
+	output:         25   #square
+					15	 #addition
+					25   # Subtraction
+						 					
+				
+	Note:  i) define module method user have to prefix the name of the module with the method name while defining the method
+		  ii) define a method with def keyword only inside a module i.e. def method_name then it will consider as an instance method. 
+				 A user cannot access instance method directly with the use of the dot operator as he cannot make the instance of the 					module.			
+		  iii) To access the instance method defined inside the module, the user has to include the module inside a class and then use 				   the class instance to access that method. Below example illustrate this concept clearly.	
+		  
+		  
+2) require Statement- call module in any program with the help of require keyword without re-writing code.	
+
+					  require "./my.rb"   (current directory) 
+					  
+			e.g.	  require "./module.rb"
+   					  Maths.addition(5,10)
+   					  
+3)  include Statement- embed a module in a class
+
+   					  
+					#access instance method
+
+					class Sub_class
+					include Maths                 #include Maths module in class
+						# def Initialize(a,b)
+						#     @a=a
+						#     @b=b
+						# end
+
+					end
+
+					ob1=Sub_class.new
+					ob1.subtraction(30,5)
+					
+				
+				
+
+
