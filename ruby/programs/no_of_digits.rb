@@ -10,4 +10,11 @@ return count
 end
 
 n=Integer(gets)
-puts nos_of_digits(n)
+puts "nos of digits #{nos_of_digits(n)}"
+
+
+=begin  
+-------------------output-----------------------
+n=36987
+nos of digits = 5
+=end
