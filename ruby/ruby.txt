@@ -899,10 +899,106 @@ A block is the same thing as a method, but it does not belong to an object. Bloc
 							
 				Output:  Begin code block
 						 This is last statement of program but will execute before end block
-						 End code block					
+						 End code block
+						 
+						 
+						 
+-------------------------------------------------------MODULES----------------------------------------------------
+
+Modules are a way of grouping together methods, classes, and constants
+
+ Modules are defined as a class, but with the module keyword not with class keyword.
+ 
+ 
+		 Important Points about Modules: 
+		 
+		    ->  You cannot inherit modules or you can’t create a subclass of a module.
+				Objects cannot be created from a module.
+				Modules are used as namespaces and as mixins.
+				All the classes are modules, but all the modules are not classes.
+				The class can use namespaces, but they cannot use mixins like modules.
+				The name of a module must start with a capital letter.
+ 						 
+ 						 
+ 		Syntax:
+
+					module Module_name
+
+					   # statements to be executed
+
+					end
+
+		e.g. 1 ---->     module Maths
+
+						def Maths.square(a)
+							c=a**2
+							puts c
+						end
+
+						def Maths.addition(a,b)
+							c=a+b
+							puts c
+						end
+						def subtraction(a,b)
+							c=a-b
+							puts c
+						end
+					end
+						
+					Maths.square(5)
+					Maths.addition(5,10)
+
+
+					#access instance method
+
+					class Sub_class
+					include Maths
+						# def Initialize(a,b)
+						#     @a=a
+						#     @b=b
+						# end
+
+					end
+
+					ob1=Sub_class.new
+					ob1.subtraction(30,5)
+					
+					
+	output:         25   #square
+					15	 #addition
+					25   # Subtraction
+						 					
 				
-				
-				
+	Note:  i) define module method user have to prefix the name of the module with the method name while defining the method
+		  ii) define a method with def keyword only inside a module i.e. def method_name then it will consider as an instance method. 
+				 A user cannot access instance method directly with the use of the dot operator as he cannot make the instance of the 					module.			
+		  iii) To access the instance method defined inside the module, the user has to include the module inside a class and then use 				   the class instance to access that method. Below example illustrate this concept clearly.	
+		  
+		  
+2) require Statement- call module in any program with the help of require keyword without re-writing code.	
+
+					  require "./my.rb"   (current directory) 
+					  
+			e.g.	  require "./module.rb"
+   					  Maths.addition(5,10)
+   					  
+3)  include Statement- embed a module in a class
+
+   					  
+					#access instance method
+
+					class Sub_class
+					include Maths                 #include Maths module in class
+						# def Initialize(a,b)
+						#     @a=a
+						#     @b=b
+						# end
+
+					end
+
+					ob1=Sub_class.new
+					ob1.subtraction(30,5)
+					
 				
 				
 
