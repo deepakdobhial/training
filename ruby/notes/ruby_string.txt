@@ -518,7 +518,73 @@ important note - Each of these methods modifies self.
 
 
 
+2) Substitution -------------
+	i) succ! → self - Returns self modified to become its own successor. 
+(The first character to be incremented is the rightmost alphanumeric: or, if no alphanumerics, the rightmost character:) 
+
+		a="hello worldA"
+		3.0.0 :236 > a.succ!
+		 => "hello worldB" 
+		3.0.0 :237 > a
+		 => "hello worldB" 
+		3.0.0 :238 > a.succ!
+		 => "hello worldC" 
+		3.0.0 :239 > a.succ
+		 => "hello worldD" 
+		3.0.0 :240 > a
+		 => "hello worldC" 
+		3.0.0 :241 > a.insert(-1,'1')
+		 => "hello worldC1" 
+		3.0.0 :242 > a.succ
+		 => "hello worldC2" 
+		3.0.0 :243 > a.succ!
+		 => "hello worldC2" 
 		 
+	ii) next! - alias to succ! 
+		3.0.0 :246 > a.next!
+		 => "hello worldC3" 
+	
+	iii) replace(other_string) → self - Returns self with its entire content replaced by a given string.
+	 	3.0.0 :247 > a.replace "hello world"
+		 => "hello world" 
+		 
+	iv) reverse! → self - Returns self with its characters in reverse order.
+		3.0.0 :252 > a.reverse!
+		 => "dlrow olleh" 
+	v) setbyte(index, integer) → integer ---Sets value of ascii code at given index and return ascii code.
+		3.0.0 :256 > a
+		 => "hello world" 
+		3.0.0 :257 > a.setbyte(1,65) 
+		 => 65                                  # return ascii code given in argument
+		3.0.0 :258 > a
+		 => "hAllo world" 						# set ascii value of 65 equal to "A" at index 1 
+		 
+	vi) tr!(from_str, to_str) → str or nil - Replaces specified characters in self with specified replacement characters; returns self 									if any changes, nil otherwise.
+		3.0.0 :263 > d="hello"
+		 => "hello" 
+		3.0.0 :264 > d.tr!('el','ip')
+		 => "hippo" 
+		3.0.0 :265 > a
+		 => "hAllo world" 
+		3.0.0 :266 > d
+		 => "hippo" 
+		3.0.0 :267 > d.tr!('ip','k')
+		 => "hkkko" 
+		3.0.0 :268 > d.tr!('k','ell')
+		 => "heeeo" 
+		3.0.0 :269 > "hello".tr!('aeiou', 'AA*') 
+		 => "hAll*"
+		
+	vii) tr_s!(from_str, to_str) → str or nil- Replaces specified characters in self with specified replacement characters, removing 										duplicates from the substrings that were modified; returns self if any changes, nil otherwise
+	
+		3.0.0 :270 > a="hello"
+		 => "hello" 
+		3.0.0 :271 > a.tr_s!('l','r')
+		 => "hero" 
+		3.0.0 :272 > a.tr_s!('er','m')
+		 => "hmo" 
+		3.0.0 :273 > "hello".tr_s('el', '*') 
+		 => "h*o"		 
 	
 
 		
