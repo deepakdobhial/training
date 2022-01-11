@@ -220,7 +220,134 @@ Public Class Methods-----
 	=> 2 
  
 
+-------------------------------------sub-strings----------------------------------
+1) =~  --  Returns the index no. of the first substring that matches a given Regexp or other object; returns nil if no match is found
 	
+	a='hello world'
+	
+	3.0.0 :102 > a=~/d/  		#  d found at index no 10
+	=> 10 
+
+	3.0.0 :103 > a=~/m/			# m not found
+	 => nil 
+
+2)  index(substring, offset = 0) → integer or nil 
+	index(regexp, offset = 0) → integer or nil - Returns the index no of the first occurrence of a given substring; returns nil if none 																																	found.
+	
+	3.0.0 :115 > a.index('o')
+	 => 4 
+	3.0.0 :117 > a.index(/ll/)
+	 => 2 
+	3.0.0 :118 > a.index(/rl/)
+	 => 8 
+	3.0.0 :119 > a.index(/r/)
+	 => 8 
+	3.0.0 :120 > a.index(/rm/)
+	 => nil 
+	3.0.0 :121 > a.index(/w/)
+	 => 6 
+	 
+3)  rindex(substring, offset = self.length) → integer or nil
+	rindex(regexp, offset = self.length) → integer or nil - Returns the index of the last occurrence of a given substring; returns nil 																														if none found.
+	a='hello world'
+	
+	3.0.0 :123 > a.rindex('l')   # index no of last occurrence of 'l' 
+	=> 9
+	
+	 3.0.0 :125 > a
+	 => "hello world" 
+	3.0.0 :126 > a.rindex(/rl/)   # index no of last occurrence of 'rl' 
+	 => 8 
+
+	3.0.0 :127 > a.rindex(/rm/)
+	 => nil 
+	 
+
+4) include? other_string → true or false - Returns true if the string contains a given substring; false otherwise.
+
+	3.0.0 :128'> a.include? 'h'
+	 => true 
+	3.0.0 :129 > a.include? 'm'
+	 => false 	
+	 
+	a.include? /r/  # only strings pass
+	
+5)  match(pattern, offset = 0) → matchdata or nil click to toggle source
+	match(pattern, offset = 0) {|matchdata| ... } → object 
+
+	-----> Returns a MatchData object if the string matches a given Regexp; nil otherwise.
+	
+	3.0.0 :132 > a
+	 => "hello world" 
+	3.0.0 :133 > a.match('ll')
+	 => #<MatchData "ll"> 
+
+	3.0.0 :134 > a.match('ml')
+	 => nil 
+	 
+	3.0.0 :136 > a.match('h',1)    # Match after index no 1 hence nil return
+	 => nil 
+	 
+	3.0.0 :138 > a.match(/h/) {|matchdata| matchdata }
+	 => #<MatchData "h"> 
+	 
+6) match?(pattern, offset = 0) → true or false - Returns true if the string matches a given Regexp; false otherwise.
+
+	3.0.0 :139 > a.match?(/ll/)
+	 => true 
+	3.0.0 :140 > a.match?('l')
+	 => true 
+	3.0.0 :141 > a.match?('ll')
+	 => true 
+	3.0.0 :142 > a.match?('l',8)
+	 => true 
+	3.0.0 :143 > a.match?('l',9)
+	 => true 
+	3.0.0 :144 > a.match?('l',10)
+	 => false 
+
+7) start_with?([prefixes]+) → true or false- Returns true if str starts with one of the prefixes given. Each of the prefixes should be a 												 String or a Regexp.
+
+
+	3.0.0 :147 > a.start_with?('ll')
+	 => false 
+	3.0.0 :148 > a.start_with?('hel')
+	 => true 
+	3.0.0 :149 > a.start_with?('he')
+	 => true 
+	3.0.0 :150/> a.start_with?(/he/)
+	 => true 
+	3.0.0 :151 > a.start_with?(/ml/)
+	 => false
+
+# returns true if one of the prefixes matches.
+
+	3.0.0 :152'> a.start_with?('he','lm')
+	 => true 
+	3.0.0 :153 > a.start_with?('he','kk')
+	 => true 
+	3.0.0 :154 > a.start_with?('he','kk','po')
+	 => true 
+	3.0.0 :155 > a.start_with?('kk','po','pp')
+	 => false 
+	3.0.0 :156 > a.start_with?('kk','po','he')
+	 => true 
+	 
+8)  end_with?([suffixes]+) → true or false ---Returns true if str ends with one of the suffixes given.
+
+	3.0.0 :157 > a.end_with?('ld')
+	 => true 
+	3.0.0 :158 > a.end_with?('l')
+	 => false 
+	 
+	3.0.0 :161 > a.end_with?('dl','ml')
+	 => false 
+	3.0.0 :162 > a.end_with?('ld','ml')
+	 => true 
+	 
+
+
+
 
 
 
