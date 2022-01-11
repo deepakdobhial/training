@@ -637,5 +637,177 @@ important note - Each of these methods modifies self.
 		3.0.0 :304 > a
 		 => "\x68\x65\x6C\x6C\x6F\x20\x77\x6F\x72\x6C\x64" 
 		3.0.0 :305 > a.force_encoding("UTF-8")
-		 => "hello world" 	
+		 => "hello world" 
+		 
+5) Deletion ---
+	i)  clear → self -- Removes all content, so that self is empty; returns self.	
+		3.0.0 :314 > a.clear
+		 => "" 
 
+	ii) Removes a substring determined by a given index, start/length, range, regexp, or substring. 
+		slice!(index) → new_string or nil
+		3.0.0 :322 > a
+		 => "hello" 
+		3.0.0 :323 > a.slice!(1)
+		 => "e" 
+		3.0.0 :324 > a
+		 => "hllo" 
+		
+		slice!(start, length) → new_string or nil
+		3.0.0 :331 > a
+		 => "hello" 
+		3.0.0 :332 > a.slice!(2,2)
+		 => "ll" 
+		3.0.0 :333 > a
+		 => "heo" 
+
+		slice!(range) → new_string or nil
+		3.0.0 :337 > a
+		 => "hello" 
+		3.0.0 :338 > a.slice!(2,2)
+		 => "ll" 
+				
+		slice!(regexp, capture = 0) → new_string or nil
+		3.0.0 :339 > a="hello"
+		 => "hello" 
+		3.0.0 :340 > a.slice!(/e.*o/)
+		 => "ello" 
+		3.0.0 :341 > a
+		 => "h" 
+
+		slice!(substring) → new_string or nil   
+		
+		3.0.0 :342 > a="hello"
+		 => "hello" 
+		3.0.0 :343 > a.slice!('el')
+		 => "el" 
+		3.0.0 :344 > a
+		 => "hlo" 	
+		 
+	iii)  str[integer] = new_str 
+		3.0.0 :346'> a[2]='m'
+		 => "m" 
+		3.0.0 :347 > a
+		 => "hemlo" 
+			
+		  str[integer, integer] = new_str
+		    3.0.0 :348 > a[2,3]="m"
+			 => "m" 
+			3.0.0 :349 > a
+			 => "hem" 
+			 
+		  str[range] = aString
+		  	3.0.0 :350 > a="hello"
+			 => "hello" 
+			3.0.0 :351"> a[1..3]="abc"
+			 => "abc" 
+			3.0.0 :352 > a
+			 => "habco"
+		  
+		  str[regexp] = new_str
+		  3.0.0 :353 > a[/abc/]="ell"
+		  => "ell" 
+		 3.0.0 :354 > a
+		 => "hello" 
+				  
+		  str[other_str] = new_str 	
+		  3.0.0 :358 > a
+		  => "hello" 
+	      3.0.0 :359 > a['ello']='abc'
+		  => "abc" 
+		  3.0.0 :360 > a
+		  => "habc" 
+		
+	iv) squeeze!([other_str]*) → str or nil -- Removes contiguous duplicate characters; returns self.
+		 3.0.0 :362 > a="hello"
+		 => "hello" 
+		3.0.0 :363 > a.squeeze!
+		 => "helo" 
+		3.0.0 :364 > a.squeeze!
+		 => nil 
+		 
+		 3.0.0 :370 > a="heello"
+		 => "heello" 
+		3.0.0 :371 > a.squeeze!('l')
+		 => "heelo" 
+		3.0.0 :372 > a
+		 => "heelo" 
+		 
+	v) delete!([other_str]+) → str or nil -- Removes characters as determined by the intersection of substring arguments.
+		
+		3.0.0 :378 > a
+		 => "hello" 
+		3.0.0 :379 > a.delete!('e')
+		 => "hllo" 
+		3.0.0 :380 > a
+		 => "hllo" 
+
+	vi) lstrip! → self or nil -- Removes left side whitespace; returns self if any changes, nil otherwise.
+		3.0.0 :385 > a="     hello"
+		 => "     hello" 
+		3.0.0 :386 > a.lstrip!
+		 => "hello" 
+		3.0.0 :387 > a
+		 => "hello" 
+		3.0.0 :388 > a.lstrip!
+		 => nil
+		 
+	vii) rstrip! → self or nil -- Removes right side whitespace; returns self if any changes, nil otherwise.
+		
+		3.0.0 :390 > a
+		 => "hello       " 
+		3.0.0 :391 > a.rstrip!
+		 => "hello" 
+		3.0.0 :392 > a
+		 => "hello" 
+		3.0.0 :393 > a.rstrip!
+		 => nil 
+		 
+	viii) strip! → self or nil -- Removes left and right side whitespace; returns self if any changes, nil otherwise.
+		3.0.0 :394"> a="    hello    "
+		 => "    hello    " 
+		3.0.0 :395 > a.strip!
+		 => "hello" 
+		3.0.0 :396 > a
+		 => "hello" 
+		3.0.0 :397 > a.strip!
+		 => nil 
+		 
+	ix) chomp!(separator=$/) → str or nil -- Returns a copy of self with a trailing record separator removed, if found.
+	-----given record separator removed from the end of str (if present). If $/ has not been changed from the default Ruby record 			separator, then chomp also removes carriage return characters (that is, it will remove \n, \r, and \r\n). If $/ is an empty 		string, it will remove all trailing newlines from the string.
+	
+		3.0.0 :420 > a
+		 => "hello\n\r" 
+		3.0.0 :421 > a.chomp!
+		 => "hello\n" 
+		 
+		 3.0.0 :425 > a.chomp!("") ---- remove all trailing separator
+			 => "hello" 
+
+		3.0.0 :467 > a.chomp('o')     # remove character only from trail
+ 		=> "hell" 
+
+	x) chop! → str or nil-- removes the last character or whitespace; returns self if any changes, nil otherwise. If the string ends 					with \r\n, both characters are removed
+	
+		3.0.0 :490 > a="he  "
+		 => "he  " 
+		3.0.0 :491 > a.chop!
+		 => "he " 
+		3.0.0 :492 > a.chop!
+		 => "he" 
+		3.0.0 :493 > a.chop!
+		 => "h" 
+		3.0.0 :494 > a.chop!
+		 => "" 
+		3.0.0 :495 > a.chop!
+		 => nil 
+		 
+			3.0.0 :496 > a="hello"
+		 => "hello" 
+		3.0.0 :497 > a.chop.chop
+		 => "hel" 
+
+		 
+		 
+		
+		
