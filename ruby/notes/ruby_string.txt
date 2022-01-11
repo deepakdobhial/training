@@ -370,6 +370,39 @@ If the string is not in a Unicode Encoding, then an Exception is raised
 	3.0.0 :171 > a.ascii_only?
  	=> true 
 
+--------------------------------------------------Others-----------------------------------
 
+1) sum(n=16) → integer # n is optional
+
+	Returns a basic n-bit checksum of the characters in str, where n is the optional Integer parameter, defaulting to 16. The result is 	simply the sum of the binary value of each byte in str modulo 2**n - 1.
+	
+	3.0.0 :172 > a.sum()
+	 => 1116 
+	3.0.0 :173 > a.sum(n=16)
+	 => 1116 
+	3.0.0 :174 > a.sum(n=8)
+	 => 92 
+
+2)  hex → integer
+
+	Treats leading characters from str as a string of hexadecimal digits (with an optional sign and an optional 0x) and returns the 	   corresponding number. Zero is returned on error.
+
+	3.0.0 :177 > '0x0a'.hex     # convert into hexadecimal digits (0-9 a-f) a or A = 10....f or F=15
+	 => 10 
+	3.0.0 :178 > 'a'.hex
+	 => 10 
+	3.0.0 :179 > 'b'.hex
+	 => 11 
+	3.0.0 :180 > 'f'.hex
+	 => 15 
+	3.0.0 :181 > 'g'.hex
+	 => 0 
+	3.0.0 :182 > 'h'.hex
+	 => 0 
+	3.0.0 :183 > 'ab'.hex
+	 => 171 
+	 
+	3.0.0 :186 > 'ABC'.hex
+ 	=> 2748 
 
 
