@@ -618,5 +618,24 @@ important note - Each of these methods modifies self.
 		3.0.0 :295 > a
 		 => "hello world" 	
 
-	
+4) Encoding ------
+
+	i)  scrub! → str
+		scrub!(repl) → str
+		scrub!{|bytes|} → str------If the string is invalid byte sequence then replace invalid bytes with given replacement character,   								else returns self. If block is given, replace invalid bytes with returned value of the block.
+		
+		3.0.0 :298 > "abc\u3042\x81"
+		 => "abcあ\x81" 
+		3.0.0 :299 > "abc\u3042\x81".scrub!("*")
+		 => "abcあ*" 
+		 
+	ii) force_encoding(encoding) → str --- Changes the encoding to a given encoding; returns self.
+		3.0.0 :302 > a
+		 => "hello world" 
+		3.0.0 :303 > a.force_encoding("UTF-32BE")
+		 => "\x68\x65\x6C\x6C\x6F\x20\x77\x6F\x72\x6C\x64" 
+		3.0.0 :304 > a
+		 => "\x68\x65\x6C\x6C\x6F\x20\x77\x6F\x72\x6C\x64" 
+		3.0.0 :305 > a.force_encoding("UTF-8")
+		 => "hello world" 	
 
