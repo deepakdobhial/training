@@ -483,5 +483,45 @@ a='hello world', b='world', c='hello world'
 	3.0.0 :214 > b.casecmp?(5)
 	 => nil 
 
+-----------------------------------------------Methods for Modifying a String-------------------------------------
 
+important note - Each of these methods modifies self.
+-----------------------------------------------------
+
+1) Insertion -------->  
+	i)  insert(index, other_string) → self-	Inserts the given other_string into self; returns self.
+		If the Integer index is positive, inserts other_string at offset index:
+		
+		b='world'
+		
+		3.0.0 :215 > b.insert(2,'lsk')
+		 => "wolskrld" 
+		3.0.0 :216 > b
+		 => "wolskrld" 
+		 
+		 If the Integer index is negative, counts backward from the end of self and inserts other_string at offset index+1 (that is, after self[index]):
+		 
+		 3.0.0 :217 > b.insert(-2,'abc')
+ 		=> "wolskrlabcd" 			# insert abc at index -2 
+ 		
+	ii) string << object → string ---Concatenates object to self and returns self:
+
+		3.0.0 :228 > a="hello"
+		 => "hello" 
+		3.0.0 :229 > b="world"
+		 => "world" 
+		3.0.0 :230 > a<<" "<<b
+		 => "hello world" 
+		 
+		3.0.0 :235 > a<<65               #concatenates Ascii value of respected integer or code
+ 		=> "hello worldA" 
+
+
+
+		 
+	
+
+		
+
+	
 
