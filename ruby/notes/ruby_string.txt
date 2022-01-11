@@ -345,9 +345,30 @@ Public Class Methods-----
 	3.0.0 :162 > a.end_with?('ld','ml')
 	 => true 
 	 
+--------------------------------------------Encodings--------------------------------------------------
+1) encoding → encoding --Returns the Encoding object that represents the encoding of obj.
 
+	3.0.0 :163 > a.encoding
+	 => #<Encoding:UTF-8> 
 
+2)unicode_normalized?(form=:nfc)- Checks whether str is in Unicode normalization form form, which can be any of the four 									  values :nfc, :nfd, :nfkc, or :nfkd. The default is :nfc.
 
+If the string is not in a Unicode Encoding, then an Exception is raised
+
+	3.0.0 :167 > "a\u0300".unicode_normalized? 
+	 => false 
+	3.0.0 :168 > "a\u0300".unicode_normalized?(:nfd)
+	 => true 
+	 
+3)valid_encoding? → true or false--Returns true for a string which is encoded correctly.
+ 
+	3.0.0 :170 > a.valid_encoding?
+	 => true 
+	 
+4)  ascii_only? → true or false --Returns true for a string which has only ASCII characters.
+
+	3.0.0 :171 > a.ascii_only?
+ 	=> true 
 
 
 
