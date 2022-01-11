@@ -107,3 +107,121 @@
 							 => {"foo"=>"bar", "baz"=>"bat"} 
 							 
 
+-----------------------------------------------Methods for Creating a String------------------------------------------------------------
+
+
+Public Class Methods----- 
+-------------------------=--------
+
+
+
+1)  new(string = '') → new_string
+	new(string = '', encoding: encoding) → new_string
+	new(string = '', capacity: size) → new_string    #capacity may set the size of the internal buffer, which may affect performance:
+	
+	3.0.0 :064 > a=String.new
+ 	=> ""
+	
+	3.0.0 :062 > a=String.new('Deepak')
+	 => "Deepak" 
+	3.0.0 :063 > a
+	 => "Deepak" 
+	 
+	 3.0.0 :067 > a.encoding
+ => #<Encoding:ASCII-8BIT> 
+ 
+ 
+	 3.0.0 :072 > a=String.new("deepak",encoding:'UTF-8')
+	 => "deepak" 
+	3.0.0 :073 > a.encoding
+	 => #<Encoding:UTF-8> 
+	 
+
+2) try_convert(object) → object, new_string, or nil--
+
+		If object is a String object, returns object.
+
+		Otherwise if object responds to :to_str, calls object.to_str and returns the result.
+
+		Returns nil if object does not respond to :to_str.
+
+		Raises an exception unless object.to_str returns a String object.
+		
+
+		3.0.0 :082 > a=String.try_convert('deep')
+		 => "deep" 
+		 
+		3.0.0 :089 > a=String.try_convert([1,2,3])
+		 => nil 
+		3.0.0 :090 > a
+		 => nil 
+		 
+		 
+--------------------------------------------------------Methods for Querying--------------------------------------------------------
+
+1) length → integer---Returns the count of characters (not bytes) in self:
+
+	3.0.0 :107 > "\x67\u3025".bytesize
+	 => 2	
+	
+	3.0.0 :097 > a="hello"
+	 => "hello" 
+	3.0.0 :098 > a.length
+	 => 5 
+	 
+2) size - alias of length
+
+	3.0.0 :099 > a.size
+	 => 5 
+	 
+3)  empty? → true or false- Returns true if the length of self is zero, false otherwise
+
+	3.0.0 :100 > "hee".empty?
+	 => false 
+	3.0.0 :101 > "".empty?
+	 => true 
+
+4)  bytesize → integer- Returns the count of bytes in self
+
+	 3.0.0 :107 > "\x67\u3025".bytesize
+	 => 4 
+
+5) count([other_str]+) → integer-Returns the count of substrings matching given strings.
+
+	3.0.0 :037 > a='hello world'
+	 => "hello world" 
+	3.0.0 :038 > a.count 'lo'          #counts the number of times the characters 'l' and 'o' appear in the string
+	 => 5 
+
+
+	3.0.0 :044 > a.count "lo", "o"  # count intersection of the 2 parameters('lo' & 'o') passed to it.
+	 => 2 
+	
+	3.0.0 :053 > a.count 'hellor','rl'  # intersction of 'hellor' and 'rl' is 'r' and 'l' appears 'r'=1 and 'l'=3 total= 4
+	=> 4 
+	
+	3.0.0 :058 > a.count 'llo','^l'    # ^l means 'l' will not include in return searched string
+ 	=> 2 
+
+	3.0.0 :065 > a.count "oj-m"        # occurrence of alphabet 'o' and between j-m ['j','k','l','m']  so o = 2 + l =3 = 5 
+	=> 5 
+     (this equal to a.count "ol")
+     
+	3.0.0 :067 > "hello^world".count "\\^aeiou"   # backslashes negates the '^' characters  so aeiou matches e,o and ^ matches ^
+	=> 4											e=1, o=2, ^=1  total = 4
+	
+	
+	3.0.0 :068 > "hello-world".count "a\\-eo"    # backslashes negates the '-' characters so a,-,e,o matches -=1, e=1, o=2 total=4
+	 => 4
+	 
+	3.0.0 :069 > c = "hello world\\r\\n"        
+	 => "hello world\\r\\n" 
+	3.0.0 :070 > c.count "\\"                   # first backslashes negates second. so \\=2 
+	=> 2 
+ 
+
+	
+
+
+
+
