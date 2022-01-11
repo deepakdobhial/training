@@ -1,0 +1,109 @@
+-----------------------------------Strings (mutable object)-------------------------
+1)
+	puts "Hello"
+	puts 'Hello'
+
+	---> output: Hello
+			 
+2) Accessing string elements - 
+
+		a="deep"
+		
+		a['d']
+		
+		a[0]
+		"d"
+		a[1]
+		"e"
+		a[2]
+		"e"
+		a[3]
+		"p"
+		a[4]
+		nil
+					 
+3) Multiline string - 
+
+	1)	puts "   
+			A   
+			AB   
+			ABC   
+			ABCD"  
+	
+	2) puts %/   
+			A   
+			AB   
+			ABC   
+			ABCD/
+			
+	3) puts <<STRING   
+			A   
+			AB   
+			ABC   
+			ABCD   
+			STRING  
+			
+			
+---------------------------------------Substitution Methods------------------------------------------
+
+	i)sub(pattern, replacement)  - One substitution (or none); returns a new string.
+	e.g. 	3.0.0 :021 > a='abcd'
+			 => "abcd" 
+			3.0.0 :022 > c=a.sub('bc','BC')
+			 => "aBCd" 
+			3.0.0 :023 > c
+			 => "aBCd" 
+			 
+	e.g.	 3.0.0 :024 > d=a.sub(/[a,b,c,d]/,'*')     #/[a,b,c,d]/ regexp
+			 => "*bcd" 
+			3.0.0 :025 > d
+			 => "*bcd" 
+
+	ii) sub!(pattern, replacement)  - One substitution (or none); returns self.
+		
+	e.g. 	3.0.0 :026 > c=a.sub!('bc','BC')
+			 => "aBCd" 
+			3.0.0 :027 > c
+			 => "aBCd" 
+			3.0.0 :028 > a
+			 => "aBCd"
+			 
+	iii) gsub(pattern, replacement) : Zero or more substitutions; returns a new string.
+		
+	e.g. 	3.0.0 :040 > a='aaa'
+			 => "aaa" 
+			3.0.0 :041 > c=a.gsub('a','e')
+			 => "eee" 
+			3.0.0 :042 > c
+			 => "eee" 
+			3.0.0 :043 > a
+			 => "aaa" 
+			 
+			3.0.0 :050 > c=a.gsub(/[a,b,c,d,e]/,'i')
+ 			=> "iii" 
+ 			
+ 	iv) gsub!(pattern, replacement) : Zero or more substitutions; returns self.
+	
+	e.g.    3.0.0 :051 > c=a.gsub!(/[a,b,c,d,e]/,'i')
+			 => "iii" 
+			3.0.0 :052 > c
+			 => "iii" 
+			3.0.0 :053 > a
+			 => "iii" 
+			 
+			 3.0.0 :054 > c=a.gsub!(/[a,b,c,d,e]/,'i')
+			 => nil 
+			3.0.0 :055 > c
+			 => nil 
+			3.0.0 :056 > c=a.gsub!(/[a,b,c,d,e]/)
+			 => #<Enumerator: "iii":gsub!(/[a,b,c,d,e]/)>   #when not pass replacement string
+			 
+			 
+	hash replacement- 		 3.0.0 :058 > h = {'foo' => 'bar', 'baz' => 'bat'}
+							 => {"foo"=>"bar", "baz"=>"bat"} 
+							3.0.0 :059 > 'food'.sub('foo', h) # => "bard"
+							 => "bard" 
+							3.0.0 :060 > h
+							 => {"foo"=>"bar", "baz"=>"bat"} 
+							 
+
