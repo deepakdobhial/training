@@ -1104,4 +1104,49 @@ xii)  chr → string click to toggle source-Returns a string containing the firs
 	3.0.0 :707 > b=a.to_s
 	 => "12345" 
     
+-----------------------------------------Methods for Converting to Non-String-----------------------------------------
 
+1) converts the contents of self to a non-String
+	i) bytes → an_array - Returns an array of bytes in str. This is a shorthand for str.each_byte.to_a.
+	
+		3.0.0 :717 > a="good"
+	 => "good" 
+	3.0.0 :718 > a.bytes
+	 => [103, 111, 111, 100] 
+	 
+	ii) chars → an_array - Returns an array of characters in str. This is a shorthand for str.each_char.to_a.
+	
+		3.0.0 :719 > a
+	 => "good" 
+	3.0.0 :720 > a.chars
+	 => ["g", "o", "o", "d"] 
+	 
+  iii) codepoints → an_array - Returns an array of the Integer ordinals of the characters in str. This is a shorthand for str.each_codepoint.to_a.
+  
+	   3.0.0 :721 > a
+	 => "good" 
+	3.0.0 :722 > a.codepoints
+	 => [103, 111, 111, 100] 
+	 
+iv) getbyte(index) → integer - Returns the byte at zero-based index as an integer:
+
+	3.0.0 :726 > a
+	 => "good" 
+	3.0.0 :727 > a.getbyte(0)      # index no=0 
+	 => 103 
+	3.0.0 :728 > a.getbyte(1)
+	 => 111 
+	3.0.0 :729 > a.getbyte(2)
+	 => 111 
+	3.0.0 :730 > a.getbyte(3)
+	 => 100 
+	3.0.0 :731 > a.getbyte(4)
+	 => nil 
+
+v) grapheme_clusters → an_array - Returns an array of grapheme clusters in str. This is a shorthand for str.each_grapheme_cluster.to_a.
+
+	3.0.0 :732 > a.grapheme_clusters
+ 	=> ["g", "o", "o", "d"] 
+
+	
+	
