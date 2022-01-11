@@ -808,6 +808,57 @@ important note - Each of these methods modifies self.
 		 => "hel" 
 
 		 
+---------------------------------------------------------Methods for Converting to New String--------------------------------------
+
+1) Extension --
+		i) * -  3.0.0 :499 > a*3
+				 => "hellohellohello" 
+				3.0.0 :500 > a
+				 => "hello" 
+				3.0.0 :501 > a*0
+				 => "" 
+		ii) + - 3.0.0 :505 > a+" "+b
+ 				=> "hello world" 
+ 	    iii) center(width, padstr=' ') → new_str - Centers str in width. If width is greater than the length of str, returns a new 												String of length width with str centered and padded with padstr; otherwise, returns str
+ 	    
+ 	    	3.0.0 :514 > d=a.center(6)
+			 => "hello " 
+			3.0.0 :515 > 'hello'.center(6)
+			 => "hello " 
+			3.0.0 :516 > 'hello'.center(7)
+			 => " hello " 
+			3.0.0 :517 > 'hello'.center(7,'-')
+			 => "-hello-" 
+	
+	  iv) concat(*objects) → string - Concatenates each object in objects to self and returns self:
+	  
+	  		3.0.0 :532 > a.concat(" ",b," ",c)
+			 => "good morning all" 
+			3.0.0 :533 > a
+			 => "good morning all" 
+			 
+	v) prepend(*other_strings) → string - 
+		 a='good'	
+		 b='morning'
+		 c='all'	
+		 3.0.0 :545 > a.prepend(b," ",c," ")
+		 => "morning all good" 
 		 
+		3.0.0 :546 > a
+ 		=> "morning all good"  
+ 		
+ 	vi) ljust → self or nil - Returns a copy of self of a given length, right-padded with a given other string.
+ 	
+ 	 	3.0.0 :562 > a.ljust(6)
+		 => "hello " 
+		3.0.0 :563'> a.ljust(6,'A')
+		 => "helloA" 
 		
+	vii) rjust(integer, padstr=' ') → new_str - Returns a copy of self of a given length, left-padded with a given other string.
+	 	 	
+	    3.0.0 :565 > a.rjust(6)
+		 => " hello" 
+		3.0.0 :566 > a.rjust(6,'A')
+		 => "Ahello" 
+				
 		
