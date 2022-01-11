@@ -860,5 +860,34 @@ important note - Each of these methods modifies self.
 		 => " hello" 
 		3.0.0 :566 > a.rjust(6,'A')
 		 => "Ahello" 
+		 
+2) Encoding -- 
+	i) b- Returns a copied string whose encoding is ASCII-8BIT.
+	
+		c=a.b
+		3.0.0 :571 > c
+		 => "hello" 
+		3.0.0 :572 > c.encoding
+		 => #<Encoding:ASCII-8BIT> 
+		3.0.0 :573 > a.encoding
+		 => #<Encoding:UTF-8> 
+		3.0.0 :574 > 
+		
+	ii)  scrub → new_str 
+		scrub(repl) → new_str
+		scrub{|bytes|} → new_str 
+		Returns a copy of self with each invalid byte replaced with a given character.
+		
+		3.0.0 :584 > a="abc\u3042\x81"
+		 => "abcあ\x81" 
+		3.0.0 :585 > a.scrub
+		 => "abcあ�" 
+		3.0.0 :586 > a.scrub("*")
+		 => "abcあ*" 
+		3.0.0 :587 > a
+		 => "abcあ\x81" 
+		 
+
+
 				
 		
