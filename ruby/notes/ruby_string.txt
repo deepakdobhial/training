@@ -887,7 +887,59 @@ important note - Each of these methods modifies self.
 		3.0.0 :587 > a
 		 => "abcあ\x81" 
 		 
+3) Substitution - 
+     i) dump → string -- Returns a printable version of self, enclosed in double-quotes, with special characters escaped, and with 							  non-printing characters replaced by hexadecimal notation:
+     
+        3.0.0 :596 > a.dump
+ 		=> "\"good morning\"" 
+ 		
+ 	ii) undump → string -- Returns an unescaped version of self:
+ 	 
+ 	 	3.0.0 :600 > a
+		 => "good morning" 
+		3.0.0 :601 > b=a.dump
+		 => "\"good morning\"" 
+		3.0.0 :602 > b
+		 => "\"good morning\"" 
+		3.0.0 :603 > c=b.undump
+		 => "good morning" 
+		 
+	iii) succ → new_str - Returns the successor to self. The successor is calculated by incrementing characters.
+	     
+	     3.0.0 :604 > a
+		 => "good morning" 
+		3.0.0 :605 > a.succ
+		 => "good morninh" 
+		3.0.0 :606 > a
+		 => "good morning" 
 
+	iv) reverse → string - Returns a new string with the characters from self in reverse order.
+		3.0.0 :608 > a="hello"
+		 => "hello" 
+		3.0.0 :609 > a.reverse
+		 => "olleh" 
+		 
+	v) tr(from_str, to_str) => new_str - Returns a copy of str with the characters in from_str replaced by the corresponding characters 										 in to_str. If to_str is shorter than from_str, it is padded with its last character in order to 											 maintain the correspondence.
+	
+		3.0.0 :610 > a
+		 => "hello" 
+		3.0.0 :611 > a.tr('ll','kk')
+		 => "hekko" 
+		 
+	vi) tr_s(from_str, to_str) → new_str - translate same as tr but removes duplicate characters in regions that were affected by the translation.
+	
+		3.0.0 :613 > a.tr_s('ll','kk')
+		 => "heko" 
+		 3.0.0 :614 > a='ababab'
+		 => "ababab" 
+		3.0.0 :615 > a.tr_s('a','e')
+		 => "ebebeb" 
+		3.0.0 :616 > a.tr_s('a','e')
+		 => "ebebeb" 
+		3.0.0 :617 > a='abbabb'
+		 => "abbabb" 
+		3.0.0 :618 > a.tr_s('bb','cc')
+		 => "acac" 
 
 				
 		
