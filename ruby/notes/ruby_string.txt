@@ -941,5 +941,32 @@ important note - Each of these methods modifies self.
 		3.0.0 :618 > a.tr_s('bb','cc')
 		 => "acac" 
 
-				
+4) Casing - 
+ 	i) capitalize(*options) → string -- Returns a string containing the characters in self; the first character is upcased; the 								  remaining characters are downcased:				
+		3.0.0 :624 > a="good"
+		 => "good" 
+		3.0.0 :625 > a.capitalize
+		 => "Good" 
+		3.0.0 :626 > 
 		
+   ii) downcase(*options) → string -- Returns a string containing the downcased characters in self:
+		3.0.0 :627 > a="GOOD"
+		 => "GOOD" 
+		3.0.0 :628 > a.downcase
+		 => "good" 
+		 
+  iii) upcase(*options) → string - Returns a string containing the upcased characters in self:
+  		3.0.0 :629 > a="good"
+		 => "good" 
+		3.0.0 :630 > a.upcase
+		 => "GOOD" 
+		 
+  iv) swapcase(*options) → string - Returns a string containing the characters in self, with cases reversed; each uppercase character is downcased; each lowercase character is upcased:
+  
+  		3.0.0 :632 > a="GoOd"
+		 => "GoOd" 
+		3.0.0 :633 > a.swapcase
+		 => "gOoD" 
+
+  	
+
