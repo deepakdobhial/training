@@ -968,5 +968,124 @@ important note - Each of these methods modifies self.
 		3.0.0 :633 > a.swapcase
 		 => "gOoD" 
 
-  	
+5) Deletion -- 
+	i) delete([other_str]+) → new_str - Returns a copy of str with all characters in the intersection of its arguments deleted.
+								
+	    3.0.0 :642 > a="hello"
+		 => "hello" 
+		3.0.0 :643 > a.delete "l"
+		 => "heo" 
+		 
+		 
+  	    3.0.0 :644 > a.delete "l","lo"    # intersection of "l" and "lo"  (same as count)
+		 => "heo" 
+
+	ii) delete_prefix(prefix) → new_str - Returns a copy of str with leading prefix deleted.
+	
+		3.0.0 :645 > a
+		 => "hello" 
+		3.0.0 :646 > a.delete_prefix('hel')
+		 => "lo" 
+		 
+		 3.0.0 :647 > a.delete_prefix('llo')    # only delete from leading 
+ 		 => "hello"
+ 		 
+   iii) delete_suffix(suffix) → new_str -- Returns a copy of str with trailing suffix deleted.
+   
+   		3.0.0 :649 > a.delete_suffix('lo')
+		 => "hel" 
+		3.0.0 :650 > a.delete_suffix('hel')
+		 => "hello" 
+		 
+   iv) lstrip → new_str - Returns a copy of the receiver with leading whitespace removed
+   		3.0.0 :651 > a="   goood  "
+		 => "   goood  " 
+		3.0.0 :652 > a.lstrip
+		 => "goood  " 
+		 
+   v) rstrip → new_str - Returns a copy of the receiver with trailing whitespace removed 
+   		3.0.0 :653 > a
+		 => "   goood  " 
+		3.0.0 :654 > a.rstrip
+		 => "   goood" 
+
+  vi) strip → new_str - Returns a copy of the receiver with leading and trailing whitespace removed.
+     3.0.0 :655 > a
+	 => "   goood  " 
+	3.0.0 :656 > a.strip
+	 => "goood" 
+	
+  vii) chomp(separator=$/) → new_str - Returns a new String with the given record separator removed from the end of str (if present)
+   	-----given record separator removed from the end of str (if present). If $/ has not been changed from the default Ruby record 			separator, then chomp also removes carriage return characters (that is, it will remove \n, \r, and \r\n). If $/ is an empty 		string, it will remove all trailing newlines from the string.
+	
+		3.0.0 :420 > a
+		 => "hello\n\r" 
+		3.0.0 :421 > a.chomp
+		 => "hello\n"
+		  
+		 a="hello\r\n" 
+		 3.0.0 :425 > a.chomp("") ---- remove all trailing separator if end with \n
+		 => "hello" 
+
+		3.0.0 :666 > a="hello"
+		 => "hello" 
+		3.0.0 :667 > a.chomp('o')
+		 => "hell" 
+		 
+  viii) chop → new_str - Returns a new String with the last character removed. If the string ends with \r\n, both characters are removed. Applying chop to an empty string returns an empty string. String#chomp is often a safer alternative, as it leaves the string unchanged if it doesn't end in a record separator.
+  			a='hello'
+		  3.0.0 :671 > a.chop
+		 => "hell" 
+		3.0.0 :672 > a.chop.chop
+		 => "hel" 
+		 
+ix) squeeze([other_str]*) → new_str -  
+
+         3.0.0 :673 > a
+		 => "hello" 
+		3.0.0 :674 > a.squeeze
+		 => "helo" 
+		3.0.0 :675 > a
+		 => "hello"
+		 
+x)  string[index] → new_string or nil
+	string[start, length] → new_string or nil
+	string[range] → new_string or nil
+	string[regexp, capture = 0] → new_string or nil
+	string[substring] → new_string or nil  
+	
+	Returns the substring of self specified by the arguments.
+	
+	3.0.0 :679 > a="hello"
+	 => "hello" 
+	3.0.0 :680 > a[1]
+	 => "e" 
+xi)  byteslice(index, length = 1) → string or nil click to toggle source
+	 byteslice(range) → string or nil - Returns a substring of self, or nil if the substring cannot be constructed.
+	 
+	 3.0.0 :681 > s='0123456789'
+	 => "0123456789" 
+	3.0.0 :682 > s.byteslice(2)
+	 => "2" 
+	3.0.0 :683 > s.byteslice(200)
+	 => nil 
+	3.0.0 :684 > s.byteslice(4,3)
+	 => "456" 
+	3.0.0 :685 > s.byteslice(4,30)
+	 => "456789" 
+	3.0.0 :686 > s.byteslice(4,-1)
+	 => nil 
+	3.0.0 :687 > s.byteslice(40,2)
+	 => nil 
+	3.0.0 :6
+	
+xii)  chr → string click to toggle source-Returns a string containing the first character of self:
+
+	3.0.0 :691 > a
+	 => "hello" 
+	3.0.0 :692 > a.chr
+	 => "h" 
+
+	
+    
 
