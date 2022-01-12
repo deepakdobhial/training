@@ -1,0 +1,7 @@
+----------------------------------------------Array------------------------------
+ --> arrays are ordered collections of objects. They can hold objects like integer, number, hash, string, symbol or any other array. 
+ indexing - start from 0 & The negative index starts with -1 from the end of the array
+ 
+ 
+ 
+ 
