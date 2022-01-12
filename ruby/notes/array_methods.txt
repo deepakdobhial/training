@@ -299,4 +299,41 @@
 	hash → integer
 	
 	3.0.0 :195 > [0,1,2].hash
-	 => -2602957621024856705    
+	 => -2602957621024856705  
+	 
+-----------------------------------------------------------Methods for Comparing--------------------------------------
+1)array <=> other_array → -1, 0, or 1 (check each elements)   (<=> - comparison operator)
+
+	Returns -1, 0, or 1 as self is less than, equal to, or greater than other_array. For each index i in self, evaluates result = self[i] 		<=> other_array[i].
+
+	Returns -1 if any result is -1:
+	a <=> b :=
+   if a < b then return -1
+   if a = b then return  0
+   if a > b then return  1
+   if a and b are not comparable then return nil
+  
+  
+  3.0.0 :206 > [0,1,2]<=>[0,1,2]    # compare elements one by one 0=0, 1=1, 2=2   result = 0
+  => 0 
+  3.0.0 :207 > [0,1,3]<=>[0,1,2]    # 0=0, 1=1, 3>2 means a>b so result = 1
+  => 1 
+  3.0.0 :208 > [0,1,3]<=>[0,1,4]    # 0=0, 1=1, 3<4 means a<b so result = -1
+  => -1 
+  3.0.0 :209 > [0,1,2]<=>[0,2,1]    # 0=0, 1<2 means a<b  so return -1
+  => -1 
+  
+2) array == other_array → true or false 
+
+	Returns true if both array.size == other_array.size and for each index i in array, array[i] == other_array[i]
+	
+	3.0.0 :215 > [0,1,2]==[0,1.0,2.0]   # each elements and size equal   in ruby 2 and 2.0 are equal
+ 	=> true 
+    3.0.0 :216 > [0]==[1]
+ 	=> false 
+3) eql?() is a Array class method which checks if the two arrays are equal or not. 
+	
+	3.0.0 :219 > [0,1,2].eql?([0,1,2])     # true if elements and size are equal. 
+    => true 
+
+  
