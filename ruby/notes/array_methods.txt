@@ -73,4 +73,230 @@
 			3.0.0 :059 > even.at(3)
 			 => 6 
 
+ -------------------------------------------------Methods for Creating an Array-------------------------------------------------
  
+ 1) [](*args) - Returns a new array populated with the given objects.
+ 	
+ 		3.0.0 :061 > arr=Array.[](1,'a','A')
+ 		=> [1, "a", "A"] 
+ 		
+ 2)  new → new_empty_array
+	new(array) → new_array
+	new(size) → new_array
+	new(size, default_value) → new_array
+	new(size) {|index| ... } → new_array -   Returns a new Array
+	
+
+3) try_convert(object) → object, new_array, or nil - If object is an Array object, returns object
+
+	
+	
+----------------------------------------------------Methods for Querying-----------------------------------------------------------
+1)  length → an_integer - Returns the count of elements in self.
+		
+			3.0.0 :077 > a
+			 => [5, 4] 
+			3.0.0 :078 > a.length
+			 => 2 
+2) size - Alias of length  
+		3.0.0 :079 > a.size
+ 		=> 2 
+ 		
+3)  include?(obj) → true or false -- Returns true if for some index i in self, obj == self[i]; otherwise false:
+
+
+		3.0.0 :090 > a=Array(0..5)
+		 => [0, 1, 2, 3, 4, 5] 
+		3.0.0 :091 > a.include?(5)
+		 => true 
+		3.0.0 :092 > a.include?(6)
+		 => false 
+		 
+4)  empty? → true or false --Returns true if the count of elements in self is zero, false otherwise.
+
+		3.0.0 :093 > a.empty?
+		 => false 
+		3.0.0 :094 > b=Array.new
+		 => [] 
+		3.0.0 :095 > b.empty?
+		 => true 
+5)  all? → true or false 
+	all? {|element| ... } → true or false
+	all?(obj) → true or false-----Returns true if all elements of self meet a given criterion.
+
+	3.0.0 :098 > a
+	 => [0, 1, 2, 3, 4, 5] 
+	3.0.0 :099 > a.all?
+	 => true 
+	3.0.0 :100 > b
+	 => [] 
+	3.0.0 :101 > b.all?
+	 => true 
+	 3.0.0 :106 > c
+	 => ["a", nil] 
+	3.0.0 :107 > c.all?
+	 => false 
+	3.0.0 :108 > [0, 1, 2].all? { |element| element < 3 }
+	 => true 
+	3.0.0 :109 > [0, 1, 2].all? { |element| element < 2 }
+	 => false 
+	 3.0.0 :114 > d=['ab','abc','abcd']
+	 => ["ab", "abc", "abcd"] 
+	3.0.0 :115 > d.all?(/ab/)
+	 => true 
+	3.0.0 :116 > d.all?(/abc/)
+	 => false 
+
+6)  any? → true or false 
+	any? {|element| ... } → true or false
+	any?(obj) → true or false--- Returns true if any element of self meets a given criterion.
+	
+	----> With no block given and no argument, returns true if self has any truthy element, false otherwise:
+	
+	3.0.0 :126 > a
+	 => [0, 1, 2, 3, 4, 5] 
+	3.0.0 :127 > a.any?
+	 => true 
+	3.0.0 :128 > b
+	 => [] 
+	3.0.0 :129 > b.any?
+	 => false 
+	3.0.0 :130 > c
+	 => ["a", nil] 
+	3.0.0 :131 > c.any?
+	 => true 
+	 
+
+7)  none- is a Array class method which checks whether the array is empty or not.
+	none? → true or false 
+	none? {|element| ... } → true or false
+	none?(obj) → true or false
+
+	Returns true if no element of self meet a given criterion.
+
+	With no block given and no argument, returns true if self has no truthy elements, false otherwise: 
+	
+	3.0.0 :141 > [nil].none?
+	 => true 
+	3.0.0 :142 > [false].none?
+	 => true 
+	3.0.0 :143 > [].none?
+	 => true 
+	3.0.0 :144 > [1].none?
+	 => false 
+	3.0.0 :146 > [0,1,2].none? {|element| element>3}
+	 => true 
+	 3.0.0 :146 > [0,1,2].none? {|element| element>3}
+	 => true 
+	3.0.0 :147 > [0,1,2].none? {|element| element>2}
+	 => true 
+	3.0.0 :148 > [0,1,2].none? {|element| element>1}
+	 => false 
+	 3.0.0 :149 > [0,1,2].none?(3)
+ 	=> true 
+	3.0.0 :150 > [0,1,2].none?(2)
+ 	=> false 
+ 	
+ 8) one? - Array class method which checks whether the array is having only one array element
+ 
+ 	 one? → true or false 
+	one? {|element| ... } → true or false
+	one?(obj) → true or false 
+	
+	Returns true if exactly one element of self meets a given criterion.
+	With no block given and no argument, returns true if self has exactly one truthy element, false otherwise:
+	
+	
+	3.0.0 :156 > c                            # nil don't consider as a element
+	 => ["a", nil] 
+	3.0.0 :157 > c.one?
+ 	=> true 
+	3.0.0 :159 > [0,1,2].one? {|element| element>2}
+	 => false 
+	3.0.0 :160 > [0,1,2].one? {|element| element>1}
+	 => true 
+	3.0.0 :161 > [false].one?
+	 => false 
+	3.0.0 :162 > [nil,0].one?
+	 => true 
+	3.0.0 :163 > [0,0].one?
+	 => false 
+	3.0.0 :164 > [nil,nil].one?                   
+	 => false 
+	3.0.0 :165 > [].one?
+	 => false 
+	3.0.0 :166 > [0,1,2].one?(0)
+	 => true 
+	3.0.0 :167 > [0,1,2].one?(1)
+	 => true 
+	3.0.0 :168 > [0,1,2].one?(2)
+	 => true 
+	3.0.0 :169 > [0,1,2,2].one?(2)
+	 => false 
+	3.0.0 :170 > [0,1,2,2].one?(3)
+	 => false 
+	
+9) count - count() is a Array class method which returns the number of elements in the array. It can also find the total number of a 			   particular element in the array.	
+
+ 	count → an_integer 
+	count(obj) → an_integer
+	count {|element| ... } → an_integer 
+	
+	3.0.0 :171 > [0,1,2,4].count
+	 => 4 
+	3.0.0 :172 > [].count
+	 => 0 
+	3.0.0 :173 > [0,1,2,2].count(2)
+	 => 2 
+	3.0.0 :174 > [0,1,2,3].count {|element| element>3}
+	 => 0 
+	3.0.0 :175 > [0,1,2,3].count {|element| element>1}
+	 => 2 
+
+10) index() or find_index() is an Array class method which returns the index of the first object in the array.
+
+	 index(object) → integer or nil click to toggle source
+	index {|element| ... } → integer or nil
+	index → new_enumerator 		
+	
+	3.0.0 :176 > [0,1,2,4].index(5)
+	 => nil 
+	3.0.0 :177 > [0,1,2,4].index(4)
+	 => 3 
+	3.0.0 :178 > [0,1,2,3].index {|element| element == 3}
+	 => 3 
+	3.0.0 :179 > [0,1,2,3].index {|element| element == 2}
+	 => 2 
+
+	3.0.0 :181 > a=[0,1,2].index
+	 => #<Enumerator: [0, 1, 2]:index> 
+	3.0.0 :182 > a.each {|element| element == 3 }
+	 => nil 
+	3.0.0 :183 > a.each {|element| element == 2 }
+	 => 2 
+	3.0.0 :184 > 
+	
+11) rindex() is a Array class method which returns the index of the last object in the array.
+	rindex(object) → integer or nil
+	rindex {|element| ... } → integer or nil
+	rindex → new_enumerator 
+	
+	3.0.0 :187 > [0,1,0,1,2].rindex(0)
+	 => 2 
+	3.0.0 :188 > [0,1,0,1,2].rindex(1)
+	 => 3 
+
+	3.0.0 :189 > [0,1,0,1,2].rindex {|element| element==0}
+ 	=> 2 
+	3.0.0 :190 > [0,1,0,1,2].rindex {|element| element==1}
+ 	=> 3 
+	3.0.0 :193 > a.each {|element| element==1}
+ 	=> 3 
+	3.0.0 :194 > a.each {|element| element==0}
+	 => 2 
+12) hash() is an Array class method which returns the hash code of the array elements--
+
+	hash → integer
+	
+	3.0.0 :195 > [0,1,2].hash
+	 => -2602957621024856705    
