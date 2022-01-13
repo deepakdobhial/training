@@ -336,4 +336,428 @@
 	3.0.0 :219 > [0,1,2].eql?([0,1,2])     # true if elements and size are equal. 
     => true 
 
+ -----------------------------------------------------Methods for Fetching-------------------------------------------
+1)  array[index] → object or nil
+	array[start, length] → object or nil
+	array[range] → object or nil
+	array[aseq] → object or nil    # aseq = Enumerator::ArithmeticSequence
+	 
+ 
+ 	3.0.0 :220 > a=[1,2,'a',3,'d']
+	 => [1, 2, "a", 3, "d"] 
+	3.0.0 :221 > a[(1..).step(2)]
+	 => [2, 3] 
+	3.0.0 :222 > a[(0..).step(2)]
+	 => [1, "a", "d"] 
+	3.0.0 :223 > a[(0..).step(2)]
+
+2) fetch() is a Array class method which returns the element at the argument index position. 
+	
+	fetch(index) → element 
+	fetch(index, default_value) → element    # return index element if index in range else return default value
+	fetch(index) {|index| ... } → element   
+ 
+ 	3.0.0 :225 > a
+	 => [1, 2, "a", 3, "d"] 
+	3.0.0 :226 > a.fetch(2)
+	 => "a" 
+	3.0.0 :227 > a.fetch(5,'k')
+	 => "k" 
+	3.0.0 :228 > a
+	 => [1, 2, "a", 3, "d"] 
+	3.0.0 :229 > a.fetch(2,'k')
+	 => "a"
+	 3.0.0 :007 > a.fetch(2) {|element| "Out of index"}
+	 => "b" 
+	3.0.0 :008 > a.fetch(5) {|element| "Out of index"}
+	 => "Out of index" 
+
+ 
+3) first() is a Array class method which returns the first element of the array or the first ‘n’ elements from the array.
+   
+    first → object or nil 
+	first(n) → new_array
+
+	Returns elements from self; does not modify self. When no argument is given, returns the first element: 
+ 	3.0.0 :009 > a
+	 => ["a", 1, "b", 3] 
+	3.0.0 :010 > a.first
+	 => "a" 
+	3.0.0 :011 > a.first(3)
+	 => ["a", 1, "b"] 
+	3.0.0 :012 > a.first(6)
+	 => ["a", 1, "b", 3] 
+	3.0.0 :013 > a.first(0)
+	 => [] 
+ 
+ 4) last() is a Array class method which returns the last element of the array or the last ‘n’ elements from the array. The first form returns nil, If the array is empty .
+ 
+    last → object or nil 
+	last(n) → new_array
+
+	Returns elements from self; self is not modified. When no argument is given, returns the last element:
+	
+	3.0.0 :014 > a
+	 => ["a", 1, "b", 3] 
+	3.0.0 :015 > a.last
+	 => 3 
+	3.0.0 :016 > a.last(2)
+	 => ["b", 3] 
+	3.0.0 :017 > a.last(6)
+	 => ["a", 1, "b", 3] 
+	3.0.0 :018 > a.last(0)
+	 => [] 
+
+5) max() is a Array class method which returns the maximum value in this array. ( Only perform Numeric values)
+
+	max → element
+		3.0.0 :002 > a.max
+ 		=> "e" 
+ 		
+	max {|a, b| ... } → element               
+	3.0.0 :012 > a=['a',5]
+	 => ["a", 5] 
+	3.0.0 :013 > a.max {|a,b| a.size<=>b.size}              #compare bytes occupied by each element
+ 	=> 5 
+
+	
+	max(n) → new_array
+		3.0.0 :003 > a.max(2)
+ 		=> ["e", "d"] 
+	
+	max(n) {|a, b| ... } → new_array 
+	3.0.0 :014 > a=['a',5,'c',10]
+	 => ["a", 5, "c", 10] 
+	3.0.0 :015 > a.max(2) {|a,b| a.size<=>b.size}
+	 => [10, 5] 
+
+6)  min() is a Array class method which returns the minimum value in this array.
+
+	3.0.0 :019 > a=[1,5,4,9,8]
+ => [1, 5, 4, 9, 8] 
+ 
+	 min → element 
+	3.0.0 :020 > a.min
+	 => 1 
+
+	min(n) → new_array
+	3.0.0 :021 > a.min(3)
+	 => [1, 4, 5]
+
+	3.0.0 :022 > a=['a',1,'b',10]
+	 => ["a", 1, "b", 10]
+ 
+ 	min { |a, b| ... } → element
+ 	3.0.0 :023 > a.min {|a,b| a.size<=>b.size}
+ 	=> "a" 
+
+	min(n) { |a, b| ... } → new_array
+	3.0.0 :024 > a.min(2) {|a,b| a.size<=>b.size}
+	 => ["a", "b"] 
+ 
+
+7) The minmax() - returns an array containing two elements. It contains the minimum and the maximum value in the array.
+
+-->	 minmax → [min_val, max_val]
+	3.0.0 :028 > a
+ 	=> [1, 4, 3, 2, 5, 9]
+ 	3.0.0 :029 > a.minmax
+	=> [1, 9] 
+	
+-->	 minmax {|a, b| ... } → [min_val, max_val]
+	3.0.0 :037 > a
+	 => ["a", "b", 5, 6, 7] 
+	3.0.0 :038 > a.minmax {|a,b| a.size<=>b.size}
+ 	=> ["a", 5] 
+ 	
+ 8) The assoc() function in Ruby is used to search through an array of arrays whose first element is compared with the parameter of the 				function and return the contained array if match found otherwise return either nil or vacant.
+ 
+     Syntax: Array.assoc(Object)
+    Here Array is the array of arrays.
+
+    Parameters:
+    Object : It is an element which gets compared with the first element of the contained array.
+
+    Returns: the contained array if match found otherwise returns either nil or vacant.	
+    
+    3.0.0 :040 > a=[[1,2,3],[5,6,7],[8,9,10]]
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :041 > a.assoc(5)
+	 => [5, 6, 7] 
+	3.0.0 :042 > a.assoc(8)
+	 => [8, 9, 10] 
+	3.0.0 :043 > a.assoc(9)
+	 => nil
+    
+9) rassoc(obj) → found_array or nil 
+
+	Syntax: Array.rassoc(Object)
+    Here Array is the array of arrays.
+
+    Parameters:
+    Object : It is an element which gets compared with the second element of the contained array.
+
+    Returns: the contained array if match found otherwise returns either nil or vacant.	
   
+  	3.0.0 :047 > a
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :048 > a.rassoc(1)
+	 => nil 
+	3.0.0 :049 > a.rassoc(2)
+	 => [1, 2, 3] 
+	3.0.0 :050 > a.rassoc(6)
+	 => [5, 6, 7] 
+	3.0.0 :051 > a.rassoc(9)
+	 => [8, 9, 10] 
+	3.0.0 :052 > a.rassoc(10)
+	 => nil 
+	 
+10) at()- is an Array class method which returns the element at the specific argumented index value. 
+
+ 	Syntax:  Array.at()
+
+	Parameter: 
+		- index to search
+
+	Return:  Array element at a specific index value
+	
+	3.0.0 :060 > a
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :061 > a.at(0)
+	 => [1, 2, 3] 
+	3.0.0 :062 > a.at(1)
+	 => [5, 6, 7] 
+	3.0.0 :063 > a.at(2)
+	 => [8, 9, 10] 
+
+11) values_at() is a Array class method which returns an array containing the elements in self corresponding to the given selector. (index)
+
+--> values_at(*indexes) → new_array
+
+	i) For each positive index, returns the element at offset index:
+		3.0.0 :066 > a
+ 		=> [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+		3.0.0 :067 > a.values_at(1,2)
+		 => [[5, 6, 7], [8, 9, 10]] 
+		3.0.0 :068 > a.values_at(0..1)
+		 => [[1, 2, 3], [5, 6, 7]] 
+		 
+   ii) The given indexes may be in any order, and may repeat:
+   		3.0.0 :071 > a
+ 		=> [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+		3.0.0 :072 > a.values_at(1,2,1)
+		 => [[5, 6, 7], [8, 9, 10], [5, 6, 7]] 
+		3.0.0 :073 > a.values_at(1,1..2)
+		 => [[5, 6, 7], [5, 6, 7], [8, 9, 10]] 
+		 
+   iii) Assigns nil for an index that is too large or too small: 
+   		3.0.0 :075 > a.values_at(1,2,3)
+		 => [[5, 6, 7], [8, 9, 10], nil] 
+		 
+		 3.0.0 :077 > a.values_at(1,-5)
+ 		 => [[5, 6, 7], nil] 
+		 
+	iv) Returns a new empty Array if no arguments given 
+		3.0.0 :076 > a.values_at
+		 => [] 
+
+12) dig() is a Array class method which extracts the specific element out of the high dimension sequences. (nested array elements)
+--> dig(index, *identifiers) → object                                   (equal to python nested list[0][1])
+	
+	3.0.0 :078 > a
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :079 > a.dig(0,2)                       
+	 => 3 
+	3.0.0 :080 > a.dig(1,2)
+ 	=> 7 
+
+13) drop() is a Array class method which drops first ‘n’ elements from the array and returns the remaining elements (does not modify self)
+--> drop(n) → new_array  # 'n' - no. of elements to drop.
+
+	3.0.0 :081 > a
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :082 > a.drop(2)                      # drop first two elements
+	 => [[8, 9, 10]] 
+	3.0.0 :083 > a.drop(1)
+	 => [[5, 6, 7], [8, 9, 10]] 			   # drop first element	
+	3.0.0 :084 > a                           # does not modify self
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+
+14) take() is a Array class method which returns the number of elements in the array. (does not modify self)
+--> take(n) → new_array # 
+
+	3.0.0 :085 > a                                   # does not modify self
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :086 > a.take(3)
+	 => [[1, 2, 3], [5, 6, 7], [8, 9, 10]] 
+	3.0.0 :087 > a.take(2)
+	 => [[1, 2, 3], [5, 6, 7]] 
+	3.0.0 :088 > a.take(1)
+	 => [[1, 2, 3]] 
+	3.0.0 :089 > a.take(0)
+	 => [] 
+
+15) The drop_while()- returns an array containing the rest elements after dropping elements upto, but not including, the first element 						  for which the block returns nil or false. In case no block is given it returns the enumerator instead.
+
+-->  drop_while {|element| ... } → new_array
+		3.0.0 :103 > a
+		 => [[1, 2, 3, 3], [5, 6, 7, 3], [8, 9, 10, 3]] 
+		3.0.0 :104 > a.at(0)
+		 => [1, 2, 3, 3] 
+		3.0.0 :105 > a.at(0).drop_while {|element| element<3}
+		 => [3, 3] 
+		3.0.0 :106 > a.at(0).drop_while {|element| element<2}
+		 => [2, 3, 3] 
+		3.0.0 :107 > 
+
+-->  drop_while → new_enumerator 
+	3.0.0 :107 > a.drop_while
+ 	=> #<Enumerator: [[1, 2, 3, 3], [5, 6, 7, 3], [8, 9, 10, 3]]:drop_while> 
+	
+16) take_while() is a Array class method which returns elements to the block until the block returns nil or false. (does not modify self.)
+
+-->  take_while {|element| ... } → new_array 
+	3.0.0 :111 > a
+	 => [[1, 2, 3, 3], [5, 6, 7, 3], [8, 9, 10, 3]] 
+	3.0.0 :112 > a.at(0).take_while {|element| element<3}
+	 => [1, 2] 
+
+-->  take_while → new_enumerator 
+     3.0.0 :113 > a.take_while
+ 	=> #<Enumerator: [[1, 2, 3, 3], [5, 6, 7, 3], [8, 9, 10, 3]]:take_while> 
+ 	
+17) slice() is a Array class method which returns a subarray specified by range of indices. 
+-->   slice(index) → object or nil
+	  3.0.0 :114 > a
+	  => [[1, 2, 3, 3], [5, 6, 7, 3], [8, 9, 10, 3]] 
+	  3.0.0 :115 > a.slice(2)								# 2 is index no.
+	  => [8, 9, 10, 3] 
+
+	slice(start, length) → object or nil
+	3.0.0 :117 > a.slice(1,2)
+	 => [[5, 6, 7, 3], [8, 9, 10, 3]] 
+
+	slice(range) → object or nil
+	3.0.0 :118 > a.slice(1...2)
+ 	=> [[5, 6, 7, 3]] 
+
+18) sort() is a Array class method which returns a new array created by sorting self 
+-->   sort → new_array 
+	3.0.0 :132 > a=[5,4,8,7,9]
+	 => [5, 4, 8, 7, 9] 
+	3.0.0 :133 > a.sort
+	 => [4, 5, 7, 8, 9] 
+	3.0.0 :134 > a                   # does not modify self
+	 => [5, 4, 8, 7, 9] 
+       
+-->  sort {|a, b| ... } → new_array 
+		#reverse sort array
+	3.0.0 :135 > a
+	 => [5, 4, 8, 7, 9] 
+	3.0.0 :136 > a.sort {|a,b| b<=>a}
+	 => [9, 8, 7, 5, 4] 
+			
+19)reverse() is a Array class method which returns a new array containing self’s elements in reverse order.
+-->  reverse → new_array
+
+	3.0.0 :139 > a=[1,5,3,8]
+	 => [1, 5, 3, 8] 
+	3.0.0 :140 > a.reverse
+	 => [8, 3, 5, 1] 
+	3.0.0 :141 > a                           # does not modify self
+	 => [1, 5, 3, 8] 
+	
+20) compact () is a Array class method which returns the array after removing all the ‘nil’ value elements (if any) from the array
+--> compact → new_array 
+
+	3.0.0 :142 > a = [nil, 0, nil, 1, nil, 2, nil]
+	 => [nil, 0, nil, 1, nil, 2, nil] 
+	3.0.0 :143 > a.compact
+	 => [0, 1, 2] 
+	 
+21) select() or filter() is a Array class method which returns a new array containing all elements of array for which the given block returns a true value
+-->   select {|element| ... } → new_array
+	3.0.0 :145 > a=[5,7,6,3,9,5]              # does not modify self
+	 => [5, 7, 6, 3, 9, 5] 
+	3.0.0 :146 > a.select {|element| element>6}
+	 => [7, 9] 
+
+-->   select → new_enumerator 
+	3.0.0 :147 > a.select
+ 	=> #<Enumerator: [5, 7, 6, 3, 9, 5]:select> 
+
+--> filter()
+
+	3.0.0 :148 > a
+	 => [5, 7, 6, 3, 9, 5] 
+	3.0.0 :149 > a.filter {|element| element>5}
+	 => [7, 6, 9] 
+
+22) uniq() is a Array class method which returns a new array by removing duplicate values in the array.	
+-->  uniq → new_array
+	3.0.0 :150 > a=['a','b',1,2,1,2,'a']
+	 => ["a", "b", 1, 2, 1, 2, "a"] 
+	3.0.0 :151 > a.uniq
+	 => ["a", "b", 1, 2] 
+
+-->	 uniq {|element| ... } → new_array 
+	3.0.0 :152 > a.uniq {|element| element.size}
+	 => ["a", 1] 
+	
+23) rotate() is a Array class method which returns a new array by rotating self so that the element at count is the first element of the 				new array.
+-->  rotate → new_array             # first element has been rotated to the last position
+	3.0.0 :156 > a
+	 => ["a", "b", 1, 2, 1, 2, "a"] 
+	3.0.0 :157 > a.rotate
+	 => ["b", 1, 2, 1, 2, "a", "a"] 
+	3.0.0 :158 > a.rotate.rotate
+	 => [1, 2, 1, 2, "a", "a", "b"] 
+	3.0.0 :159 > a.rotate.rotate.rotate
+	 => [2, 1, 2, "a", "a", "b", 1] 
+	
+-->  rotate(count) → new_array   # returns a new Array with count elements(from first) rotated from the beginning to the end:
+	3.0.0 :160 > a
+	 => ["a", "b", 1, 2, 1, 2, "a"] 
+	3.0.0 :161 > a.rotate(3)                 # first 3 elements has been rotated to the last position
+ 	=> [2, 1, 2, "a", "a", "b", 1] 
+
+24)  bsearch() is an Array class method which finds a value from the array that meets with the given condition. It’s complexity is O(log 					n) where n is the array size. This method can work in both the modes – find-minimum and find-any mode.
+
+-->  bsearch {|element| ... } → object
+	3.0.0 :171 > a
+	 => [5, 9, 6, 4, 4] 
+	3.0.0 :174 > a.bsearch{|element| element<7}  # return first element which meet condition
+	 => 6 
+
+-->  bsearch → new_enumerator 
+	3.0.0 :175 > a.bsearch
+	 => #<Enumerator: [5, 9, 6, 4, 4]:bsearch> 
+
+25) bsearch_index() is an Array class method which finds the index of the array value that meets with the given condition. Its complexity is O(log n) where n is the array size. This method can work in both the modes – find-minimum and find-any mode.
+
+-->  bsearch_index {|element| ... } → integer
+	3.0.0 :193 > a
+	 => [5, 9, 6, 4, 4] 
+	3.0.0 :194 > a.bsearch_index {|element| element>=4}
+	 => 0 
+	3.0.0 :195 > a.bsearch_index {|element| element>4}
+	 => 0 
+	3.0.0 :196 > a.bsearch_index {|element| element>5}
+	 => 1 
+ 
+-->  bsearch_index → new_enumerator 
+ 	3.0.0 :197 > a.bsearch_index
+ 	=> #<Enumerator: [5, 9, 6, 4, 4]:bsearch_index> 
+ 	
+26) sample() is a Array class method which returns a random element or n random elements from the array.
+--> sample(random: Random) → object
+	3.0.0 :199 > a.sample
+	 => 4 
+--> sample(n, random: Random) → new_ary 
+	3.0.0 :200 > a.sample(5)
+ 	=> [9, 6, 4, 5, 4] 
+	3.0.0 :201 > a.sample(4)
+	 => [4, 4, 5, 9] 
+
+
+	
