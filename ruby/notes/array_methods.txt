@@ -758,6 +758,222 @@
  	=> [9, 6, 4, 5, 4] 
 	3.0.0 :201 > a.sample(4)
 	 => [4, 4, 5, 9] 
+	 
+27) shuffle() is a Array class method which returns a new array with elements of self shuffle.
+
+--> shuffle[random: Random] → new_ary
+	3.0.0 :206 > a
+	 => [5, 9, 6, 4, 4] 
+	3.0.0 :207 > a.shuffle
+	 => [9, 4, 6, 4, 5] 
+
+-------------------------------------------------------Methods for Assigning---------------------------------------------------------
+Note --- These methods add, replace, or reorder elements in self.
+
+1)  array[index] = object → object  (Return given object and modify self)
+	3.0.0 :210 > a
+	 => [5, 9, 6, 4, 4] 
+	3.0.0 :211 > a[2]=20
+	 => 20 
+	3.0.0 :212 > a
+	 => [5, 9, 20, 4, 4] 
+
+-->	array[start, length] = object → object
+	3.0.0 :213 > a
+	 => [5, 9, 20, 4, 4] 
+	3.0.0 :214 > a[2,2]=[20,10]
+	 => [20, 10] 
+	3.0.0 :215 > a
+	 => [5, 9, 20, 10, 4] 
+	
+-->	array[range] = object → object
+ 	 3.0.0 :217 > a
+	 => [5, 9, 20, 10, 4] 
+	3.0.0 :218 > a[1..3]=[5]
+ 	=> [5] 
+	3.0.0 :219 > a
+	 => [5, 5, 4] 
+
+2) The push() function in Ruby is used to push the given element at the end of the given array and returns the array itself with the pushed elements.
+--> push(*objects) → self   (return self array)
+	3.0.0 :220 > a
+	 => [5, 5, 4] 
+	3.0.0 :221 > a.push(5,20)
+	 => [5, 5, 4, 5, 20] 
+
+2) append() is an Array class method which add elements at the end of the array. (same as push)
+--> append(*args) - return self
+	3.0.0 :223 > a.append(2,5)
+ 	=> [5, 5, 4, 5, 20, 2, 5] 
+	3.0.0 :224 > a.append([10,15])
+ 	=> [5, 5, 4, 5, 20, 2, 5, [10, 15]] 
+
+3) array << object → self 
+	3.0.0 :228 > a<<1000
+	 => [5, 5, 4, 5, 20, 2, 5, [10, 15], 1000] 
+	3.0.0 :229 > a<<[2,63]
+	 => [5, 5, 4, 5, 20, 2, 5, [10, 15], 1000, [2, 63]] 
+	3.0.0 :230 > a<<'a'
+ 	=> [5, 5, 4, 5, 20, 2, 5, [10, 15], 1000, [2, 63], "a"] 
+	3.0.0 :231 > a
+ 	=> [5, 5, 4, 5, 20, 2, 5, [10, 15], 1000, [2, 63], "a"] 
+ 
+4) unshift() is a Array class method which returns the shifted array with argumented element in place.
+
+--> unshift(*objects) → self    # insert object at first position
+	3.0.0 :232 > a=[5,4,8,6]
+	 => [5, 4, 8, 6] 
+	3.0.0 :233 > a.unshift(2)
+	 => [2, 5, 4, 8, 6] 
+	3.0.0 :234?> a.unshift([2,8])
+	 => [[2, 8], 2, 5, 4, 8, 6] 
+
+5) prepend(*args) - alias of unshift
+	3.0.0 :235 > a
+ 	=> [[2, 8], 2, 5, 4, 8, 6] 
+	3.0.0 :236 > a.prepend(5,10)
+ 	=> [5, 10, [2, 8], 2, 5, 4, 8, 6] 
+ 	
+6) insert() is a Array class method which returns the array by inserting a given element at the specified index value. 
+
+--> insert(index, *objects) → self 
+	3.0.0 :238 > a=[1,3,5,7,11,13]
+	 => [1, 3, 5, 7, 11, 13] 
+	3.0.0 :239 > a.insert(3,9)
+	 => [1, 3, 5, 9, 7, 11, 13] 
+	 
+7) concat() is a Array class method which returns the array after appending the two arrays together. (add other array elements in self)
+
+--> concat(*other_arrays) → self 
+	3.0.0 :241 > a=[1,2,3]
+	 => [1, 2, 3] 
+	3.0.0 :242 > a.concat([5,6,7],[8,9,10])
+	 => [1, 2, 3, 5, 6, 7, 8, 9, 10] 
+	3.0.0 :243 > a
+ 	=> [1, 2, 3, 5, 6, 7, 8, 9, 10] 
+ 	
+8) fill() is a Array class method which fills the array with the element and that can be in a specific range.
+			fill elements at all position if not range passed 
+
+-->	 fill(obj) → self   # fill object at all position
+	3.0.0 :251 > a=[1,2]
+ 	=> [1, 2] 
+	3.0.0 :252 > a.fill(3)
+ 	=> [3, 3] 
+
+-->	fill(obj, start) → self    # fill object at all position from given starting position 
+	3.0.0 :253 > a
+	 => [3, 3] 
+	3.0.0 :254 > a=[1,2,3,4]
+ 	=> [1, 2, 3, 4] 
+	3.0.0 :255 > a.fill(7,1)
+	 => [1, 7, 7, 7] 
+
+-->	fill(obj, start, length) → self    # fill obj from given start position and length
+	3.0.0 :259 > a=[2,5,7,4,5]
+ 	=> [2, 5, 7, 4, 5] 
+	3.0.0 :260 > a.fill(100,2,2)
+ 	=> [2, 5, 100, 100, 5] 
+
+
+-->	fill(obj, range) → self
+   3.0.0 :261 > a
+	 => [2, 5, 100, 100, 5] 
+	3.0.0 :262 > a.fill(500,1..3)
+ 	=> [2, 500, 500, 500, 5] 
+
+-->	fill {|index| ... } → self
+
+--> fill(start) {|index| ... } → self
+
+-->	fill(start, length) {|index| ... } → self
+-->	fill(range) {|index| ... } → self 
+
+9. replace() is a Array class method which returns an array of all combinations of elements from all arrays.
+ 
+--> replace(other_array) → self
+	3.0.0 :265 > a
+	 => [2, 500, 500, 500, 5] 
+	3.0.0 :266 > a.replace([5,10])
+ 	=> [5, 10] 
+	3.0.0 :267 > a
+	 => [5, 10] 
+
+10) reverse() is a Array class method which returns a new array containing self’s elements in reverse order.
+
+--> reverse! → self
+	3.0.0 :268 > a
+ 	=> [5, 10] 
+	3.0.0 :269 > a.reverse!
+	 => [10, 5] 
+	3.0.0 :270 > a
+	 => [10, 5] 
+
+11) rotate!() is a Array class method which returns self rotated in place so that the element at count comes first, and returns self.
+
+--> rotate! → self
+	3.0.0 :274 > a=[5,10,15,20]
+	 => [5, 10, 15, 20] 
+	3.0.0 :275 > a.rotate!
+	 => [10, 15, 20, 5] 
+	3.0.0 :276 > a
+	 => [10, 15, 20, 5] 
+
+
+--> rotate!(count) → self 
+	3.0.0 :277 > a
+	 => [10, 15, 20, 5] 
+	3.0.0 :278 > a.rotate!(2)
+ 	=> [20, 5, 10, 15] 
+ 	
+ 	3.0.0 :280 > a
+	=> [20, 5, 10, 15] 
+	3.0.0 :281 > a.rotate!(-2)       # When given a negative Integer count, rotates in the opposite direction, from end to beginning
+	 => [10, 15, 20, 5] 
+
+12) shuffle!() is a Array class method which shuffles elements in self in place. 
+--> shuffle!(random: Random) → array
+	3.0.0 :282 > a
+	 => [10, 15, 20, 5] 
+	3.0.0 :283 > a.shuffle!
+	 => [10, 20, 15, 5] 
+	3.0.0 :284 > a
+	 => [10, 20, 15, 5] 
+	
+13) sort!() is a Array class method which returns sorted self array in place. 
+-->	 sort! → self 
+	3.0.0 :285 > a
+	 => [10, 20, 15, 5] 
+	3.0.0 :286 > a.sort!
+	 => [5, 10, 15, 20] 
+	3.0.0 :287 > a
+	 => [5, 10, 15, 20] 
+
+-->	sort! {|a, b| ... } → self 
+	
+	3.0.0 :289 > a=[5,2,8,4,9,6]
+	 => [5, 2, 8, 4, 9, 6] 
+	3.0.0 :290 > a.sort! {|a,b| b<=>a}          # reverse sorting
+	 => [9, 8, 6, 5, 4, 2] 
+	3.0.0 :291 > a
+	 => [9, 8, 6, 5, 4, 2] 
+
+14) sort_by!() is a Array class method which returns the enumerator for the sorted array.
+
+--> sort_by! {|element| ... } → self
+	3.0.0 :294 > a=['a','aaaa','aa','aaaaa','aaa']
+	 => ["a", "aaaa", "aa", "aaaaa", "aaa"] 
+	3.0.0 :295 > a.sort_by! {|element| element.size}
+	 => ["a", "aa", "aaa", "aaaa", "aaaaa"] 
+	3.0.0 :296 > a
+	 => ["a", "aa", "aaa", "aaaa", "aaaaa"] 
+	3.0.0 :297 > 
+
+
+--> sort_by! → new_enumerator 
+	3.0.0 :297 > a.sort_by!
+	 => #<Enumerator: ["a", "aa", "aaa", "aaaa", "aaaaa"]:sort_by!> 
+
 
 
 	
