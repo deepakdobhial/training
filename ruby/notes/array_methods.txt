@@ -975,5 +975,210 @@ Note --- These methods add, replace, or reorder elements in self.
 	 => #<Enumerator: ["a", "aa", "aaa", "aaaa", "aaaaa"]:sort_by!> 
 
 
+-----------------------------------------------------Methods for Deleting--------------------------------------------
+Note -------Each of these methods removes elements from self: 
 
+1) pop() is a Array class method which checks removes the last element from the array and returns it.
+--> pop → object or nil   # return pop element
+	3.0.0 :301 > a=[5,4,7,8]
+	 => [5, 4, 7, 8] 
+	3.0.0 :302 > a.pop
+	 => 8 
+	3.0.0 :303 > a
+	 => [5, 4, 7] 
+
+--> pop(n) → new_array 
+	3.0.0 :304 > a
+	 => [5, 4, 7] 
+	3.0.0 :305 > a.pop(2)       # pop last two elements
+	 => [4, 7] 
+	3.0.0 :306 > a
+	 => [5] 
+
+2) shift() is a Array class method which removes the first element of self and returns it or nil if the array is empty.
+
+--> shift → object or nil
+	3.0.0 :312 > a=[5,4,7,2,1]
+	 => [5, 4, 7, 2, 1] 
+	3.0.0 :313 > a.shift
+	 => 5 
+	3.0.0 :314 > a
+	 => [4, 7, 2, 1] 
+
+--> shift(n) → new_array 
+	3.0.0 :315 > a
+	 => [4, 7, 2, 1] 
+	3.0.0 :316 > a.shift(2)
+	 => [4, 7] 
+	3.0.0 :317 > a
+	 => [2, 1] 
+
+3) compact! () is a Array class method which returns the array after removing all the ‘nil’ value elements (if any) from the array. If 					there are no nil values in the array it returns back the nil value.
+
+--> compact! → self or nil      # return self if nil values else return nil
+	3.0.0 :321 > a=[5,nil,nil,5,5]
+	 => [5, nil, nil, 5, 5] 
+	3.0.0 :322 > a.compact!
+	 => [5, 5, 5] 
+	3.0.0 :323 > a
+	 => [5, 5, 5] 
+
+4) delete() is a Array class method which returns the array after deleting the mentioned elements. It can also delete a particular 				element in the array. 
+
+--> delete(obj) → deleted_object 
+	3.0.0 :328 > a=[5,4,7,8]
+	 => [5, 4, 7, 8] 
+	3.0.0 :329 > a.delete(4)
+	 => 4 
+	3.0.0 :330 > a
+	 => [5, 7, 8] 
+	3.0.0 :331 > a.delete(10)
+	 => nil 
+
+--> delete(obj) {|nosuch| ... } → deleted_object or block_return 
+	3.0.0 :347 > a=[5,7,5,5,6,3]
+	 => [5, 7, 5, 5, 6, 3] 
+	3.0.0 :348 > a.delete(20) {|ele| "element not found"}          # return block value
+	 => "element not found" 
+	3.0.0 :349 > a.delete(5) {|ele| "element not found"}
+	 => 5 
+	3.0.0 :350 > a
+	 => [7, 6, 3] 
+
+5) delete_at() is a Array class method which deletes the arrays elements at the mentioned index. 
+
+--> delete_at(index) → deleted_object or nil
+	3.0.0 :351 > a
+	 => [7, 6, 3] 
+	3.0.0 :352 > a.delete_at(1)
+	 => 6 
+	3.0.0 :353 > a
+	 => [7, 3] 
+	 
+-->	When index is negative, counts backward from the end of the array:
+	3.0.0 :354 > a
+	 => [7, 3] 
+	3.0.0 :355 > a.delete_at(-1)
+	 => 3 
+	3.0.0 :356 > a
+	 => [7] 
+
+6) delete_if() is a Array class method which deletes the arrays elements for which the block condition satisifies.
+
+--> delete_if {|element| ... } → self click to toggle source
+	3.0.0 :357 > a=[5,4,3,8,7]
+	 => [5, 4, 3, 8, 7] 
+	3.0.0 :358 > a.delete_if {|ele| ele<10}
+	 => [] 
+	3.0.0 :359 > a
+	 => [] 
+
+--> delete_if → Enumerator 
+	3.0.0 :360 > a=[5,4,3,8,7]
+	 => [5, 4, 3, 8, 7] 
+	3.0.0 :361 > a.delete_if
+	 => #<Enumerator: [5, 4, 3, 8, 7]:delete_if> 
+	 
+7) keep_if() is a Array class method Retains those elements for which the block returns a truthy value; deletes all other elements; 			returns self:
+
+-->  keep_if {|element| ... } → self 
+	3.0.0 :362 > a
+	 => [5, 4, 3, 8, 7] 
+	3.0.0 :363 > a.keep_if {|ele| ele>5}
+	 => [8, 7] 
+	3.0.0 :364 > a
+	 => [8, 7] 
+	 
+-->  keep_if → new_enumeration 	 
+
+	3.0.0 :365 > a.keep_if
+	 => #<Enumerator: [8, 7]:keep_if> 
+
+8) reject!() Removes each element for which the block returns a truthy value. Returns self if any elements removed
+
+--> reject! {|element| ... } → self or nil
+	3.0.0 :367 > a=[5,7,6,4,2]
+	 => [5, 7, 6, 4, 2] 
+	3.0.0 :368 > a.reject! {|ele| ele>3}
+	 => [2] 
+	3.0.0 :369 > a
+	 => [2] 
+	 
+--> reject! → new_enumerator
+	3.0.0 :373 > a=[1,2]
+	 => [1, 2] 
+	3.0.0 :374 > a.reject!
+	 => #<Enumerator: [1, 2]:reject!>  
+	 
+9) select!() or filter!() - Calls the block, if given with each element of self; removes from self those elements for which the block 								returns false or nil.
+
+--> select! {|element| ... } → self or nil
+	3.0.0 :378 > a
+	 => [5, 4, 3, 6, 9] 
+	3.0.0 :379 > a.select! {|ele| ele>3}
+	 => [5, 4, 6, 9] 
+	3.0.0 :380 > a
+	 => [5, 4, 6, 9] 
+
+--> select! → new_enumerator
+	3.0.0 :376 > a=[5,4,3,6,9]
+	 => [5, 4, 3, 6, 9] 
+	3.0.0 :377 > a.select!
+	 => #<Enumerator: [5, 4, 3, 6, 9]:select!> 
+	 
+10) slice!() - Removes and returns elements from self. When the only argument is an Integer n, removes and returns the nth element in self
+
+--> slice!(n) → object or nil
+	3.0.0 :385 > a
+	 => [5, 4, 6, 9] 
+	3.0.0 :386 > a.slice!(2)
+	 => 6 
+	3.0.0 :387 > a
+	 => [5, 4, 9] 	
+
+--> slice!(start, length) → new_array or nil
+	3.0.0 :387 > a
+	 => [5, 4, 9] 
+	3.0.0 :388 > a.slice!(1,2)
+	 => [4, 9] 
+	3.0.0 :389 > a
+	 => [5] 
+
+--> slice!(range) → new_array or nil 
+	3.0.0 :390 > a=[5,4,3]
+	 => [5, 4, 3] 
+	3.0.0 :391 > a.slice!(1..3)
+	 => [4, 3] 
+	3.0.0 :392 > a
+	 => [5] 
+
+11) uniq!() - Removes duplicate elements from self, the first occurrence always being retained; returns self if any elements removed, 					nil otherwise. With no block given, identifies and removes elements using method eql? to compare. Returns self if any 					elements removed
+
+--> uniq! → self or nil 
+	3.0.0 :394 > a=[1,1,5,5,8,9]
+	 => [1, 1, 5, 5, 8, 9] 
+	3.0.0 :395 > a.uniq!
+	 => [1, 5, 8, 9] 
+	3.0.0 :396 > a
+	 => [1, 5, 8, 9] 
+
+--> uniq! {|element| ... } → self or nil 
 	
+	3.0.0 :401 > a=['a','b','c']
+	 => ["a", "b", "c"] 
+	3.0.0 :402 > a.uniq! {|ele| ele.size}   # delete unique size elements 
+	 => ["a"] 
+	3.0.0 :403 > a
+	 => ["a"] 
+
+
+
+
+
+
+
+
+
+
+
+
