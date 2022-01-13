@@ -1611,4 +1611,49 @@ flatten!(level) → self or nil
 
 -->  zip(*other_arrays) {|other_array| ... } → nil 
 
+--------------------------------------------------Other Methods---------------------------------------------
+
+1)  array * n → new_array 
+
+	3.0.0 :258 > a=[5,6]
+	 => [5, 6] 
+	3.0.0 :259 > a*3
+	 => [5, 6, 5, 6, 5, 6] 
+
+    array * string_separator → new_string
+    3.0.0 :263 > b=a*','
+	 => "5,6" 
+	3.0.0 :264 > b.class
+	 => String 
+
+
+When non-negative argument Integer n is given, returns a new Array built by concatenating the n copies of self
+
+2)  sum(init = 0) → object 
+	3.0.0 :279 > a=[1,2,3]
+	 => [1, 2, 3] 
+	3.0.0 :280 > a.sum          # 1+2+3 = 6
+	 => 6 
+	 
+	3.0.0 :282 > a
+	 => [1, 2, 3] 
+	3.0.0 :283 > a.sum(4)             # 4+1+2+3  = 10
+	 => 10 
+
+--> sum(init = 0) {|element| ... } → object 
+
+	3.0.0 :284 > a
+	 => [1, 2, 3] 
+	3.0.0 :285 > a.sum {|obj| obj**2}                 #1**2+2**2+3**2 = 1+4+9 = 14
+	 => 14 
+
+3) pack() is a Array class method which returns the contents of arr into a binary sequence according to the directives in aTemplateString
+
+--> pack( aTemplateString ) → aBinaryString
+	3.0.0 :293 > a
+	 => [1, 2, 3] 
+	3.0.0 :294 > a.pack('ccc')       #c for integer , a for string
+	 => "\x01\x02\x03" 
+
+
 
