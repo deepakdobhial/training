@@ -1281,10 +1281,180 @@ When a block is given, yields each combination as an Array; returns self:
 	c= [5,2]
 
 
+--------------------------------------------------Methods for Iterating---------------------------------------------
+
+1) each() is a Array class method which returns the array by following the condition in the given block once for each element in self. 
+		Iterates over array elements. When a block given, passes each successive array element to the block; returns self
+		
+	3.0.0 :508 > a.each {|ele| puts "#{ele.class} #{ele}"}  
+	Integer 5
+	String a
+	Float 2.3
+	Array [5, 4]
+	 => [5, "a", 2.3, [5, 4]] 
+
+	3.0.0 :509 > a.each
+	 => #<Enumerator: [5, "a", 2.3, [5, 4]]:each> 
+
+2) reverse_each() is a Array class method which traverses self in reverse order. Iterates backwards over array elements.
+			      When a block given, passes, in reverse order, each element to the block; returns self
+			      
+	3.0.0 :510 > a
+	 => [5, "a", 2.3, [5, 4]] 
+	3.0.0 :511 > a.reverse_each {|ele| puts "#{ele.class} #{ele}"}
+	Array [5, 4]
+	Float 2.3
+	String a
+	Integer 5
+	 => [5, "a", 2.3, [5, 4]] 
+
+3) each_index() is a Array class method which returns the index of the array element by following the condition in the given block once 				for each_index element in self. Iterates over array indexes. When a block given, passes each successive array index to 					the block; returns self.
+
+	3.0.0 :514 >   a.each_index {|index| puts "#{index} #{a[index]}"} 
+	0 5
+	1 a
+	2 2.3
+	3 [5, 4]
+	 => [5, "a", 2.3, [5, 4]] 
+
+4) cycle() is a Array class method which returns the array by calling the given block each time for every element in the array ‘n’ no. 					of times and if ‘nil’ is given, then it will call it for forever. 
+				When called with positive Integer argument count and a block, calls the block with each element, then does so again, 					until it has done so count times; returns nil:
+				
+-->	 cycle {|element| ... } → nil
+-->  cycle(count) {|element| ... } → nil
+-->  cycle → new_enumerator
+-->  cycle(count) → new_enumerator 
+
+		3.0.0 :001 > a=[]
+		 => [] 
+		3.0.0 :002 > [1,2,3].cycle(2) {|ele| a.push(ele)}
+		 => nil 
+		3.0.0 :003 > a
+		 => [1, 2, 3, 1, 2, 3] 
+
+5)  combination() -  Calls the block, if given, with combinations of elements of self; returns self. The order of combinations is     indeterminate.
+
+When a block and an in-range positive Integer argument n (0 < n <= self.size) are given, calls the block with all n-tuple combinations of self.
+
+--> combination(n) {|element| ... } → self click to toggle source
+	3.0.0 :004 > a
+	 => [1, 2, 3, 1, 2, 3] 
+	3.0.0 :005 > a.combination(1) {|combination| p combination}
+	[1]
+	[2]
+	[3]
+	[1]
+	[2]
+	[3]
+	 => [1, 2, 3, 1, 2, 3] 
+	3.0.0 :006 > a.combination(2) {|combination| p combination}
+	[1, 2]
+	[1, 3]
+	[1, 1]
+	[1, 2]
+	[1, 3]
+	[2, 3]
+	[2, 1]
+	[2, 2]
+	[2, 3]
+	[3, 1]
+	[3, 2]
+	[3, 3]
+	[1, 2]
+	[1, 3]
+	[2, 3]
+	 => [1, 2, 3, 1, 2, 3] 
+
+--> combination(n) → new_enumerator 
+	3.0.0 :008 > a.combination(2)
+	 => #<Enumerator: [1, 2, 3, 1, 2, 3]:combination(2)> 
+	 
+6) permutation() - permutation() is a Array class method which returns all permutations of length n of the elements of the array, then 						return the array itself.
+
+ permutation {|element| ... } → self 
+			 3.0.0 :097 > a.permutation {|permutation| p permutation}
+			[1, 2, 3]
+			[1, 3, 2]
+			[2, 1, 3]
+			[2, 3, 1]
+			[3, 1, 2]
+			[3, 2, 1]
+			 => [1, 2, 3] 
+permutation(n) {|element| ... } → self
+
+	3.0.0 :096 > a.permutation(2) {|permutation| p permutation}
+	[1, 2]
+	[1, 3]
+	[2, 1]
+	[2, 3]
+	[3, 1]
+	[3, 2]
+	 => [1, 2, 3] 
+permutation → new_enumerator
+permutation(n) → new_enumerator 
+
+	3.0.0 :098 > a.permutation
+	 => #<Enumerator: [1, 2, 3]:permutation> 
+	3.0.0 :099 > a.permutation(2)
+	 => #<Enumerator: [1, 2, 3]:permutation(2)> 
+
+7) repeated_combination() is a Array class method which returns all repeated combinations of length n of elements from the array and 							  then returns the array itself.
+--> repeated_combination(n) {|combination| ... } → self 
+	3.0.0 :115 > a.repeated_combination(1) {|combination| p combination}
+	[1]
+	[2]
+	[3]
+	 => [1, 2, 3] 
+	3.0.0 :116 > a.repeated_combination(2) {|combination| p combination}
+	[1, 1]
+	[1, 2]
+	[1, 3]
+	[2, 2]
+	[2, 3]
+	[3, 3]
+	 => [1, 2, 3] 
+	3.0.0 :117 > a.repeated_combination(3) {|combination| p combination}
+	[1, 1, 1]
+	[1, 1, 2]
+	[1, 1, 3]
+	[1, 2, 2]
+	[1, 2, 3]
+	[1, 3, 3]
+	[2, 2, 2]
+	[2, 2, 3]
+	[2, 3, 3]
+	[3, 3, 3]
+	 => [1, 2, 3] 
+
+--> repeated_combination(n) → new_enumerator 
+	3.0.0 :119 > a.repeated_combination(2)
+	 => #<Enumerator: [1, 2, 3]:repeated_combination(2)> 
 
 
+	 
+8) repeated_permutation() - repeated_permutation() is a Array class method which returns all repeated permutations of length n of the elements of the array, then return the array itself
 
+--> repeated_permutation(n) {|permutation| ... } → self
+3.0.0 :100 > a
+ => [1, 2, 3] 
+	3.0.0 :101 > a.repeated_permutation(1) {|permutation| p permutation}
+	[1]
+	[2]
+	[3]
+	 => [1, 2, 3] 
+	3.0.0 :102 > a.repeated_permutation(2) {|permutation| p permutation}
+	[1, 1]
+	[1, 2]
+	[1, 3]
+	[2, 1]
+	[2, 2]
+	[2, 3]
+	[3, 1]
+	[3, 2]
+	[3, 3]
+	 => [1, 2, 3] 
 
-
-
+--> repeated_permutation(n) → new_enumerator 
+	3.0.0 :103 > a.repeated_permutation(2)
+	 => #<Enumerator: [1, 2, 3]:repeated_permutation(2)> 
 
