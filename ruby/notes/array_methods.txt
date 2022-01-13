@@ -1457,4 +1457,158 @@ permutation(n) → new_enumerator
 --> repeated_permutation(n) → new_enumerator 
 	3.0.0 :103 > a.repeated_permutation(2)
 	 => #<Enumerator: [1, 2, 3]:repeated_permutation(2)> 
+	 
+------------------------------------------------------Methods for Converting-------------------------------------
+
+1) map() or collect() is a Array class method which returns a new array containing the values returned by the block.
+
+--> map {|element| ... } → new_array
+	3.0.0 :128 > a
+	 => [1, 2, 3] 
+	3.0.0 :129 > a.map {|ele| ele.class}
+	 => [Integer, Integer, Integer] 
+
+--> map → new_enumerator 
+	3.0.0 :130 > a.map
+	 => #<Enumerator: [1, 2, 3]:map> 
+	 
+note - Array#collect is an alias for Array#map.
+
+2) map!() or collect!()  # return changed or modify self
+--> map! {|element| ... } → self 
+	3.0.0 :138 > a
+	 => ["a", [5, 6]] 
+	3.0.0 :139 > a.map! {|ele| ele.class}
+	 => [String, Array] 
+	3.0.0 :140 > a
+	 => [String, Array] 
+
+--> map! → new_enumerator 
+	3.0.0 :141 > a.map!
+	 => #<Enumerator: [String, Array]:map!> 
+	3.0.0 :142 > a
+	 => [String, Array] 
+	
+3) flatten() is an Array class method which returns flattened array i.e. a 1D array
+	Returns a new Array that is a recursive flattening of self:
+
+    Each non-Array element is unchanged.
+
+    Each Array is replaced by its individual elements.
+
+	With non-negative Integer argument level, flattens recursively through level levels:
+	
+--> flatten → new_array 
+	3.0.0 :144 > a
+	 => [5, [6, [7]]] 
+	3.0.0 :145 > a.flatten
+	 => [5, 6, 7] 
+	3.0.0 :146 > a
+	 => [5, [6, [7]]] 
+	
+--> flatten(level) → new_array 
+	3.0.0 :147 > a
+	 => [5, [6, [7]]] 
+	3.0.0 :148 > a.flatten(0)
+	 => [5, [6, [7]]] 
+	3.0.0 :149 > a.flatten(1)
+	 => [5, 6, [7]] 
+	3.0.0 :150 > a.flatten(2)
+	 => [5, 6, 7]  
+
+--> With no argument, a nil argument, or with negative argument level, flattens all levels:
+	3.0.0 :155 > a.flatten(-1)
+	 => [5, 6, 7] 
+	
+4)  flatten! → self or nil- flatten to self
+flatten!(level) → self or nil 
+
+	3.0.0 :156 > a
+	 => [5, [6, [7]]] 
+	3.0.0 :157 > a.flatten!
+	 => [5, 6, 7] 
+	3.0.0 :158 > a
+	 => [5, 6, 7] 
+
+5) Inspect() is an Array class method which returns the all array elements. 
+
+--> inspect → new_string
+
+	3.0.0 :171 > a
+	 => ["a", "b", "c"] 
+	3.0.0 :172 > b=a.inspect
+	 => "[\"a\", \"b\", \"c\"]" 
+	3.0.0 :173 > b.class
+	 => String 
+6) to_s() - alias to inspect() & old_to_s
+
+	3.0.0 :174 > a
+	 => ["a", "b", "c"] 
+	3.0.0 :175 > a.to_s
+	 => "[\"a\", \"b\", \"c\"]" 
+	 
+7)join() is an Array class method which returns the string which is created by converting each element of the array to a string, 			 separated by the given separator.
+
+--> join →new_string 
+	3.0.0 :177 > a.join
+	 => "abc" 
+	3.0.0 :178 > a
+	 => ["a", "b", "c"] 
+
+--> join(separator = $,) → new_string 
+
+	3.0.0 :186 > a=["d","e","e","p","a","k"]
+	 => ["d", "e", "e", "p", "a", "k"] 
+	3.0.0 :187 > a.join("\n")
+	 => "d\ne\ne\np\na\nk" 
+	3.0.0 :188'> a.join('\n')
+	 => "d\\ne\\ne\\np\\na\\nk" 
+
+8) to_a() is a Array class method which returns self array. 
+-->  to_a → self or new_array
+	 3.0.0 :205 > a
+	 => [5, 4, 3] 
+	3.0.0 :206 > a.object_id
+	 => 300 
+	3.0.0 :207 > b=a.to_a
+	 => [5, 4, 3] 
+	3.0.0 :208 > b.object_id
+	 => 300    
+	 
+9) to_h() is a Array class method which returns the result of interpreting ary as an array of [key, value] pairs.
+
+--> to_h → new_hash
+	3.0.0 :233 > a=[['A',65],['B',66],['C',67]]
+	 => [["A", 65], ["B", 66], ["C", 67]] 
+	3.0.0 :234 > a.to_h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	 
+--> to_h {|item| ... } → new_hash 
+	3.0.0 :240 > a=[5,10,20,30]
+	 => [5, 10, 20, 30] 
+	3.0.0 :241 > a.to_h {|item| [item,item]}
+	 => {5=>5, 10=>10, 20=>20, 30=>30} 
+
+10) transpose() is a Array class method which returns the length of elements in the array transposes the rows and columns.
+
+--> transpose → new_array 
+	3.0.0 :244 > a=[['A',65],['B',66],['C',67]]
+	 => [["A", 65], ["B", 66], ["C", 67]] 
+	3.0.0 :245 > a.transpose
+	 => [["A", "B", "C"], [65, 66, 67]] 
+	
+11) zip() is a Array class method which Converts any arguments to arrays, then merges elements of self with corresponding elements from 			each argument.
+
+-->  zip(*other_arrays) → new_array 
+	3.0.0 :246 > a
+	 => [["A", 65], ["B", 66], ["C", 67]] 
+	3.0.0 :247 > b=[5,6]
+	 => [5, 6] 
+	3.0.0 :248 > c=[8,9]
+	 => [8, 9] 
+	3.0.0 :249 > a.zip(b,c)
+	 => [[["A", 65], 5, 8], [["B", 66], 6, 9], [["C", 67], nil, nil]] 
+
+-->  zip(*other_arrays) {|other_array| ... } → nil 
+
 
