@@ -621,3 +621,196 @@ II) Public Instance Methods----------------------->
 	3.0.0 :111 > g
 	 => {"A"=>69, "B"=>66, "C"=>67} 
 
+--------------------------------------------------Methods for Deleting----------------------------------------------------
+
+1)  clear → self-- Removes all hash entries; returns self.
+
+	3.0.0 :112 > g
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+	3.0.0 :113 > g.clear
+	 => {} 
+	3.0.0 :114 > g
+	 => {} 
+
+
+2) compact! → self or nil-- Returns self with all its nil-valued entries removed (in place): (Returns nil if no entries were removed)
+
+	3.0.0 :117 > g={'A':25, 'B':nil, 'C': nil}
+	 => {:A=>25, :B=>nil, :C=>nil} 
+	3.0.0 :118 > g.compact!
+	 => {:A=>25} 
+	3.0.0 :119 > g
+	 => {:A=>25}
+
+3) delete() is an Hash class method which deletes the key-value pair and returns the value from hash whose key is equal to key.
+
+-->  delete(key) → value or nil
+	3.0.0 :122 > g
+	 => {:A=>25} 
+	3.0.0 :123:> g.delete(:A)
+	 => 25 
+	3.0.0 :124 > g
+	 => {} 
+	 
+	 3.0.0 :125 > g.delete(:A)         # key is not found, returns nil
+ 	 => nil 
+
+-->  delete(key) {|key| ... } → object 
+	3.0.0 :126 > h
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+	3.0.0 :127 > h.delete("A") { |key| "Key not found" }
+	 => 69 
+	3.0.0 :128 > h.delete("D") { |key| "Key not found" }
+	 => "Key not found" 
+
+
+4) delete_if() is a Hash class method which delete_if the key-value pair if the block condition is true 
+
+---> delete_if {|key, value| ... } → self #If a block given, calls the block with each key-value pair; deletes each entry for which the 										 block returns a truthy value; returns self: 
+		3.0.0 :133 > h
+		 => {:a=>97, :b=>98, :c=>97} 
+		3.0.0 :134 > h.delete_if { |key, value| value == 97 }
+		 => {:b=>98} 
+		3.0.0 :135 > h
+		 => {:b=>98} 
+
+---> delete_if → new_enumerator
+If no block given, returns a new Enumerator:
+	3.0.0 :136 > h.delete_if
+ 	=> #<Enumerator: {:b=>98}:delete_if> 
+
+5) select() is a Hash class method which finds the array from the hash based on the block condition. 
+
+--->  select! {|key, value| ... } → self or nil 
+	Returns self, whose entries are those for which the block returns a truthy value. Returns nil if no entries were removed
+
+	3.0.0 :146 >  h={'a': 97, 'b': 98, 'c': 97}
+	 => {:a=>97, :b=>98, :c=>97} 
+	3.0.0 :147 > h.select! { |key, value| value>97 }
+	 => {:b=>98} 
+	3.0.0 :148 > h
+	 => {:b=>98} 
+
+--->  select! → new_enumerator --- Returns a new Enumerator if no block given
+
+	3.0.0 :138 > h
+	 => {:b=>98} 
+	3.0.0 :139 > h.select!
+	 => #<Enumerator: {:b=>98}:select!> 
+
+-----> filter! -  alias for select! 
+	3.0.0 :149 >  h={'a': 97, 'b': 98, 'c': 97}
+	 => {:a=>97, :b=>98, :c=>97} 
+	3.0.0 :150 > h.filter! { |key, value| value>97 }
+	 => {:b=>98} 
+	3.0.0 :151 > h
+	 => {:b=>98} 
+	
+6) keep_if() is a Hash class method which only keeps those key value pair that follows the block condition.
+
+--->  keep_if {|key, value| ... } → self---Calls the block for each key-value pair; retains the entry if the block returns a truthy 									 value; otherwise deletes the entry; returns self
+		3.0.0 :154 >  h={'a': 97, 'b': 98, 'c': 97}
+		 => {:a=>97, :b=>98, :c=>97} 
+		3.0.0 :155 > h.keep_if { |key, value| value<98 }
+		 => {:a=>97, :c=>97} 
+		3.0.0 :156 > h
+		 => {:a=>97, :c=>97} 
+
+--->  keep_if → new_enumerator -- Returns a new Enumerator if no block given
+
+	3.0.0 :157 > h.keep_if
+	 => #<Enumerator: {:a=>97, :c=>97}:keep_if> 
+	 
+7) reject!() is a Hash class method which checks whether any changes are made in the hash array or not
+
+---> reject! {|key, value| ... } → self or nil -Returns self, whose remaining entries are those for which the block returns false or nil:
+	3.0.0 :158 >  h={'a': 97, 'b': 98, 'c': 97}
+	 => {:a=>97, :b=>98, :c=>97} 
+	3.0.0 :159 > h.reject! { |key, value| value<98 }
+	 => {:b=>98} 
+	3.0.0 :160 > h
+	 => {:b=>98}
+
+---> reject! → new_enumerator  
+	3.0.0 :161 > h.reject!
+	 => #<Enumerator: {:b=>98}:reject!> 
+
+8)shift() is a Hash class method which removes a key-value pair from hash and then it returns these value as two-item array 
+
+---> shift → [key, value] or default_value - Removes the first hash entry (see Entry Order); returns a 2-element Array containing the 					removed key and value:
+
+	3.0.0 :164 >  h={'a': 97, 'b': 98, 'c': 97}   # changes in self
+	 => {:a=>97, :b=>98, :c=>97} 
+	3.0.0 :165 > h.shift
+	 => [:a, 97]                  # ['key', value'] array 
+	3.0.0 :166 > h
+	 => {:b=>98, :c=>97} 
+
+
+---------------These methods return a copy of self with some entries removed:-----------------------
+
+1)  compact → new_hash -- Returns a copy of self with all nil-valued entries removed
+
+	3.0.0 :170 >  h={'a': 97, 'b': 98, 'c': nil}
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :171 > h.compact
+	 => {:a=>97, :b=>98} 
+	3.0.0 :172 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+
+
+2)  except(*keys) → a_hash -- Returns a new Hash excluding entries for the given keys
+					Any given keys that are not found are ignored.
+	3.0.0 :178 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :179 > g=h.except(:a)
+	 => {:b=>98, :c=>nil} 
+	 
+3) select() is a Hash class method which finds the array from the hash based on the block condition. 
+
+---> select {|key, value| ... } → new_hash- Returns a new Hash object whose entries are those for which the block returns a truthy value:
+
+	3.0.0 :183 > h
+	 => {:a=>97, :b=>98} 
+	3.0.0 :184 > h.select { |key, value| value>97 }
+	 => {:b=>98} 
+	3.0.0 :185 > h
+	 => {:a=>97, :b=>98} 
+	 
+-->	select → new_enumerator 
+	3.0.0 :186 > h.select
+	 => #<Enumerator: {:a=>97, :b=>98}:select> 
+
+
+-----> filter -  alias for select 
+
+	3.0.0 :149 >  h={'a': 97, 'b': 98, 'c': 97}
+	 => {:a=>97, :b=>98, :c=>97} 
+	3.0.0 :150 > h.filter { |key, value| value>97 }
+	 => {:b=>98} 
+	
+4) reject() is a Hash class method which returns a new hash which consists of entries for which the block returns false. 
+--> reject {|key, value| ... } → new_hash 
+	Returns a new Hash object whose entries are all those from self for which the block returns false or nil:
+	3.0.0 :187 > h
+	 => {:a=>97, :b=>98} 
+	3.0.0 :188 > h.reject { |key, value| value>97}
+	 => {:a=>97} 
+	3.0.0 :189 > h
+	 => {:a=>97, :b=>98} 
+
+--> reject → new_enumerator 
+	3.0.0 :190 > h.reject
+	 => #<Enumerator: {:a=>97, :b=>98}:reject> 
+
+
+5)slice(*keys) → new_hash -- Returns a new Hash object containing the entries for the given keys:
+
+	3.0.0 :191 > h
+	 => {:a=>97, :b=>98} 
+	3.0.0 :192 > h.slice(:a,:d)
+	 => {:a=>97} 
+	3.0.0 :193 > h
+	 => {:a=>97, :b=>98} 
+
+
