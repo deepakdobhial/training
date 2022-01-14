@@ -158,6 +158,158 @@ II) Public Instance Methods----------------------->
 	 => {"A"=>65, "B"=>66, "A"=>69, "A"=>65} 
 
 
+-----------------------------------------------Methods for Querying-----------------------------------------------
 
+1) any? () - Returns true if any element satisfies a given criterion; false otherwise.
+ 			 With no argument and no block, returns true if self is non-empty; false if empty. 
 
+	any? → true or false 
+	3.0.0 :114 > h.any?       # returns true if self is non-empty; false if empty    
+	 => true 
+		
+	any?(object) → true or false
+	3.0.0 :113 > h
+	 => {"A"=>65, "B"=>66, "C"=>67, "D"=>69} 
+	3.0.0 :114 > h.any?
+	 => true 
+	3.0.0 :115 > h.any?(['A', 65])
+	 => true 
+	3.0.0 :116 > h.any?(['A', 69])
+	 => false 
 
+	any? {|key, value| ... } → true or false 
+
+	3.0.0 :007 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :008 > h.any? {|key, value| value>65 }
+	 => true 
+	3.0.0 :009 > h.any? {|key, value| value>70 }
+	 => false 
+	3.0.0 :010 > h.any? {|key, value| value>60 }
+	 => true 
+
+2) default  -  Returns the default value for the given key. The returned value will be determined either by the default proc or by the 					default value 
+
+--> default → object
+	3.0.0 :016 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :017 > h.default
+	 => nil 
+
+--> default(key) → object 
+	3.0.0 :018 > g = Hash.new { |hash, key| hash[key] = "No key #{key}"}
+	 => {} 
+
+	3.0.0 :020 > g['A']
+	 => "No key A" 
+	3.0.0 :021 > g.default('A')
+	 => "No key A" 
+
+3)  eql? object → true or false
+	Returns true if all of the following are true:
+    object is a Hash object.
+    hash and object have the same keys (regardless of order).
+    For each key key, h[key] eql? object[key].   # value 
+
+	Otherwise, returns false.
+
+		3.0.0 :025 > h.eql?g
+		 => false 
+		3.0.0 :026 > g['B']
+		 => "No key B" 
+		3.0.0 :027 > h
+		 => {"A"=>65, "B"=>66} 
+		3.0.0 :028 > g
+		 => {"A"=>"No key A", "B"=>"No key B"} 
+		3.0.0 :029 > h.eql?g
+		 => false
+
+	3.0.0 :002 > h={'A' => 65, 'B' => 66}
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :003 > g={'A' => 65, 'B' => 66}
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :004 > h.eql?g
+	 => true 
+
+4)  hash → an_integer -- Returns the Integer hash-code for the hash.
+	Two Hash objects have the same hash-code if their content is the same (regardless or order):
+	
+	3.0.0 :005 > h.hash
+	 => -1033875940828079217 
+	3.0.0 :006 > g.hash
+	 => -1033875940828079217 
+	 
+5)  has_value?() is a Hash class method which checks whether the given value is present in hash.(Method value? is an alias for 						#has_value?.) 
+	 Returns true if value is a value in self, otherwise false.
+	 
+---> has_value?(value) → true or false  
+	 
+	3.0.0 :008 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :009 > h.has_value?(65)
+	 => true 
+	3.0.0 :010 > h.has_value?(69)
+ 	=> false 
+	
+---> value?(value) → true or false	
+	3.0.0 :011 > h.value?(69)            # value()  is an alias for has_value? 
+ 	=> false  
+	3.0.0 :012 > h.value?(65)
+	 => true 
+
+	
+	 
+6) include?() is a Hash class method which checks whether the given key is present in hash.
+	 
+-->	 include?(key) → true or false - Returns true if key is a key in self, otherwise false.
+	 3.0.0 :013 > h.include?('A')
+	 => true 
+	3.0.0 :014 > h.include?('D')
+	 => false 
+	 
+---> has_key? () -----------------------------Alias for include?()	
+	3.0.0 :015 > h.has_key?('D')
+	 => false 
+	3.0.0 :016 > h.has_key?('A')
+ 	=> true 
+ 
+--> member? () -----------------------------Alias for include?()		 
+	 
+	3.0.0 :004 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :005 > h.member?('A')
+	 => true 
+	3.0.0 :006 > h.member?('D')
+	 => false  
+	 
+--> key? () -----------------------------Alias for include?()		 
+	 
+	3.0.0 :007 > h.key?('A')
+ 	=> true 
+	3.0.0 :008 > h.key?('D')
+	 => false 
+	 
+7) length() and size() - is a Hash class method which gives number of key-value pairs in the hash.	 
+	 
+--->  length → integer---	Returns the count of entries in self:
+
+	3.0.0 :009 > h.length()
+ 	=> 2  
+	 
+---> size → integer
+	3.0.0 :010 > h.size
+	 => 2 
+ 
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
