@@ -927,15 +927,82 @@ to_hash → self -- Returns self.
 	3.0.0 :228:> proc.call(:c)
 	 => nil 
 
+------------------------------------Methods for Transforming Keys and Values-------------------------
+
+1)  transform_keys {|key| ... } → new_hash 
+  	3.0.0 :233 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :234 > h.transform_keys {|key| key.to_s }
+	 => {"a"=>97, "b"=>98, "c"=>nil} 
+	3.0.0 :235 > h
+	 => {:a=>97, :b=>98, :c=>nil}
+	 
+	transform_keys(hash2) → new_hash
+	
+	transform_keys(hash2) {|other_key| ...} → new_hash
+	3.0.0 :238 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :239 > g
+	 => {:b=>98, :c=>nil} 
+	3.0.0 :240 > h.transform_keys(g)
+	 => {:a=>97, 98=>98, nil=>nil} 
+	
+  transform_keys → new_enumerator 	Returns a new Hash object; each entry has:
+
+    A key provided by the block.
+
+    The value from self.
+
+An optional hash argument can be provided to map keys to new keys. Any key not given will be mapped using the provided block, or remain the same if no block is given.
 
 
 
+2)  transform_keys! {|key| ... } → self
+	transform_keys!(hash2) → self
+	transform_keys!(hash2) {|other_key| ...} → self
+	transform_keys! → new_enumerator
+
+Same as Hash#transform_keys but modifies the receiver in place instead of returning a new hash.
+
+	3.0.0 :241 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :242 > h.transform_keys! {|key| key.to_s }
+	 => {"a"=>97, "b"=>98, "c"=>nil} 
+	3.0.0 :243 > h
+	 => {"a"=>97, "b"=>98, "c"=>nil} 
 
 
+----------------------------------------Other Methods------------------------------------------------
+1) flatten → new_array
+ 
 
+Returns a new Array object that is a 1-dimensional flattening of self.
 
+3.0.0 :244 > h
+ => {"a"=>97, "b"=>98, "c"=>nil} 
+3.0.0 :245 > h.flatten
+ => ["a", 97, "b", 98, "c", nil] 
+ 
+   flatten(level) → new_array
+   3.0.0 :249 > g={'a': {'b': {'c':20}}}
+	 => {:a=>{:b=>{:c=>20}}} 
+	3.0.0 :250 > g
+	 => {:a=>{:b=>{:c=>20}}} 
+	3.0.0 :251 > g.flatten(1)
+	 => [:a, {:b=>{:c=>20}}] 
+	3.0.0 :252 > g.flatten(2)
+	 => [:a, {:b=>{:c=>20}}] 
+	3.0.0 :253 > g.flatten(3)
+	 => [:a, {:b=>{:c=>20}}] 
+	 
+2)  invert → new_hash-- Returns a new Hash object with the each key-value pair inverted:
 
-
-
-
+	3.0.0 :254 > h
+	 => {"a"=>97, "b"=>98, "c"=>nil} 
+	3.0.0 :255 > h.invert
+	 => {97=>"a", 98=>"b", nil=>"c"} 
+	3.0.0 :256 > g
+	 => {:a=>{:b=>{:c=>20}}} 
+	3.0.0 :257 > g.invert
+	 => {{:b=>{:c=>20}}=>:a} 
 
