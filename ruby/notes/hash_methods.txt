@@ -813,4 +813,57 @@ If no block given, returns a new Enumerator:
 	3.0.0 :193 > h
 	 => {:a=>97, :b=>98} 
 
+--------------------------------------------------------Methods for Iterating-------------------------------------------------
+
+1) each() and each_pair() is a Hash class method which finds the nested value which calls block once for each key in hash by passing the key-value pair as parameters.
+
+--> each {|key, value| ... } → self
+	3.0.0 :195 >  h={'a': 97, 'b': 98, 'c': nil}
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :196 > h.each {|key, value| puts "#{key} : #{value}" }
+	a : 97
+	b : 98
+	c : 
+	
+--> each_pair {|key, value| ... } → self
+	3.0.0 :197 > h.each_pair {|key, value| puts "#{key} : #{value}" }
+	a : 97
+	b : 98
+	c : 
+	 => {:a=>97, :b=>98, :c=>nil}
+
+--> each → new_enumerator
+--> each_pair → new_enumerator 
+
+3.0.0 :198 > h.each
+ => #<Enumerator: {:a=>97, :b=>98, :c=>nil}:each> 
+3.0.0 :199 > h.each_pair
+ => #<Enumerator: {:a=>97, :b=>98, :c=>nil}:each_pair> 
+3.0.0 :200 > 
+
+2) each_key() is a Hash class method which finds the nested value which calls block once for each_key key in hash by passing the key pair 					as parameters. 
+
+---> each_value {|value| ... } → self 
+	Calls the given block with each value; returns self: 
+	3.0.0 :201 > h.each_key {|value| puts "#{value}" }
+	a
+	b
+	c
+	 => {:a=>97, :b=>98, :c=>nil} 
+	 
+---> each_value → new_enumerator 
+
+3)each_value {|value| ... } → self - Calls the given block with each value; returns self
+
+each_value → new_enumerator  -- Returns a new Enumerator if no block given 
+
+	3.0.0 :207 > h.each_value {|value| puts "#{value}" }
+	97
+	98
+
+	 => {:a=>97, :b=>98, :c=>nil} 
+
+	
+
+
 
