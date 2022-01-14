@@ -376,13 +376,132 @@ II) Public Instance Methods----------------------->
 	3.0.0 :100 > h>=i
 	 => true 
 	 
+-----------------------------------------Methods for Fetching-------------------------------------
+1)   hash[key] → value-- Returns the value associated with the given key, if found: 
+						If key is not found, returns a default value
 
+	3.0.0 :103 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :104 > h[:A]
+	 => nil 
+	3.0.0 :105 > h["A"]
+	 => 65 
+	3.0.0 :106 > h["C"]
+	 => 67 
+	3.0.0 :107 > h["D"]
+	 => nil
 	 
+2) assoc() is an Hash class method which searches an element through the Hash.
+
+--> assoc(key) →  new_array or nil ---- If the given key is found, returns a 2-element Array containing that key and its value:	 
+	 				Returns nil if key key is not found.
 	 
+	 3.0.0 :011 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :012 > h.assoc("A")               # return array ['key',value']
+	 => ["A", 65] 
+	3.0.0 :013 > h.assoc("B")
+	 => ["B", 66] 
+	3.0.0 :014 > h.assoc("C")
+	 => nil
+		 
+3) dig() is a Hash class method which finds the nested value which is specified by the sequence of the key object by calling dig at each 			step.	
+--->  dig(key, *identifiers) → object click to toggle source
+		 Finds and returns the object in nested objects that is specified by key and identifiers. The nested objects may be instances of 			 various classes. 
+		 
+	3.0.0 :019 > g
+ 	=> {:A=>{:B=>{:C=>68}}} 	
+ 	3.0.0 :021 > g.dig(:A)
+	 => {:B=>{:C=>68}} 
+	3.0.0 :022 > g.dig(:A, :B)
+	 => {:C=>68} 
+	3.0.0 :023:> g.dig(:A, :B, :C)
+ 	=> 68 
 	 
+4) fetch() is a Hash class method which returns a value from the hash for the given key. With no other arguments, it will raise a 				KeyError exception. (Returns the value for the given key, if found. & returns default_value) 
+
+-->	 fetch(key) → object 
+	 3.0.0 :027 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :028 > h.fetch("A")
+	 => 65 
+-->  fetch(key, default_value) → object
+	 3.0.0 :031 > h
+ 	=> {"A"=>65, "B"=>66} 
+	3.0.0 :032 > h.fetch("A", :default)
+	 => 65 
+	3.0.0 :033 > h.fetch("D", :default)
+	 => :default 
+
+-->	 fetch(key) {|key| ... } → object 
+	3.0.0 :034 > h
+ 	=> {"A"=>65, "B"=>66} 
+	3.0.0 :035 > h.fetch(:A) {|key| "No key #{key}"}
+ 	=> "No key A" 
+	3.0.0 :036 > h.fetch("A") {|key| "No key #{key}"}
+	 => 65 	
+		 
+5) fetch_values() is a Hash class method which returns array containing the values associated with the given keys. With no other 					  arguments, it will raise a KeyError exception. 	
+		
+		(Returns a new Array containing the values associated with the given keys *keys)
+		
+---> fetch_values(*keys) → new_array 
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :038 > h.fetch_values("A","B")
+	 => [65, 66] 
 	 
+---> fetch_values(*keys) {|key| ... } → new_array 
+
+	3.0.0 :039 > h.fetch_values("A","B") {|key| "No key #{key}"}
+ 	=> [65, 66] 
+	3.0.0 :040 > h.fetch_values("C","B") {|key| "No key #{key}"}
+	 => ["No key C", 66] 
 	 
+6) key() is a Hash class method which gives the key value corresponding to the value. If value doesn’t exist then return nil.
+
+--> key(value) → key or nil --- Returns the key for the first-found entry with the given value & Returns nil if so such value is found.
+
+	3.0.0 :041 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :042 > h.key(66)
+	 => "B" 
+	3.0.0 :043 > h.key(69)
+	 => nil 
+
+7) keys() is a Hash class method which gives an array with all the keys present in the hash. 
+	
+-->  keys → new_array ----- Returns a new Array containing all keys in self:
+
+	3.0.0 :044 > h.keys
+	 => ["A", "B"] 
+
+8) rassoc() is an Hash class method which searches an element through the Hash value.  (first-found entry) 
+
+--> rassoc(value) → new_array or nil ----Returns a new 2-element Array consisting of the key and value of the first-found entry whose value is == to value
+
+	 3.0.0 :045 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :046 > h.rassoc(1)
+	 => nil 
+	3.0.0 :047 > h.rassoc(68)
+	 => nil 
+	3.0.0 :048 > h.rassoc(65)
+	 => ["A", 65] 
+	3.0.0 :049 > h.rassoc(66)
+	 => ["B", 66] 
+		 	 
+9)  values → new_array---Returns a new Array containing all values in self:	 
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :051 > h.values
+	 => [65, 66] 
 	 
+10)  values_at(*keys) → new_array --- Returns a new Array containing values for the given keys. The default values are returned for any 							keys that are not found:	 
 	 
-	 
+	 3.0.0 :052 > h.values_at("A")
+	 => [65] 
+	3.0.0 :053 > h.values_at("A","B")
+	 => [65, 66] 
+	 3.0.0 :054 > h.values_at("C","D")
+	 => [nil, nil] 
+
 	 
