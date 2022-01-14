@@ -504,4 +504,120 @@ II) Public Instance Methods----------------------->
 	 3.0.0 :054 > h.values_at("C","D")
 	 => [nil, nil] 
 
-	 
+-------------------------------------------------------Methods for Assigning----------------------------------------
+
+1) hash[key] = value → value ---  Associates the given value with the given key; returns value. 
+
+	3.0.0 :108 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :109 > h['D'] = 68                       # add new key if key not exists in the end
+	 => 68 
+	3.0.0 :110 > h
+	 => {"A"=>65, "B"=>66, "C"=>67, "D"=>68} 
+	3.0.0 :111 > h
+	 => {"A"=>65, "B"=>66, "C"=>67, "D"=>68} 
+	3.0.0 :112 > h['D'] = 69						# replace value 							
+	 => 69 
+	3.0.0 :113 > h
+	 => {"A"=>65, "B"=>66, "C"=>67, "D"=>69} 
+
+
+2) store(key, value) -  Alias for hash[key] -- ------return value 
+
+	3.0.0 :055 > h
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :056 > h.store("C",67)
+	 => 67 
+	3.0.0 :057 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+
+	3.0.0 :059 > h.store('A',68)         # replace value 	   
+ 	=> 68 
+	3.0.0 :060 > h
+	 => {"A"=>68, "B"=>66, "C"=>67} 
+
+3) merge() is a Hash class method which combines two hash arrays and their content.
+
+--->  merge → copy_of_self
+	3.0.0 :062 > g=h.merge
+	 => {"A"=>68, "B"=>66, "C"=>67} 
+	3.0.0 :063 > g
+	 => {"A"=>68, "B"=>66, "C"=>67}
+
+--->  merge(*other_hashes) → new_hash
+	3.0.0 :073 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :074 > g
+	 => {"D"=>68, "E"=>69} 
+	3.0.0 :075 > i=h.merge(g)
+	 => {"A"=>65, "B"=>66, "C"=>67, "D"=>68, "E"=>69}
+
+--->  merge(*other_hashes) { |key, old_value, new_value| ... } → new_hash 	 
+
+	3.0.0 :079 > g
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :080 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :081 > i=h.merge(g) { |key, old_value, new_value| old_value + new_value }
+	 => {"A"=>130, "B"=>132, "C"=>134} 
+
+4) merge!() is a Hash class method which can add the content the given hash array to the other. Entries with duplicate keys are 			overwritten with the values from each other_hash successively if no block is given.
+
+---> 	merge! → self 
+	3.0.0 :082 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :083 > g=h.merge!
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :084 > g
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :085 > g["A"]=69                
+	 => 69 
+	3.0.0 :086 > h						  
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+
+
+---> 	merge!(*other_hashes) → self
+	3.0.0 :091 > h
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+	3.0.0 :092 > g
+	 => {"C"=>69} 
+	3.0.0 :093 > h.merge!(g)
+	 => {"A"=>69, "B"=>66, "C"=>69} 
+	3.0.0 :094 > h
+	 => {"A"=>69, "B"=>66, "C"=>69} 
+
+---> 	merge!(*other_hashes) { |key, old_value, new_value| ... } → self 
+	3.0.0 :097 > h
+	 => {"A"=>69, "B"=>66, "C"=>69} 
+	3.0.0 :098 > g
+	 => {"C"=>67} 
+	3.0.0 :099 > h.merge!(g) { |key, old_value, new_value | old_value + new_value }
+	 => {"A"=>69, "B"=>66, "C"=>136} 
+	3.0.0 :100 > h
+	 => {"A"=>69, "B"=>66, "C"=>136} 
+
+
+----> update() - Alias for merge! 
+
+	3.0.0 :101 > h
+	 => {"A"=>69, "B"=>66, "C"=>136} 
+	3.0.0 :102 > g
+	 => {"C"=>67} 
+	3.0.0 :103 > h.update(g)
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+	3.0.0 :104 > h
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+
+5) replace() is a Hash class method which replaces the content of one hash with other. 
+
+-->  replace(other_hash) → self -- Replaces the entire contents of self with the contents of other_hash; returns self:
+
+	3.0.0 :108 > g
+	 => {"C"=>67} 
+	3.0.0 :109 > h
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+	3.0.0 :110 > g.replace(h)
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+	3.0.0 :111 > g
+	 => {"A"=>69, "B"=>66, "C"=>67} 
+
