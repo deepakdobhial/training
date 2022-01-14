@@ -1,0 +1,163 @@
+-------------------------------------------------------HASH---------------------------------------------------------------------------
+
+A Hash is a collection of key-value pairs like this: "employee" = > "salary". It is similar to an Array, except that indexing is done via arbitrary keys of any object type, not an integer index.
+
+---------------------------------------------------Hash Data Syntax------------------------------------------------------
+
+older syntax-- 
+	h= {:A=>65, :B=>66, :C=>67} 
+
+
+New Syntax: -
+-->	3.0.0 :007 > h={A: 65, B: 66, C: 67}
+ 	=> {:A=>65, :B=>66, :C=>67} 
+
+--> 3.0.0 :009 > h={'A': 65, 'B': 66, 'C': 67}
+ 	=> {:A=>65, :B=>66, :C=>67} 
+ 
+ -------------------------------------------------Creating a Hash-------------------------------------------------------------
+ 3 ways - 
+    
+    i) Method Hash.new
+   ii) Method Hash[]
+  iii) Literal form: {}.
+
+1) Create an empty Hash--
+	
+ 	3.0.0 :010 > h=Hash.new
+	 => {} 
+	3.0.0 :011 > h=Hash[]
+	 => {} 
+	3.0.0 :012 > h={}
+	 => {} 
+	 
+
+---------------------------------------------------Methods for Creating a Hash----------------------------------------------------------
+1) Public Class Methods ------------->
+
+1) Hash[] - Returns a new Hash object populated with the given objects, if any. See ::new. With no argument, returns a new empty Hash.
+			When the single given argument is a Hash, returns a new Hash populated with the entries from the given Hash.
+
+-->	Hash[] → new_empty_hash 
+	3.0.0 :023 > h=Hash[]
+	 => {} 
+
+-->	Hash[hash] → new_hash
+
+	3.0.0 :024 > h = {"A"=>65, "B"=>66, "C"=>76}
+	 => {"A"=>65, "B"=>66, "C"=>76} 
+	3.0.0 :025 > hash1 = Hash(h)
+	 => {"A"=>65, "B"=>66, "C"=>76} 
+	3.0.0 :026 > hash1
+	 => {"A"=>65, "B"=>66, "C"=>76} 
+
+-->	Hash[ [*2_element_arrays] ] → new_hash
+	3.0.0 :032 > a
+	 => [["A", 65], ["B", 66]] 
+	3.0.0 :033 > h=Hash[a]
+	 => {"A"=>65, "B"=>66} 
+
+-->	Hash[*objects] → new_hash 
+	3.0.0 :034 > h=Hash['A', 65, 'B', 66]
+ 	=> {"A"=>65, "B"=>66} 
+ 	
+	3.0.0 :036 > h=Hash[1, 2, 3, 4]   # cretae hash for even arguments only
+	 => {1=>2, 3=>4} 
+
+	h=Hash[1, 2, 3, 4, 5]    #Error - (odd number of arguments for Hash)
+
+	
+2) new() - Returns a new empty Hash object. The initial default value and initial default proc for the new hash depend on which form above 				was used. 
+
+--> new(default_value = nil) → new_hash
+e.g.	3.0.0 :047 > h=Hash.new
+		 => {} 
+		3.0.0 :048 > h.default
+		 => nil 
+		3.0.0 :049 > h.default_proc
+		 => nil 
+e.g.	3.0.0 :050 > h=Hash.new("Default values")
+		 => {} 
+		3.0.0 :051 > h.default
+		 => "Default values" 
+		3.0.0 :052 > h.default_proc
+		 => nil 	
+		 
+-->	new {|hash, key| ... } → new_hash 
+
+
+3) try_convert(obj) → obj, new_hash, or nil 
+
+If obj is a Hash object, returns obj.
+
+Otherwise if obj responds to :to_hash, calls obj.to_hash and returns the result.
+
+Returns nil if obj does not respond to :to_hash
+
+		3.0.0 :054 > h=Hash.try_convert({'A' => 65})
+		 => {"A"=>65} 
+		3.0.0 :055 > h
+		 => {"A"=>65} 
+
+---------------------------------------Methods for Setting Hash State----------------------------------------------
+II) Public Instance Methods----------------------->
+
+1) compare_by_identity → self - Sets self to consider only identity in comparing keys; two keys are considered the same only if they are 									the same object; returns self.
+
+	3.0.0 :134 > h={'A' => 65, 'B' => 66}
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :135 > h['A']
+	 => 65 
+	3.0.0 :136 > h['B']
+	 => 66 
+	3.0.0 :137 > h.compare_by_identity?
+	 => false 
+	3.0.0 :138 > h.compare_by_identity          # by using this insert duplicate keys 
+	 => {"A"=>65, "B"=>66} 
+	3.0.0 :139 > h['A']
+	 => nil 
+	3.0.0 :140 > h['A'] = 69
+	 => 69 
+	3.0.0 :141 > h
+	 => {"A"=>65, "B"=>66, "A"=>69} 
+	3.0.0 :142 > h.compare_by_identity?
+	 => true 
+	3.0.0 :143 > h['A']=65
+	 => 65 
+	3.0.0 :144 > h
+	 => {"A"=>65, "B"=>66, "A"=>69, "A"=>65} 
+	 
+2)  compare_by_identity? → true or false-- Returns true if compare_by_identity has been called, false otherwise.
+	 
+	 3.0.0 :142 > h.compare_by_identity?      # return true bcz called comprae_by_identity 
+	 => true 
+
+3)  default = value → object --> Sets the default value to value; returns value:
+
+	3.0.0 :145 > h
+	 => {"A"=>65, "B"=>66, "A"=>69, "A"=>65} 
+	3.0.0 :146 > h.default
+	 => nil 
+	3.0.0 :147 > h.default= 'default_value'
+	 => "default_value" 
+	3.0.0 :148 > h.default
+	 => "default_value" 
+
+4)  default_proc = proc → proc -- Sets the default proc for self to proc	
+
+	3.0.0 :149 > h.default_proc
+	 => nil 
+	3.0.0 :150 > h.default_proc = proc { |hash,key| "default value for #{key}"}
+	 => #<Proc:0x000055f088918bc8 (irb):150> 
+	3.0.0 :151 > h.default_proc
+	 => #<Proc:0x000055f088918bc8 (irb):150> 
+
+
+5) rehash → self - Rebuilds the hash table by recomputing the hash index for each key; returns self. 
+	3.0.0 :154 > h.rehash
+	 => {"A"=>65, "B"=>66, "A"=>69, "A"=>65} 
+
+
+
+
+
