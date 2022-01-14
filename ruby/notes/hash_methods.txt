@@ -864,6 +864,78 @@ each_value → new_enumerator  -- Returns a new Enumerator if no block given
 	 => {:a=>97, :b=>98, :c=>nil} 
 
 	
+--------------------------------------------Methods for Converting--------------------------------------------
+1)  inspect → new_string -- Returns a new String containing the hash entries
+
+	3.0.0 :209 > h.inspect
+	 => "{:a=>97, :b=>98, :c=>nil}" 
+
+
+2)  to_s() - Alias for: inspect 
+
+	3.0.0 :212 > h.to_s()
+	 => "{:a=>97, :b=>98, :c=>nil}" 
+
+
+3)  to_a → new_array -- Returns a new Array of 2-element Array objects; each nested Array contains a key-value pair from self:
+
+	3.0.0 :213 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :214 > h.to_a
+	 => [[:a, 97], [:b, 98], [:c, nil]] 
+
+4)  to_h → self or new_hash
+to_h {|key, value| ... } → new_hash
+
+For an instance of Hash, returns self.
+
+For a subclass of Hash, returns a new Hash containing the content of self.
+
+When a block is given, returns a new Hash object whose content is based on the block; the block should return a 2-element Array object specifying the key-value pair to be included in the returned Array:
+
+	3.0.0 :215 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :216 > h1=h.to_h {|key, value| [value, key]}
+	 => {97=>:a, 98=>:b, nil=>:c} 
+	3.0.0 :217 > h1
+	 => {97=>:a, 98=>:b, nil=>:c} 
+
+
+
+5) to_hash() is a Hash class method which returns the self – hash representation of the hash
+ 
+to_hash → self -- Returns self.
+
+3.0.0 :218 > h
+ => {:a=>97, :b=>98, :c=>nil} 
+3.0.0 :219 > h.to_hash
+ => {:a=>97, :b=>98, :c=>nil} 
+
+
+6)to_proc → proc -- Returns a Proc object that maps a key to its value.
+
+	3.0.0 :223 > h
+	 => {:a=>97, :b=>98, :c=>nil} 
+	3.0.0 :224 > proc=h.to_proc
+	 => #<Proc:0x00005595243ac7a8 (lambda)> 
+	3.0.0 :225 > proc.class
+	 => Proc 
+	3.0.0 :226 > proc.call(:a)
+	 => 97 
+	3.0.0 :227:> proc.call(:b)
+	 => 98 
+	3.0.0 :228:> proc.call(:c)
+	 => nil 
+
+
+
+
+
+
+
+
+
+
 
 
 
