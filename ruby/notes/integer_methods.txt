@@ -1,0 +1,234 @@
+---------------------------------------------INTEGERS-----------------------
+ Integer class is the basis for the two concrete classes that hold whole numbers. These concrete classes are Bignum and Fixnum. Fixnum holds integer values that are shown in the native machine word, whereas Bignum holds the integer value outside the range of Fixnum. Integer class contains a wide range of methods that are used for performing specified tasks. Integer class is a subclass of Numeric class.
+
+
+-------------------------------------------Integer Methods----------------------------
+
+1) self <=> other → -1, 0, +1, or nil 
+	 3.0.0 :320 > 1<=>2
+	 => -1 
+	3.0.0 :321 > 1<=>1
+	 => 0 
+	3.0.0 :322 > 1<=>0
+	 => 1 
+
+
+2) == (aliased as ===)-   Returns whether self is equal to the given value.
+
+3.0.0 :323 > 1==1
+ => true 
+3.0.0 :324 > 1===1
+ => true 
+
+
+3) sqrt(numeric) → integer 
+	3.0.0 :326 > Integer.sqrt(100)
+ 	=> 10 
+
+4) ceil(ndigits = 0) → integer - Returns the smallest number greater than or equal to self with a precision of ndigits decimal digits.
+
+								When the precision is negative, the returned value is an integer with at least ndigits.abs trailing zeros:
+	555.ceil(-1)  # => 560
+	555.ceil(-2)  # => 600
+	-555.ceil(-2) # => -500
+	555.ceil(-3)  # => 1000
+	555.ceil     # => 555
+	555.ceil(50) # => 555
+	
+5)  chr → string ----  
+	chr(encoding) → string 
+	Returns a 1-character string containing the character represented by the value of self, according to the given encoding.
+	
+	3.0.0 :345 > 65.chr
+	 => "A" 
+
+6)  digits(base = 10) → array_of_integers click to toggle source
+
+Returns an array of integers representing the base-radix digits of self; the first element of the array represents the least significant digit:
+
+	3.0.0 :346 > 10.digits(10)
+	 => [0, 1] 
+	3.0.0 :347 > 111.digits(2)
+	 => [1, 1, 1, 1, 0, 1, 1] 
+	3.0.0 :348 > 12345.digits
+	 => [5, 4, 3, 2, 1] 
+		
+7)  div(numeric) → integer 
+
+Performs integer division; returns the integer result of dividing self by numeric:	
+
+	3.0.0 :349 > 4.div(3)
+	 => 1 
+	3.0.0 :350 > 4/3
+	 => 1 
+	3.0.0 :351 > -4/3
+	 => -2 
+	3.0.0 :352 > -4.div(3)
+	 => -2 
+
+8)  divmod(other) → array - Returns a 2-element array [quotient,remainder]
+	q = (self/other).floor    # Quotient
+	r = self % other          # Remainder	
+	
+	3.0.0 :353 > 11.divmod(4)
+	 => [2, 3]                 
+
+9)  fdiv(numeric) → float 
+Returns the Float result of dividing self by numeric:	
+
+3.0.0 :354 > 4.fdiv(2) 
+ => 2.0 
+
+3.0.0 :356 > 4.fdiv(-3) 
+ => -1.3333333333333333 
+
+10)  floor(ndigits = 0) → integer click to toggle source
+
+Returns the largest number less than or equal to self with a precision of ndigits decimal digits.
+When ndigits is negative, the returned value has at least ndigits.abs trailing zeros:
+
+	3.0.0 :361 > 555.floor(-2)
+	 => 500 
+	3.0.0 :362 > 555.floor(-1)
+	 => 550 
+	3.0.0 :363 > 555.floor(-2)
+	 => 500 
+	3.0.0 :364 > -555.floor(-2)
+	 => -600 
+	3.0.0 :365 > 555.floor
+	 => 555 
+	3.0.0 :366 > 555.floor(50)
+	 => 555 
+	3.0.0 :3
+11)  pow(numeric) → numeric     same as a**b
+pow(integer, integer) → integer -- Returns (modular) exponentiation as:
+
+3.0.0 :367 > 2.pow(3)
+ => 8 
+
+12)  pred → next_integer--Returns the predecessor of self (equivalent to self - 1):  a=a-1
+
+3.0.0 :368 > 1.pred
+ => 0 
+3.0.0 :369 > -1.pred
+ => -2 
+3.0.0 :370 > 2.pred
+ => 1 
+
+13)  remainder(other) → real_number--Returns the remainder after dividing self by other. 
+
+3.0.0 :371 > 11.remainder(4) 
+ => 3 
+
+14)  round(ndigits= 0, half: :up) → integer --Returns self rounded to the nearest value with a precision of ndigits decimal digits.
+
+When ndigits is negative, the returned value has at least ndigits.abs trailing zeros:
+
+	3.0.0 :372 > 555.round(-1)  
+	 => 560 
+	3.0.0 :373 > 555.round(-2)  
+	 => 600 
+	3.0.0 :374 > 555.555.round(2)  
+	 => 555.56 
+	3.0.0 :375 > 25.round(-1, half: :up)  
+	 => 30 
+
+15)  succ or next → next_integer--Returns the successor integer of self (equivalent to self + 1):
+
+	3.0.0 :376 > 1.succ
+	 => 2 
+	 
+	 3.0.0 :377 > 1.next
+ 	=> 2 
+
+16)  to_f → float - Converts self to a Float:
+
+	3.0.0 :378 > 1.to_f 
+	 => 1.0 
+
+17) to_s(base = 10) → string -  
+	3.0.0 :379 > 12345.to_s   
+	 => "12345" 
+	3.0.0 :380 > 12345.to_s(2)
+	 => "11000000111001" 
+	3.0.0 :381 > 12345.to_s(8)
+	 => "30071" 
+
+18)  truncate(ndigits = 0) → integer--Returns self truncated (toward zero) to a precision of ndigits decimal digits.
+
+When ndigits is negative, the returned value has at least ndigits.abs trailing zeros:
+
+	3.0.0 :382 > 555.truncate(-1)
+	 => 550 
+	3.0.0 :383 > 555.truncate(-2)
+	 => 500 
+	3.0.0 :384 > 555.truncate(2)
+	 => 555 
+	3.0.0 :385 > 555.truncate(3)
+	 => 555 
+
+19)  self | other → integer  (Bitwise OR)
+	Bitwise OR; each bit in the result is 1 if either corresponding bit in self or other is 1, 0 otherwise
+	
+	
+20)  downto(limit) {|i| ... } → self - downto(limit) → enumerator
+
+Calls the given block with each integer value from self down to limit; returns self:	
+
+	3.0.0 :388 > 10.downto(5) {|i| puts i}
+	10
+	9
+	8
+	7
+	6
+	5
+
+21)  times {|i| ... } → self , times → enumerator
+
+Calls the given block self times with each integer in (0..self-1):
+	3.0.0 :390 > 10.times {|i| puts i}
+	0
+	1
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+	 => 10 	
+	 
+22)  upto(limit) {|i| ... } → self, upto(limit) → enumerator
+
+Calls the given block with each integer value from self up to limit; returns self:
+
+	3.0.0 :396 > 5.upto(10) {|i| puts i}
+	5
+	6
+	7
+	8
+	9
+	10
+	 => 5 
+
+23)  abs → integer, magnitude → integer
+
+Returns the absolute value of int.
+	3.0.0 :397 > -555.abs
+ 	=> 555 
+
+24)  even? → true or false
+
+Returns true if int is an even number.
+
+	3.0.0 :398 > 25.even?
+	 => false 
+
+25)  gcd(other_int) → integer
+
+Returns the greatest common divisor of the two integers. The result is always positive. 0.gcd(x) and x.gcd(0) return x.abs.
+
+	3.0.0 :399 > 36.gcd(60)  
+	 => 12	
+
