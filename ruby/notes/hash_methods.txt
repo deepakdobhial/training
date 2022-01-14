@@ -301,9 +301,82 @@ II) Public Instance Methods----------------------->
 	 => 2 
  
 
+--------------------------------------------Methods for Comparing--------------------------------------------------
+
+1)  hash < other_hash → true or false---- Returns true if hash is a proper subset of other_hash, false otherwise
+
+	3.0.0 :064 > h={'A' => 65, 'B' => 66, 'C' => 67}
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :065 > g={'A' => 65}
+	 => {"A"=>65} 
+	3.0.0 :066 > h<g                  # h is not subset of g
+	 => false 
+	3.0.0 :067 > g<h				 # g is proper subset of h     
+	 => true 
+	3.0.0 :078 > i
+	=> {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :083 > i<h
+ 	=> false 
 	 
+2)  hash <= other_hash → true or false--- Returns true if hash is a subset of other_hash, false otherwise:
+
+	3.0.0 :076 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :077 > g
+	 => {"A"=>65} 
+	3.0.0 :078 > i
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :079 > g<=h
+	 => true 
+	3.0.0 :080 > g<=i
+	 => true 
+	3.0.0 :081 > i<=h
+	 => true 
+	3.0.0 :082 > i<=h
+	 => true 
 	 
+3)  hash == object → true or false -- Returns true if all of the following are true:
+
+    object is a Hash object. hash and object have the same keys (regardless of order). For each key key, hash[key] == object[key].
+	Otherwise, returns false.
+
+	3.0.0 :086 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :087 > g
+	 => {"A"=>65} 
+	3.0.0 :088 > i
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :089 > h==g
+	 => false 
+	3.0.0 :090 > h==i
+	 => true 
 	 
+4)  hash > other_hash → true or false---Returns true if hash is a proper superset of other_hash, false otherwise:
+
+	3.0.0 :091 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :092 > g
+	 => {"A"=>65} 
+	3.0.0 :093 > i
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :094 > h>g
+	 => true 
+	3.0.0 :095 > h>i
+	 => false 
+
+5)  hash >= other_hash → true or false -- Returns true if hash is a superset of other_hash, false otherwise:
+	3.0.0 :096 > h
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :097 > g
+	 => {"A"=>65} 
+	3.0.0 :098 > i
+	 => {"A"=>65, "B"=>66, "C"=>67} 
+	3.0.0 :099 > h>=g
+	 => true 
+	3.0.0 :100 > h>=i
+	 => true 
+	 
+
 	 
 	 
 	 
