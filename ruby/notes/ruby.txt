@@ -1001,5 +1001,109 @@ Modules are a way of grouping together methods, classes, and constants
 					
 				
 				
+-----------------------------------------------------------Iterators------------------------------------------------------
+
+1) each Iterator - each iterator returns all the elements of an array or a hash.
+
+				arr = [1, 2, 3,4]
+				arr. each do |ele|
+				  puts ele
+				end
+			output --	
+				1
+				2
+				3
+				4
+
+2) collect Iterator - The collect iterator returns collect enumerator 
+	
+		a = [1,2,3,4,5]
+		b = a.collect{|x| 10*x}
+		puts b
+		
+		output -- 
+		10
+		20
+		30
+		40
+		50
+
+3) Times Iterator - A loop is executed specified number of times by the times iterator. Loop will start from zero till one less than specified number.
+
+		5.times do |ele|
+  		puts ele
+		end
+		
+		output - 
+		0
+		1
+		2
+		3
+		4
+		
+4) Upto Iterators - upto iterator iterates from number x to number y. 
+		1.upto(5) do |var|
+		  puts var
+		end
+		
+		output - 
+		1
+		2
+		3
+		4
+		5
+		
+5) Downto - 
+		5.downto(0) do |var|
+ 			 puts var
+		end
+		
+		output - 
+		5
+		4
+		3
+		2
+		1
+		0
+		
+6) Step Iterator - A step iterator is used to iterate while skipping over a range. (for step at each loop)
+
+	
+   (10..50).step(10) do |var|   # used to 10 to 20 (jump step 10)
+ 	 puts var
+	end
+	
+	output - -   
+	10
+	20
+	30
+	40
+	50
+
+7) Each_Line - A each_line iterator is used to iterate over a new line in a string. 
+	
+		a ="All\nlines\nwill\nprinted\nword\nby\nword"
+		a.each_line do |line|
+  			puts line
+		end
+		
+		output - 
+		All
+		lines
+		will
+		printed
+		word
+		by
+		word
+		
+
+
+
+
+
+
+
+
+
 
 
