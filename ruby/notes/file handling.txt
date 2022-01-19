@@ -383,10 +383,36 @@ Returns true if the named file is writable by the real user and group id of this
  => true 
 	
 	
-	
-	
-	
-	
+----------------------------------------------------Contents Methods -----------------	
+1) ::empty? (aliased as ::zero?) ---  Returns whether the file at the given path exists and is empty.
+
+zero?(file_name) → true or false --- 
+
+3.0.0 :183 > File.zero?('sample11.txt')
+ => false 
+3.0.0 :184 > File.zero?('sample.socket')
+ => true 
+
+2)  size(file_name) → integer -- Returns the size of file_name.	
+
+	3.0.0 :003 > File.size('sample.txt')
+	 => 6 
+	3.0.0 :004 > File.size('sample.socket')
+ 	=> 0 
+ 	
+3)  size?(file_name) → Integer or nil -- Returns nil if file_name doesn't exist or has zero size, the size of the file otherwise.
+	3.0.0 :001 > File.size?('sample.socket')
+	 => nil 
+	3.0.0 :002 > File.size?('sample.txt')
+	 => 6 
+
+4) size() -   Returns the size (bytes) of self.
+
+3.0.0 :005 > File.new('sample.socket').size
+ => 0 
+3.0.0 :006 > File.new('sample.txt').size
+ => 6  	
+
 	
 	
 	
