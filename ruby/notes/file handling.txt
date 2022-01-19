@@ -54,6 +54,135 @@ Difference between both the methods is that File.open method can be associated w
 	
 	
 
+-------------------------------------------Querying Methods ---------------------------------------------
+Paths --- 
+
+1) ::absolute_path() -- Returns the absolute file path for the given path.
+
+absolute_path(file_name [, dir_string] ) → abs_file_name- Converts a pathname to an absolute pathname. Relative paths are referenced from the current working directory of the process unless dir_string is given, in which case it will be used as the starting point. If the given pathname starts with a “~'' it is NOT expanded, it is treated as a normal directory name.
+
+  3.0.0 :031 > File.absolute_path('sample.txt')
+  => "/home/beryl/sample.txt" 
+  
+2)  absolute_path?(file_name) → true or false - Returns true if file_name is an absolute path, and false otherwise.
+	
+	3.0.0 :032?> File.absolute_path? ('sample.txt')
+	 => false 
+	3.0.0 :033 > File.absolute_path? ('/home/beryl/sample.txt')
+	 => true 
+
+3) ::basename - Returns the last component of the given file path.
+
+---- basename(file_name [, suffix] ) → base_name  
+	  3.0.0 :034 > File.basename("/home/beryl/sample.txt")
+ 		=> "sample.txt" 
+ 		
+ 	  3.0.0 :036 > File.basename("/home/beryl/sample.txt", ".txt")
+	 => "sample" 
+	3.0.0 :037 > File.basename("/home/beryl/sample.txt", ".*")
+ 	=> "sample" 
+ 	
+4) ::dirname - Returns all but the last component of the given file path. 
+   
+--->  dirname(file_name, level = 1) → dir_name - Returns all components of the filename given in file_name except the last one (after 
+                                          first stripping trailing separators)
+                                          
+ 3.0.0 :049 > File.dirname("/home/beryl/sample.txt")
+ => "/home/beryl" 
+                          
+5)::expand_path -  Returns the absolute file path for the given path, expanding ~ for a home directory.
+
+--- expand_path(file_name [, dir_string] ) → abs_file_name
+
+	3.0.0 :055 > File.expand_path("~/home")
+	 => "/home/beryl/home" 
+	3.0.0 :056 > File.expand_path("~")
+	 => "/home/beryl" 
+	3.0.0 :057 > File.expand_path("~/traning")
+	 => "/home/beryl/traning" 
+	3.0.0 :058 > File.expand_path("traning", "/home/beryl")
+	 => "/home/beryl/traning" 
+
+6) ::extname - Returns the file extension for the given file path.
+
+--- extname(path) → string--Returns the extension (the portion of file name in path starting from the last period).
+
+3.0.0 :061 > File.extname("/home/beryl/sample")
+ => "" 
+3.0.0 :062 > File.extname("/home/beryl/sample.txt")
+ => ".txt" 
+
+7) ::fnmatch? (aliased as ::fnmatch) --Returns whether the given file path matches the given pattern.
+
+--- fnmatch( pattern, path, [flags] ) → (true or false)
+--- fnmatch?( pattern, path, [flags] ) → (true or false)
+ 
+	3.0.0 :064 > File.fnmatch('c?t',     'cat') 
+	 => true 
+	3.0.0 :065 > File.fnmatch('cat',     'cat') 
+	 => true 
+	3.0.0 :066 > File.fnmatch('cat',     'category') 
+	 => false 
+	3.0.0 :067 > File.fnmatch('c??t',     'cat') 
+	 => false 
+	3.0.0 :068 > File.fnmatch('c*',     'cat') 
+	 => true 
+
+8) ::join --- Joins path components into a single path string.
+
+	3.0.0 :072 > File.join("home", "beryl", "sample.txt")
+	 => "home/beryl/sample.txt" 
+
+9) ::path -- Returns the string representation of the given path.
+
+	3.0.0 :073 > File.path("home/beryl/sample.txt")
+	 => "home/beryl/sample.txt" 
+
+10) ::readlink - Returns the path to the file at the given symbolic link.
+
+-- readlink(link_name) → file_name -- Returns the name of the file referenced by the given link. Not available on all platforms.
+
+3.0.0 :077 > File.readlink("sample5.txt")
+ => "sample.txt" 
+
+11) ::realdirpath --  Returns the real path for the given file path, where the last component need not exist.
+
+-- realdirpath(pathname [, dir_string]) → real_pathname 
+
+Returns the real (absolute) pathname of pathname in the actual filesystem. The real pathname doesn't contain symlinks or useless dots.
+
+If dir_string is given, it is used as a base directory for interpreting relative pathname instead of the current directory.
+
+
+	3.0.0 :082 > File.realdirpath('/home/beryl/sample.txt')
+ 	=> "/home/beryl/sample.txt" 
+
+12) ::split -- Returns an array of two strings: the directory name and basename of the file at the given path. 
+ 
+--> split(file_name) → array -- Splits the given string into a directory and a file component and returns them in a two-element array
+
+	3.0.0 :084 > File.split('/home/beryl/sample.txt')
+	 => ["/home/beryl", "sample.txt"] 
+
+13) path (aliased as to_path) --   Returns the string representation of the given path.
+
+---- path → filename
+---- to_path → filename
+
+Returns the pathname used to create file as a string. Does not normalize the name.
+
+The pathname may not point to the file corresponding to file. For instance, the pathname becomes void when the file has been moved or deleted.
+
+	3.0.0 :085 > fileobj = File.new('sample.txt').path
+ 	=> "sample.txt"
+
+
+
+
+
+
+
+
 
 
 
