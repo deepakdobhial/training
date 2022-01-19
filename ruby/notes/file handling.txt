@@ -413,6 +413,66 @@ zero?(file_name) → true or false ---
 3.0.0 :006 > File.new('sample.txt').size
  => 6  	
 
-	
-	
+--------------------------------------------------Settings Methods -------------------------------------------------------	
+
+1) ::chmod - Changes permissions of the file at the given path. Returns the number of files processed.
+-- chmod(mode_int, file_name, ... ) → integer
+
+3.0.0 :014 > File.chmod(0644, 'sample.txt')
+ => 1 
+
+2) chown(owner_int, group_int, file_name, ...) → integer -- Changes the owner and group of the named file(s) to the given numeric owner and group id's. 
+
+
+3)  rename(old_name, new_name) → 0 -- Renames the given file to the new name. Raises a SystemCallError if the file cannot be renamed.
+
+3.0.0 :015 > File.rename('sample.socket', 'sample.txt')
+ => 0
+ 
+ 
+ ---------------------------------------------Delete methods ------------------------------------
+1) ::truncate --  Truncates the file at the given file path to the given size.
+
+ truncate(file_name, integer) → 0
+
+Truncates the file file_name to be at most integer bytes long.
+
+		3.0.0 :022 > f = File.new('sample.txt', 'w')
+		 => #<File:sample.txt> 
+		3.0.0 :023 > f.write('1234567890')
+		 => 10 
+		3.0.0 :024 > f.close
+		 => nil 
+		 3.0.0 :026 > File.truncate('sample.txt', 5)            #67890 deleted
+		 => 0 
+		3.0.0 :027 > File.size('sample.txt')
+		 => 5 
+		 
+2)  truncate(integer) → 0 -- Truncates file to at most integer bytes. The file must be opened for writing
+
+3.0.0 :034 > f = File.new('sample.txt', 'w')
+ => #<File:sample.txt> 
+3.0.0 :035 > f.write('1234567890')
+ => 10 
+3.0.0 :036 > f.truncate(5)              #67890 deleted
+ => 0 
+3.0.0 :037 > f.size
+ => 5 
+
+
+3) ::unlink (aliased as ::delete) --     Deletes the file for each given file path.
+
+ unlink(file_name, ...) → integer  or delete(file_name, ...) → integer 
+
+Deletes the named files, returning the number of names passed as arguments. Raises an exception on any error.
+ 
+ 3.0.0 :028 > File.delete('sample5.txt')
+ => 1 
+ 
+ 
+
+
+		 
+
+
 	
