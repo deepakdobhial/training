@@ -1,0 +1,63 @@
+------------------------------------------------File handling--------------------------------
+It is a way of processing a file such as creating a new file, reading content in a file, writing content to a file, appending content to a file, renaming the file and deleting the file
+
+
+ # Class File:
+
+ --   Inherits from class IO, in particular, methods for creating, reading, and writing files
+ --   Includes module FileTest. which provides dozens of additional methods.
+   
+# Common modes for File Handling
+
+	“r” : Read-only mode for a file.
+	“w” : Write-only mode for a file.
+	“a” : Write-only mode, if file exists it will append the data otherwise a new file will be created.
+	“r+” : Read-Write mode for a file.
+	“w+” : Read-Write mode for a file.
+	“a+” : Read and Write mode, if file exists it will append the data otherwise a new file will be created.
+
+
+-----------------------------------------Creating methods ---------------------------------------------------
+
+ 1) file.new() -  create a new File using File.new() method for reading, writing or for both, according to the mode string. we can use 					  fileobject.close() method to close that file.
+ 
+There are two methods to open a file in Ruby:
+
+----- File.new method : Using this method a new file can be created for reading, writing or both.
+      3.0.0 :020 > fileobj = File.new('sample.txt', 'w+')
+ => #<File:sample.txt> 
+
+----  File.open method : Using this method a new file object is created. That file object is assigned to a file. 
+
+	  3.0.0 :022 > File.open('sample.txt', 'w+') do |file|
+      3.0.0 :023 > end
+
+
+Difference between both the methods is that File.open method can be associated with a block while File.new method can't.
+			   
+						   
+2) link(old_name, new_name) → 0 - Creates a new name for an existing file using a hard link. Will not overwrite new_name if it already 									  exists (raising a subclass of SystemCallError).
+
+	3.0.0 :024 > File.link('sample.txt', 'sample1.txt')   # a new file created 
+ 	=> 0 
+
+3)  mkfifo(file_name, mode=0666) => 0   (create pipe file)
+	Creates a FIFO special file with name file_name. mode specifies the FIFO's permissions. It is modified by the process's umask in the 	 usual way: the permissions of the created file are (mode & ~umask).
+	
+	3.0.0 :028 > File.mkfifo('sample3.txt', mode=0666)
+ 	=> 0
+
+4)  symlink() → Creates a symbolic link for the given file path. 
+	symlink(old_name, new_name) → 0
+	
+	(a symbolic link is a term for any file that contains a reference to another file or directory in the form of an absolute or relative path and that affects pathname resolution.)
+	
+	
+
+
+
+
+
+
+
+
