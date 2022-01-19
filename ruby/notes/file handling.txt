@@ -221,11 +221,172 @@ The pathname may not point to the file corresponding to file. For instance, the 
 	3.0.0 :099 > File.new('sample.txt').mtime
 	 => 2022-01-19 14:57:58.685024538 +0530 
 
+---------------------------------------------Types Methods ----------------------------------------
+
+1) ::blockdev?   Returns whether the file at the given path is a block device.
+  blockdev?(file_name) → true or false
+
+Returns true if the named file is a block device.
+3.0.0 :105 > File.blockdev?('sampe9.txt')
+ => false 
+
+2) chardev?(file_name) → true or false -- Returns true if the named file is a character device.
+
+3.0.0 :106 > File.chardev?('sampe9.txt')
+ => false 
+
+3) ::directory? -- Returns whether the file at the given path is a diretory.
+
+ directory?(file_name) → true or false
+Returns true if the named file is a directory, or a symlink that points at a directory, and false otherwise.
+
+3.0.0 :112 > File.directory?('.')
+ => true 
+
+4) ::executable? -- Returns whether the file at the given path is executable by the effective user and group of the current process.
+
+3.0.0 :116 > File.executable?('sample.txt')
+ => false 
+
+5) ::executable_real?--    Returns whether the file at the given path is executable by the real user and group of the current process.
+
+executable_real?(file_name) → true or false
+
+3.0.0 :120 > File.executable_real?('home/download/slack-desktop-4.23.0-amd64.de
+b')
+ => false 
+
+6) exist?(file_name) → true or false -- Return true if the named file exists.
+
+3.0.0 :121 > File.exist?('sample')
+ => false 
+3.0.0 :122 > File.exist?('sample.txt')
+ => true 
+ 
+7)  file?(file) → true or false -- Returns true if the named file exists and is a regular file.
+If the file argument is a symbolic link, it will resolve the symbolic link and use the file referenced by the link.
+
+3.0.0 :124 > File.file?('sample5.txt')
+ => true 
+3.0.0 :125 > File.file?('sample5.txt')
+ => true 
+3.0.0 :126 > File.file?('sample10.txt')
+ => false 
+ 
+8)  ftype(file_name) → string 
+Identifies the type of the named file; the return string is one of “file'', “directory'', “characterSpecial'', “blockSpecial'', “fifo'', “link'', “socket'', or “unknown''.
+
+3.0.0 :128 > File.ftype('sample5.txt')
+ => "link" 
+3.0.0 :129 > File.ftype('sample.txt')
+ => "file" 
+3.0.0 :130 > File.ftype('sample3.txt')
+ => "fifo" 
+ 
+9)  grpowned?(file_name) → true or false -- Returns true if the named file exists and the effective group id of the calling process is the owner of the file.
+
+3.0.0 :133 > File.grpowned?('sample9.txt')
+ => true 
+3.0.0 :134 > File.grpowned?('sample10.txt')
+ => false 
+
+10)  identical?(file_1, file_2) → true or false -- Returns true if the named files are identical. Returns whether the files at two given paths are identical.
+
+3.0.0 :139 > File.identical?('sample5.txt', 'sample.txt')
+ => true 
+ 
+11)  lstat(file_name) → stat--- Same as File::stat, but does not follow the last symbolic link. Instead, reports on the link itself.
+
+3.0.0 :141 > File.lstat('sample5.txt')
+ => #<File::Stat dev=0x805, ino=19043105, mode=0120777, nlink=1, uid=1000, gid=1000, rdev=0x0, size=10, blksize=4096, blocks=0, atime=2022-01-19 13:04:48.710822365 +0530, mtime=2022-01-19 13:04:48.70682198 +0530, ctime=2022-01-19 13:04:48.70682198 +0530> 
 
 
+-------3.0.0 :144 > File.lstat('sample5.txt').size
+ 		=> 10 
 
+12)  owned?(file_name) → true or false -- Returns true if the named file exists and the effective used id of the calling process is the owner of the file.
 
+3.0.0 :145 > File.owned?('sample5.txt')
+ => true 
+3.0.0 :146 > File.owned?('sample.txt')
+ => true 
+3.0.0 :147 > File.owned?('sample10.txt')
+ => false 
 
+13)  pipe?(file_name) → true or false -- Returns true if the named file is a pipe.
 
+3.0.0 :148 > File.pipe?('sample5.txt')
+ => false 
+3.0.0 :149 > File.pipe?('sample3.txt')
+ => true 
 
+14) readable?(file_name) → true or false -- Returns true if the named file is readable by the effective user and group id of this process
 
+3.0.0 :152 > File.readable?('sample3.txt')
+ => true 
+3.0.0 :153 > File.readable?('sample5.txt')
+ => true 
+ 
+15)  readable_real?(file_name) → true or false --  Returns true if the named file is readable by the real user and group id of this process.
+3.0.0 :154 > File.readable_real?('sample5.txt')
+ => true 
+ 
+16)  setgid?(file_name) → true or false -    (set group ID)
+
+meaning - The Unix access rights flags setuid and setgid (short for "set user ID" and "set group ID") allow users to run an executable with the file system permissions of the executable's owner or group respectively and to change behaviour in directories
+
+Returns true if the named file has the setgid bit set. 
+
+3.0.0 :155 > File.setgid?('sample5.txt')
+ => false 
+ 
+17)  setuid?(file_name) → true or false -- Returns true if the named file has the setuid bit set.
+
+18)  socket?(file_name) → true or false -- Returns true if the named file is a socket.
+A unit configuration file whose name ends in " . socket " encodes information about an IPC or network socket or a file system FIFO controlled and supervised by systemd, for socket-based activation.
+
+19) stat(file_name) → stat -- Returns a File::Stat object for the named file
+3.0.0 :169 > File.stat('sample.socket')
+ => #<File::Stat dev=0x805, ino=19014473, mode=0100664, nlink=1, uid=1000, gid=1000, rdev=0x0, size=0, blksize=4096, blocks=0, atime=2022-01-19 15:53:30.499762546 +0530, mtime=2022-01-19 15:53:30.499762546 +0530, ctime=2022-01-19 15:53:30.499762546 +0530> 
+
+20) a sticky bit -------is a permission bit which is set on a file or folder, thereby permitting only the owner or root user of the file 							or folder to modify, rename or delete the concerned directory or file. No other user would be permitted to have 						these privileges on a file which has a sticky bit.
+
+sticky?(file_name) → true or false
+
+3.0.0 :170 > File.sticky?('sample.socket')
+ => false
+ 
+21)  symlink?(file_name) → true or false -- Returns true if the named file is a symbolic link.
+	3.0.0 :171 > File.symlink?('sample5.txt')
+	 => true 
+
+22)  umask() → integer    (user mask value)   #Default File Permissions
+	umask(integer) → integer -- Returns the current umask value for this proces
+	
+	
+23) world_readable?(file_name) → integer or nil - 
+If file_name is readable by others, returns an integer representing the file permission bits of file_name. Returns nil otherwise.
+
+3.0.0 :178 > File.world_readable?('sample.txt')
+ => 436  
+ 
+24)  writable?(file_name) → true or false  -- Returns true if the named file is writable by the effective user and group id of this process
+	
+3.0.0 :179 > File.writable?('sample.txt')
+ => true 
+ 
+25)  writable_real?(file_name) → true or false
+
+Returns true if the named file is writable by the real user and group id of this process.	
+	
+	3.0.0 :180 > File.writable_real?('sample.txt')
+ => true 
+	
+	
+	
+	
+	
+	
+	
+	
+	
