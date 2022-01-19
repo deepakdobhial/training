@@ -177,10 +177,49 @@ The pathname may not point to the file corresponding to file. For instance, the 
  	=> "sample.txt"
 
 
+------------------------------------------------times Method--------------------------------------------------------
+1) ::atime --    Returns a Time for the most recent access to the given file.
 
+---atime(file_name) → time -- Returns the last access time for the named file as a Time object.  file_name can be an IO object.
 
+3.0.0 :086 > File.atime('sample.txt')
+ => 2022-01-19 13:04:54.875412587 +0530
 
+2) ::birthtime --  Returns a Time for the creation of the given file.
 
+	3.0.0 :087 > File.birthtime('sample.txt')
+	 => 2022-01-19 12:40:06.642876823 +0530 
+	 
+3) ::ctime -- Returns a Time for the metadata change of the given file.
+ --ctime(file_name) → time
+ Returns the change time for the named file (the time at which directory information about the file was changed, not the file itself).
+
+	3.0.0 :088 > File.ctime('sample.txt')
+ 	=> 2022-01-19 12:46:58.086595859 +0530 
+
+4) ::mtime --  Returns a Time for the most recent data modification to the content of the given file.
+ mtime(file_name) → time -- Returns the modification time for the named file as a Time object.
+ 
+3.0.0 :090 > File.mtime('sample.txt')
+ => 2022-01-19 14:57:58.685024538 +0530 
+
+5)atime → time -- Returns the last access time (a Time object) for file, or epoch if file has not been accessed
+
+3.0.0 :093 > File.new('sample.txt').atime
+ => 2022-01-19 13:04:54.875412587 +0530
+
+6)  birthtime → time -Returns the birth time for file.
+	3.0.0 :096 > File.new('sample.txt').birthtime
+  => 2022-01-19 12:40:06.642876823 +0530 
+
+7)  ctime → time --Returns the change time for file (that is, the time directory information about the file was changed, not the file itself).
+
+3.0.0 :098 > File.new('sample.txt').ctime
+ => 2022-01-19 14:57:58.685024538 +0530 
+
+8) mtime → time -- Returns the modification time for file.
+	3.0.0 :099 > File.new('sample.txt').mtime
+	 => 2022-01-19 14:57:58.685024538 +0530 
 
 
 
