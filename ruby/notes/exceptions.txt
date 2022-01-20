@@ -78,3 +78,209 @@ When an exception has been raised but not yet handled (in rescue, ensure, at_exi
     fatal
 
 ------------------------------------------Handling an Exception---------------------------------------
+
+e.g. 
+
+			begin
+			   no1 = Integer(gets)
+			   no2 = Integer(gets)
+			   puts "#{ no1 / no2 }"
+			   
+			rescue 
+			   puts "Zero Division error occur"
+			end
+
+# output
+				5
+				0
+				Zero Division error occur
+
+
+
+1) Using retry Statement - retry statement, the rescue block code can be resumed from begin after capturing an exception. 
+
+
+	begin
+   no1 = Integer(gets)
+   no2 = Integer(gets)
+   puts "#{ no1 / no2 }"
+   
+	rescue 
+	   puts "Zero Division error occur"
+	   puts "Enter numbers again: "
+	   retry                                  # The retry statement will go to the begin block.
+	end
+
+# output-----------
+	5
+	0
+	Zero Division error occur
+	Enter numbers again: 
+	6
+	3
+	2
+		
+
+2) Using raise Statement - The raise statement is used to raise an exception.  (Raising Exceptions Manually)
+
+   syntax:  raise or 
+   			raise "Error Message"   or
+		    raise ExceptionType, "Error Message"  or
+		    raise ExceptionType, "Error Message" condition  
+
+		no1 = Integer(gets)
+		no2 = Integer(gets)
+
+		begin
+		   puts no1/no2
+		   raise ZeroDivisionError, "Divided by 0" if no2 == 0
+		rescue ZeroDivisionError => e 
+		   puts e.message
+		   puts e.backtrace.inspect
+		end
+
+3) Using ensure Statement - The ensure block always run whether an exception is raised or not. It is placed after last rescue clause and 								will always executed as the block terminates. 
+
+
+	no1 = Integer(gets)
+	no2 = Integer(gets)
+
+	begin
+	   no3 = no1/no2
+	   raise ZeroDivisionError, "Divided by 0" if no2 == 0
+	rescue ZeroDivisionError => e 
+	   puts e.message
+	   # puts e.backtrace.inspect
+	ensure 
+	   print "This block always execute \n"
+	   puts no3
+	end
+
+# output -- 
+		5
+		0
+		divided by 0
+		This block always execute 
+                                       # puts no3 blank line
+                                       
+4) Using else Statement - The else clause is always present after rescue clause and before ensure clause. If no exceptions are raised, then only else block is executed.
+
+
+	no1 = Integer(gets)
+	no2 = Integer(gets)
+
+	begin
+	   no3 = no1/no2
+	   raise ZeroDivisionError, "Divided by 0" if no2 == 0
+	rescue ZeroDivisionError => e 
+	   puts "Rescue block"
+	   puts e.message
+	   # puts e.backtrace.inspect
+	else 
+	   puts "Else block"
+	   puts no3
+	ensure 
+	   print "ensure block always execute \n"
+	   # puts no3
+	end
+
+# output ---
+
+	5
+	0
+	Rescue block
+	divided by 0
+	ensure block always execute 
+	
+# output - 2
+	5
+	3
+	Else block
+	1
+	ensure block always execute 	
+
+
+5) rescue statements  -- 
+
+		begin
+		   no1 = Integer(gets)
+		   no2 = Integer(gets)
+		   no3 = no1/no2
+		 
+		rescue ZeroDivisionError => e          # rescue ZeroDivisionError, ArgumentError => e     
+		   puts "Rescue block"
+		   puts e.message
+		  
+		rescue ArgumentError => e
+		   puts e.message
+		else 
+		   puts "Else block"
+		   puts no3
+		
+		end
+
+
+# output 
+5
+0
+Rescue block
+divided by 0
+ensure block always execute 
+beryl@beryl-HP-ProBook-6460b:~/training/ruby/programs$ ruby rough.rb 
+5
+'a'
+Rescue block
+invalid value for Integer(): "'a'\n"
+ensure block always execute 
+
+
+5) Catch and Throw  ---- 
+
+catch and throw provide a way to jump from the execution early when no further work is needed in a code.
+
+The catch defines a block that is labeled with a given name. It is used to jump out of nested code. Using catch, the block will be executed normally until throw is encountered.
+
+The catch and throw method is faster than rescue and raise clauses. Hence, it is more suitable to use. 
+catch and throw work with symbols rather than exceptions.
+
+They're used to escape from a nested loop, method call, or similar. 
+
+syntax: 
+					throw :label_name
+						# this block will not be executed
+
+					catch :label_name do
+						# matching catch will be executed when the throw block encounter
+					end
+					
+		catch(:finish) do 
+		   10.times do |x| 
+			  10.times do |y|
+				throw :finish if (x + y) == 6        # come out from both loops
+				puts "#{ x } and #{ y } = #{ (x+y) }"       
+			  end
+			 
+		   end 
+		 
+		   puts "This line not print if exception occur" 
+		end
+
+		# output --- 
+
+		0 and 0 = 0
+		0 and 1 = 1
+		0 and 2 = 2
+		0 and 3 = 3
+		0 and 4 = 4
+		0 and 5 = 5
+
+
+
+
+
+
+
+
+
+
+
