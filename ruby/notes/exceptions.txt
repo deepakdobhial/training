@@ -1,0 +1,80 @@
+-----------------------------------------------------Introduction-----------------------------------------
+exception handling is a process which describes a way to handle the error raised in a program.
+
+syntax: -
+
+	begin
+		raise
+		  # block where exception raise
+
+		rescue
+		  # block where exception rescue
+	end
+	
+Note -Ruby exception is an object, an instance of the class Exception . 
+      When an exception is raised but not handled, global variable $! contains the current exception and $@ contains the current 			  exception's backtrace. 	
+      
+
+-----An Exception object carries information about an exception:
+
+   i) Its type (the exception's class).
+
+   ii) An optional descriptive message.
+
+  iii) Optional backtrace information
+   
+ Defaults¶ ↑
+
+Two Ruby statements have default exception classes:
+
+    raise: defaults to RuntimeError.
+
+    rescue: defaults to StandardError.
+
+ Global Variables¶ ↑
+
+When an exception has been raised but not yet handled (in rescue, ensure, at_exit and END blocks), two global variables are set:
+
+    $! contains the current exception.
+
+    $@ contains its backtrace.
+    
+   #-------------------------------------#    
+    The built-in subclasses of Exception are:
+    NoMemoryError
+    ScriptError
+    LoadError
+    NotImplementedError
+    SyntaxError
+    SecurityError
+    SignalException
+    Interrupt
+    StandardError
+    ArgumentError
+    UncaughtThrowError
+    EncodingError
+    FiberError
+    IOError
+    EOFError
+    IndexError
+    KeyError
+    StopIteration
+    ClosedQueueError
+    LocalJumpError
+    NameError
+    NoMethodError
+    RangeError
+    FloatDomainError
+    RegexpError
+    RuntimeError
+    FrozenError
+    SystemCallError
+    Errno::*
+    ThreadError
+    TypeError
+    ZeroDivisionError
+    SystemExit
+    SystemStackError
+    fatal
+
+------------------------------------------Handling an Exception---------------------------------------
