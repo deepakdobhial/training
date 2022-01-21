@@ -471,8 +471,175 @@ Deletes the named files, returning the number of names passed as arguments. Rais
  
  
 
+-------------------------------------------------Important Methods ----------------------------------------
 
-		 
-
-
+# Reading and Writing Files
 	
+	i) syswrite Method -   (write method)  (Open file in write mode)
+		afile = File.new('readme.txt', 'r+')
+		if afile
+		  afile.syswrite('GHIJ')
+		end
+		 
+	ii) sysread Method  - (Read method)  (Open file in any mode)
+		
+			afile = File.new('readme.txt', 'r')
+			if afile
+			  contents = afile.sysread(20)
+			  puts contents
+			end
+
+
+
+			#GHIJEF
+
+	iii) each_byte Method - (This method belongs to the class File. The method each_byte is always associated with a block) 
+	
+	aFile = File.new("readme.txt", "r")
+	if aFile
+	   
+	   aFile.each_byte {|ch| putc ch; putc ?. }
+	else
+	   puts "Unable to open file!"
+	end
+
+
+
+	#A.B.C.D.E.F.
+
+-------------------------------------------------IO Class ----------------------------------------------
+Position - An IO stream has a position, which is the non-negative integer offset (in bytes) in the stream where the next read or write will occur.
+
+    At the beginning (position 0) if its mode is 'r', 'w', or 'r+'.
+
+    At the end (position self.size) if its mode is 'a', 'w+', or 'a+'.
+    
+ 1)  tell → integer -- Returns the current position (in bytes) in self 
+ 	
+ 
+ 2) pos = new_position → new_position-- Seeks to the given new_position (in bytes)
+ 
+ 3)  seek(offset, whence = IO::SEEK_SET) → 0 -- Seeks to the position given by integer offset (see Position) and constant whence, which 															is one of: :CUR or IO::SEEK_CUR: Repositions the stream to its current position 														plus the given offset:
+
+4)  eof → true or false -- Returns true if the stream is positioned at its end, false otherwise	
+
+
+
+	e.g. 3.0.0 :003 > f.tell           # return current
+		 => 0 
+		3.0.0 :004 > f.pos				# return current
+		 => 0 
+		3.0.0 :005 > f.pos= 5           # seeks given position
+		 => 5 
+		3.0.0 :006 > f.tell	
+		 => 5 
+		 
+		 3.0.0 :008 > f.seek(6, :CUR)           # from cur(5) to 6 more & return zero
+ 		=> 0 
+		3.0.0 :009 > f.tell
+ 		=> 11 
+
+		3.0.0 :011 > f.seek(11, :END)           # end position from 11 
+			 => 0 
+			3.0.0 :012 > f.tell
+			 => 95 
+		
+		3.0.0 :013 > f.seek(-30, :END)
+		 => 0 
+		3.0.0 :014 > f.tell
+		 => 54 
+	
+		3.0.0 :017 > f.tell
+	 => 54 
+	3.0.0 :018 > f.seek(f.tell, :END)
+	 => 0 
+	3.0.0 :019 > f.eof                      # true if stream positioned at end
+	 => true 
+	
+	
+5)  lineno → integer -- Returns the current line number in ios. The stream must be opened for reading	
+
+	lineno = integer → integer Manually sets the current line number to the given value. $. is updated only on the next read.
+	
+	3.0.0 :079 > f.lineno = 0                # set lineno to start
+	 => 0 
+	3.0.0 :080 > f.lineno					# lineno 
+	 => 0 
+	3.0.0 :081 > f.gets                     # read line
+	 => "hello world sahjkahdjkafhjk\n" 
+	3.0.0 :082 > f.lineno
+	 => 1 
+	3.0.0 :083 > f.gets
+	 => "sajkfdhfjkdshfjkdhf\n" 
+
+6)  read(name, [length [, offset]] [, opt]) → string
+read(name, [length [, offset]] [, opt]) → string
+
+Opens the file, optionally seeks to the given offset, then returns length bytes (defaulting to the rest of the file). read ensures the file is closed before returning.
+
+	3.0.0 :091 > f.read         # read whole text
+	 => "hello world sahjkahdjkafhjk\nsajkfdhfjkdshfjkdhf\nsahjkfhsjkafhjksahfjk\nsjafhsjkhfjka\n" 
+	3.0.0 :092 > f.read
+	 => "" 
+	3.0.0 :093 > f.pos = 0
+	 => 0 
+	3.0.0 :094 > f.read(5)     # read number of bytes
+	 => "hello" 
+
+7)  readlines(name, sep=$/ [, getline_args, open_args]) → array
+	readlines(name, limit [, getline_args, open_args]) → array
+	readlines(name, sep, limit [, getline_args, open_args]) → array
+	readlines(name, sep=$/ [, getline_args, open_args]) → array
+	readlines(name, limit [, getline_args, open_args]) → array
+	readlines(name, sep, limit [, getline_args, open_args]) → array 
+
+Reads the entire file specified by name as individual lines, and returns those lines in an array. Lines are separated by sep.
+
+	3.0.0 :101 > f = File.open('readme.txt')
+	 => #<File:readme.txt> 
+	3.0.0 :102 > f.readlines
+	 => ["hello world sahjkahdjkafhjk\n", "sajkfdhfjkdshfjkdhf\n", "sahjkfhsjkafhjksahfjk\n", "sjafhsjkhfjka\n"] 
+
+8)  readchar → string - Reads a one-character string from ios. Raises an EOFError on end of file.
+
+	 => #<File:readme.txt> 
+	3.0.0 :002 > f.readchar
+	 => "h" 
+	3.0.0 :003 > f.readchar
+	 => "e" 
+	3.0.0 :004 > f.readchar
+	 => "l" 
+
+9) readline(sep=$/ [, getline_args]) → string 
+ readline(limit [, getline_args]) → string
+readline(sep, limit [, getline_args]) → string  
+
+	3.0.0 :005 > f.readline
+ 	=> "lo world sahjkahdjkafhjk\n"
+ 	
+ 	3.0.0 :006 > f.readline(2)
+ => "sa"  
+ 	
+10)  write(name, string [, offset]) → integer
+write(name, string [, offset] [, opt]) → integer
+write(name, string [, offset]) → integer
+write(name, string [, offset] [, opt]) → integer 
+
+Opens the file, optionally seeks to the given offset, writes string, then returns the length written. write ensures the file is closed before returning. If offset is not given in write mode, the file is truncated. Otherwise, it is not truncated.
+
+
+e.g.  3.0.0 :008 > f = File.open('readme.txt', 'a+')
+ => #<File:readme.txt> 
+3.0.0 :009 > f.write('This data added by terminal')
+ => 27 
+3.0.0 :010 > f.readlines
+ => [] 
+3.0.0 :011 > f.pos = 0
+ => 0 
+3.0.0 :012 > f.readlines
+ => ["hello world sahjkahdjkafhjk\n", "sajkfdhfjkdshfjkdhf\n", "sahjkfhsjkafhjksahfjk\n", "sjafhsjkhfjka\n", "This data added by terminal"]
+
+
+
+
+
