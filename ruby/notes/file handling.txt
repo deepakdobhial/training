@@ -640,6 +640,28 @@ e.g.  3.0.0 :008 > f = File.open('readme.txt', 'a+')
  => ["hello world sahjkahdjkafhjk\n", "sajkfdhfjkdshfjkdhf\n", "sahjkfhsjkafhjksahfjk\n", "sjafhsjkhfjka\n", "This data added by terminal"]
 
 
+-------------------------------------Iterating ----------------------------------------------
+1) foreach(name, sep=$/ [, getline_args, open_args]) {|line| block } → nil 
+	Executes the block for every line in the named I/O port, where lines are separated by sep
+	
+	e.g.   File.foreach('readme.txt') {|line| puts line}              # PRINT LINE BY LINE
 
+2) each_char {|c| block } → ios 
+	each_char → an_enumerator
+	
+	E.G. fileobj = File.open('readme.txt')
+		fileobj.each_char {|char| puts char}                         # print character
+	
+3)   each(sep=$/ [, getline_args]) {|line| block } → ios 
+	 each(limit [, getline_args]) {|line| block } → ios
+	 each(sep, limit [, getline_args]) {|line| block } → ios
+	 each(...) → an_enumerator
+	 each_line(sep=$/ [, getline_args]) {|line| block } → ios
+	 each_line(limit [, getline_args]) {|line| block } → ios
+	 each_line(sep, limit [, getline_args]) {|line| block } → ios
+	 each_line(...) → an_enumerator 
+	
+    fileobj = File.open('readme.txt')                # print each  line 
+    fileobj.each {|char| puts char}
 
 
