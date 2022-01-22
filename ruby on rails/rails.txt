@@ -73,33 +73,175 @@ psql (14.1 (Ubuntu 14.1-2.pgdg20.04+1))
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
 Type "help" for help.
 
-						inventory_management_system=# \dt
-										List of relations
-						 Schema |         Name         | Type  |  Owner   
-						--------+----------------------+-------+----------
-						 public | ar_internal_metadata | table | postgres
-						 public | products             | table | postgres
-						 public | schema_migrations    | table | postgres
-						(3 rows)
+			inventory_management_system=# \dt
+						List of relations
+			Schema |         Name         | Type  |  Owner   
+			-------+----------------------+-------+----------
+			public | ar_internal_metadata | table | postgres
+			public | products             | table | postgres
+			public | schema_migrations    | table | postgres
+			(3 rows)
 
-						inventory_management_system=# \dt products 
-								  List of relations
-						 Schema |   Name   | Type  |  Owner   
-						--------+----------+-------+----------
-						 public | products | table | postgres
-						(1 row)
+			inventory_management_system=# \dt products 
+						List of relations
+			Schema |   Name   | Type  |  Owner   
+			--------+----------+-------+----------
+			public | products | table | postgres
+			(1 row)
 
-						inventory_management_system=# \d products 
-												                  Table "public.products"
-						   Column   |              Type              | Collation | Nullable |               Default                
-						------------+--------------------------------+-----------+----------+--------------------------------------
-						 id         | bigint                         |           | not null | nextval('products_id_seq'::regclass)
-						 title      | character varying              |           |          | 
-						 body       | text                           |           |          | 
-						 created_at | timestamp(6) without time zone |           | not null | 
-						 updated_at | timestamp(6) without time zone |           | not null | 
-						Indexes:
-							"products_pkey" PRIMARY KEY, btree (id)
+			inventory_management_system=# \d products 
+			                 Table "public.products"
+			Column   |              Type              | Collation | Nullable |               Default                
+			------------+--------------------------------+-----------+----------+--------------------------------------
+			id         | bigint                         |           | not null | nextval('products_id_seq'::regclass)
+			title      | character varying              |           |          | 
+			body       | text                           |           |          | 
+			created_at | timestamp(6) without time zone |           | not null | 
+			updated_at | timestamp(6) without time zone |           | not null | 
+			Indexes:
+			"products_pkey" PRIMARY KEY, btree (id)
+
+
+-----------------------------------Create table --------------------------------
+
+step - 1) ruby generate model Category     # create model Category
+
+step - 2) Add column in migrate file
+
+		 class CreateCategories < ActiveRecord::Migration[7.0]
+		  def change
+			create_table :categories do |t|
+			  t.string :name                         # add column name 
+
+			  t.timestamps
+			end
+		  end
+		end
+
+step - 3) rake db:migrate               # this will create or mapping categories table in postgresql
+
+
+---------------------------------------Add Column to Table-------------------------------------
+
+step - 1) First generate migration
+
+		syntax: rails generate migrattion AddNameToBrands                #AddColumnToTable" or "RemoveColumnFromTable	
+		
+		# create a empty migration file 
+		
+			class AddNameToBrand < ActiveRecord::Migration[7.0]
+			  def change
+			  end
+			end
+			
+step - 2) Add column manually 
+			
+			class AddNameToBrand < ActiveRecord::Migration[7.0]
+			  def change
+				add_column :brands, :name, :string                  # add manually 
+			  end
+			end				
+			
+step - 3) run migartion
+
+		  syntax: rake db:migrate 
+		  
+		  -----------------------Output-------------------------------------------
+		  
+		== 20220122095544 AddNameToBrand: migrating ===================================
+		-- add_column(:brands, :name, :string)
+		   -> 0.1144s
+		== 20220122095544 AddNameToBrand: migrated (0.1146s) ==========================
+
+			
+			
+			
+
+						--------or----------
+						
+step - 1) syntax: rails generate migration AddNameToBrands name:string
+				
+			class AddNameToBrand < ActiveRecord::Migration[7.0]
+			  def change
+			  add_column :brands, :name, :string
+			  end
+			end
+
+step - 2)  run migartion
+
+		  syntax: rake db:migrate 
+		  
+		  ---------------------------Output-------------------------------------------
+		  
+		== 20220122095544 AddNameToBrand: migrating ===================================
+		-- add_column(:brands, :name, :string)
+		   -> 0.1144s
+		== 20220122095544 AddNameToBrand: migrated (0.1146s) ==========================
+
+
+----------------------------Remove Column from Table-------------------------------------
+
+step - 1) First generate migration
+
+		syntax: rails generate migrattion RemoveTitleToProducts title:string               #AddColumnToTable" or "RemoveColumnFromTable	
+		
+		class RemoveTitleFromProducts < ActiveRecord::Migration[7.0]
+		  def change
+			remove_column :products, :title, :string
+		  end
+		end
+
+step - 2)  run migartion
+
+		  syntax: rake db:migrate 
+		  
+		  ---------------------------Output-------------------------------------------
+		  
+		== 20220122102705 RemoveTitleFromProducts: migrating ==========================
+		-- remove_column(:products, :title, :string)
+		   -> 0.0593s
+		== 20220122102705 RemoveTitleFromProducts: migrated (0.0595s) =================
+
+		
+---------------------------------------Rename Column to Table-------------------------------------
+
+step - 1) First generate migration
+
+		syntax: rails generate migration RenameBodyToNameInProducts                #RenameColumnToNewNameInTable"	
+		
+		# create a empty migration file 
+		
+			class AddNameToBrand < ActiveRecord::Migration[7.0]
+			  def change
+			  end
+			end
+			
+step - 2) Rename column manually
+ 
+		class RenameBodyToNameInProducts < ActiveRecord::Migration[7.0]
+		  def change
+			rename_column :products, :body, :name                           # Rename Column Manual
+		  end
+		end
+		
+step - 3) run migartion
+
+		  syntax: rake db:migrate 
+		  
+		  -----------------------Output-------------------------------------------
+		  
+		== 20220122105344 RenameBodyToNameInProducts: migrating =======================
+		-- rename_column(:products, :body, :name)
+		   -> 0.0102s
+		== 20220122105344 RenameBodyToNameInProducts: migrated (0.0105s) ==============
+
+
+
+
+
+
+
+
 
 
 	
