@@ -15,7 +15,7 @@
 -----------------------------------Database-----------------------------------
 1) config --> database.yml
 	
-	database: databasename
+	database: databasename  #inventory_management_system
 	username: root
 	password: password
 	host: localhost or Ip address
@@ -23,8 +23,83 @@
 	
 2) create database --> 
 
-	rake db:create            #created database databasename                    
+	rake db:create            #created database databasename   #inventory_management_system                 
 	
  
 	
+--------------------------------Models----------------------------------------
 
+1) Generating a Model -(command) rails generate model Product title:string body:text   # title and body are two columns of table [optional]
+
+	Output :   		invoke  active_record
+					create    db/migrate/20220122070723_create_products.rb  # create migrate file inside db <timestamp>_create_articles.rb
+					create    app/models/product.rb						# create model file	inside app/models
+					invoke    test_unit
+					create      test/models/product_test.rb
+					create      test/fixtures/products.yml
+						  
+	
+
+-------------------------------Database Migrations--------------------------- 
+
+migrate file : 
+					class CreateProducts < ActiveRecord::Migration[7.0]
+					  def change
+						create_table :products do |t|
+						  t.string :title                   # title and body are two columns of table
+						  t.text :body
+
+						  t.timestamps
+						end
+					  end
+					end			
+					
+----------run migration-----------	
+				
+	syntax: rails db:migrate
+	
+		                           ---Output---
+	
+		== 20220122070723 CreateProducts: migrating ===================================
+		-- create_table(:products)
+		   -> 0.2036s
+		== 20220122070723 CreateProducts: migrated (0.2038s) ==========================
+
+3) check table in database 
+
+ 	syntax: rails db
+Password for user postgres: 
+psql (14.1 (Ubuntu 14.1-2.pgdg20.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+						inventory_management_system=# \dt
+										List of relations
+						 Schema |         Name         | Type  |  Owner   
+						--------+----------------------+-------+----------
+						 public | ar_internal_metadata | table | postgres
+						 public | products             | table | postgres
+						 public | schema_migrations    | table | postgres
+						(3 rows)
+
+						inventory_management_system=# \dt products 
+								  List of relations
+						 Schema |   Name   | Type  |  Owner   
+						--------+----------+-------+----------
+						 public | products | table | postgres
+						(1 row)
+
+						inventory_management_system=# \d products 
+												                  Table "public.products"
+						   Column   |              Type              | Collation | Nullable |               Default                
+						------------+--------------------------------+-----------+----------+--------------------------------------
+						 id         | bigint                         |           | not null | nextval('products_id_seq'::regclass)
+						 title      | character varying              |           |          | 
+						 body       | text                           |           |          | 
+						 created_at | timestamp(6) without time zone |           | not null | 
+						 updated_at | timestamp(6) without time zone |           | not null | 
+						Indexes:
+							"products_pkey" PRIMARY KEY, btree (id)
+
+
+	
