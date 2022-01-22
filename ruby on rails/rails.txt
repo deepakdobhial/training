@@ -1,0 +1,30 @@
+-----------------------------------------Ruby on rails -------------------------------------------
+
+1) installation- gem install rails
+
+2) version - rails --version  - Rails 7.0.1
+
+3) install dependancies of pg -- sudo apt install libpq-dev
+
+4. install pg -- gem install pg
+
+---------------------------------------Rails Project---------------------------
+
+3) Create Rails Project - rails new inventory_management_system -d postgresqls   # optional -d postgres ( using postgresql database)
+
+-----------------------------------Database-----------------------------------
+1) config --> database.yml
+	
+	database: databasename
+	username: root
+	password: password
+	host: localhost or Ip address
+	port: 5432
+	
+2) create database --> 
+
+	rake db:create            #created database databasename                    
+	
+ 
+	
+
