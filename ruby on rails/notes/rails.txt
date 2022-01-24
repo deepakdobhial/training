@@ -10,7 +10,7 @@
 
 ---------------------------------------Rails Project---------------------------
 
-3) Create Rails Project - rails new inventory_management_system -d postgresqls   # optional -d postgres ( using postgresql database)
+3) Create Rails Project - rails new inventory_management_system -d postgresql   # optional -d postgres ( using postgresql database)
 
 -----------------------------------Database-----------------------------------
 1) config --> database.yml
@@ -418,6 +418,213 @@ syntax : t.string :gender limit: 1
 
 The add_reference method allows the creation of an appropriately named column.
 
+
+
+
+-----------------------------------------------CRUD--------------------------------------
+
+-------------------------------------------create methods ------------------------------- 
+
+1) create -- create will return the object and save it to the database.
+
+----> brand = Brand.create(name: 'Redmi')
+
+2) new --  The new method will return a new object without being saved to the database. 
+		#  A call to user.save will commit the record to the database.
+		
+		brand = Brand.new(name: 'Dell')
+ 		=> #<Brand:0x00005607a8fee510 id: nil, name: "Dell", created_at: nil, updated_at: nil>  # Brand class object created
+ 		brand.save
+ 		
+
+----------------------------------------Read methods ------------------------------------------------------
+
+1 ) all -- return a collection with all
+		3.0.0 :038 > brands = Brand.all                              # return a array 
+		Brand Load (0.6ms)  SELECT "brands".* FROM "brands"
+		=>                                                                   
+		[#<Brand:0x00005607a91b7108                                           
+		...     
+			
+		3.0.0 :045 > brands [0] 
+		 => 
+		#<Brand:0x00005607a91b7108                     
+		 id: 1,                                        
+		 name: "Lenovo",                               
+		 created_at: Mon, 24 Jan 2022 10:47:51.428993000 UTC +00:00,
+		 updated_at: Mon, 24 Jan 2022 10:47:51.428993000 UTC +00:00>  		
+		
+2) first --- return the first record
+
+	3.0.0 :052 > brands = Brand.first
+ 	 Brand Load (1.1ms)  SELECT "brands".* FROM "brands" ORDER BY "brands"."id" ASC LIMIT $1 [["LIMIT",1]]  	                     			=>                                                                   
+	#<Brand:0x00005607a9206bb8                                            
+... 
+         3.0.0 :053 > brands
+		 => 
+		#<Brand:0x00005607a9206bb8                                            
+		 id: 1,                                                               
+		 name: "Lenovo",                                                      
+		 created_at: Mon, 24 Jan 2022 10:47:51.428993000 UTC +00:00,          
+		 updated_at: Mon, 24 Jan 2022 10:47:51.428993000 UTC +00:00>   
+		 
+3) find_by -- return the first record filter by given argument (With find_by, a single record or nil)
+	3.0.0 :057 > brand =Brand.find_by(name: 'HP')
+	  Brand Load (0.5ms)  SELECT "brands".* FROM "brands" WHERE "brands"."name" = $1 LIMIT $2  [["name", "HP"], ["LIMIT", 1]]                                                  
+	 =>                                                                 
+	#<Brand:0x00005607a8bf8118  
+	
+	3.0.0 :058 > brand
+	 => 
+	#<Brand:0x00005607a8bf8118                                          
+	 id: 3,                                                             
+	 name: "HP",             
+	 created_at: Mon, 24 Jan 2022 10:50:38.013064000 UTC +00:00,
+	 updated_at: Mon, 24 Jan 2022 10:50:38.013064000 UTC +00:00>                                                        
+
+
+
+4) where - where clause   (With where, an ActiveRecord::Relation object)
+	
+-->		brands = Brand.where(name: "Dell")
+		Brand Load (0.5ms)  SELECT "brands".* FROM "brands" WHERE "brands"."name" = $1  [["name", "Dell"]]
+		 =>                                                                   
+		[#<Brand:0x00005607a8cd9230
+		
+-->		barnds
+		  [#<Brand:0x00005607a8cd9230
+		  id: 4,                 
+		  name: "Dell",          
+		  created_at: Mon, 24 Jan 2022 11:02:55.432574000 UTC +00:00,
+		  updated_at: Mon, 24 Jan 2022 11:02:55.432574000 UTC +00:00>] 
+		  
+		  
+e.g.2)     brands = Brand.where("id > 5")                                     # where condition where id > 5
+  			Brand Load (0.6ms)  SELECT "brands".* FROM "brands" WHERE (id > 5)
+ 			=>                                                                   	
+			[#<Brand:0x00007f06290b91f0 
+			
+output:  	3.0.0 :067 > brands
+ => 
+			[#<Brand:0x00007f06290b91f0                                           
+			  id: 6,                                                              
+			  name: "Godrej",                                                     
+			  created_at: Mon, 24 Jan 2022 11:21:58.687546000 UTC +00:00,         
+			  updated_at: Mon, 24 Jan 2022 11:21:58.687546000 UTC +00:00>,        
+			 #<Brand:0x00007f06290b9100
+			  id: 7,                 
+			  name: "Usha",
+			  created_at: Mon, 24 Jan 2022 11:22:38.901697000 UTC +00:00,
+			  updated_at: Mon, 24 Jan 2022 11:22:38.901697000 UTC +00:00>] 
+					
+# If you’re expecting one record (a specific user), use find_by, for multiple records (a list of users) use where.
+
+5) order - order by 
+
+e.g. -- 3.0.0 :078 > brands = Brand.where('id > 5').order(created_at: :desc)
+		  Brand Load (0.6ms)  SELECT "brands".* FROM "brands" WHERE (id > 5) ORDER BY "brands"."created_at" DESC    						=>                                                                                                    
+		[#<Brand:0x00007f0629071508                    
+		 
+		 3.0.0 :079 > brands
+		 => 
+		[#<Brand:0x00007f0629071508                                                                            
+		  id: 7,                                                                                               
+		  name: "Usha",                                                                                        
+		  created_at: Mon, 24 Jan 2022 11:22:38.901697000 UTC +00:00,                                          
+		  updated_at: Mon, 24 Jan 2022 11:22:38.901697000 UTC +00:00>,
+		 #<Brand:0x00007f0629071440
+		  id: 6,                 
+		  name: "Godrej",
+		  created_at: Mon, 24 Jan 2022 11:21:58.687546000 UTC +00:00,
+		  updated_at: Mon, 24 Jan 2022 11:21:58.687546000 UTC +00:00>] 
+		  
+-------------------------------------Update Methods -------------------------------------------------------
+
+1) update - 
+e.g.    --> brand = Brand.find_by(name: 'Wipro')
+		-->	brand.name = 'wipro'
+ 		-->	=> "wipro" 
+ 		-->	brand.save
+
+e.g. 2 ) brand = Brand.where(name: 'wipro')
+		 brand.update(name: 'Wipro')
+		 
+		  TRANSACTION (0.3ms)  BEGIN
+		  Brand Update (0.6ms)  UPDATE "brands" SET "name" = $1, "updated_at" = $2 WHERE "brands"."id" = $3  [["name", "Wipro"], ["updated_at", "2022-01-24 12:16:35.782768"], ["id", 5]]          
+		  TRANSACTION (22.9ms)  COMMIT                                       
+		 =>                                                                  
+		[#<Brand:0x0000563d5850cf80                                          
+		  id: 5,                                                             
+		  name: "Wipro",                                     
+		  created_at: Mon, 24 Jan 2022 11:20:02.090315000 UTC +00:00,
+		  updated_at: Mon, 24 Jan 2022 12:16:35.782768000 UTC +00:00>]	
+	
+2) update_all -    (This is class method)
+
+			#User.update_all 
+
+		brands = Brand.update_all(name: 'Lenovo')
+		  Brand Update All (15.8ms)  UPDATE "brands" SET "name" = $1  [["name", "Lenovo"]]
+		 => 7                                                                                                 
+		3.0.0 :012 > brands
+		 => 7 
+		3.0.0 :013 > brands.class
+		 => Integer 
+
+Brand.update(:all, name: 'HP')   # :work with class only # return all record with update value 'HP'
+
+
+----------------------------------------------Delete/ Destroy ----------------------------------------------
+
+1) destroy- 
+		brand = Brand.find_by(name: 'HP')
+		  Brand Load (0.4ms)  SELECT "brands".* FROM "brands" WHERE "brands"."name" = $1 LIMIT $2  [["name", "HP"], ["LIMIT", 1]]                                                                  
+		 =>                                                                  
+		#<Brand:0x0000563d587ff710                                           
+		...                                                                  
+		3.0.0 :026 > brand.destroy
+		  TRANSACTION (0.4ms)  BEGIN
+		  Brand Destroy (1.3ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 1]]
+		  TRANSACTION (23.1ms)  COMMIT                                       
+		 =>                                                                  
+		#<Brand:0x0000563d587ff710                                           
+		 id: 1,                                                              
+		 name: "HP",                                                         
+		 created_at: Mon, 24 Jan 2022 10:47:51.428993000 UTC +00:00,         
+		 updated_at: Mon, 24 Jan 2022 12:26:21.999432000 UTC +00:00> 
+
+
+
+2) destroy_by -   Class method
+
+	brands = Brand.destroy_by(name: 'HP')
+
+	
+	
+	
+3) .0.0 :027 > destroy_all -  Class method to delete all records
+
+ barnds = Brand.destroy_all
+ ----------Output: -------
+  Brand Load (0.5ms)  SELECT "brands".* FROM "brands"
+  TRANSACTION (0.3ms)  BEGIN                                          
+  Brand Destroy (0.9ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 2]]
+  TRANSACTION (21.2ms)  COMMIT                                        
+  TRANSACTION (0.3ms)  BEGIN                                          
+  Brand Destroy (0.7ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 3]]
+  TRANSACTION (4.8ms)  COMMIT                                         
+  TRANSACTION (0.3ms)  BEGIN                                          
+  Brand Destroy (0.7ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 4]]
+  TRANSACTION (5.9ms)  COMMIT                                         
+  TRANSACTION (0.3ms)  BEGIN                                          
+  Brand Destroy (0.8ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 6]]
+  TRANSACTION (4.9ms)  COMMIT                                         
+  TRANSACTION (0.3ms)  BEGIN                                          
+  Brand Destroy (0.8ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 7]]
+  TRANSACTION (5.9ms)  COMMIT
+  TRANSACTION (0.3ms)  BEGIN
+  Brand Destroy (0.6ms)  DELETE FROM "brands" WHERE "brands"."id" = $1  [["id", 5]]
+  TRANSACTION (5.8ms)  COMMIT
 
 
 
