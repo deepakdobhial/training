@@ -336,4 +336,76 @@ e.g. ----
 		  end
 		end
 
+-----------------------------------------Creating a Join Table---------------------------------------
+
+1) syntax : create_join_table(table_1, table_2, column_options: {}, **options) 
+
+You can pass an options hash which can include the following keys:
+
+	1) :table_name - Sets the table name, overriding the default.
+	2) :column_options - Any extra options you want appended to the columns definition.
+	3) :options - Any extra options you want appended to the table definition.
+    4) :temporary - Make a temporary table.
+	5) :force - Set to true to drop the table before creating it. Defaults to false.
+
+
+e.g. -   rails generate migration CreateJoinTableBrandCategories brands categories
+
+		class CreateJoinTableBrandCategories < ActiveRecord::Migration[7.0]
+		  def change
+			create_join_table :brands, :categories do |t|
+			  # t.index [:brand_id, :category_id]
+			  # t.index [:category_id, :brand_id]
+			end
+		  end
+		end
+		
+postgres syntax : CREATE TABLE brands_categories (
+				  brand_id bigint NOT NULL,
+				  caterory_id bigint NOT NULL,
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+----------------------------Create Table using migration----------------------------------------
+
+syntax: rails generate migration CreateCustomers name:string 
+
+	class CreateCustomers < ActiveRecord::Migration[7.0]
+	  def change
+		create_table :customers do |t|
+		  t.string :name
+
+		  t.timestamps
+		end
+	  end
+	end
+
+
+
+---------------------------Change Table------------------------------------------------------------
+syntax: change_table(table_name, **options)
+
+class ChangeTableCustomers < ActiveRecord::Migration[7.0]
+  def change
+    change_table :customers do |t|
+      t.string :gender, limit: 1                   # create new column
+      t.date :date_of_birth
+      t.string :city
+      t.string :state
+      t.string :country
+      t.remove :description, :customer_name        # remove column
+  	  t.index :part_number                         # create index
+      t.rename :upccode, :upc_code				   # rename column					
+    end
+  end
+end
+
+
+
+
+
+
+
+
+
+
 	
