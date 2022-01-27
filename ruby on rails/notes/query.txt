@@ -168,11 +168,137 @@ Note - The last! method behaves exactly like last, except that it will raise Act
 	 product = Product.find_by id: 2     # return object if find otherwise return nil (NilClass)
 	 
 note - The find_by! method behaves exactly like find_by, except that it will raise ActiveRecord::RecordNotFound if no matching record is found
+
+-----------------------------------------Retrieving Multiple Objects in Batches---------------------------------------------
+
+1) find_each - The find_each method retrieves records in batches and then yields each one to the block. 
+
+	 Product.find_each do |product|        # return nil
+       puts product.name 
+	 end
+	 ---------Output------------------
 	 
+ Product Load (0.6ms)  SELECT "products".* FROM "products" ORDER BY "products"."id" ASC LIMIT $1  [["LIMIT", 1000]]    
+                                                   
+Mobile                                                                               
+Mobile                                                                               
+Laptop                                                                
+Laptop                                                                
+Laptop                                                                
+Desktop                                                               
+Desktop                                                               
+Desktop                                                               
+Cricket bat                                                           
+Cricket ball                                                          
+Chairs                                                                
+ => nil              
+---------------------> Options for find_each
+
+1) :batch_size - :batch_size option allows you to specify the number of records to be retrieved in each batch, before being passed individually to the block.
+
+products.find_each(batch_size: 5) do |product|        # make batch - 5 record per block
+  puts product.name
+end
+-------Output--------  
+Product Load (0.5ms)  SELECT "products".* FROM "products" ORDER BY "products"."id" ASC LIMIT $1  [["LIMIT", 5]]
+Mobile
+Mobile
+Laptop
+Laptop
+Laptop
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."id" > $1 ORDER BY "products"."id" ASC LIMIT $2  [["id", 5], ["LIMIT", 5]]
+Desktop
+Desktop
+Desktop
+Cricket bat
+Cricket ball
+  Product Load (0.5ms)  SELECT "products".* FROM "products" WHERE "products"."id" > $1 ORDER BY "products"."id" ASC LIMIT $2  [["id", 10], ["LIMIT", 5]]
+Chairs
+ => nil 
 	 
+2) :start - By default, records are fetched in ascending order of the primary key. The :start option allows you to configure the first ID of the sequence whenever the lowest ID is not the one you need. 
+
+products.find_each(start: 9) do |product|      # return records from id = 9 to end
+  puts product.name
+end
+-----------Output ------------------
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."id" >= $1 ORDER BY "products"."id" ASC LIMIT $2  [["id", 9], ["LIMIT", 1000]]
+Cricket bat
+Cricket ball
+Chairs
+ => nil 	 
 	 
+3) :finish - The finish option allows specifying the ending ID of the records to be retrieved
+
+products.find_each(finish: 3) do |product|       # return from first to id = finish: 3
+  puts product.name
+end
+-----output-------
+
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."id" <= $1 ORDER BY "products"."id" ASC LIMIT $2  [["id", 3], ["LIMIT", 1000]]
+Mobile
+Mobile
+Laptop
+ => nil 
 	 
-	 
-	 
-	 
-	 
+4) :error_on_ignore - The error_on_ignore option overrides the application config to specify if an error should be raised when a specific order is present in the relation. 	
+ 
+----------------------------------------------------------------------------------------------------------------------------------------
+
+2) find_in_batches - The find_in_batches method is similar to find_each, since both retrieve batches of records. The difference is that find_in_batches yields batches to the block as an array of models, instead of individually.
+
+Note - Give add_customers an array of 1000 customers at a time. 
+
+Product.find_in_batches do |batch|                  
+  batch.each {|product| puts product.name}
+end
+
+------output ------------------
+  Product Load (0.5ms)  SELECT "products".* FROM "products" ORDER BY "products"."id" ASC LIMIT $1  [["LIMIT", 1000]]                                                
+Mobile                                                                         
+Mobile                                                                         
+Laptop                                                                         
+Laptop                                                                         
+Laptop                                                                         
+Desktop
+Desktop
+Desktop
+Cricket bat
+Cricket ball
+Chairs
+ => nil 
+
+Check class -- 
+
+Project.find_in_batches.class
+#=> Enumerator < ObjectProject.find_in_batches.first.class
+#=> Array < Object
+
+Note - Options same as find_each
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
