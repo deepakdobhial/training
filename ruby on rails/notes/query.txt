@@ -1,0 +1,178 @@
+---------------------------------------------Active Record Query Interface-----------------------------------
+1. ---Retrieving Objects from the Database--
+
+    annotate
+    find
+    create_with
+    distinct
+    eager_load
+    extending
+    extract_associated
+    from
+    group
+    having
+    includes
+    joins
+    left_outer_joins
+    limit
+    lock
+    none
+    offset
+    optimizer_hints
+    order
+    preload
+    readonly
+    references
+    reorder
+    reselect
+    reverse_order
+    select
+    where
+
+---------------------------Retrieving a Single Object--------------------
+
+1) find -retrieve the object corresponding to the specified primary key that matches any supplied options.
+The find method will raise an ActiveRecord::RecordNotFound exception if no matching record is found.
+
+	e.g. product = Product.find(10)   -----> return object
+
+		product.class -----> Product class
+		
+		3.0.0 :055 > product = Product.find([1,10])          # can use array too # return Array
+		
+		  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."id" IN ($1, $2)  [["id", 1], ["id", 10]]
+		 =>                                                            
+		[#<Product:0x000055f83200bc40                                  
+		...                                                            
+		3.0.0 :056 > product
+		 => 
+		[#<Product:0x000055f83200bc40                                            
+		  id: 1,                                                                 
+		  name: "Mobile",                                                        
+		  price: 0.15e5,                                                         
+		  created_at: Tue, 25 Jan 2022 09:21:19.187934000 UTC +00:00,            
+		  updated_at: Tue, 25 Jan 2022 09:53:30.756965000 UTC +00:00,            
+		  category_id: 1,                                                        
+		  brand_id: 1,                                                           
+		  model_no: "M001">,                                                     
+		 #<Product:0x000055f83200bb78                                            
+		  id: 10,                                                                
+		  name: "Cricket ball",                                                  
+		  price: 0.25e3,                                                         
+		  created_at: Thu, 27 Jan 2022 07:39:08.647059000 UTC +00:00,            
+		  updated_at: Thu, 27 Jan 2022 07:39:08.647059000 UTC +00:00,
+		  category_id: 2,
+		  brand_id: 8,
+		  model_no: "Abcball001">] 
+		  
+		  3.0.0 :057 > product.class
+ 		 => Array 
+ 		 
+---> Sql Query - SELECT * FROM customers WHERE (customers.id = 10) LIMIT 1
+---> Sql Query - SELECT * FROM customers WHERE (customers.id IN (1,10))
+
+2) take - The take method retrieves a record without any implicit ordering.
+
+Example - 1
+
+	3.0.0 :066 > product = Product.take   # return Product class object
+	  Product Load (0.5ms)  SELECT "products".* FROM "products" LIMIT $1  [["LIMIT", 1]]
+	 =>                                                                      
+	#<Product:0x00007fc3fceafe80                                             
+	...                                                                      
+	3.0.0 :067 > product.class     
+	 => Product(id: integer, name: string, price: decimal, created_at: datetime, updated_at: datetime, category_id: integer, brand_id: integer, model_no: string)                                  
+	3.0.0 :068 > product
+	 => 
+	#<Product:0x00007fc3fceafe80                                             
+	 id: 1,                                                                  
+	 name: "Mobile",                                                         
+	 price: 0.15e5,                                                          
+	 created_at: Tue, 25 Jan 2022 09:21:19.187934000 UTC +00:00,             
+	 updated_at: Tue, 25 Jan 2022 09:53:30.756965000 UTC +00:00,             
+	 category_id: 1,                                               
+	 brand_id: 1,                                                  
+	 model_no: "M001">		
+	 
+	  
+Example - 2
+	product = Product.take(2)             3 return array 
+	3.0.0 :067 > product.class
+	 => Product(id: integer, name: string, price: decimal, created_at: datetime, updated_at: datetime, category_id: intege
+	[#<Product:0x00007fc3fcd46468                
+	...                                          
+	3.0.0 :070 > product
+	 => 
+	[#<Product:0x00007fc3fcd46468                
+	  id: 1,                                     
+	  name: "Mobile",                            
+	  price: 0.15e5,                             
+	  created_at: Tue, 25 Jan 2022 09:21:19.187934000 UTC +00:00,
+	  updated_at: Tue, 25 Jan 2022 09:53:30.756965000 UTC +00:00,
+	  category_id: 1,                            
+	  brand_id: 1,                               
+	  model_no: "M001">,                         
+	 #<Product:0x00007fc3fcd46350                
+	  id: 2,                                     
+	  name: "Laptop",                            
+	  price: 0.7e5,                              
+	  created_at: Tue, 25 Jan 2022 10:01:25.587866000 UTC +00:00,
+	  updated_at: Tue, 25 Jan 2022 10:01:25.587866000 UTC +00:00,
+	  category_id: 1,
+	  brand_id: 10,
+	  model_no: "LL001">] 
+	3.0.0 :071 > product.class
+	 => Array 
+	 
+	 
+Note - The take! method behaves exactly like take, except that it will raise ActiveRecord::RecordNotFound if no matching record is found.
+	 
+3)  first - The first method finds the first record ordered by primary key (default). 
+
+Example - 1	
+	 customer = Customer.first
+	  Customer Load (0.6ms)  SELECT "customers".* FROM "customers" ORDER BY "customers"."id" ASC LIMIT $1  [["LIMIT", 1]]
+	 =>                                                                        
+	#<Customer:0x000055f831c7c520                                              
+	...                                                                        
+	3.0.0 :073 > customer
+	 => 
+	#<Customer:0x000055f831c7c520                                              
+	 id: 1,                                                                    
+	 name: "Deepak",                                                           
+	 gender: "M",                                                              
+	 date_of_birth: Fri, 12 May 1989,                                          
+	 city: "Faridabad",                                                        
+	 state: "Haryana",                                                         
+	 country: "India",                                                         
+	 created_at: Thu, 27 Jan 2022 05:04:53.203324000 UTC +00:00,               
+	 updated_at: Thu, 27 Jan 2022 07:06:26.879569000 UTC +00:00,               
+	 email: "deepak@gmail.com",                                                
+	 mobile_no: 1234567890> 	
+	 
+	 customer.class
+	 
+	 customer = Customer.first(2)   # return array of first two customer objects 
+	 
+Note - The first! method behaves exactly like first, except that it will raise ActiveRecord::RecordNotFound if no matching record is found.	 
+	 
+4) last - The last method finds the last record ordered by primary key (default). 
+
+	product = Product.last ---------Return object
+	product = Product.last(3) -------Return Array
+	
+Note - The last! method behaves exactly like last, except that it will raise ActiveRecord::RecordNotFound if no matching record is found.	 
+	 
+5) find_by - The find_by method finds the first record matching some conditions.
+	 
+	 product = Product.find_by id: 2     # return object if find otherwise return nil (NilClass)
+	 
+note - The find_by! method behaves exactly like find_by, except that it will raise ActiveRecord::RecordNotFound if no matching record is found
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
