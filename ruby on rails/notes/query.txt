@@ -279,26 +279,203 @@ Note - Options same as find_each
 
 
 
+-----------------------------------------Conditions-------------------------------------------
+
+1) Ordering - To retrieve records from the database in a specific order, you can use the order method.
+
+3.0.0 :391 > products = Product.order(id: :asc)              # return Product::Activation_relaion class object
+  Product Load (0.5ms)  SELECT "products".* FROM "products" ORDER BY "products"."id" ASC                                                                                  
+ =>                                                                                  
+[#<Product:0x000055f832534e10                                                        
+...                                                                                  
+3.0.0 :392 > products.class
+ => Product::ActiveRecord_Relation 
+
+products will print all product details by ascending   # use with where
+
+2) select - To select only a subset of fields from the result set, you can specify the subset via the select method.
+
+         # return activation record
+                                                         
+3.0.0 :415 > Product.select(:id,:name)
+		  Product Load (0.6ms)  SELECT "products"."id", "products"."name" FROM "products"
+		 =>                                                                                  
+		[#<Product:0x00007fc3fcb8f2f0 id: 1, name: "Mobile">,                                
+		 #<Product:0x00007fc3fcb7b638 id: 3, name: "Laptop">,                                
+		 #<Product:0x00007fc3fcb66b98 id: 4, name: "Laptop">,                                
+		 #<Product:0x00007fc3fcb46d98 id: 5, name: "Laptop">,                                
+		 #<Product:0x00007fc3fcb2ff58 id: 6, name: "Desktop">,                               
+		 #<Product:0x00007fc3fcb01f40 id: 7, name: "Desktop">,                               
+		 #<Product:0x00007fc3fcae7578 id: 8, name: "Desktop">,                               
+		 #<Product:0x00007fc3fcacfc20 id: 9, name: "Cricket bat">,                           
+		 #<Product:0x00007fc3fcab6bf8 id: 10, name: "Cricket ball">,        
+		 #<Product:0x00007fc3fca7beb8 id: 11, name: "Chairs">,              
+		 #<Product:0x00007fc3fca7bc88 id: 2, name: "Mobile">]  
+3) select with distinct -  
+3.0.0 :418 > Product.select(:name).distinct
+  Product Load (0.7ms)  SELECT DISTINCT "products"."name" FROM "products"
+ =>                                                                                  
+[#<Product:0x000055f8323d6b40 id: nil, name: "Cricket bat">,                         
+ #<Product:0x000055f8323d6a78 id: nil, name: "Mobile">,                              
+ #<Product:0x000055f8323d6960 id: nil, name: "Desktop">,                             
+ #<Product:0x000055f8323d6848 id: nil, name: "Cricket ball">,                        
+ #<Product:0x000055f8323d6758 id: nil, name: "Chairs">,                              
+ #<Product:0x000055f8323d6690 id: nil, name: "Laptop">] 
+
+
+User.select(:name)
+# Might return two records with the same name
+
+User.select(:name).distinct
+# Returns 1 record per distinct name
+
+User.select(:name).distinct.distinct(false)
+# You can also remove the uniqueness
+
+
+4) Limit and Offset - You can use limit to specify the number of records to be retrieved, and use offset to specify the number of records to skip before starting to return the records. 
+
+	products = Product.limit(2)
+	Product Load (0.3ms)  SELECT "products".* FROM "products" LIMIT $1  [["LIMIT", 2]]
+	 =>                                                                       
+	[#<Product:0x000055f831c87ad8                                             
+	...   
+	 
+	products.class
+	 => Product::ActiveRecord_Relation 
+	 
+	 products         # list of products 
+	 => 
+	[#<Product:0x000055f831c87ad8                           
+	  id: 1,                                                
+	  name: "Mobile",                                       
+	  price: 0.15e5,                                        
+	  created_at: Tue, 25 Jan 2022 09:21:19.187934000 UTC +00:00,
+	  updated_at: Tue, 25 Jan 2022 09:53:30.756965000 UTC +00:00,
+	  category_id: 1,                                       
+	  brand_id: 1,                                          
+	  model_no: "M001">,                                    
+	 #<Product:0x000055f831c87998                           
+	  id: 3,                                                
+	  name: "Laptop",                                       
+	  price: 0.7e5,                              
+	  created_at: Tue, 25 Jan 2022 10:01:25.587866000 UTC +00:00,
+	  updated_at: Tue, 25 Jan 2022 10:01:25.587866000 UTC +00:00,
+	  category_id: 1,
+	  brand_id: 10,
+	  model_no: "LL001">] 
+
+# if use products.order(id: :desc) ----- fetch last three records
+
+5)offset  -   products = Product.limit(2).offset(5)  - will return instead a maximum of 2 customers beginning with the 6.
+
+
+3.0.0 :434 > products = Product.limit(2).offset(5)
+  Product Load (0.3ms)  SELECT "products".* FROM "products" LIMIT $1 OFFSET $2  [["LIMIT", 2], ["OFFSET", 5]]                              
+ =>                                                   
+[#<Product:0x00007fc3fc982188                         
+...                                                   
+3.0.0 :435 > products.class
+ => Product::ActiveRecord_Relation 
+3.0.0 :436 > products
+ => 
+[#<Product:0x00007fc3fc982188                           
+  id: 7,                                                
+  name: "Desktop",                                      
+  price: 0.6e5,                                         
+  created_at: Tue, 25 Jan 2022 10:03:57.971162000 UTC +00:00,
+  updated_at: Tue, 25 Jan 2022 10:03:57.971162000 UTC +00:00,
+  category_id: 1,                                       
+  brand_id: 1,                                          
+  model_no: "HPD001">,                                  
+ #<Product:0x00007fc3fc982098                           
+  id: 8,                                                
+  name: "Desktop",                                      
+  price: 0.6e5,                                         
+  created_at: Tue, 25 Jan 2022 10:03:57.971162000 UTC +00:00,
+  updated_at: Tue, 25 Jan 2022 10:03:57.971162000 UTC +00:00,
+  category_id: 1,
+  brand_id: 2,
+  model_no: "DED001">] 
+
+
+6) Group - To apply a GROUP BY clause to the SQL fired by the finder, you can use the group method.
+
+		3.0.0 :448 > products = Product.select(:id, :name).group(:id)
+		  Product Load (0.7ms)  SELECT "products"."id", "products"."name" FROM "products" GROUP BY "products"."id"                                   
+		 =>                                                     
+		[#<Product:0x00007fc3fc693c38 id: 4, name: "Laptop">,  
+		 
+3.0.0 :449 > products.class
+ => Product::ActiveRecord_Relation 
+3.0.0 :450 > products
+ => 
+[#<Product:0x00007fc3fc693c38 id: 4, name: "Laptop">,   
+ #<Product:0x00007fc3fc693b70 id: 10, name: "Cricket ball">,
+ #<Product:0x00007fc3fc693aa8 id: 6, name: "Desktop">,  
+ #<Product:0x00007fc3fc6939e0 id: 2, name: "Mobile">,   
+ #<Product:0x00007fc3fc693918 id: 11, name: "Chairs">,  
+ #<Product:0x00007fc3fc693850 id: 9, name: "Cricket bat">,
+ #<Product:0x00007fc3fc693788 id: 3, name: "Laptop">,   
+ #<Product:0x00007fc3fc6936c0 id: 5, name: "Laptop">,   
+ #<Product:0x00007fc3fc6935f8 id: 7, name: "Desktop">,  
+ #<Product:0x00007fc3fc693530 id: 1, name: "Mobile">,   
+ #<Product:0x00007fc3fc693468 id: 8, name: "Desktop">]  
+
+
+7) Total of grouped items - using count  # return hash 
+
+3.0.0 :465 > products = Product.group(:id, :name).count
+  Product Count (0.7ms)  SELECT COUNT(*) AS "count_all", "products"."id" AS "products_id", "products"."name" AS "products_name" FROM "products" GROUP BY "products"."id", "products"."name"                                                                    
+ =>                                                                                  
+{[4, "Laptop"]=>1,                                                                   
+...                                                                                  
+3.0.0 :466 > products
+ => 
+{[4, "Laptop"]=>1,                                                                   
+ [10, "Cricket ball"]=>1,                                                            
+ [6, "Desktop"]=>1,                                                                  
+ [2, "Mobile"]=>1,                                                                   
+ [11, "Chairs"]=>1,                                                                  
+ [9, "Cricket bat"]=>1,                                                              
+ [3, "Laptop"]=>1,                                                                   
+ [5, "Laptop"]=>1,                           
+ [7, "Desktop"]=>1,                          
+ [1, "Mobile"]=>1,                           
+ [8, "Desktop"]=>1}   
+
+3.0.0 :467 > products.class
+ => Hash 
+ 
+8) Having - SQL uses the HAVING clause to specify conditions on the GROUP BY fields. You can add the HAVING clause to the SQL fired by the Model.find by adding the having method to the find.
+
+		3.0.0 :506 > product = Product.select(:id,:name).group(:id,:name).having("id > 5")
+		  Product Load (0.9ms)  SELECT "products"."id", "products"."name" FROM "products" GROUP BY "products"."id", "products"."name" HAVING (id > 5)                             
+		 =>                                                                                  
+		[#<Product:0x00007fc3fd0013d8 id: 11, name: "Chairs">,                               
+		...                                                                                  
+		3.0.0 :507 > product
+		 => 
+		[#<Product:0x00007fc3fd0013d8 id: 11, name: "Chairs">,                               
+		 #<Product:0x00007fc3fd001310 id: 9, name: "Cricket bat">,                           
+		 #<Product:0x00007fc3fd001248 id: 10, name: "Cricket ball">,                         
+		 #<Product:0x00007fc3fd001158 id: 6, name: "Desktop">,                               
+		 #<Product:0x00007fc3fd001090 id: 7, name: "Desktop">,                               
+		 #<Product:0x00007fc3fd000fc8 id: 8, name: "Desktop">]    
+		 
+9) count(column_name = nil)  - Count the records.  # return integer
+3.0.0 :509 > Product.count
+  Product Count (0.6ms)  SELECT COUNT(*) FROM "products"
+ => 11 
+
+
+# return hash with group 
+3.0.0 :508 > Product.group(:price).count
+  Product Count (33.9ms)  SELECT COUNT(*) AS "count_all", "products"."price" AS "products_price" FROM "products" GROUP BY "products"."price"                              
+ => {0.25e5=>1, 0.125e4=>1, 0.9e5=>1, 0.6e5=>2, 0.25e3=>1, 0.5e5=>1, 0.7e5=>2, 0.15e5=>2}  
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
