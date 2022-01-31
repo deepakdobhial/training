@@ -1,0 +1,171 @@
+-----------------------------------Validations----------------------------------------
+
+1) The following methods trigger validations, and will save the object to the database only if the object is valid:
+
+    create
+    create!
+    save
+    save!
+    update
+    update!
+
+
+2) 1.3 Skipping Validations
+
+The following methods skip validations, and will save the object to the database regardless of its validity. 
+
+    decrement!
+    decrement_counter
+    increment!
+    increment_counter
+    insert
+    insert!
+    insert_all
+    insert_all!
+    toggle!
+    touch
+    touch_all
+    update_all
+    update_attribute
+    update_column
+    update_columns
+    update_counters
+    upsert
+    upsert_all
+
+Note that save also has the ability to skip validations if passed validate:
+false as an argument. This technique should be used with caution.
+
+    save(validate: false)
+    
+    
+ 3) valid? and invalid? -   -- check validation 
+ 
+ ----------------------------------Validation Helpers---------------------------------
+ 
+ 1) acceptance - This method validates that a checkbox on the user interface was checked when a form was submitted
+ 
+ syntax: validates :terms_of_service, acceptance: true
+ 		 validates :terms_of_service, acceptance: { message: 'must be abided' }
+ 		 validates :terms_of_service, acceptance: { accept: 'yes' }
+  		 validates :eula, acceptance: { accept: ['TRUE', 'accepted'] }
+ 
+ 2) validates_associated  - use this helper when your model has associations with other models and they also need to be validated. 
+ 
+ syntax: validates_associated :books
+ 
+ 3) confirmation - use this helper when you have two text fields that should receive exactly the same content. For example, you may want 					   to confirm an email address or a password.
+ 				   
+ 				   validates :email, confirmation: true
+ 				   validates :email, confirmation: { case_sensitive: false }
+ 
+ 
+ 4) comparison - This check will validate a comparison between any two comparable values
+ 
+ 				   validates :start_date, comparison: { greater_than: :end_date }
+ 				   
+ 				   
+    :greater_than   
+    :greater_than_or_equal_to    
+    :equal_to
+    :less_than    
+    :less_than_or_equal_to     
+    :other_than - 
+ 
+5)  length - This helper validates the length of the attributes' values. 
+
+    :minimum - The attribute cannot have less than the specified length.
+    :maximum - The attribute cannot have more than the specified length.
+    :in (or :within) - The attribute length must be included in a given interval. The value for this option must be a range.
+    :is - The attribute length must be equal to the given value.
+
+e.g.   validates :gender, length: { is: 1}
+ 
+ 
+6) numericality - This helper validates that your attributes have only numeric values. By default, it will match an optional sign followed by an integer or floating point number.
+
+	validates :points, numericality: true
+    validates :games_played, numericality: { only_integer: true }
+    
+    
+    :greater_than 
+    :greater_than_or_equal_to
+    :equal_to 
+    :less_than 
+    :less_than_or_equal_to 
+    :other_than 
+    :in 
+    :odd 
+    :even 
+    
+    By default, numericality doesn't allow nil values. You can use allow_nil: true option to permit it.
+
+ 
+7)  presence - This helper validates that the specified attributes are not empty. 
+
+ 	validates :name, :login, :email, presence: true
+ 
+8) absence  - This helper validates that the specified attributes are absent.
+
+	validates :name, :login, :email, absence: true
+	
+9) uniqueness- This helper validates that the attribute's value is unique right before the object gets saved. It does not create a uniqueness constraint in the database 
+
+	validates :email, uniqueness: true
+	
+10) inclusion - This helper validates that the attributes' values are included in a given set.
+
+	 validates :size, inclusion: { in: %w(small medium large),message: "%{value} is not a valid size" }
+
+ 		The inclusion helper has an option :in that receives the set of values that will be accepted. The :in option has an alias 			called :within
+ 		
+11) exclusion - This helper validates that the attributes' values are not included in a given set.
+
+	validates :subdomain, exclusion: { in: %w(www us ca jp), message: "%{value} is reserved." }
+	
+12) format - This helper validates the attributes' values by testing whether they match a given regular expression, which is specified 				  using the :with option
+
+			validates :legacy_code, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
+
+Alternatively, you can require that the specified attribute does not match the regular expression by using the :without option.
+
+
+13) validates_each - This helper validates attributes against a block. It doesn't have a predefined validation function. You should create one using a block, and every attribute passed to validates_each will be tested against it.
+
+	validates_each :name, :surname do |record, attr, value|
+      record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
+
+
+--------------------------------------------- Common Validation Options-------------------------------
+
+1) allow_nil - The :allow_nil option skips the validation when the value being validated is nil. 
+	 validates :size, inclusion: { in: %w(small medium large), message: "%{value} is not a valid size" }, allow_nil: true
+
+validates :size, inclusion: { in: %w(small medium large),
+    message: "%{value} is not a valid size" }, allow_nil: true
+    
+2) allow_blank - The :allow_blank option is similar to the :allow_nil option. This option will let validation pass if the attribute's 
+value is blank?, like nil or an empty string.
+
+ validates :title, length: { is: 5 }, allow_blank: true
+ 
+3) :message - the :message option lets you specify the message that will be added to the errors collection when validation fails.
+
+ validates :age, numericality: { message: "%{value} seems wrong" }
+
+4) :on - The :on option lets you specify when the validation should happen. The default behavior for all the built-in validation helpers is to be run on save (both when you're creating a new record and when you're updating it)  (default : both create and update)
+
+validates :email, uniqueness: true, on: :create
+validates :age, numericality: true, on: :update 
+
+
+
+
+
+
+
+
+
+
+
+
