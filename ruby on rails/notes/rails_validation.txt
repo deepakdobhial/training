@@ -159,7 +159,43 @@ validates :email, uniqueness: true, on: :create
 validates :age, numericality: true, on: :update 
 
 
+--------------------------------------------Strict Validations----------------------------------------------------------
+1) strict - ActiveModel::StrictValidationFailed when the object is invalid
 
+validates :name, presence: { strict: true }
+
+validates :token, presence: true, uniqueness: true, strict: TokenGenerationException
+
+
+-------------------------------------------Conditional Validation---------------------------------------------------------
+
+1) Using a Symbol with :if and :unless  -- :if option when you want to specify when the validation should happen. If you want to specify when the validation should not happen, then you may use the :unless option.
+
+validates :card_number, presence: true, if: :paid_with_card?
+
+  def paid_with_card?
+    payment_type == "card"
+  end
+    
+  validates :password, confirmation: true,
+    unless: Proc.new { |a| a.password.blank? }
+
+
+2) ----------------------------------------Working with Validation Errors--------------------------------------------------
+
+1) errors - The gateway through which you can drill down into various details of each error. 
+This returns an instance of the class ActiveModel::Errors containing all errors, each error is represented by an ActiveModel::Error object.
+
+person.errors.full_messages
+
+2) errors[] - used when you want to check the error messages for a specific attribute. It returns an array of strings with all error messages for the given attribute, each string with one error message. If there are no errors related to the attribute, it returns an empty array.
+
+3.0.0 :002 > department = Department.create
+ => #<Department:0x00007fd7b4b85928 id: nil, name: nil, created_at: nil, updated_at: nil> 
+3.0.0 :003 > department.errors
+ => #<ActiveModel::Errors [#<ActiveModel::Error attribute=name, type=blank, options={:message=>"can't be blank"}>]> 
+3.0.0 :004 > department.errors[:name]
+ => ["can't be blank"] 
 
 
 
