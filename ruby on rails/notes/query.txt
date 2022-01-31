@@ -475,7 +475,60 @@ User.select(:name).distinct.distinct(false)
  => {0.25e5=>1, 0.125e4=>1, 0.9e5=>1, 0.6e5=>2, 0.25e3=>1, 0.5e5=>1, 0.7e5=>2, 0.15e5=>2}  
 
 
+--------------------------------------Hash Conditions--------------------------------------------------------
+1) Equality Conditions - 
 
- 
+Book.where(out_of_print: true)
+
+2) Range Conditions -- 
+product = Product.where(price: 10000..30000)
+
+  Product Load (0.6ms)  SELECT "products".* FROM "products" WHERE "products"."name" = $1  [["name", "Cricket bat"]]
+ =>                                                                      
+[#<Product:0x0000564618e6d340                
+...  
+
+product.each {|product| puts product.price}
+15000.0
+15000.0                                                                        
+25000.0  
+.........
+........
+
+3)  Subset Conditions - If you want to find records using the IN expression you can pass an array to the conditions hash:
+
+3.0.0 :058 > products = Product.where(name: ['Guitar', 'Cricket ball'])   # where name in(Guitar, Cricket ball)
+
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."name" IN ($1, $2)  [["name", "Guitar"], ["name", "Cricket ball"]]
+ => 
+[#<Product:0x000056461936fe10
+... 
+
+4) NOT Conditions - NOT SQL queries can be built by where.not: 
+
+3.0.0 :063 > products = Product.where.not(name: ['Mobile', 'Laptop', 'Desktop'])
+
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."name" NOT IN ($1, $2, $3)  [["name", "Mobile"], ["name", "Laptop"], ["name", "Desktop"]]
+ => 
+[#<Product:0x00007fe45895da50 
+
+4) OR Conditions - OR conditions between two relations can be built by calling or on the first relation, and passing the second one as an argument.
+
+products = Product.where.not(name: ['Mobile', 'Laptop', 'Desktop']).or(Product.where(price: 10000..))
+
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE ("products"."name" NOT IN ($1, $2, $3) OR "products"."price" >= $4)  [["name", "Mobile"], ["name", "Laptop"], ["name", "Desktop"], ["price", "10000.0"]]
+ => 
+[#<Product:0x00005646191d6748
+
+5) AND Conditions - AND conditions can be built by chaining where conditions.
+
+3.0.0 :069 > products = Product.where.not(name: ['Mobile', 'Laptop', 'Desktop']).and(Product.where(price: 10000..))
+
+  Product Load (0.8ms)  SELECT "products".* FROM "products" WHERE "products"."name" NOT IN ($1, $2, $3) AND "products"."price" >= $4  [["name", "Mobile"], ["name", "Laptop"], ["name", "Desktop"], ["price", "10000.0"]]
+ => 
+[#<Product:0x00005646192a6128
+
+
+
 
 
