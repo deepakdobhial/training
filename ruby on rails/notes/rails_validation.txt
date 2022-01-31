@@ -198,8 +198,39 @@ person.errors.full_messages
  => ["can't be blank"] 
 
 
+3) errors.where and error object --  
 
+3.0.0 :028 > department.errors
+ => #<ActiveModel::Errors [#<ActiveModel::Error attribute=name, type=blank, options={:message=>"can't be blank"}>]> 
+ 
+3.0.0 :066 > error = department.errors.where(:name)
+ => [#<ActiveModel::Error attribute=name, type=blank, options={:message=>"can't be blank"}>]   # return array
+ 
+3.0.0 :069 > error.first.attribute
+ => :name 
+ 
+3.0.0 :070 > error.first.type
+ => :blank 
+ 
+ 3.0.0 :071 > error.first.message
+ => "can't be blank" 
+ 
+3.0.0 :072 > error.first.full_message
+ => "Name can't be blank" 
+ 
+ 4) errors.add - validate do |person|
+    errors.add :name, :too_plain, message: "is not cool enough"
+  end  
 
+5) errors.clear - The clear method is used when you intentionally want to clear the errors collection. 
+
+3.0.0 :018 > customer.errors.clear
+ => [] 
+ 
+ 6) errors.size - The size method returns the total number of errors for the object.
+ 
+ 3.0.0 :020 > customer.errors.size
+ => 3 
 
 
 
