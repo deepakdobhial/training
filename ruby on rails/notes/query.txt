@@ -528,7 +528,82 @@ products = Product.where.not(name: ['Mobile', 'Laptop', 'Desktop']).or(Product.w
  => 
 [#<Product:0x00005646192a6128
 
+------------------------------Overriding Conditions------------------------------------------------------
+
+1) unscope - You can specify certain conditions to be removed using the unscope method
+
+3.0.0 :077 > products = Product.where(price: 25000..).order(:name).unscope(:order)      # order condition remove from query
+
+  Product Load (0.6ms)  SELECT "products".* FROM "products" WHERE "products"."price" >= $1  [["price", "25000.0"]]
+ => 
+[#<Product:0x00005646197d4ed8
+... 
+
+2) only - You can also override conditions using the only method. 
+
+3.0.0 :080 > products = Product.where(price: 25000..).order(:name).only(:where)   # only where executed . 
+  Product Load (0.7ms)  SELECT "products".* FROM "products" WHERE "products"."price" >= $1  [["price", "25000.0"]]
+ => 
+[#<Product:0x000056461a37a0f8
+... 
+
+3) reselect - The reselect method overrides an existing select statement.  
+
+3.0.0 :085 > product = Product.select(:name, :price).reselect(:brand_id)     # select rows using brand_id
+
+  Product Load (0.7ms)  SELECT "products"."brand_id" FROM "products"
+ =>                  
+[#<Product:0x000056461ab53838 id: nil, brand_id: 1>,
+... 
+
+4) reorder - The reorder method overrides the default scope order
+
+3.0.0 :096 > products = Product.select(:name).where('id > 5').reorder(id: :desc)        # change order 
+
+  Product Load (0.5ms)  SELECT "products"."name" FROM "products" WHERE (id > 5) ORDER BY "products"."id" DESC
+ =>                                                                                                                   
+[#<Product:0x000056461910de88 id: nil, name: "Guitar">,                                                               
+...                                                                                                                   
+3.0.0 :097 > products
+ => 
+[#<Product:0x000056461910de88 id: nil, name: "Guitar">,                                                               
+ #<Product:0x000056461910ddc0 id: nil, name: "Chairs">,                                                               
+ #<Product:0x000056461910dcf8 id: nil, name: "Cricket ball">,                                                         
+ #<Product:0x000056461910dc30 id: nil, name: "Cricket bat">,                                                          
+ #<Product:0x000056461910db68 id: nil, name: "Desktop">,                                                              
+ #<Product:0x000056461910daa0 id: nil, name: "Desktop">,
+ #<Product:0x000056461910d9d8 id: nil, name: "Desktop">] 
+
+
+5) reverse_order - The reverse_order method reverses the ordering clause if specified.
+
+3.0.0 :098 > products.reverse_order
+  
+  Product Load (0.6ms)  SELECT "products"."name" FROM "products" WHERE (id > 5) ORDER BY "products"."id" ASC
+ =>                                                     
+[#<Product:0x0000564619547620 id: nil, name: "Desktop">,
+ #<Product:0x0000564619547558 id: nil, name: "Desktop">,
+ #<Product:0x0000564619547490 id: nil, name: "Desktop">,
+ #<Product:0x00005646195473c8 id: nil, name: "Cricket bat">,
+ #<Product:0x0000564619547300 id: nil, name: "Cricket ball">,
+ #<Product:0x0000564619547238 id: nil, name: "Chairs">, 
+ #<Product:0x0000564619547170 id: nil, name: "Guitar">] 
+
+6) rewhere - The rewhere method overrides an existing, named where condition. 
+
+products = Product.select(:name, :id).where('id > 5').rewhere('id > 10')   # only id > 10 select
+
+3.0.0 :112 > products
+ => [#<Product:0x000056461aabaa20 id: 11, name: "Chairs">, #<Product:0x000056461aaba958 id: 12, name: "Guitar">] 
+ 
+7) Readonly Objects - Active Record provides the readonly method on a relation to explicitly disallow modification of any of the returned objects. Any attempt to alter a readonly record will not succeed, raising an ActiveRecord::ReadOnlyRecord exception.
+
+customer = Customer.readonly.first
+customer.visits += 1
+customer.save          3 show error
 
 
 
+
+ 
 
