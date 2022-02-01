@@ -4,6 +4,8 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { in: 2..30 }
   before_create :remove_whitespaces
   after_create :capitalize_name
+  before_update :remove_whitespaces
+  after_update :capitalize_name
 
   private 
   def remove_whitespaces
