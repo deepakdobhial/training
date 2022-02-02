@@ -3,6 +3,14 @@ class Employee < ApplicationRecord
   validates :name, presence: {message: "can't be blank"}
   validate  :dob_validate
   
+  after_initialize do |employee|
+    puts "You have initialized an object!"
+  end
+
+  after_find do |employee|
+    puts "You have found an object!"
+  end
+  
   private
   def dob_validate
     age = ((Time.zone.now - self.date_of_birth.to_time) / (1.year.seconds)).to_i
