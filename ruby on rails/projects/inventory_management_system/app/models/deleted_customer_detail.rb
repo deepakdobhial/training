@@ -1,0 +1,3 @@
+class DeletedCustomerDetail < ApplicationRecord
+ 
+end
