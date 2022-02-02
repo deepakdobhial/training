@@ -6,7 +6,9 @@ class Customer < ApplicationRecord
   after_validation :capitalize_name
   before_save :generate_otp
   after_save :registration_message
-    
+  # before_destroy :destroy_customers
+  after_destroy :destroy_customers
+      
   private
   def capitalize_name
     self.name = name.downcase.titleize
@@ -22,5 +24,10 @@ class Customer < ApplicationRecord
   def registration_message
     puts "successfully registered"
   end
-    
+  
+  private
+  def destroy_customers
+    DeletedCustomerDetail.create(customer_id: self.id, name: self.name)
+  end
+
 end
