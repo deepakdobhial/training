@@ -1,0 +1,8 @@
+<ul>
+<h2> Products </h2>
+<% @products.each do |product| %>
+  <li><%= link_to product.titleize, "/products/details/#{ product }" %></li>
+<%end%>
+</ul><br>
+
+<%= link_to "Go to Home", "/" %>

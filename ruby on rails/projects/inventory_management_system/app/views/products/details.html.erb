@@ -1,0 +1,27 @@
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+
+<h2>Product Details</h2>
+
+<table style="width:50%">
+  <tr>
+    <th> Brand Name </th>
+    <th> Model no </th>
+    <th> Price </th>
+  </tr>
+  
+  <% @products.each do |product| %>
+    <% product.brands.each do |brand| %>
+      <tr>      
+        <td><%= brand.name %></td>
+        <td><%= product.model_no %></td>
+        <td><%= product.price %></td>
+      </tr>
+    <%end%>
+  <%end%>
+</table> <br>
+<%= link_to "Go to Home", "/" %> &nbsp &nbsp
+<%= link_to "Go back to Previous", "../../categories/1/products" %>
