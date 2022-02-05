@@ -1,0 +1,73 @@
+<!Doctype HTML>
+<html>
+<head>
+<title> Customer Registration Form </title>
+<style>
+
+#fieldset {
+  margin-left: 400px;
+  margin-right: 400px;
+  margin-top: 30px;
+  padding-top: 1.35em;
+  padding-bottom: 1.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  color: #e86100}
+
+</style>
+</head>
+<body>
+
+<form action= "">
+<fieldset id ="fieldset">
+<legend>Customer Registration </legend>
+
+<label for = "name"> Name </label>
+<input type = "text" id = "name" name = "name" value = "Enter Your Name"><br><br>
+<label for = "gender"> Gender </label>
+<input type = "radio" id = "gender" name = "gender">Male
+<input type = "radio" id ="gender" name ="gender">Female <br><br>
+<label for = "date of birth">Date of birth </label>
+<input type = "date" id = "date of birth" name = "date of birth"><br> <br>
+
+<label for = "address"> Address </label> <br> <br>
+<label for = "city"> City </label>
+<select name = "city" id = "city">
+<option value = "faridabad"> Faridabad </option>
+<option value = "new Delhi"> New Delhi </option>
+<option value = "gurugram"> Gurugram </option>
+<option value = "noida"> Noida </option> 
+</select> <br> <br>
+
+<label for = "state"> State </label>
+<select name = "state" id = "state">
+<option value = "haryana"> Haryana </option>
+<option value = "delhi"> Delhi </option>
+<option value = "uttar pradesh"> Uttar Pradesh </option>
+</select> <br><br>
+
+<label for = "country"> Country </label>
+<select name = "country" id = "country">
+<option value = "india"> India </option>
+</select><br><br>
+
+<label for = "email"> Email(optional)</label>
+<input type = "email" id = "email" name = "email" value = "Enter Your Email"> <br><br>
+<label for = "mobile"> Mobile number </label>
+<select name = "country-code" id = "country-code">
+<option value = "country-code"> +91 </option> 
+</select> 
+<input type = "mobile" id = "mobile" name = "mobile"> <br> <br>
+
+<label for = "interest"> Interest </label> <br><br>
+<input type = "checkbox" id = "electronics" name = "electronics"> Electronics
+<input type = "checkbox" id = "sports" name = "sports"> Sports
+<input type = "checkbox" id = "music" name = "music"> Music <br><br>
+<input type = "reset" value = "Submit"> &nbsp
+<input type = "submit" value = "Reset" >
+
+</fieldset>
+</form>
+
+</body>
+</html>
