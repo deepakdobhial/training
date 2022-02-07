@@ -1,0 +1,12 @@
+<h2 style="color: #e86100"> Customer list </h2>
+<ul>
+  <% @customers.each do |customer| %>
+    <li>
+      <%= customer.name %> 
+      <%= link_to "Show Details","customers/#{ customer.id }"%><br><br>
+      <%end%>
+    </li>
+</ul>
+<p style="color: #e86100"> New Customer? 
+<%= link_to "Start here", "/form/" %>
+</p>
