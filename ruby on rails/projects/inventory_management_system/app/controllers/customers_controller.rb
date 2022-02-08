@@ -8,13 +8,42 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
 
-  def form
+  def new
+    @customer = Customer.new
+    # debugger
   end
 
-  def create 
-    @customer = Customer.new(name: params[:name], gender: params[:gender], date_of_birth: params[:date_of_birth], city: params[:city], state: params[:state], country: params[:country], email: params[:email], mobile_no: params[:mobile_no])
-    @customer.save  
-    redirect_to customers_path, notice: "Register successfully"
+  def create    
+    @customer = Customer.new(customer_params)
+    # debugger
+    if @customer.save
+      flash[:message] = "Register Successfully"
+      redirect_to "/customers/#{ @customer.id }"
+    else
+      render :customers_new_path
+    end
+  end
+
+  def edit
+    @customer = Customer.find(params[:id])
+    # debugger
+  end
+
+  def update
+    @customer.update(customer_params)
+    # debugger
+    redirect_to "/customers/#{@customer.id }"
+  end
+
+  def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to :customers
+  end
+  
+  private
+  def customer_params
+    params.require(:customer).permit(:name, :gender, :date_of_birth, :city, :state, :country, :email, :mobile_no)
   end
 
 end
