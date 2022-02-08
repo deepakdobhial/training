@@ -1,0 +1,25 @@
+<%= form_for @customer do |f| %>
+  <div> 
+    <%= f.label :name %> 
+    <%= f.text_field :name %><br>
+    <%= f.label :gender %> 
+    <%= f.radio_button :gender, 'M' %> Male 
+    <%= f.radio_button :gender, 'F' %> Female <br>
+    <%= f.label("date_of_birth") %>
+    <%= f.date_field :date_of_birth %><br>
+    <%= f.label :address %> <br>
+    City <%= f.select :city, options_for_select(['Faridabad', 'New Delhi', 'Gurugram', 'Noida']) %>
+    State <%= f.select :state, options_for_select(['Haryana', 'Delhi', 'Uttar Pradesh']) %>
+    Country <%= f.select :country, options_for_select(['India'])%> <br><br>
+    <%= f.label :email %>
+    <%= f.email_field :email %> <br><br>
+    <%= f.label :mobile_no%>
+    <%= f.telephone_field :mobile_no%> <br>
+    <%#= f.label :interest %>
+    <%#= f.checkbox :interest, {['electronics', 'sports', 'music']} %>
+    <%= f.submit %>
+
+
+    
+  </div>
+<% end %>
