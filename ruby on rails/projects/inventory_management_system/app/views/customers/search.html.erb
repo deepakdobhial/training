@@ -1,0 +1,42 @@
+<%= form_with url: "/search", method: :get do |f| %>
+  Date of Birth <%= f.date_field :dob_query %> <br><br>
+  Name start with <%= f.text_field :key_query %> <br>
+  <%= f.submit ("search")%>
+<% end %> 
+
+
+
+  <% if (@date_of_birth != nil and @date_of_birth != "") or (@keyword != nil and @keyword != "")  %>
+    <table>
+      <tr>
+        <th> Name </th>
+        <th> Gender</th>
+        <th> age </th>
+        <th> City </th> 
+        <th> State </th>
+        <th> Country </th>
+        <th> Email </th>
+        <th> Mobile no </th>
+        <th> Interest </th>
+      </tr>
+  
+  <h2 style="color: #e86100"> Customer Details </h2>
+  <h3 style="color: #e86100"> </h3>
+  <tr>
+  <% @customers. each do |customer| %>
+    
+    <td> <%= customer.name %></td>
+    <td> <%= customer.gender %></td>
+    <td> <%= ((Time.zone.now - customer.date_of_birth.to_time) / (1.year.seconds)).to_i %></td>
+    <td> <%= customer.city %></td>
+    <td> <%= customer.state %></td>
+    <td> <%= customer.country %></td>
+    <td> <%= customer.email %></td>
+    <td> <%= customer.mobile_no %></td>
+    <td> <%= customer.interest.to_sentence %>
+    </tr> <br>
+  <% end %> </ul> <br>
+  </table>
+<% end %> <br>
+<%= link_to "Go to Back", {:action => "index"} %>
+  
