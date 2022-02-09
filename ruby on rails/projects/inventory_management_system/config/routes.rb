@@ -13,12 +13,16 @@ Rails.application.routes.draw do
   get "brands/:id/products/brands_wise_details/:name" => "products#brands_wise_details"
   get "customers" => "customers#index"
   get "customers/new" => "customers#new" 
+  get "customers/search" => "customers#search"
+  get "/search" => "customers#search"
+  
   get "customers/:id" => "customers#show"
   post "customers/" => "customers#create"
   get "customers/:id/edit" => "customers#edit"
   resources :customers
-  # patch "customers/update" => "customers#update"
-  # delete "customers/destroy/:id" => "customers#destroy"
+  # patch "customers/:id" => "customers#update"
+  delete "customers/:id/destroy" => "customers#destroy"
+  
   
   
   
