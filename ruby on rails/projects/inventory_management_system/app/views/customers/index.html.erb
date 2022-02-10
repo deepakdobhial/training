@@ -1,12 +1,18 @@
 <h2 style="color: #e86100"> Customer list </h2>
+<p style="color: #e86100">
+  New Customer? <%= link_to "Register here", "customers/new" %> <br> <br>
+  Search Customer <%= link_to "Click here", "customers/search" %>
+</p>
+
 <ul>
   <% @customers.each do |customer| %>
     <li>
-      <%= customer.name %> 
-      <%= link_to "Show Details","customers/#{ customer.id }"%><br><br>
-      <%end%>
+      <%= customer.name %> <br>
+      <%= link_to "Show Details","customers/#{ customer.id }"%> &nbsp
+      <%= link_to "Edit","customers/#{ customer.id}/edit"%>
+      <%= button_to "Delete", "customers/#{ customer.id }/destroy/", :method => :delete %><br><br>
     </li>
+  <%end%>
 </ul>
-<p style="color: #e86100"> New Customer? 
-<%= link_to "Start here", "/form/" %>
-</p>
+
+<%= link_to "Go to Back", "/" %>
