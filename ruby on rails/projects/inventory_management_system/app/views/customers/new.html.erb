@@ -1,5 +1,16 @@
+<% if @customer.errors.any? %>
+  <div style="color: red">
+    <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this employee from being saved:</h2>
+    <ul>
+      <% @customer.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @customer do |f| %>
-  <div> 
+  <div class = "form"> 
     <%= f.label :name %> 
     <%= f.text_field :name %><br>
     <%= f.label :gender %> 
@@ -15,11 +26,12 @@
     <%= f.email_field :email %> <br><br>
     <%= f.label :mobile_no%>
     <%= f.telephone_field :mobile_no%> <br>
-    <%#= f.label :interest %>
-    <%#= f.checkbox :interest, {['electronics', 'sports', 'music']} %>
+    <%= f.label :interest %> <br>
+    <%= f.check_box(:interest, { :multiple => true }, "electronics", false) %> Electronics<br>
+    <%= f.check_box(:interest, { :multiple => true }, "sports", false) %> Sports<br>
+    <%= f.check_box(:interest, { :multiple => true }, "music", false)  %> Music<br>
     <%= f.submit %>
-
-
-    
   </div>
-<% end %>
+<% end %><br>
+
+<%= link_to "Go to Back", {:action => "index"} %>
