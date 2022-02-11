@@ -1,0 +1,15 @@
+<h2 style="color: red">
+  <%= flash[:message] %> 
+</h2>
+<%= link_to "Register",{controller: "users", action: "signup"} %>
+<%= link_to "Login", {action: "index"} %>
+<br>
+<br>
+
+<%= form_with url: "signin", method: :get do |f| %>
+  <%= f.label :name, "Username" %>
+  <%= f.text_field :name %> <br><br>
+  <%= f.label :password %>
+  <%= f.password_field :password %> <br><br>
+  <%= f.submit :submit %>
+<% end %>
