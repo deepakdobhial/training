@@ -1,0 +1,31 @@
+<h2 style="color: red; text-align: center"><%= flash[:message] %> </h2>
+<div class="index-link" >
+  <%= link_to "Create Product", {controller: :products, action: :new} %>
+  <%= link_to "Signout", {controller: :users, action: :signout} %> <br><br>
+</div>
+
+<div class="product-list" >
+  <% if !@products.nil? && !@products.blank? %>
+    <h2 style="color: #0f52ba;"> Product List </h2>
+    <table width=50%>
+      <thead>
+        <tr>
+          <th> Name </td>
+          <th> Price </td>
+          <th> Action </td>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td> <%= product.name.titleize %> </td>
+            <td> <%= product.price %> </td>
+            <td> <%= link_to "Edit", controller: :products, action: :edit, id: product.id, method: :get %> &nbsp
+                 <%= link_to "Delete", controller: :products, action: :delete, id: product.id, method: :delete %></td>
+          </tr>  
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
