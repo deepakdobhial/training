@@ -2,7 +2,11 @@ class ProductsController < ApplicationController
   before_action :require_login
 
   def index
-    @products = Product.where(user_id: session[:current_user_id])
+    if !params[:name].nil?
+      @products = Product.where("user_id = ? and name ilike ?", session[:current_user_id], "#{params[:name]}%").paginate(page: params[:page], :per_page => 2)
+    else
+      @products = Product.where(user_id: session[:current_user_id]).paginate(page: params[:page], :per_page => 2).order(:name)
+    end
   end
 
   def new
@@ -41,6 +45,16 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
+  def search
+    name = params[:name]
+    debugger
+    if name.nil? && name.blank? 
+      flash[:message] = "Product not found"
+    else
+      redirect_to products_path
+    end
+  end
+  
   private
   def product_params
     params.require(:product).permit(:name, :price)
