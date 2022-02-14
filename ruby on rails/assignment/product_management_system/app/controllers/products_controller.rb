@@ -1,12 +1,5 @@
 class ProductsController < ApplicationController
   before_action :require_login
-  
-  def require_login
-    if session[:current_user_id].nil?
-      flash[:message] = "You must be logged in to access this section"
-      redirect_to "/" 
-    end
-  end
 
   def index
     @products = Product.where(user_id: session[:current_user_id])
@@ -51,6 +44,14 @@ class ProductsController < ApplicationController
   private
   def product_params
     params.require(:product).permit(:name, :price)
+  end
+
+  private
+  def require_login
+    if session[:current_user_id].nil?
+      flash[:message] = "You must be logged in to access this section"
+      redirect_to "/" 
+    end
   end
 
 end
