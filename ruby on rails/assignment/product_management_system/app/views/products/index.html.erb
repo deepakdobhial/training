@@ -4,6 +4,14 @@
   <%= link_to "Signout", {controller: :users, action: :signout} %> <br><br>
 </div>
 
+<div class = "search-box" >
+  <%= form_with url: "/products/", method: :get do |f| %>
+    <%= f.label :name, "Search product" %>
+    <%= f.text_field :name %>
+    <%= f.submit "search"%>
+  <% end %>
+</div>
+
 <div class="product-list" >
   <% if !@products.nil? && !@products.blank? %>
     <h2 style="color: #0f52ba;"> Product List </h2>
@@ -28,4 +36,8 @@
       </tbody>
     </table>
   <% end %>
+</div>
+
+<div class="paginate">
+ <%= will_paginate @products %> 
 </div>
