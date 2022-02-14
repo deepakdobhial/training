@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def logout
+  def signout
     session.delete(:current_user_id)
     redirect_to "/"
   end
@@ -32,8 +32,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.permit(:name, :password, :password_confirmation, :date_of_birth, :address, :terms_of_services)
-    
+    params.require(:user).permit(:name, :password, :password_confirmation, :date_of_birth, :address, :terms_of_services)
   end
 
 end
