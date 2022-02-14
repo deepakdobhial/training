@@ -1,15 +1,21 @@
-<h2 style="color: red">
+<h2 style="color: red; text-align: center">
   <%= flash[:message] %> 
 </h2>
-<%= link_to "Register",{controller: "users", action: "signup"} %>
-<%= link_to "Login", {action: "index"} %>
-<br>
-<br>
 
-<%= form_with url: "signin", method: :get do |f| %>
-  <%= f.label :name, "Username" %>
-  <%= f.text_field :name %> <br><br>
-  <%= f.label :password %>
-  <%= f.password_field :password %> <br><br>
-  <%= f.submit :submit %>
-<% end %>
+<div class="index-link">
+  <%= link_to "Register",{controller: "users", action: "signup"} %>
+  <%= link_to "Signin", {controller: "home", action: "index"} %> <br> <br>
+</div>
+
+<div class="signin">
+  <%= form_with url: "signin", method: :get, class: "signin-form" do |f|%>
+    <fieldset class = "signin-fieldset">
+    <legend style="font-size: 26px; font-weight: bold"> Sign in </legend>
+    <%= f.label :name, "Username" %>
+    <%= f.text_field :name %> <br><br>
+    <%= f.label :password %>
+    <%= f.password_field :password %> <br><br>
+    <%= f.submit :submit, class: "button" %>
+    </fieldset>
+  <% end %>
+</div>
