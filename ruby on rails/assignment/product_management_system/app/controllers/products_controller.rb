@@ -3,12 +3,17 @@ class ProductsController < ApplicationController
 
   def index
     if !params[:name].nil?
-      @products = Product.where("user_id = ? and name ilike ?", session[:current_user_id], "#{params[:name]}%").paginate(page: params[:page], :per_page => 2)
+        @products = Product.where( 
+                    "user_id = ? and name ilike ? and price <= ?", 
+                    session[:current_user_id], "#{params[:name]}%", params[:price]
+                    ).paginate(page: params[:page], :per_page => 2)
       if @product.blank?
         flash[:alert] = "Product not found"
       end
     else
-      @products = Product.where(user_id: session[:current_user_id]).paginate(page: params[:page], :per_page => 2).order(:name)
+      @products = Product.where(
+                  user_id: session[:current_user_id]
+                  ).paginate(page: params[:page], :per_page => 2).order(:name)
     end
   end
 

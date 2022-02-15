@@ -1,21 +1,21 @@
 <h2 style="color: red; text-align: center"><%= flash[:message] %> </h2>
 <div class="index-link" >
-  <%= link_to "Create Product", {controller: :products, action: :new} %>
-  <%= link_to "Signout", {controller: :users, action: :signout} %> <br><br>
+  <%= link_to "Create Product", {controller: :products, action: :new} %> |
+  <%= link_to "Product List", {controller: :products, action: :index} %> |
+  <%= link_to "Signout", {controller: :users, action: :signout} %> <br><br> 
 </div>
 
-<div class = "search-box" >
-  <%= form_with url: "/products/", method: :get do |f| %>
-    <%= f.label :name, "Search product" %>
-    <%= f.text_field :name %>
+<div class="search-box">
+  <%= bootstrap_form_with url: "/products/", method: :get do |f| %>
+    <%= f.text_field :name, label: "Search Product " %>
+    <%= f.range_field :price, value: 1, min: 1, max: 100000, :step => 10, label: "Price Range "%>
     <%= f.submit "search"%>
   <% end %>
-</div>
+</div> 
 
 <div class="search-box-message" >
   <% if @products.blank? %>
     <h2><%= flash[:alert] %> </h2>
-    <%= link_to "Product List", {controller: :products, action: :index} %>
   <% end %>
 </div>
 
