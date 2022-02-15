@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
   def index
     if !params[:name].nil?
       @products = Product.where("user_id = ? and name ilike ?", session[:current_user_id], "#{params[:name]}%").paginate(page: params[:page], :per_page => 2)
+      if @product.blank?
+        flash[:alert] = "Product not found"
+      end
     else
       @products = Product.where(user_id: session[:current_user_id]).paginate(page: params[:page], :per_page => 2).order(:name)
     end
@@ -43,16 +46,6 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:message] = "Product Deleted Successfully"
     redirect_to products_path
-  end
-
-  def search
-    name = params[:name]
-    debugger
-    if name.nil? && name.blank? 
-      flash[:message] = "Product not found"
-    else
-      redirect_to products_path
-    end
   end
   
   private
