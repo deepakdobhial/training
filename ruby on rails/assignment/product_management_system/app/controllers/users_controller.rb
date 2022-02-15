@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   def create 
     @user = User.new(user_params)
     if @user.save
+      UserMailer.welcome_email(@user).deliver_now
       flash[:message] = "Register Successfully"
       redirect_to "/"
     else
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation, :date_of_birth, :address, :terms_of_services)
+    params.require(:user).permit(:name, :password, :password_confirmation, :date_of_birth, :address, :email, :terms_of_services)
   end
 
 end
