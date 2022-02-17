@@ -64,6 +64,7 @@ group :development do
   # gem "spring"
 
   gem 'devise'
+  gem 'omniauth'
 end
 
 group :test do
