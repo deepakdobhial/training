@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+10.times do |i|
+  category = Category.create(name: "category-#{i}")
+  10.times do |j|
+    category.products.create(name: "product-#{i}-#{j}", price: rand(100..500))
+  end
+end
