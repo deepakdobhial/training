@@ -20,9 +20,9 @@ class Api::V1::CategoriesController < ApplicationController
     @category = Category.find_by(id: params[:id])
     if @category.present?
       @category.destroy
-      render json: {data: "Deleted"}
+      render json: {message: "Deleted Successfully"}
     else
-      render json: {data: "category not found"}
+      render json: {message: "category not found"}
     end
   end
 
