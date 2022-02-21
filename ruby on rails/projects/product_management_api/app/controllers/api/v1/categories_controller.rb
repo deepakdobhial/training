@@ -3,7 +3,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
-    render json: {data: @categories}
+    render json: {data: ActiveModelSerializers::SerializableResource.new(@categories, each_serializer: CategorySerializer)}
   end
   
   def create
