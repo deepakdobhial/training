@@ -14,9 +14,11 @@
   </div>
 <% end %>
 
+
+
 <div class= "signup-form">
-  <%= form_for @user, url: "create" , method: :post do |f| %>
-    <fieldset class= "signup-fieldset">
+  <fieldset class= "signup-fieldset">
+    <%= form_for @user, url: "create" , method: :post do |f| %>
       <legend style="font-size: 26px; font-weight: bold"> Sign up </legend>
       <%= f.label :name, "User", class: "signup-label" %>
       <%= f.text_field :name, class: "signup-field" %> <br><br>
@@ -28,8 +30,13 @@
       <%= f.date_field :date_of_birth, class: "signup-field"%> <br><br>
       <%= f.label :address, class: "signup-label" %>
       <%= f.text_area :address, class: "signup-field"%> <br> <br>
+      <%= f.label :email, class: "signup-label" %>
+      <%= f.email_field :email, class: "signup-field" %> <br> <br>
       <%= f.check_box :terms_of_services, class: "checkbox" %> I accept terms and conditions <br> <br>
-      <%= f.submit "Sign up", class: "button" %>
-    </fieldset>
-  <% end %>
+      <%= f.submit "Sign up", class: "button" %> <br> 
+    <% end %>
+    <div class="gmail_sign" >
+      <%= link_to "Sign up with google", '/auth/google_oauth2' %>
+    </div>
+  </fieldset>
 </div>
