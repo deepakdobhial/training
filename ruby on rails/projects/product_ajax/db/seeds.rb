@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+j = 200
+50.times do |i|
+  products = Product.create(name: "Product-#{i}", price: "#{j*i}")
+  j += 10 
+end
+
